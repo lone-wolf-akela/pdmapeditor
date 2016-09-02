@@ -1,0 +1,1110 @@
+﻿namespace PDMapEditor
+{
+    partial class Main
+    {
+        /// <summary>
+        /// Erforderliche Designervariable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Verwendete Ressourcen bereinigen.
+        /// </summary>
+        /// <param name="disposing">True, wenn verwaltete Ressourcen gelöscht werden sollen; andernfalls False.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Vom Windows Form-Designer generierter Code
+
+        /// <summary>
+        /// Erforderliche Methode für die Designerunterstützung.
+        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
+            this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
+            this.buttonSaveMap = new System.Windows.Forms.ToolStripButton();
+            this.buttonSettings = new System.Windows.Forms.ToolStripButton();
+            this.buttonHotkeys = new System.Windows.Forms.ToolStripButton();
+            this.buttonAbout = new System.Windows.Forms.ToolStripButton();
+            this.openMapDialog = new System.Windows.Forms.OpenFileDialog();
+            this.splitPropertiesAndViewportProblems = new System.Windows.Forms.SplitContainer();
+            this.tabControlLeft = new System.Windows.Forms.TabControl();
+            this.tabMap = new System.Windows.Forms.TabPage();
+            this.groupFog = new System.Windows.Forms.GroupBox();
+            this.sliderFogAlpha = new System.Windows.Forms.TrackBar();
+            this.labelFogAlpha = new System.Windows.Forms.Label();
+            this.labelFogDensity = new System.Windows.Forms.Label();
+            this.sliderFogDensity = new System.Windows.Forms.TrackBar();
+            this.labelFogType = new System.Windows.Forms.Label();
+            this.comboFogType = new System.Windows.Forms.ComboBox();
+            this.labelFogColor = new System.Windows.Forms.Label();
+            this.buttonFogColor = new System.Windows.Forms.Button();
+            this.labelFogEnd = new System.Windows.Forms.Label();
+            this.numericFogEnd = new System.Windows.Forms.NumericUpDown();
+            this.labelFogStart = new System.Windows.Forms.Label();
+            this.numericFogStart = new System.Windows.Forms.NumericUpDown();
+            this.checkFogActive = new System.Windows.Forms.CheckBox();
+            this.groupMapDimensions = new System.Windows.Forms.GroupBox();
+            this.labelMapDimensionsZ = new System.Windows.Forms.Label();
+            this.numericMapDimensionsZ = new System.Windows.Forms.NumericUpDown();
+            this.labelMapDimensionsY = new System.Windows.Forms.Label();
+            this.numericMapDimensionsY = new System.Windows.Forms.NumericUpDown();
+            this.labelMapDimensionsX = new System.Windows.Forms.Label();
+            this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
+            this.splitViewportAndProblems = new System.Windows.Forms.SplitContainer();
+            this.gridProblems = new System.Windows.Forms.DataGridView();
+            this.columnProblems = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonProblems = new System.Windows.Forms.Button();
+            this.comboPerspectiveOrtho = new System.Windows.Forms.ComboBox();
+            this.labelFPS = new System.Windows.Forms.Label();
+            this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.tabSelection = new System.Windows.Forms.TabPage();
+            this.groupSelectionPosition = new System.Windows.Forms.GroupBox();
+            this.labelSelectionPositionZ = new System.Windows.Forms.Label();
+            this.numericSelectionPositionZ = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionPositionY = new System.Windows.Forms.Label();
+            this.numericSelectionPositionY = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionPositionX = new System.Windows.Forms.Label();
+            this.numericSelectionPositionX = new System.Windows.Forms.NumericUpDown();
+            this.groupSelectionRotation = new System.Windows.Forms.GroupBox();
+            this.labelSelectionRotationZ = new System.Windows.Forms.Label();
+            this.numericSelectionRotationZ = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionRotationY = new System.Windows.Forms.Label();
+            this.numericSelectionRotationY = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionRotationX = new System.Windows.Forms.Label();
+            this.numericSelectionRotationX = new System.Windows.Forms.NumericUpDown();
+            this.checkFogDisplay = new System.Windows.Forms.CheckBox();
+            this.toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
+            this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
+            this.splitPropertiesAndViewportProblems.Panel2.SuspendLayout();
+            this.splitPropertiesAndViewportProblems.SuspendLayout();
+            this.tabControlLeft.SuspendLayout();
+            this.tabMap.SuspendLayout();
+            this.groupFog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderFogAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderFogDensity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFogEnd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFogStart)).BeginInit();
+            this.groupMapDimensions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).BeginInit();
+            this.splitViewportAndProblems.Panel2.SuspendLayout();
+            this.splitViewportAndProblems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
+            this.tabSelection.SuspendLayout();
+            this.groupSelectionPosition.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).BeginInit();
+            this.groupSelectionRotation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationX)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // toolStrip
+            // 
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonNewMap,
+            this.buttonOpenMap,
+            this.buttonSaveMap,
+            this.buttonSettings,
+            this.buttonHotkeys,
+            this.buttonAbout});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(1037, 25);
+            this.toolStrip.TabIndex = 0;
+            this.toolStrip.Text = "toolStrip1";
+            // 
+            // buttonNewMap
+            // 
+            this.buttonNewMap.Image = ((System.Drawing.Image)(resources.GetObject("buttonNewMap.Image")));
+            this.buttonNewMap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonNewMap.Name = "buttonNewMap";
+            this.buttonNewMap.Size = new System.Drawing.Size(51, 22);
+            this.buttonNewMap.Text = "New";
+            this.buttonNewMap.Click += new System.EventHandler(this.buttonNewMap_Click);
+            // 
+            // buttonOpenMap
+            // 
+            this.buttonOpenMap.Image = ((System.Drawing.Image)(resources.GetObject("buttonOpenMap.Image")));
+            this.buttonOpenMap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonOpenMap.Name = "buttonOpenMap";
+            this.buttonOpenMap.Size = new System.Drawing.Size(56, 22);
+            this.buttonOpenMap.Text = "Open";
+            this.buttonOpenMap.Click += new System.EventHandler(this.buttonOpenMap_Click);
+            // 
+            // buttonSaveMap
+            // 
+            this.buttonSaveMap.Image = ((System.Drawing.Image)(resources.GetObject("buttonSaveMap.Image")));
+            this.buttonSaveMap.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSaveMap.Name = "buttonSaveMap";
+            this.buttonSaveMap.Size = new System.Drawing.Size(51, 22);
+            this.buttonSaveMap.Text = "Save";
+            this.buttonSaveMap.Click += new System.EventHandler(this.buttonSaveMap_Click);
+            // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Image = ((System.Drawing.Image)(resources.GetObject("buttonSettings.Image")));
+            this.buttonSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(69, 22);
+            this.buttonSettings.Text = "Settings";
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
+            // buttonHotkeys
+            // 
+            this.buttonHotkeys.Image = ((System.Drawing.Image)(resources.GetObject("buttonHotkeys.Image")));
+            this.buttonHotkeys.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonHotkeys.Name = "buttonHotkeys";
+            this.buttonHotkeys.Size = new System.Drawing.Size(70, 22);
+            this.buttonHotkeys.Text = "Hotkeys";
+            this.buttonHotkeys.Click += new System.EventHandler(this.buttonHotkeys_Click);
+            // 
+            // buttonAbout
+            // 
+            this.buttonAbout.Image = ((System.Drawing.Image)(resources.GetObject("buttonAbout.Image")));
+            this.buttonAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonAbout.Name = "buttonAbout";
+            this.buttonAbout.Size = new System.Drawing.Size(60, 22);
+            this.buttonAbout.Text = "About";
+            this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
+            // 
+            // openMapDialog
+            // 
+            this.openMapDialog.DefaultExt = "level";
+            this.openMapDialog.Filter = "Level-files|*.level|All files|*.*";
+            this.openMapDialog.Title = "Open lua level file...";
+            // 
+            // splitPropertiesAndViewportProblems
+            // 
+            this.splitPropertiesAndViewportProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitPropertiesAndViewportProblems.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitPropertiesAndViewportProblems.Location = new System.Drawing.Point(0, 25);
+            this.splitPropertiesAndViewportProblems.Name = "splitPropertiesAndViewportProblems";
+            // 
+            // splitPropertiesAndViewportProblems.Panel1
+            // 
+            this.splitPropertiesAndViewportProblems.Panel1.Controls.Add(this.tabControlLeft);
+            // 
+            // splitPropertiesAndViewportProblems.Panel2
+            // 
+            this.splitPropertiesAndViewportProblems.Panel2.Controls.Add(this.splitViewportAndProblems);
+            this.splitPropertiesAndViewportProblems.Size = new System.Drawing.Size(1037, 678);
+            this.splitPropertiesAndViewportProblems.SplitterDistance = 228;
+            this.splitPropertiesAndViewportProblems.TabIndex = 1;
+            // 
+            // tabControlLeft
+            // 
+            this.tabControlLeft.Controls.Add(this.tabMap);
+            this.tabControlLeft.Controls.Add(this.tabSelection);
+            this.tabControlLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlLeft.HotTrack = true;
+            this.tabControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.tabControlLeft.Name = "tabControlLeft";
+            this.tabControlLeft.SelectedIndex = 0;
+            this.tabControlLeft.Size = new System.Drawing.Size(228, 678);
+            this.tabControlLeft.TabIndex = 0;
+            // 
+            // tabMap
+            // 
+            this.tabMap.Controls.Add(this.groupFog);
+            this.tabMap.Controls.Add(this.groupMapDimensions);
+            this.tabMap.Location = new System.Drawing.Point(4, 22);
+            this.tabMap.Name = "tabMap";
+            this.tabMap.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMap.Size = new System.Drawing.Size(220, 652);
+            this.tabMap.TabIndex = 0;
+            this.tabMap.Text = "Map";
+            this.tabMap.ToolTipText = "You can set general map settings here.";
+            this.tabMap.UseVisualStyleBackColor = true;
+            // 
+            // groupFog
+            // 
+            this.groupFog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupFog.Controls.Add(this.checkFogDisplay);
+            this.groupFog.Controls.Add(this.sliderFogAlpha);
+            this.groupFog.Controls.Add(this.labelFogAlpha);
+            this.groupFog.Controls.Add(this.labelFogDensity);
+            this.groupFog.Controls.Add(this.sliderFogDensity);
+            this.groupFog.Controls.Add(this.labelFogType);
+            this.groupFog.Controls.Add(this.comboFogType);
+            this.groupFog.Controls.Add(this.labelFogColor);
+            this.groupFog.Controls.Add(this.buttonFogColor);
+            this.groupFog.Controls.Add(this.labelFogEnd);
+            this.groupFog.Controls.Add(this.numericFogEnd);
+            this.groupFog.Controls.Add(this.labelFogStart);
+            this.groupFog.Controls.Add(this.numericFogStart);
+            this.groupFog.Controls.Add(this.checkFogActive);
+            this.groupFog.Location = new System.Drawing.Point(3, 109);
+            this.groupFog.Name = "groupFog";
+            this.groupFog.Size = new System.Drawing.Size(214, 207);
+            this.groupFog.TabIndex = 6;
+            this.groupFog.TabStop = false;
+            this.groupFog.Text = "Fog";
+            // 
+            // sliderFogAlpha
+            // 
+            this.sliderFogAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderFogAlpha.AutoSize = false;
+            this.sliderFogAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderFogAlpha.Enabled = false;
+            this.sliderFogAlpha.Location = new System.Drawing.Point(51, 121);
+            this.sliderFogAlpha.Maximum = 100;
+            this.sliderFogAlpha.Name = "sliderFogAlpha";
+            this.sliderFogAlpha.Size = new System.Drawing.Size(157, 23);
+            this.sliderFogAlpha.TabIndex = 12;
+            this.sliderFogAlpha.TickFrequency = 5;
+            this.sliderFogAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.sliderFogAlpha.Scroll += new System.EventHandler(this.sliderFogAlpha_Scroll);
+            // 
+            // labelFogAlpha
+            // 
+            this.labelFogAlpha.AutoSize = true;
+            this.labelFogAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFogAlpha.Location = new System.Drawing.Point(6, 126);
+            this.labelFogAlpha.Name = "labelFogAlpha";
+            this.labelFogAlpha.Size = new System.Drawing.Size(37, 13);
+            this.labelFogAlpha.TabIndex = 11;
+            this.labelFogAlpha.Text = "Alpha:";
+            // 
+            // labelFogDensity
+            // 
+            this.labelFogDensity.AutoSize = true;
+            this.labelFogDensity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFogDensity.Location = new System.Drawing.Point(6, 181);
+            this.labelFogDensity.Name = "labelFogDensity";
+            this.labelFogDensity.Size = new System.Drawing.Size(45, 13);
+            this.labelFogDensity.TabIndex = 10;
+            this.labelFogDensity.Text = "Density:";
+            // 
+            // sliderFogDensity
+            // 
+            this.sliderFogDensity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderFogDensity.AutoSize = false;
+            this.sliderFogDensity.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderFogDensity.Enabled = false;
+            this.sliderFogDensity.Location = new System.Drawing.Point(51, 177);
+            this.sliderFogDensity.Maximum = 100;
+            this.sliderFogDensity.Name = "sliderFogDensity";
+            this.sliderFogDensity.Size = new System.Drawing.Size(157, 23);
+            this.sliderFogDensity.TabIndex = 9;
+            this.sliderFogDensity.TickFrequency = 5;
+            this.sliderFogDensity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.sliderFogDensity.Scroll += new System.EventHandler(this.sliderFogDensity_Scroll);
+            // 
+            // labelFogType
+            // 
+            this.labelFogType.AutoSize = true;
+            this.labelFogType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFogType.Location = new System.Drawing.Point(6, 153);
+            this.labelFogType.Name = "labelFogType";
+            this.labelFogType.Size = new System.Drawing.Size(34, 13);
+            this.labelFogType.TabIndex = 8;
+            this.labelFogType.Text = "Type:";
+            // 
+            // comboFogType
+            // 
+            this.comboFogType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboFogType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFogType.Enabled = false;
+            this.comboFogType.FormattingEnabled = true;
+            this.comboFogType.Items.AddRange(new object[] {
+            "Linear",
+            "Exponential",
+            "Exponential 2"});
+            this.comboFogType.Location = new System.Drawing.Point(51, 150);
+            this.comboFogType.Name = "comboFogType";
+            this.comboFogType.Size = new System.Drawing.Size(157, 21);
+            this.comboFogType.TabIndex = 7;
+            this.comboFogType.SelectedIndexChanged += new System.EventHandler(this.comboFogType_SelectedIndexChanged);
+            // 
+            // labelFogColor
+            // 
+            this.labelFogColor.AutoSize = true;
+            this.labelFogColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFogColor.Location = new System.Drawing.Point(6, 99);
+            this.labelFogColor.Name = "labelFogColor";
+            this.labelFogColor.Size = new System.Drawing.Size(34, 13);
+            this.labelFogColor.TabIndex = 6;
+            this.labelFogColor.Text = "Color:";
+            // 
+            // buttonFogColor
+            // 
+            this.buttonFogColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonFogColor.Enabled = false;
+            this.buttonFogColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFogColor.Location = new System.Drawing.Point(51, 95);
+            this.buttonFogColor.Name = "buttonFogColor";
+            this.buttonFogColor.Size = new System.Drawing.Size(157, 20);
+            this.buttonFogColor.TabIndex = 5;
+            this.buttonFogColor.UseVisualStyleBackColor = true;
+            this.buttonFogColor.Click += new System.EventHandler(this.buttonFogColor_Click);
+            // 
+            // labelFogEnd
+            // 
+            this.labelFogEnd.AutoSize = true;
+            this.labelFogEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFogEnd.Location = new System.Drawing.Point(6, 70);
+            this.labelFogEnd.Name = "labelFogEnd";
+            this.labelFogEnd.Size = new System.Drawing.Size(29, 13);
+            this.labelFogEnd.TabIndex = 4;
+            this.labelFogEnd.Text = "End:";
+            // 
+            // numericFogEnd
+            // 
+            this.numericFogEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericFogEnd.Enabled = false;
+            this.numericFogEnd.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericFogEnd.Location = new System.Drawing.Point(51, 68);
+            this.numericFogEnd.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericFogEnd.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericFogEnd.Name = "numericFogEnd";
+            this.numericFogEnd.Size = new System.Drawing.Size(157, 20);
+            this.numericFogEnd.TabIndex = 3;
+            this.numericFogEnd.ThousandsSeparator = true;
+            this.numericFogEnd.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericFogEnd.ValueChanged += new System.EventHandler(this.numericFogEnd_ValueChanged);
+            // 
+            // labelFogStart
+            // 
+            this.labelFogStart.AutoSize = true;
+            this.labelFogStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFogStart.Location = new System.Drawing.Point(6, 44);
+            this.labelFogStart.Name = "labelFogStart";
+            this.labelFogStart.Size = new System.Drawing.Size(32, 13);
+            this.labelFogStart.TabIndex = 2;
+            this.labelFogStart.Text = "Start:";
+            // 
+            // numericFogStart
+            // 
+            this.numericFogStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericFogStart.Enabled = false;
+            this.numericFogStart.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericFogStart.Location = new System.Drawing.Point(51, 42);
+            this.numericFogStart.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericFogStart.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericFogStart.Name = "numericFogStart";
+            this.numericFogStart.Size = new System.Drawing.Size(157, 20);
+            this.numericFogStart.TabIndex = 1;
+            this.numericFogStart.ThousandsSeparator = true;
+            this.numericFogStart.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericFogStart.ValueChanged += new System.EventHandler(this.numericFogStart_ValueChanged);
+            // 
+            // checkFogActive
+            // 
+            this.checkFogActive.AutoSize = true;
+            this.checkFogActive.Location = new System.Drawing.Point(9, 19);
+            this.checkFogActive.Name = "checkFogActive";
+            this.checkFogActive.Size = new System.Drawing.Size(56, 17);
+            this.checkFogActive.TabIndex = 0;
+            this.checkFogActive.Text = "Active";
+            this.checkFogActive.UseVisualStyleBackColor = true;
+            this.checkFogActive.CheckedChanged += new System.EventHandler(this.checkFogActive_CheckedChanged);
+            // 
+            // groupMapDimensions
+            // 
+            this.groupMapDimensions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupMapDimensions.Controls.Add(this.labelMapDimensionsZ);
+            this.groupMapDimensions.Controls.Add(this.numericMapDimensionsZ);
+            this.groupMapDimensions.Controls.Add(this.labelMapDimensionsY);
+            this.groupMapDimensions.Controls.Add(this.numericMapDimensionsY);
+            this.groupMapDimensions.Controls.Add(this.labelMapDimensionsX);
+            this.groupMapDimensions.Controls.Add(this.numericMapDimensionsX);
+            this.groupMapDimensions.Location = new System.Drawing.Point(3, 3);
+            this.groupMapDimensions.Name = "groupMapDimensions";
+            this.groupMapDimensions.Size = new System.Drawing.Size(214, 100);
+            this.groupMapDimensions.TabIndex = 0;
+            this.groupMapDimensions.TabStop = false;
+            this.groupMapDimensions.Text = "Dimensions";
+            // 
+            // labelMapDimensionsZ
+            // 
+            this.labelMapDimensionsZ.AutoSize = true;
+            this.labelMapDimensionsZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMapDimensionsZ.Location = new System.Drawing.Point(6, 73);
+            this.labelMapDimensionsZ.Name = "labelMapDimensionsZ";
+            this.labelMapDimensionsZ.Size = new System.Drawing.Size(39, 13);
+            this.labelMapDimensionsZ.TabIndex = 5;
+            this.labelMapDimensionsZ.Text = "Z-Axis:";
+            // 
+            // numericMapDimensionsZ
+            // 
+            this.numericMapDimensionsZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericMapDimensionsZ.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsZ.Location = new System.Drawing.Point(51, 71);
+            this.numericMapDimensionsZ.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsZ.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsZ.Name = "numericMapDimensionsZ";
+            this.numericMapDimensionsZ.Size = new System.Drawing.Size(157, 20);
+            this.numericMapDimensionsZ.TabIndex = 4;
+            this.numericMapDimensionsZ.ThousandsSeparator = true;
+            this.numericMapDimensionsZ.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsZ.ValueChanged += new System.EventHandler(this.SetMapDimensions);
+            // 
+            // labelMapDimensionsY
+            // 
+            this.labelMapDimensionsY.AutoSize = true;
+            this.labelMapDimensionsY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMapDimensionsY.Location = new System.Drawing.Point(6, 47);
+            this.labelMapDimensionsY.Name = "labelMapDimensionsY";
+            this.labelMapDimensionsY.Size = new System.Drawing.Size(39, 13);
+            this.labelMapDimensionsY.TabIndex = 3;
+            this.labelMapDimensionsY.Text = "Y-Axis:";
+            // 
+            // numericMapDimensionsY
+            // 
+            this.numericMapDimensionsY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericMapDimensionsY.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsY.Location = new System.Drawing.Point(51, 45);
+            this.numericMapDimensionsY.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsY.Name = "numericMapDimensionsY";
+            this.numericMapDimensionsY.Size = new System.Drawing.Size(157, 20);
+            this.numericMapDimensionsY.TabIndex = 2;
+            this.numericMapDimensionsY.ThousandsSeparator = true;
+            this.numericMapDimensionsY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsY.ValueChanged += new System.EventHandler(this.SetMapDimensions);
+            // 
+            // labelMapDimensionsX
+            // 
+            this.labelMapDimensionsX.AutoSize = true;
+            this.labelMapDimensionsX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMapDimensionsX.Location = new System.Drawing.Point(6, 21);
+            this.labelMapDimensionsX.Name = "labelMapDimensionsX";
+            this.labelMapDimensionsX.Size = new System.Drawing.Size(39, 13);
+            this.labelMapDimensionsX.TabIndex = 1;
+            this.labelMapDimensionsX.Text = "X-Axis:";
+            // 
+            // numericMapDimensionsX
+            // 
+            this.numericMapDimensionsX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericMapDimensionsX.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsX.Location = new System.Drawing.Point(51, 19);
+            this.numericMapDimensionsX.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsX.Name = "numericMapDimensionsX";
+            this.numericMapDimensionsX.Size = new System.Drawing.Size(157, 20);
+            this.numericMapDimensionsX.TabIndex = 0;
+            this.numericMapDimensionsX.ThousandsSeparator = true;
+            this.numericMapDimensionsX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericMapDimensionsX.ValueChanged += new System.EventHandler(this.SetMapDimensions);
+            // 
+            // splitViewportAndProblems
+            // 
+            this.splitViewportAndProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitViewportAndProblems.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitViewportAndProblems.Location = new System.Drawing.Point(0, 0);
+            this.splitViewportAndProblems.Name = "splitViewportAndProblems";
+            // 
+            // splitViewportAndProblems.Panel2
+            // 
+            this.splitViewportAndProblems.Panel2.Controls.Add(this.gridProblems);
+            this.splitViewportAndProblems.Size = new System.Drawing.Size(805, 678);
+            this.splitViewportAndProblems.SplitterDistance = 594;
+            this.splitViewportAndProblems.TabIndex = 0;
+            // 
+            // gridProblems
+            // 
+            this.gridProblems.AllowUserToAddRows = false;
+            this.gridProblems.AllowUserToDeleteRows = false;
+            this.gridProblems.AllowUserToResizeColumns = false;
+            this.gridProblems.AllowUserToResizeRows = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.gridProblems.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnProblems});
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle7;
+            this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridProblems.Location = new System.Drawing.Point(0, 0);
+            this.gridProblems.MultiSelect = false;
+            this.gridProblems.Name = "gridProblems";
+            this.gridProblems.ReadOnly = true;
+            this.gridProblems.RowHeadersVisible = false;
+            this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowTemplate.Height = 500;
+            this.gridProblems.RowTemplate.ReadOnly = true;
+            this.gridProblems.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridProblems.Size = new System.Drawing.Size(207, 678);
+            this.gridProblems.TabIndex = 1;
+            this.gridProblems.SelectionChanged += new System.EventHandler(this.gridProblems_SelectionChanged);
+            // 
+            // columnProblems
+            // 
+            this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle6;
+            this.columnProblems.HeaderText = "Problems";
+            this.columnProblems.Name = "columnProblems";
+            this.columnProblems.ReadOnly = true;
+            this.columnProblems.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.columnProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // buttonProblems
+            // 
+            this.buttonProblems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonProblems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.buttonProblems.FlatAppearance.BorderSize = 0;
+            this.buttonProblems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonProblems.Image = global::PDMapEditor.Properties.Resources.flagWhite;
+            this.buttonProblems.Location = new System.Drawing.Point(993, 0);
+            this.buttonProblems.Name = "buttonProblems";
+            this.buttonProblems.Size = new System.Drawing.Size(44, 25);
+            this.buttonProblems.TabIndex = 9;
+            this.buttonProblems.UseVisualStyleBackColor = false;
+            this.buttonProblems.Click += new System.EventHandler(this.buttonProblems_Click);
+            // 
+            // comboPerspectiveOrtho
+            // 
+            this.comboPerspectiveOrtho.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboPerspectiveOrtho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPerspectiveOrtho.FormattingEnabled = true;
+            this.comboPerspectiveOrtho.ItemHeight = 13;
+            this.comboPerspectiveOrtho.Items.AddRange(new object[] {
+            "Perspective",
+            "Orthographic"});
+            this.comboPerspectiveOrtho.Location = new System.Drawing.Point(882, 3);
+            this.comboPerspectiveOrtho.MaxDropDownItems = 1;
+            this.comboPerspectiveOrtho.Name = "comboPerspectiveOrtho";
+            this.comboPerspectiveOrtho.Size = new System.Drawing.Size(105, 21);
+            this.comboPerspectiveOrtho.TabIndex = 10;
+            this.comboPerspectiveOrtho.SelectedIndexChanged += new System.EventHandler(this.comboPerspectiveOrtho_SelectedIndexChanged);
+            // 
+            // labelFPS
+            // 
+            this.labelFPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFPS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.labelFPS.Location = new System.Drawing.Point(752, 2);
+            this.labelFPS.Name = "labelFPS";
+            this.labelFPS.Size = new System.Drawing.Size(124, 23);
+            this.labelFPS.TabIndex = 11;
+            this.labelFPS.Text = "0 FPS";
+            this.labelFPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // saveMapDialog
+            // 
+            this.saveMapDialog.DefaultExt = "level";
+            this.saveMapDialog.FileName = "map";
+            this.saveMapDialog.Title = "Save lua level file...";
+            // 
+            // colorDialog
+            // 
+            this.colorDialog.FullOpen = true;
+            // 
+            // tabSelection
+            // 
+            this.tabSelection.Controls.Add(this.groupSelectionRotation);
+            this.tabSelection.Controls.Add(this.groupSelectionPosition);
+            this.tabSelection.Location = new System.Drawing.Point(4, 22);
+            this.tabSelection.Name = "tabSelection";
+            this.tabSelection.Size = new System.Drawing.Size(220, 652);
+            this.tabSelection.TabIndex = 1;
+            this.tabSelection.Text = "Selection";
+            this.tabSelection.UseVisualStyleBackColor = true;
+            // 
+            // groupSelectionPosition
+            // 
+            this.groupSelectionPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionZ);
+            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionZ);
+            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionY);
+            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionY);
+            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionX);
+            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionX);
+            this.groupSelectionPosition.Location = new System.Drawing.Point(3, 3);
+            this.groupSelectionPosition.Name = "groupSelectionPosition";
+            this.groupSelectionPosition.Size = new System.Drawing.Size(214, 100);
+            this.groupSelectionPosition.TabIndex = 1;
+            this.groupSelectionPosition.TabStop = false;
+            this.groupSelectionPosition.Text = "Position";
+            // 
+            // labelSelectionPositionZ
+            // 
+            this.labelSelectionPositionZ.AutoSize = true;
+            this.labelSelectionPositionZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionPositionZ.Location = new System.Drawing.Point(6, 73);
+            this.labelSelectionPositionZ.Name = "labelSelectionPositionZ";
+            this.labelSelectionPositionZ.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionPositionZ.TabIndex = 5;
+            this.labelSelectionPositionZ.Text = "Z:";
+            // 
+            // numericSelectionPositionZ
+            // 
+            this.numericSelectionPositionZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionPositionZ.DecimalPlaces = 1;
+            this.numericSelectionPositionZ.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionZ.Location = new System.Drawing.Point(51, 71);
+            this.numericSelectionPositionZ.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionZ.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionPositionZ.Name = "numericSelectionPositionZ";
+            this.numericSelectionPositionZ.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionPositionZ.TabIndex = 4;
+            this.numericSelectionPositionZ.ThousandsSeparator = true;
+            // 
+            // labelSelectionPositionY
+            // 
+            this.labelSelectionPositionY.AutoSize = true;
+            this.labelSelectionPositionY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionPositionY.Location = new System.Drawing.Point(6, 47);
+            this.labelSelectionPositionY.Name = "labelSelectionPositionY";
+            this.labelSelectionPositionY.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionPositionY.TabIndex = 3;
+            this.labelSelectionPositionY.Text = "Y:";
+            // 
+            // numericSelectionPositionY
+            // 
+            this.numericSelectionPositionY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionPositionY.DecimalPlaces = 1;
+            this.numericSelectionPositionY.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionY.Location = new System.Drawing.Point(51, 45);
+            this.numericSelectionPositionY.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionY.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionPositionY.Name = "numericSelectionPositionY";
+            this.numericSelectionPositionY.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionPositionY.TabIndex = 2;
+            this.numericSelectionPositionY.ThousandsSeparator = true;
+            // 
+            // labelSelectionPositionX
+            // 
+            this.labelSelectionPositionX.AutoSize = true;
+            this.labelSelectionPositionX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionPositionX.Location = new System.Drawing.Point(6, 21);
+            this.labelSelectionPositionX.Name = "labelSelectionPositionX";
+            this.labelSelectionPositionX.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionPositionX.TabIndex = 1;
+            this.labelSelectionPositionX.Text = "X:";
+            // 
+            // numericSelectionPositionX
+            // 
+            this.numericSelectionPositionX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionPositionX.DecimalPlaces = 1;
+            this.numericSelectionPositionX.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionX.Location = new System.Drawing.Point(51, 19);
+            this.numericSelectionPositionX.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionX.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionPositionX.Name = "numericSelectionPositionX";
+            this.numericSelectionPositionX.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionPositionX.TabIndex = 0;
+            this.numericSelectionPositionX.ThousandsSeparator = true;
+            // 
+            // groupSelectionRotation
+            // 
+            this.groupSelectionRotation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSelectionRotation.Controls.Add(this.labelSelectionRotationZ);
+            this.groupSelectionRotation.Controls.Add(this.numericSelectionRotationZ);
+            this.groupSelectionRotation.Controls.Add(this.labelSelectionRotationY);
+            this.groupSelectionRotation.Controls.Add(this.numericSelectionRotationY);
+            this.groupSelectionRotation.Controls.Add(this.labelSelectionRotationX);
+            this.groupSelectionRotation.Controls.Add(this.numericSelectionRotationX);
+            this.groupSelectionRotation.Location = new System.Drawing.Point(3, 109);
+            this.groupSelectionRotation.Name = "groupSelectionRotation";
+            this.groupSelectionRotation.Size = new System.Drawing.Size(214, 100);
+            this.groupSelectionRotation.TabIndex = 6;
+            this.groupSelectionRotation.TabStop = false;
+            this.groupSelectionRotation.Text = "Rotation";
+            // 
+            // labelSelectionRotationZ
+            // 
+            this.labelSelectionRotationZ.AutoSize = true;
+            this.labelSelectionRotationZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionRotationZ.Location = new System.Drawing.Point(6, 73);
+            this.labelSelectionRotationZ.Name = "labelSelectionRotationZ";
+            this.labelSelectionRotationZ.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionRotationZ.TabIndex = 5;
+            this.labelSelectionRotationZ.Text = "Z:";
+            // 
+            // numericSelectionRotationZ
+            // 
+            this.numericSelectionRotationZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionRotationZ.DecimalPlaces = 1;
+            this.numericSelectionRotationZ.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericSelectionRotationZ.Location = new System.Drawing.Point(51, 71);
+            this.numericSelectionRotationZ.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionRotationZ.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionRotationZ.Name = "numericSelectionRotationZ";
+            this.numericSelectionRotationZ.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionRotationZ.TabIndex = 4;
+            this.numericSelectionRotationZ.ThousandsSeparator = true;
+            // 
+            // labelSelectionRotationY
+            // 
+            this.labelSelectionRotationY.AutoSize = true;
+            this.labelSelectionRotationY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionRotationY.Location = new System.Drawing.Point(6, 47);
+            this.labelSelectionRotationY.Name = "labelSelectionRotationY";
+            this.labelSelectionRotationY.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionRotationY.TabIndex = 3;
+            this.labelSelectionRotationY.Text = "Y:";
+            // 
+            // numericSelectionRotationY
+            // 
+            this.numericSelectionRotationY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionRotationY.DecimalPlaces = 1;
+            this.numericSelectionRotationY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericSelectionRotationY.Location = new System.Drawing.Point(51, 45);
+            this.numericSelectionRotationY.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionRotationY.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionRotationY.Name = "numericSelectionRotationY";
+            this.numericSelectionRotationY.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionRotationY.TabIndex = 2;
+            this.numericSelectionRotationY.ThousandsSeparator = true;
+            // 
+            // labelSelectionRotationX
+            // 
+            this.labelSelectionRotationX.AutoSize = true;
+            this.labelSelectionRotationX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionRotationX.Location = new System.Drawing.Point(6, 21);
+            this.labelSelectionRotationX.Name = "labelSelectionRotationX";
+            this.labelSelectionRotationX.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionRotationX.TabIndex = 1;
+            this.labelSelectionRotationX.Text = "X:";
+            // 
+            // numericSelectionRotationX
+            // 
+            this.numericSelectionRotationX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionRotationX.DecimalPlaces = 1;
+            this.numericSelectionRotationX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericSelectionRotationX.Location = new System.Drawing.Point(51, 19);
+            this.numericSelectionRotationX.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionRotationX.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionRotationX.Name = "numericSelectionRotationX";
+            this.numericSelectionRotationX.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionRotationX.TabIndex = 0;
+            this.numericSelectionRotationX.ThousandsSeparator = true;
+            // 
+            // checkFogDisplay
+            // 
+            this.checkFogDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkFogDisplay.AutoSize = true;
+            this.checkFogDisplay.Location = new System.Drawing.Point(148, 19);
+            this.checkFogDisplay.Name = "checkFogDisplay";
+            this.checkFogDisplay.Size = new System.Drawing.Size(60, 17);
+            this.checkFogDisplay.TabIndex = 13;
+            this.checkFogDisplay.Text = "Display";
+            this.checkFogDisplay.UseVisualStyleBackColor = true;
+            this.checkFogDisplay.CheckedChanged += new System.EventHandler(this.checkFogDisplay_CheckedChanged);
+            // 
+            // Main
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1037, 703);
+            this.Controls.Add(this.labelFPS);
+            this.Controls.Add(this.comboPerspectiveOrtho);
+            this.Controls.Add(this.buttonProblems);
+            this.Controls.Add(this.splitPropertiesAndViewportProblems);
+            this.Controls.Add(this.toolStrip);
+            this.Name = "Main";
+            this.Text = "PayDay\'s Homeworld Remastered Map Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
+            this.splitPropertiesAndViewportProblems.Panel1.ResumeLayout(false);
+            this.splitPropertiesAndViewportProblems.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).EndInit();
+            this.splitPropertiesAndViewportProblems.ResumeLayout(false);
+            this.tabControlLeft.ResumeLayout(false);
+            this.tabMap.ResumeLayout(false);
+            this.groupFog.ResumeLayout(false);
+            this.groupFog.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderFogAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderFogDensity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFogEnd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFogStart)).EndInit();
+            this.groupMapDimensions.ResumeLayout(false);
+            this.groupMapDimensions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
+            this.splitViewportAndProblems.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
+            this.splitViewportAndProblems.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
+            this.tabSelection.ResumeLayout(false);
+            this.groupSelectionPosition.ResumeLayout(false);
+            this.groupSelectionPosition.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).EndInit();
+            this.groupSelectionRotation.ResumeLayout(false);
+            this.groupSelectionRotation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationX)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStripButton buttonOpenMap;
+        private System.Windows.Forms.OpenFileDialog openMapDialog;
+        private System.Windows.Forms.ToolStripButton buttonAbout;
+        private System.Windows.Forms.ToolStripButton buttonSettings;
+        private System.Windows.Forms.SplitContainer splitPropertiesAndViewportProblems;
+        private System.Windows.Forms.DataGridView gridProblems;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnProblems;
+        public System.Windows.Forms.SplitContainer splitViewportAndProblems;
+        private System.Windows.Forms.Button buttonProblems;
+        private System.Windows.Forms.ToolStripButton buttonHotkeys;
+        private System.Windows.Forms.ComboBox comboPerspectiveOrtho;
+        private System.Windows.Forms.Label labelFPS;
+        private System.Windows.Forms.ToolStripButton buttonSaveMap;
+        private System.Windows.Forms.SaveFileDialog saveMapDialog;
+        private System.Windows.Forms.TabPage tabMap;
+        private System.Windows.Forms.GroupBox groupMapDimensions;
+        private System.Windows.Forms.Label labelMapDimensionsY;
+        private System.Windows.Forms.NumericUpDown numericMapDimensionsY;
+        private System.Windows.Forms.Label labelMapDimensionsX;
+        private System.Windows.Forms.NumericUpDown numericMapDimensionsX;
+        private System.Windows.Forms.Label labelMapDimensionsZ;
+        private System.Windows.Forms.NumericUpDown numericMapDimensionsZ;
+        private System.Windows.Forms.GroupBox groupFog;
+        private System.Windows.Forms.CheckBox checkFogActive;
+        private System.Windows.Forms.Label labelFogStart;
+        private System.Windows.Forms.NumericUpDown numericFogStart;
+        private System.Windows.Forms.Label labelFogType;
+        private System.Windows.Forms.ComboBox comboFogType;
+        private System.Windows.Forms.Label labelFogColor;
+        private System.Windows.Forms.Button buttonFogColor;
+        private System.Windows.Forms.Label labelFogEnd;
+        private System.Windows.Forms.NumericUpDown numericFogEnd;
+        private System.Windows.Forms.TrackBar sliderFogDensity;
+        private System.Windows.Forms.Label labelFogDensity;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.TrackBar sliderFogAlpha;
+        private System.Windows.Forms.Label labelFogAlpha;
+        private System.Windows.Forms.ToolStripButton buttonNewMap;
+        private System.Windows.Forms.GroupBox groupSelectionPosition;
+        private System.Windows.Forms.Label labelSelectionPositionZ;
+        private System.Windows.Forms.Label labelSelectionPositionY;
+        private System.Windows.Forms.Label labelSelectionPositionX;
+        public System.Windows.Forms.NumericUpDown numericSelectionPositionZ;
+        public System.Windows.Forms.NumericUpDown numericSelectionPositionY;
+        public System.Windows.Forms.NumericUpDown numericSelectionPositionX;
+        public System.Windows.Forms.TabControl tabControlLeft;
+        public System.Windows.Forms.TabPage tabSelection;
+        private System.Windows.Forms.Label labelSelectionRotationZ;
+        public System.Windows.Forms.NumericUpDown numericSelectionRotationZ;
+        private System.Windows.Forms.Label labelSelectionRotationY;
+        public System.Windows.Forms.NumericUpDown numericSelectionRotationY;
+        private System.Windows.Forms.Label labelSelectionRotationX;
+        public System.Windows.Forms.NumericUpDown numericSelectionRotationX;
+        public System.Windows.Forms.GroupBox groupSelectionRotation;
+        private System.Windows.Forms.CheckBox checkFogDisplay;
+    }
+}
+
