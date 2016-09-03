@@ -197,7 +197,13 @@ namespace PDMapEditor
 
             if (delta != Vector3.Zero)
             {
-                float finalPanSpeed = (float)Math.Max(PanSpeed * zoom, PAN_MIN_SPEED);
+                float finalPanSpeed = 1;
+
+                if(!Orthographic)
+                    finalPanSpeed = (float)Math.Max(PanSpeed * zoom, PAN_MIN_SPEED);
+                else
+                    finalPanSpeed = (float)Math.Max(1 / OrthographicSize * 700, PAN_MIN_SPEED); //The orthographic size gets smaller the more you zoom out, so the speed should raise the lower the size gets
+
                 LookAt += delta * finalPanSpeed * (float)Program.ElapsedSeconds;
 
                 UpdatePosition();

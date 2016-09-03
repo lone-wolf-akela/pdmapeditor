@@ -314,8 +314,14 @@ namespace PDMapEditor
             if (selectedDrawable == null)
                 return;
 
-            float cameraDistanceApprox = (Program.Camera.Position - selectedDrawable.Position).LengthFast;
-            Vector3 scale = new Vector3(cameraDistanceApprox / 700);
+            Vector3 scale = Vector3.One;
+            if (!Program.Camera.Orthographic)
+            {
+                float cameraDistanceApprox = (Program.Camera.Position - selectedDrawable.Position).LengthFast;
+                scale = new Vector3(cameraDistanceApprox / 700);
+            }
+            else
+                scale = new Vector3(1 / Program.Camera.OrthographicSize * 2); //The orthographic size gets smaller the more you zoom out, so the scale should raise when the orthographic size gets smaller
 
             gizmoPosX.Mesh.Scale = new Vector3(scale);
             gizmoPosY.Mesh.Scale = new Vector3(scale);
@@ -365,23 +371,30 @@ namespace PDMapEditor
                 float rotY = selectedDrawable.Rotation.Y;
                 float rotZ = selectedDrawable.Rotation.Z;
 
+                float speedMultiplier = 1;
+
+                if (!Program.Camera.Orthographic)
+                    speedMultiplier = cameraDistanceApprox / 800;
+                else
+                    speedMultiplier = 1 / Program.Camera.OrthographicSize; //The orthographic size gets smaller the more you zoom out, so the speed should raise the lower the size gets
+
                 switch (draggingState)
                 {
                     //Position
                     case DraggingState.MOVING_X:
                         if(Program.Camera.Position.Z > selectedDrawable.Position.Z) //To fix the user experience
-                            posX = selectedDrawable.Position.X + mouseXDelta * (cameraDistanceApprox / 800);
+                            posX = selectedDrawable.Position.X + mouseXDelta * speedMultiplier;
                         else
-                            posX = selectedDrawable.Position.X - mouseXDelta * (cameraDistanceApprox / 800);
+                            posX = selectedDrawable.Position.X - mouseXDelta * speedMultiplier;
                         break;
                     case DraggingState.MOVING_Y:
-                        posY = selectedDrawable.Position.Y + mouseYDelta * (cameraDistanceApprox / 800);
+                        posY = selectedDrawable.Position.Y + mouseYDelta * speedMultiplier;
                         break;
                     case DraggingState.MOVING_Z:
                         if (Program.Camera.Position.X > selectedDrawable.Position.X) //To fix the user experience
-                            posZ = selectedDrawable.Position.Z - mouseXDelta * (cameraDistanceApprox / 800);
+                            posZ = selectedDrawable.Position.Z - mouseXDelta * speedMultiplier;
                         else
-                            posZ = selectedDrawable.Position.Z + mouseXDelta * (cameraDistanceApprox / 800);
+                            posZ = selectedDrawable.Position.Z + mouseXDelta * speedMultiplier;
                         break;
 
                     //Rotation

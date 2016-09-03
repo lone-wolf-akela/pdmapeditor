@@ -19,7 +19,7 @@ namespace PDMapEditor
         private static Background background;
         public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboBackgroundIndex; } }
 
-        private static float glareIntensity;
+        private static float glareIntensity = 0;
         public static float GlareIntensity { get { return glareIntensity; } set { glareIntensity = value; Program.main.sliderGlareIntensity.Value = (int)Math.Round(value * 100); } }
 
         private static bool fogActive = false;

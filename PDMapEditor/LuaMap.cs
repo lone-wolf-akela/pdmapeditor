@@ -77,73 +77,91 @@ namespace PDMapEditor
         {
             string name = Path.GetFileName(path);
 
-            string file = "";
+            StringBuilder sb = new StringBuilder();
 
             //Top comment
-            file += "-- PayDay's Homeworld Remastered Map Editor generated file\n";
-            file += "-- ============================================================\n";
-            file += "-- Name: " + name + "\n";
-            file += "-- Purpose: Automatically generated level file by the map editor.\n";
-            file += "-- Created " + DateTime.Now.ToLongDateString() + " at " + DateTime.Now.ToLongTimeString() + ".\n";
-            file += "-- ============================================================\n";
-            file += "\n";
+            sb.AppendLine("-- PayDay's Homeworld Remastered Map Editor generated file");
+            sb.AppendLine("-- ============================================================");
+            sb.AppendLine("-- Name: " + name + "");
+            sb.AppendLine("-- Purpose: Automatically generated level file by the map editor.");
+            sb.AppendLine("-- Created " + DateTime.Now.ToLongDateString() + " at " + DateTime.Now.ToLongTimeString() + ".");
+            sb.AppendLine("-- ============================================================");
+            sb.AppendLine("");
 
             //DetermChunk()
-            file += "function DetermChunk()\n";
-            file += "\t-- Points\n";
-            foreach(Point point in Point.Points)
-            {
-                file += "\taddPoint(\"" + point.Name + "\", " + WriteFloatLuaTable(point.Position.X, point.Position.Y, point.Position.Z) + ", " + WriteFloatLuaTable(point.Rotation.X, point.Rotation.Y, point.Rotation.Z) + ")\n";
-            }
-            file += "\n";
-            file += "\t-- Asteroids\n";
-            foreach (Asteroid asteroid in Asteroid.Asteroids)
-            {
-                file += "\taddAsteroid(\"" + asteroid.Type.Name + "\", " + WriteFloatLuaTable(asteroid.Position.X, asteroid.Position.Y, asteroid.Position.Z) + ", " + asteroid.Multiplier.ToString(InvariantCulture) + ", " + asteroid.Rotation.X.ToString(InvariantCulture) + ", " + asteroid.Rotation.Y.ToString(InvariantCulture) + ", " + asteroid.Rotation.Z.ToString(InvariantCulture) + ", " + asteroid.RotSpeed.ToString(InvariantCulture) + ")\n";
-            }
-            file += "\n";
-            file += "\t-- Dust clouds\n";
-            foreach (DustCloud dustCloud in DustCloud.DustClouds)
-            {
-                file += "\taddDustCloud(\"" + dustCloud.Name + "\", \"" + dustCloud.Type.Name + "\", " + WriteFloatLuaTable(dustCloud.Position.X, dustCloud.Position.Y, dustCloud.Position.Z) + ", " + WriteFloatLuaTable(dustCloud.Color.X, dustCloud.Color.Y, dustCloud.Color.Z, dustCloud.Color.W) + ", " + dustCloud.Unknown1.ToString(InvariantCulture) + ", " + dustCloud.Size.ToString(InvariantCulture) + ")\n";
-            }
-            file += "\n";
-            file += "\t-- Settings\n";
-            file += "\tsetWorldBoundsInner(" + WriteFloatLuaTable(0, 0, 0) + ", " + WriteFloatLuaTable(Map.MapDimensions.X, Map.MapDimensions.Y, Map.MapDimensions.Z) + ")\n";
-            file += "end\n";
+            sb.AppendLine("function DetermChunk()");
 
-            file += "\n";
+            if (Point.Points.Count > 0)
+            {
+                sb.AppendLine("\t-- Points");
+                foreach (Point point in Point.Points)
+                {
+                    sb.AppendLine("\taddPoint(\"" + point.Name + "\", " + WriteFloatLuaTable(point.Position.X, point.Position.Y, point.Position.Z) + ", " + WriteFloatLuaTable(point.Rotation.X, point.Rotation.Y, point.Rotation.Z) + ")");
+                }
+                sb.AppendLine("");
+            }
+
+            if (Asteroid.Asteroids.Count > 0)
+            {
+                sb.AppendLine("\t-- Asteroids");
+                foreach (Asteroid asteroid in Asteroid.Asteroids)
+                {
+                    sb.AppendLine("\taddAsteroid(\"" + asteroid.Type.Name + "\", " + WriteFloatLuaTable(asteroid.Position.X, asteroid.Position.Y, asteroid.Position.Z) + ", " + asteroid.Multiplier.ToString(InvariantCulture) + ", " + asteroid.Rotation.X.ToString(InvariantCulture) + ", " + asteroid.Rotation.Y.ToString(InvariantCulture) + ", " + asteroid.Rotation.Z.ToString(InvariantCulture) + ", " + asteroid.RotSpeed.ToString(InvariantCulture) + ")");
+                }
+                sb.AppendLine("");
+            }
+
+            if (DustCloud.DustClouds.Count > 0)
+            {
+                sb.AppendLine("\t-- Dust clouds");
+                foreach (DustCloud dustCloud in DustCloud.DustClouds)
+                {
+                    sb.AppendLine("\taddDustCloud(\"" + dustCloud.Name + "\", \"" + dustCloud.Type.Name + "\", " + WriteFloatLuaTable(dustCloud.Position.X, dustCloud.Position.Y, dustCloud.Position.Z) + ", " + WriteFloatLuaTable(dustCloud.Color.X, dustCloud.Color.Y, dustCloud.Color.Z, dustCloud.Color.W) + ", " + dustCloud.Unknown1.ToString(InvariantCulture) + ", " + dustCloud.Size.ToString(InvariantCulture) + ")");
+                }
+                sb.AppendLine("");
+            }
+            sb.AppendLine("\t-- Settings");
+            sb.AppendLine("\tsetWorldBoundsInner(" + WriteFloatLuaTable(0, 0, 0) + ", " + WriteFloatLuaTable(Map.MapDimensions.X, Map.MapDimensions.Y, Map.MapDimensions.Z) + ")");
+            sb.AppendLine("end");
+
+            sb.AppendLine("");
 
             //NonDetermChunk()
-            file += "function NonDetermChunk()\n";
-            file += "\t-- Pebbles\n";
-            foreach (Pebble pebble in Pebble.Pebbles)
+            sb.AppendLine("function NonDetermChunk()");
+            if (Pebble.Pebbles.Count > 0)
             {
-                file += "\taddPebble(\"" + pebble.Type.Name + "\", " + WriteFloatLuaTable(pebble.Position.X, pebble.Position.Y, pebble.Position.Z) + ", " + pebble.Rotation.X.ToString(InvariantCulture) + ", " + pebble.Rotation.Y.ToString(InvariantCulture) + ", " + pebble.Rotation.Z.ToString(InvariantCulture) + ")\n";
+                sb.AppendLine("\t-- Pebbles");
+                foreach (Pebble pebble in Pebble.Pebbles)
+                {
+                    sb.AppendLine("\taddPebble(\"" + pebble.Type.Name + "\", " + WriteFloatLuaTable(pebble.Position.X, pebble.Position.Y, pebble.Position.Z) + ", " + pebble.Rotation.X.ToString(InvariantCulture) + ", " + pebble.Rotation.Y.ToString(InvariantCulture) + ", " + pebble.Rotation.Z.ToString(InvariantCulture) + ")");
+                }
+                sb.AppendLine("");
             }
-            file += "\n";
-            file += "\t-- Fog\n";
+            sb.AppendLine("\t-- Fog");
             string fogActive = "0";
             if (Map.FogActive)
                 fogActive = "1";
-            file += "\tfogSetActive(" + fogActive + ")\n";
+            sb.AppendLine("\tfogSetActive(" + fogActive + ")");
             if(Map.FogActive)
             {
-                file += "\tfogSetStart(" + Map.FogStart.ToString(InvariantCulture) + ")\n";
-                file += "\tfogSetEnd(" + Map.FogEnd.ToString(InvariantCulture) + ")\n";
-                file += "\tfogSetColour(" + Map.FogColor.X.ToString(InvariantCulture) + ", " + Map.FogColor.Y.ToString(InvariantCulture) + ", " + Map.FogColor.Z.ToString(InvariantCulture) + ", " + Map.FogColor.W.ToString(InvariantCulture) + ")\n";
-                file += "\tfogSetType(\"" + Map.FogType + "\")\n";
-                file += "\tfogSetDensity(" + Map.FogDensity.ToString(InvariantCulture) + ")\n";
+                sb.AppendLine("\tfogSetStart(" + Map.FogStart.ToString(InvariantCulture) + ")");
+                sb.AppendLine("\tfogSetEnd(" + Map.FogEnd.ToString(InvariantCulture) + ")");
+                sb.AppendLine("\tfogSetColour(" + Map.FogColor.X.ToString(InvariantCulture) + ", " + Map.FogColor.Y.ToString(InvariantCulture) + ", " + Map.FogColor.Z.ToString(InvariantCulture) + ", " + Map.FogColor.W.ToString(InvariantCulture) + ")");
+                sb.AppendLine("\tfogSetType(\"" + Map.FogType + "\")");
+                sb.AppendLine("\tfogSetDensity(" + Map.FogDensity.ToString(InvariantCulture) + ")");
             }
-            file += "\n";
+            sb.AppendLine("");
 
-            file += "\t-- Settings\n";
-            file += "\tloadBackground(\"" + Map.Background.Name + "\")\n";
-            file += "\tsetGlareIntensity(" + Map.GlareIntensity.ToString(InvariantCulture) + ")\n";
+            sb.AppendLine("\t-- Settings");
+            if(Map.Background != null)
+                sb.AppendLine("\tloadBackground(\"" + Map.Background.Name + "\")");
+            else
+                sb.AppendLine("\tloadBackground(\"\")");
+            sb.AppendLine("\tsetGlareIntensity(" + Map.GlareIntensity.ToString(InvariantCulture) + ")");
 
-            file += "end\n";
+            sb.AppendLine("end");
 
-            File.WriteAllText(path, file);
+            File.WriteAllText(path, sb.ToString());
         }
 
         public static Vector3 LuaTableToVector3(LuaTable table)
