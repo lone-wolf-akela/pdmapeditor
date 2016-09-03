@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -44,7 +44,13 @@
             this.splitPropertiesAndViewportProblems = new System.Windows.Forms.SplitContainer();
             this.tabControlLeft = new System.Windows.Forms.TabControl();
             this.tabMap = new System.Windows.Forms.TabPage();
+            this.groupGeneral = new System.Windows.Forms.GroupBox();
+            this.comboBackground = new System.Windows.Forms.ComboBox();
+            this.labelBackground = new System.Windows.Forms.Label();
+            this.sliderGlareIntensity = new System.Windows.Forms.TrackBar();
+            this.labelGlareIntensity = new System.Windows.Forms.Label();
             this.groupFog = new System.Windows.Forms.GroupBox();
+            this.checkFogDisplay = new System.Windows.Forms.CheckBox();
             this.sliderFogAlpha = new System.Windows.Forms.TrackBar();
             this.labelFogAlpha = new System.Windows.Forms.Label();
             this.labelFogDensity = new System.Windows.Forms.Label();
@@ -65,6 +71,21 @@
             this.numericMapDimensionsY = new System.Windows.Forms.NumericUpDown();
             this.labelMapDimensionsX = new System.Windows.Forms.Label();
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
+            this.tabSelection = new System.Windows.Forms.TabPage();
+            this.groupSelectionRotation = new System.Windows.Forms.GroupBox();
+            this.labelSelectionRotationZ = new System.Windows.Forms.Label();
+            this.numericSelectionRotationZ = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionRotationY = new System.Windows.Forms.Label();
+            this.numericSelectionRotationY = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionRotationX = new System.Windows.Forms.Label();
+            this.numericSelectionRotationX = new System.Windows.Forms.NumericUpDown();
+            this.groupSelectionPosition = new System.Windows.Forms.GroupBox();
+            this.labelSelectionPositionZ = new System.Windows.Forms.Label();
+            this.numericSelectionPositionZ = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionPositionY = new System.Windows.Forms.Label();
+            this.numericSelectionPositionY = new System.Windows.Forms.NumericUpDown();
+            this.labelSelectionPositionX = new System.Windows.Forms.Label();
+            this.numericSelectionPositionX = new System.Windows.Forms.NumericUpDown();
             this.splitViewportAndProblems = new System.Windows.Forms.SplitContainer();
             this.gridProblems = new System.Windows.Forms.DataGridView();
             this.columnProblems = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,22 +94,7 @@
             this.labelFPS = new System.Windows.Forms.Label();
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.tabSelection = new System.Windows.Forms.TabPage();
-            this.groupSelectionPosition = new System.Windows.Forms.GroupBox();
-            this.labelSelectionPositionZ = new System.Windows.Forms.Label();
-            this.numericSelectionPositionZ = new System.Windows.Forms.NumericUpDown();
-            this.labelSelectionPositionY = new System.Windows.Forms.Label();
-            this.numericSelectionPositionY = new System.Windows.Forms.NumericUpDown();
-            this.labelSelectionPositionX = new System.Windows.Forms.Label();
-            this.numericSelectionPositionX = new System.Windows.Forms.NumericUpDown();
-            this.groupSelectionRotation = new System.Windows.Forms.GroupBox();
-            this.labelSelectionRotationZ = new System.Windows.Forms.Label();
-            this.numericSelectionRotationZ = new System.Windows.Forms.NumericUpDown();
-            this.labelSelectionRotationY = new System.Windows.Forms.Label();
-            this.numericSelectionRotationY = new System.Windows.Forms.NumericUpDown();
-            this.labelSelectionRotationX = new System.Windows.Forms.Label();
-            this.numericSelectionRotationX = new System.Windows.Forms.NumericUpDown();
-            this.checkFogDisplay = new System.Windows.Forms.CheckBox();
+            this.comboGizmoMode = new System.Windows.Forms.ComboBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -96,6 +102,8 @@
             this.splitPropertiesAndViewportProblems.SuspendLayout();
             this.tabControlLeft.SuspendLayout();
             this.tabMap.SuspendLayout();
+            this.groupGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderGlareIntensity)).BeginInit();
             this.groupFog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderFogAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderFogDensity)).BeginInit();
@@ -105,19 +113,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).BeginInit();
-            this.splitViewportAndProblems.Panel2.SuspendLayout();
-            this.splitViewportAndProblems.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
             this.tabSelection.SuspendLayout();
-            this.groupSelectionPosition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).BeginInit();
             this.groupSelectionRotation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationX)).BeginInit();
+            this.groupSelectionPosition.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).BeginInit();
+            this.splitViewportAndProblems.Panel2.SuspendLayout();
+            this.splitViewportAndProblems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -228,6 +236,7 @@
             // 
             // tabMap
             // 
+            this.tabMap.Controls.Add(this.groupGeneral);
             this.tabMap.Controls.Add(this.groupFog);
             this.tabMap.Controls.Add(this.groupMapDimensions);
             this.tabMap.Location = new System.Drawing.Point(4, 22);
@@ -238,6 +247,68 @@
             this.tabMap.Text = "Map";
             this.tabMap.ToolTipText = "You can set general map settings here.";
             this.tabMap.UseVisualStyleBackColor = true;
+            // 
+            // groupGeneral
+            // 
+            this.groupGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupGeneral.Controls.Add(this.comboBackground);
+            this.groupGeneral.Controls.Add(this.labelBackground);
+            this.groupGeneral.Controls.Add(this.sliderGlareIntensity);
+            this.groupGeneral.Controls.Add(this.labelGlareIntensity);
+            this.groupGeneral.Location = new System.Drawing.Point(3, 3);
+            this.groupGeneral.Name = "groupGeneral";
+            this.groupGeneral.Size = new System.Drawing.Size(214, 159);
+            this.groupGeneral.TabIndex = 7;
+            this.groupGeneral.TabStop = false;
+            this.groupGeneral.Text = "General";
+            // 
+            // comboBackground
+            // 
+            this.comboBackground.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBackground.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBackground.FormattingEnabled = true;
+            this.comboBackground.Location = new System.Drawing.Point(80, 13);
+            this.comboBackground.Name = "comboBackground";
+            this.comboBackground.Size = new System.Drawing.Size(128, 21);
+            this.comboBackground.TabIndex = 15;
+            this.comboBackground.SelectedIndexChanged += new System.EventHandler(this.comboBackground_SelectedIndexChanged);
+            // 
+            // labelBackground
+            // 
+            this.labelBackground.AutoSize = true;
+            this.labelBackground.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBackground.Location = new System.Drawing.Point(6, 16);
+            this.labelBackground.Name = "labelBackground";
+            this.labelBackground.Size = new System.Drawing.Size(68, 13);
+            this.labelBackground.TabIndex = 14;
+            this.labelBackground.Text = "Background:";
+            // 
+            // sliderGlareIntensity
+            // 
+            this.sliderGlareIntensity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderGlareIntensity.AutoSize = false;
+            this.sliderGlareIntensity.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderGlareIntensity.Location = new System.Drawing.Point(88, 60);
+            this.sliderGlareIntensity.Maximum = 100;
+            this.sliderGlareIntensity.Name = "sliderGlareIntensity";
+            this.sliderGlareIntensity.Size = new System.Drawing.Size(121, 23);
+            this.sliderGlareIntensity.TabIndex = 13;
+            this.sliderGlareIntensity.TickFrequency = 5;
+            this.sliderGlareIntensity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.sliderGlareIntensity.Scroll += new System.EventHandler(this.sliderGlareIntensity_Scroll);
+            // 
+            // labelGlareIntensity
+            // 
+            this.labelGlareIntensity.AutoSize = true;
+            this.labelGlareIntensity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGlareIntensity.Location = new System.Drawing.Point(6, 64);
+            this.labelGlareIntensity.Name = "labelGlareIntensity";
+            this.labelGlareIntensity.Size = new System.Drawing.Size(76, 13);
+            this.labelGlareIntensity.TabIndex = 12;
+            this.labelGlareIntensity.Text = "Glare intensity:";
             // 
             // groupFog
             // 
@@ -257,12 +328,24 @@
             this.groupFog.Controls.Add(this.labelFogStart);
             this.groupFog.Controls.Add(this.numericFogStart);
             this.groupFog.Controls.Add(this.checkFogActive);
-            this.groupFog.Location = new System.Drawing.Point(3, 109);
+            this.groupFog.Location = new System.Drawing.Point(3, 274);
             this.groupFog.Name = "groupFog";
             this.groupFog.Size = new System.Drawing.Size(214, 207);
             this.groupFog.TabIndex = 6;
             this.groupFog.TabStop = false;
             this.groupFog.Text = "Fog";
+            // 
+            // checkFogDisplay
+            // 
+            this.checkFogDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkFogDisplay.AutoSize = true;
+            this.checkFogDisplay.Location = new System.Drawing.Point(148, 19);
+            this.checkFogDisplay.Name = "checkFogDisplay";
+            this.checkFogDisplay.Size = new System.Drawing.Size(60, 17);
+            this.checkFogDisplay.TabIndex = 13;
+            this.checkFogDisplay.Text = "Display";
+            this.checkFogDisplay.UseVisualStyleBackColor = true;
+            this.checkFogDisplay.CheckedChanged += new System.EventHandler(this.checkFogDisplay_CheckedChanged);
             // 
             // sliderFogAlpha
             // 
@@ -471,7 +554,7 @@
             this.groupMapDimensions.Controls.Add(this.numericMapDimensionsY);
             this.groupMapDimensions.Controls.Add(this.labelMapDimensionsX);
             this.groupMapDimensions.Controls.Add(this.numericMapDimensionsX);
-            this.groupMapDimensions.Location = new System.Drawing.Point(3, 3);
+            this.groupMapDimensions.Location = new System.Drawing.Point(3, 168);
             this.groupMapDimensions.Name = "groupMapDimensions";
             this.groupMapDimensions.Size = new System.Drawing.Size(214, 100);
             this.groupMapDimensions.TabIndex = 0;
@@ -601,127 +684,6 @@
             0});
             this.numericMapDimensionsX.ValueChanged += new System.EventHandler(this.SetMapDimensions);
             // 
-            // splitViewportAndProblems
-            // 
-            this.splitViewportAndProblems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitViewportAndProblems.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitViewportAndProblems.Location = new System.Drawing.Point(0, 0);
-            this.splitViewportAndProblems.Name = "splitViewportAndProblems";
-            // 
-            // splitViewportAndProblems.Panel2
-            // 
-            this.splitViewportAndProblems.Panel2.Controls.Add(this.gridProblems);
-            this.splitViewportAndProblems.Size = new System.Drawing.Size(805, 678);
-            this.splitViewportAndProblems.SplitterDistance = 594;
-            this.splitViewportAndProblems.TabIndex = 0;
-            // 
-            // gridProblems
-            // 
-            this.gridProblems.AllowUserToAddRows = false;
-            this.gridProblems.AllowUserToDeleteRows = false;
-            this.gridProblems.AllowUserToResizeColumns = false;
-            this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.gridProblems.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.columnProblems});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle7;
-            this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridProblems.Location = new System.Drawing.Point(0, 0);
-            this.gridProblems.MultiSelect = false;
-            this.gridProblems.Name = "gridProblems";
-            this.gridProblems.ReadOnly = true;
-            this.gridProblems.RowHeadersVisible = false;
-            this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowTemplate.Height = 500;
-            this.gridProblems.RowTemplate.ReadOnly = true;
-            this.gridProblems.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridProblems.Size = new System.Drawing.Size(207, 678);
-            this.gridProblems.TabIndex = 1;
-            this.gridProblems.SelectionChanged += new System.EventHandler(this.gridProblems_SelectionChanged);
-            // 
-            // columnProblems
-            // 
-            this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle6;
-            this.columnProblems.HeaderText = "Problems";
-            this.columnProblems.Name = "columnProblems";
-            this.columnProblems.ReadOnly = true;
-            this.columnProblems.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.columnProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // buttonProblems
-            // 
-            this.buttonProblems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonProblems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.buttonProblems.FlatAppearance.BorderSize = 0;
-            this.buttonProblems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonProblems.Image = global::PDMapEditor.Properties.Resources.flagWhite;
-            this.buttonProblems.Location = new System.Drawing.Point(993, 0);
-            this.buttonProblems.Name = "buttonProblems";
-            this.buttonProblems.Size = new System.Drawing.Size(44, 25);
-            this.buttonProblems.TabIndex = 9;
-            this.buttonProblems.UseVisualStyleBackColor = false;
-            this.buttonProblems.Click += new System.EventHandler(this.buttonProblems_Click);
-            // 
-            // comboPerspectiveOrtho
-            // 
-            this.comboPerspectiveOrtho.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboPerspectiveOrtho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboPerspectiveOrtho.FormattingEnabled = true;
-            this.comboPerspectiveOrtho.ItemHeight = 13;
-            this.comboPerspectiveOrtho.Items.AddRange(new object[] {
-            "Perspective",
-            "Orthographic"});
-            this.comboPerspectiveOrtho.Location = new System.Drawing.Point(882, 3);
-            this.comboPerspectiveOrtho.MaxDropDownItems = 1;
-            this.comboPerspectiveOrtho.Name = "comboPerspectiveOrtho";
-            this.comboPerspectiveOrtho.Size = new System.Drawing.Size(105, 21);
-            this.comboPerspectiveOrtho.TabIndex = 10;
-            this.comboPerspectiveOrtho.SelectedIndexChanged += new System.EventHandler(this.comboPerspectiveOrtho_SelectedIndexChanged);
-            // 
-            // labelFPS
-            // 
-            this.labelFPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFPS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.labelFPS.Location = new System.Drawing.Point(752, 2);
-            this.labelFPS.Name = "labelFPS";
-            this.labelFPS.Size = new System.Drawing.Size(124, 23);
-            this.labelFPS.TabIndex = 11;
-            this.labelFPS.Text = "0 FPS";
-            this.labelFPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // saveMapDialog
-            // 
-            this.saveMapDialog.DefaultExt = "level";
-            this.saveMapDialog.FileName = "map";
-            this.saveMapDialog.Title = "Save lua level file...";
-            // 
-            // colorDialog
-            // 
-            this.colorDialog.FullOpen = true;
-            // 
             // tabSelection
             // 
             this.tabSelection.Controls.Add(this.groupSelectionRotation);
@@ -732,131 +694,6 @@
             this.tabSelection.TabIndex = 1;
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
-            // 
-            // groupSelectionPosition
-            // 
-            this.groupSelectionPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionZ);
-            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionZ);
-            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionY);
-            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionY);
-            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionX);
-            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionX);
-            this.groupSelectionPosition.Location = new System.Drawing.Point(3, 3);
-            this.groupSelectionPosition.Name = "groupSelectionPosition";
-            this.groupSelectionPosition.Size = new System.Drawing.Size(214, 100);
-            this.groupSelectionPosition.TabIndex = 1;
-            this.groupSelectionPosition.TabStop = false;
-            this.groupSelectionPosition.Text = "Position";
-            // 
-            // labelSelectionPositionZ
-            // 
-            this.labelSelectionPositionZ.AutoSize = true;
-            this.labelSelectionPositionZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelectionPositionZ.Location = new System.Drawing.Point(6, 73);
-            this.labelSelectionPositionZ.Name = "labelSelectionPositionZ";
-            this.labelSelectionPositionZ.Size = new System.Drawing.Size(17, 13);
-            this.labelSelectionPositionZ.TabIndex = 5;
-            this.labelSelectionPositionZ.Text = "Z:";
-            // 
-            // numericSelectionPositionZ
-            // 
-            this.numericSelectionPositionZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericSelectionPositionZ.DecimalPlaces = 1;
-            this.numericSelectionPositionZ.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericSelectionPositionZ.Location = new System.Drawing.Point(51, 71);
-            this.numericSelectionPositionZ.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericSelectionPositionZ.Minimum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            -2147483648});
-            this.numericSelectionPositionZ.Name = "numericSelectionPositionZ";
-            this.numericSelectionPositionZ.Size = new System.Drawing.Size(157, 20);
-            this.numericSelectionPositionZ.TabIndex = 4;
-            this.numericSelectionPositionZ.ThousandsSeparator = true;
-            // 
-            // labelSelectionPositionY
-            // 
-            this.labelSelectionPositionY.AutoSize = true;
-            this.labelSelectionPositionY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelectionPositionY.Location = new System.Drawing.Point(6, 47);
-            this.labelSelectionPositionY.Name = "labelSelectionPositionY";
-            this.labelSelectionPositionY.Size = new System.Drawing.Size(17, 13);
-            this.labelSelectionPositionY.TabIndex = 3;
-            this.labelSelectionPositionY.Text = "Y:";
-            // 
-            // numericSelectionPositionY
-            // 
-            this.numericSelectionPositionY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericSelectionPositionY.DecimalPlaces = 1;
-            this.numericSelectionPositionY.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericSelectionPositionY.Location = new System.Drawing.Point(51, 45);
-            this.numericSelectionPositionY.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericSelectionPositionY.Minimum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            -2147483648});
-            this.numericSelectionPositionY.Name = "numericSelectionPositionY";
-            this.numericSelectionPositionY.Size = new System.Drawing.Size(157, 20);
-            this.numericSelectionPositionY.TabIndex = 2;
-            this.numericSelectionPositionY.ThousandsSeparator = true;
-            // 
-            // labelSelectionPositionX
-            // 
-            this.labelSelectionPositionX.AutoSize = true;
-            this.labelSelectionPositionX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelectionPositionX.Location = new System.Drawing.Point(6, 21);
-            this.labelSelectionPositionX.Name = "labelSelectionPositionX";
-            this.labelSelectionPositionX.Size = new System.Drawing.Size(17, 13);
-            this.labelSelectionPositionX.TabIndex = 1;
-            this.labelSelectionPositionX.Text = "X:";
-            // 
-            // numericSelectionPositionX
-            // 
-            this.numericSelectionPositionX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericSelectionPositionX.DecimalPlaces = 1;
-            this.numericSelectionPositionX.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericSelectionPositionX.Location = new System.Drawing.Point(51, 19);
-            this.numericSelectionPositionX.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericSelectionPositionX.Minimum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            -2147483648});
-            this.numericSelectionPositionX.Name = "numericSelectionPositionX";
-            this.numericSelectionPositionX.Size = new System.Drawing.Size(157, 20);
-            this.numericSelectionPositionX.TabIndex = 0;
-            this.numericSelectionPositionX.ThousandsSeparator = true;
             // 
             // groupSelectionRotation
             // 
@@ -983,28 +820,276 @@
             this.numericSelectionRotationX.TabIndex = 0;
             this.numericSelectionRotationX.ThousandsSeparator = true;
             // 
-            // checkFogDisplay
+            // groupSelectionPosition
             // 
-            this.checkFogDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkFogDisplay.AutoSize = true;
-            this.checkFogDisplay.Location = new System.Drawing.Point(148, 19);
-            this.checkFogDisplay.Name = "checkFogDisplay";
-            this.checkFogDisplay.Size = new System.Drawing.Size(60, 17);
-            this.checkFogDisplay.TabIndex = 13;
-            this.checkFogDisplay.Text = "Display";
-            this.checkFogDisplay.UseVisualStyleBackColor = true;
-            this.checkFogDisplay.CheckedChanged += new System.EventHandler(this.checkFogDisplay_CheckedChanged);
+            this.groupSelectionPosition.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionZ);
+            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionZ);
+            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionY);
+            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionY);
+            this.groupSelectionPosition.Controls.Add(this.labelSelectionPositionX);
+            this.groupSelectionPosition.Controls.Add(this.numericSelectionPositionX);
+            this.groupSelectionPosition.Location = new System.Drawing.Point(3, 3);
+            this.groupSelectionPosition.Name = "groupSelectionPosition";
+            this.groupSelectionPosition.Size = new System.Drawing.Size(214, 100);
+            this.groupSelectionPosition.TabIndex = 1;
+            this.groupSelectionPosition.TabStop = false;
+            this.groupSelectionPosition.Text = "Position";
+            // 
+            // labelSelectionPositionZ
+            // 
+            this.labelSelectionPositionZ.AutoSize = true;
+            this.labelSelectionPositionZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionPositionZ.Location = new System.Drawing.Point(6, 73);
+            this.labelSelectionPositionZ.Name = "labelSelectionPositionZ";
+            this.labelSelectionPositionZ.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionPositionZ.TabIndex = 5;
+            this.labelSelectionPositionZ.Text = "Z:";
+            // 
+            // numericSelectionPositionZ
+            // 
+            this.numericSelectionPositionZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionPositionZ.DecimalPlaces = 1;
+            this.numericSelectionPositionZ.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionZ.Location = new System.Drawing.Point(51, 71);
+            this.numericSelectionPositionZ.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionZ.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionPositionZ.Name = "numericSelectionPositionZ";
+            this.numericSelectionPositionZ.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionPositionZ.TabIndex = 4;
+            this.numericSelectionPositionZ.ThousandsSeparator = true;
+            // 
+            // labelSelectionPositionY
+            // 
+            this.labelSelectionPositionY.AutoSize = true;
+            this.labelSelectionPositionY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionPositionY.Location = new System.Drawing.Point(6, 47);
+            this.labelSelectionPositionY.Name = "labelSelectionPositionY";
+            this.labelSelectionPositionY.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionPositionY.TabIndex = 3;
+            this.labelSelectionPositionY.Text = "Y:";
+            // 
+            // numericSelectionPositionY
+            // 
+            this.numericSelectionPositionY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionPositionY.DecimalPlaces = 1;
+            this.numericSelectionPositionY.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionY.Location = new System.Drawing.Point(51, 45);
+            this.numericSelectionPositionY.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionY.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionPositionY.Name = "numericSelectionPositionY";
+            this.numericSelectionPositionY.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionPositionY.TabIndex = 2;
+            this.numericSelectionPositionY.ThousandsSeparator = true;
+            // 
+            // labelSelectionPositionX
+            // 
+            this.labelSelectionPositionX.AutoSize = true;
+            this.labelSelectionPositionX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectionPositionX.Location = new System.Drawing.Point(6, 21);
+            this.labelSelectionPositionX.Name = "labelSelectionPositionX";
+            this.labelSelectionPositionX.Size = new System.Drawing.Size(17, 13);
+            this.labelSelectionPositionX.TabIndex = 1;
+            this.labelSelectionPositionX.Text = "X:";
+            // 
+            // numericSelectionPositionX
+            // 
+            this.numericSelectionPositionX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSelectionPositionX.DecimalPlaces = 1;
+            this.numericSelectionPositionX.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionX.Location = new System.Drawing.Point(51, 19);
+            this.numericSelectionPositionX.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSelectionPositionX.Minimum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            -2147483648});
+            this.numericSelectionPositionX.Name = "numericSelectionPositionX";
+            this.numericSelectionPositionX.Size = new System.Drawing.Size(157, 20);
+            this.numericSelectionPositionX.TabIndex = 0;
+            this.numericSelectionPositionX.ThousandsSeparator = true;
+            // 
+            // splitViewportAndProblems
+            // 
+            this.splitViewportAndProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitViewportAndProblems.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitViewportAndProblems.Location = new System.Drawing.Point(0, 0);
+            this.splitViewportAndProblems.Name = "splitViewportAndProblems";
+            // 
+            // splitViewportAndProblems.Panel2
+            // 
+            this.splitViewportAndProblems.Panel2.Controls.Add(this.gridProblems);
+            this.splitViewportAndProblems.Size = new System.Drawing.Size(805, 678);
+            this.splitViewportAndProblems.SplitterDistance = 594;
+            this.splitViewportAndProblems.TabIndex = 0;
+            // 
+            // gridProblems
+            // 
+            this.gridProblems.AllowUserToAddRows = false;
+            this.gridProblems.AllowUserToDeleteRows = false;
+            this.gridProblems.AllowUserToResizeColumns = false;
+            this.gridProblems.AllowUserToResizeRows = false;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.gridProblems.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnProblems});
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle11;
+            this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridProblems.Location = new System.Drawing.Point(0, 0);
+            this.gridProblems.MultiSelect = false;
+            this.gridProblems.Name = "gridProblems";
+            this.gridProblems.ReadOnly = true;
+            this.gridProblems.RowHeadersVisible = false;
+            this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowTemplate.Height = 500;
+            this.gridProblems.RowTemplate.ReadOnly = true;
+            this.gridProblems.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridProblems.Size = new System.Drawing.Size(207, 678);
+            this.gridProblems.TabIndex = 1;
+            this.gridProblems.SelectionChanged += new System.EventHandler(this.gridProblems_SelectionChanged);
+            // 
+            // columnProblems
+            // 
+            this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle10;
+            this.columnProblems.HeaderText = "Problems";
+            this.columnProblems.Name = "columnProblems";
+            this.columnProblems.ReadOnly = true;
+            this.columnProblems.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.columnProblems.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // buttonProblems
+            // 
+            this.buttonProblems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonProblems.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.buttonProblems.FlatAppearance.BorderSize = 0;
+            this.buttonProblems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonProblems.Image = global::PDMapEditor.Properties.Resources.flagWhite;
+            this.buttonProblems.Location = new System.Drawing.Point(993, 0);
+            this.buttonProblems.Name = "buttonProblems";
+            this.buttonProblems.Size = new System.Drawing.Size(44, 25);
+            this.buttonProblems.TabIndex = 9;
+            this.buttonProblems.UseVisualStyleBackColor = false;
+            this.buttonProblems.Click += new System.EventHandler(this.buttonProblems_Click);
+            // 
+            // comboPerspectiveOrtho
+            // 
+            this.comboPerspectiveOrtho.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboPerspectiveOrtho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPerspectiveOrtho.FormattingEnabled = true;
+            this.comboPerspectiveOrtho.ItemHeight = 13;
+            this.comboPerspectiveOrtho.Items.AddRange(new object[] {
+            "Perspective",
+            "Orthographic"});
+            this.comboPerspectiveOrtho.Location = new System.Drawing.Point(882, 3);
+            this.comboPerspectiveOrtho.MaxDropDownItems = 1;
+            this.comboPerspectiveOrtho.Name = "comboPerspectiveOrtho";
+            this.comboPerspectiveOrtho.Size = new System.Drawing.Size(105, 21);
+            this.comboPerspectiveOrtho.TabIndex = 10;
+            this.comboPerspectiveOrtho.SelectedIndexChanged += new System.EventHandler(this.comboPerspectiveOrtho_SelectedIndexChanged);
+            // 
+            // labelFPS
+            // 
+            this.labelFPS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFPS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.labelFPS.Location = new System.Drawing.Point(752, 2);
+            this.labelFPS.Name = "labelFPS";
+            this.labelFPS.Size = new System.Drawing.Size(124, 23);
+            this.labelFPS.TabIndex = 11;
+            this.labelFPS.Text = "0 FPS";
+            this.labelFPS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // saveMapDialog
+            // 
+            this.saveMapDialog.DefaultExt = "level";
+            this.saveMapDialog.FileName = "map";
+            this.saveMapDialog.Title = "Save lua level file...";
+            // 
+            // colorDialog
+            // 
+            this.colorDialog.FullOpen = true;
+            // 
+            // comboGizmoMode
+            // 
+            this.comboGizmoMode.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.comboGizmoMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboGizmoMode.FormattingEnabled = true;
+            this.comboGizmoMode.ItemHeight = 13;
+            this.comboGizmoMode.Location = new System.Drawing.Point(536, 2);
+            this.comboGizmoMode.MaxDropDownItems = 1;
+            this.comboGizmoMode.Name = "comboGizmoMode";
+            this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
+            this.comboGizmoMode.TabIndex = 12;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1037, 703);
+            this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);
             this.Controls.Add(this.buttonProblems);
             this.Controls.Add(this.splitPropertiesAndViewportProblems);
             this.Controls.Add(this.toolStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "PayDay\'s Homeworld Remastered Map Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
@@ -1016,6 +1101,9 @@
             this.splitPropertiesAndViewportProblems.ResumeLayout(false);
             this.tabControlLeft.ResumeLayout(false);
             this.tabMap.ResumeLayout(false);
+            this.groupGeneral.ResumeLayout(false);
+            this.groupGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderGlareIntensity)).EndInit();
             this.groupFog.ResumeLayout(false);
             this.groupFog.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderFogAlpha)).EndInit();
@@ -1027,21 +1115,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
-            this.splitViewportAndProblems.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
-            this.splitViewportAndProblems.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
             this.tabSelection.ResumeLayout(false);
-            this.groupSelectionPosition.ResumeLayout(false);
-            this.groupSelectionPosition.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).EndInit();
             this.groupSelectionRotation.ResumeLayout(false);
             this.groupSelectionRotation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationX)).EndInit();
+            this.groupSelectionPosition.ResumeLayout(false);
+            this.groupSelectionPosition.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).EndInit();
+            this.splitViewportAndProblems.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
+            this.splitViewportAndProblems.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1105,6 +1193,12 @@
         public System.Windows.Forms.NumericUpDown numericSelectionRotationX;
         public System.Windows.Forms.GroupBox groupSelectionRotation;
         private System.Windows.Forms.CheckBox checkFogDisplay;
+        public System.Windows.Forms.ComboBox comboGizmoMode;
+        private System.Windows.Forms.GroupBox groupGeneral;
+        private System.Windows.Forms.Label labelBackground;
+        private System.Windows.Forms.Label labelGlareIntensity;
+        public System.Windows.Forms.ComboBox comboBackground;
+        public System.Windows.Forms.TrackBar sliderGlareIntensity;
     }
 }
 

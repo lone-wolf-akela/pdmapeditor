@@ -12,6 +12,7 @@ namespace PDMapEditor
         public Gizmo(Vector3 position, Assimp.Mesh assMesh) : base(position, assMesh)
         {
             Mesh = new Mesh(position, Vector3.Zero, assMesh);
+            Mesh.DrawInFront = true;
         }
     }
 }

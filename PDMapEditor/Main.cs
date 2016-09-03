@@ -131,6 +131,7 @@ namespace PDMapEditor
         {
             ActionKey.KeyDown(e);
             Program.Camera.KeyDown();
+            Selection.KeyDown();
         }
 
         public void glControl_KeyUp(object sender, KeyEventArgs e)
@@ -418,5 +419,22 @@ namespace PDMapEditor
             Program.GLControl.Invalidate();
         }
         #endregion
+
+        private void comboBackground_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach(Background background in Background.Backgrounds)
+            {
+                if(background.ComboBackgroundIndex == comboBackground.SelectedIndex)
+                {
+                    Map.Background = background;
+                    break;
+                }
+            }
+        }
+
+        private void sliderGlareIntensity_Scroll(object sender, EventArgs e)
+        {
+            Map.GlareIntensity = (float)sliderGlareIntensity.Value / 100;
+        }
     }
 }

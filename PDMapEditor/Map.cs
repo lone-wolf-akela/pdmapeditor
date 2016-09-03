@@ -16,6 +16,12 @@ namespace PDMapEditor
         private static Vector3 mapDimensions = new Vector3(40000);
         public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.UpdateMeshData(); Renderer.UpdateView(); Program.GLControl.Invalidate(); Program.main.UpdateMapDimensions(); } }
 
+        private static Background background;
+        public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboBackgroundIndex; } }
+
+        private static float glareIntensity;
+        public static float GlareIntensity { get { return glareIntensity; } set { glareIntensity = value; Program.main.sliderGlareIntensity.Value = (int)Math.Round(value * 100); } }
+
         private static bool fogActive = false;
         public static bool FogActive //Disabled for now
         {
@@ -203,6 +209,7 @@ namespace PDMapEditor
             Renderer.BackgroundColor = new Vector3(0.05f);
 
             Selection.CreateGizmos();
+            Selection.Selected = null;
         }
     }
 }

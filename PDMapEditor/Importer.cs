@@ -42,6 +42,12 @@ namespace PDMapEditor
             scene = importer.ImportFile(@"resources/gizmoPosZ.ply", PostProcessPreset.TargetRealTimeQuality);
             Mesh.GizmoZPos = scene.Meshes[0];
 
+            scene = importer.ImportFile(@"resources/gizmoRotX.ply", PostProcessPreset.TargetRealTimeQuality);
+            Mesh.GizmoXRot = scene.Meshes[0];
+            scene = importer.ImportFile(@"resources/gizmoRotY.ply", PostProcessPreset.TargetRealTimeQuality);
+            Mesh.GizmoYRot = scene.Meshes[0];
+            scene = importer.ImportFile(@"resources/gizmoRotZ.ply", PostProcessPreset.TargetRealTimeQuality);
+            Mesh.GizmoZRot = scene.Meshes[0];
 
             scene = importer.ImportFile(@"resources/text000.obj", PostProcessPreset.TargetRealTimeQuality);
             Mesh.Text000 = scene.Meshes[0];

@@ -87,6 +87,24 @@ namespace PDMapEditor
                         Program.HWData.ParseDustCloudType(file);
                     }
                 }
+
+                //Parse backgrounds
+                string backgroundsPath = Path.Combine(dataPath, "background");
+
+                //Check if background folder exists
+                if (Directory.Exists(backgroundsPath))
+                {
+                    string[] directories = Directory.GetDirectories(backgroundsPath, "*", SearchOption.TopDirectoryOnly);
+                    foreach (string directory in directories)
+                    {
+                        string name = Path.GetDirectoryName(directory + "/meh.txt");
+                        string[] split = name.Split(Path.DirectorySeparatorChar);
+                        name = split[split.Length - 1];
+
+                        if (Background.GetBackgroundFromName(name) == null) //Don't create duplicate backgrounds (because of multiple data paths)
+                            new Background(name);
+                    }
+                }
             }
         }
 

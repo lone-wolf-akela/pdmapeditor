@@ -11,7 +11,7 @@ namespace PDMapEditor
         public Vector3 Position = new Vector3(0, 0, 15);
         public Vector3 Orientation = new Vector3((float)Math.PI, 0f, 0f);
 
-        public float NearClipDistance = 0.01f;
+        public float NearClipDistance = 100f;
         public float ClipDistance = 500000;
         public float FieldOfView = 0.9599f;
 

@@ -13,7 +13,6 @@ namespace PDMapEditor
     {
         public static Main main;
         public static Hotkeys hotkeys;
-        public static Updater updater;
 
         public static GLControl GLControl;
         public static Camera Camera = new Camera();
@@ -35,15 +34,6 @@ namespace PDMapEditor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            updater = new Updater();
-            updater.CheckForUpdates();
-            Application.Run(updater);
-        }
-
-        public static void UpdateFinished()
-        {
-            updater.Close();
-
             main = new Main();
 
             Log.Init();
@@ -53,6 +43,7 @@ namespace PDMapEditor
             Hotkeys.LoadHotkeys();
 
             CreateGLControl();
+
             Application.Run(main);
         }
 

@@ -60,12 +60,24 @@ namespace PDMapEditor
 
             List<Drawable> newList = new List<Drawable>();
             foreach (Drawable drawable in Drawable.Drawables)
-                if (drawable.Mesh.Material.Opacity >= 1)
-                    newList.Add(drawable);
+                if(!drawable.Mesh.DrawInFront)
+                    if (drawable.Mesh.Material.Opacity >= 1)
+                        newList.Add(drawable);
 
             foreach (Drawable drawable in Drawable.Drawables)
-                if (drawable.Mesh.Material.Opacity < 1)
-                    newList.Add(drawable);
+                if (!drawable.Mesh.DrawInFront)
+                    if (drawable.Mesh.Material.Opacity < 1)
+                        newList.Add(drawable);
+
+            foreach (Drawable drawable in Drawable.Drawables)
+                if (drawable.Mesh.DrawInFront)
+                    if (drawable.Mesh.Material.Opacity >= 1)
+                        newList.Add(drawable);
+
+            foreach (Drawable drawable in Drawable.Drawables)
+                if (drawable.Mesh.DrawInFront)
+                    if (drawable.Mesh.Material.Opacity < 1)
+                        newList.Add(drawable);
 
             Drawable.Drawables = newList;
 
@@ -149,15 +161,35 @@ namespace PDMapEditor
             int indiceat = 0;
             foreach (Drawable drawable in Drawable.Drawables)
             {
-                if(drawable.Mesh.Material.Opacity >= 1)
-                    indiceat += DrawDrawable(drawable, indiceat);
+                if(!drawable.Mesh.DrawInFront)
+                    if(drawable.Mesh.Material.Opacity >= 1)
+                        indiceat += DrawDrawable(drawable, indiceat);
             }
 
             GL.DepthMask(false);
             foreach (Drawable drawable in Drawable.Drawables)
             {
-                if (drawable.Mesh.Material.Opacity < 1)
-                    indiceat += DrawDrawable(drawable, indiceat);
+                if (!drawable.Mesh.DrawInFront)
+                    if (drawable.Mesh.Material.Opacity < 1)
+                        indiceat += DrawDrawable(drawable, indiceat);
+            }
+            GL.DepthMask(true);
+
+            //Draw in front
+            GL.Clear(ClearBufferMask.DepthBufferBit);
+            foreach (Drawable drawable in Drawable.Drawables)
+            {
+                if (drawable.Mesh.DrawInFront)
+                    if (drawable.Mesh.Material.Opacity >= 1)
+                        indiceat += DrawDrawable(drawable, indiceat);
+            }
+
+            GL.DepthMask(false);
+            foreach (Drawable drawable in Drawable.Drawables)
+            {
+                if (drawable.Mesh.DrawInFront)
+                    if (drawable.Mesh.Material.Opacity < 1)
+                        indiceat += DrawDrawable(drawable, indiceat);
             }
             GL.DepthMask(true);
 

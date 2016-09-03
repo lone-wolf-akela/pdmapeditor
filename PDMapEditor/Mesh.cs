@@ -27,6 +27,10 @@ namespace PDMapEditor
         public static Assimp.Mesh GizmoXPos;
         public static Assimp.Mesh GizmoYPos;
         public static Assimp.Mesh GizmoZPos;
+
+        public static Assimp.Mesh GizmoXRot;
+        public static Assimp.Mesh GizmoYRot;
+        public static Assimp.Mesh GizmoZRot;
         #endregion
 
         public Assimp.Mesh AssMesh;
@@ -39,7 +43,7 @@ namespace PDMapEditor
         public bool Wireframe = false;
         public bool VertexColored = true;
         public bool Persistent = false;
-        public bool DrawInFront = true;
+        public bool DrawInFront = false;
 
         public BeginMode BeginMode = BeginMode.Triangles;
 

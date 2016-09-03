@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 using OpenTK;
+using System.Media;
 
 namespace PDMapEditor
 {
@@ -20,13 +21,23 @@ namespace PDMapEditor
         private static Line gizmoLineY;
         private static Line gizmoLineZ;
 
+        private static Drawable gizmoRotX;
+        private static Drawable gizmoRotY;
+        private static Drawable gizmoRotZ;
+
         private static DraggingState draggingState = DraggingState.NONE;
+
+        private static GizmoMode gizmoMode = GizmoMode.TRANSLATION;
+        public static GizmoMode GizmoMode { get { return gizmoMode; } set { gizmoMode = value; UpdateSelectionGizmos(); } }
 
         private static float lastMouseX, lastMouseY;
 
         //GUI
         private static bool ignorePositionChange;
         private static bool ignoreRotationChange;
+
+        private static bool ignoreGizmoModeChange;
+        private static object comboGizmoModeRotationItem;
 
         private static ISelectable selected;
         public static ISelectable Selected { get { return selected; } set { selected = value; UpdateSelectionGUI(); UpdateSelectionGizmos(); } }
@@ -36,6 +47,13 @@ namespace PDMapEditor
             shader = new Shader("picking.vs", "picking.fs", true);
 
             //GUI
+            Program.main.comboGizmoMode.Items.Add("Translation");
+            Program.main.comboGizmoMode.Items.Add("Rotation");
+            comboGizmoModeRotationItem = Program.main.comboGizmoMode.Items[1];
+
+            Program.main.comboGizmoMode.SelectedIndex = 0;
+            Program.main.comboGizmoMode.SelectedIndexChanged += new EventHandler(comboGizmoMode_SelectedIndexChanged);
+
             Program.main.tabControlLeft.TabPages.Remove(Program.main.tabSelection);
 
             Program.main.numericSelectionPositionX.ValueChanged += new System.EventHandler(PositionChanged);
@@ -67,6 +85,18 @@ namespace PDMapEditor
             gizmoPosZ.Visible = false;
             gizmoLineZ = new Line(Vector3.Zero + new Vector3(0, 0, -100000), Vector3.Zero + new Vector3(0, 0, 100000), new Vector3(0, 0, 1));
             gizmoLineZ.Visible = false;
+
+            gizmoRotX = new Gizmo(Vector3.Zero, Mesh.GizmoXRot);
+            gizmoRotX.Mesh.Scale = new Vector3(25);
+            gizmoRotX.Visible = false;
+
+            gizmoRotY = new Gizmo(Vector3.Zero, Mesh.GizmoYRot);
+            gizmoRotY.Mesh.Scale = new Vector3(25);
+            gizmoRotY.Visible = false;
+
+            gizmoRotZ = new Gizmo(Vector3.Zero, Mesh.GizmoZRot);
+            gizmoRotZ.Mesh.Scale = new Vector3(25);
+            gizmoRotZ.Visible = false;
         }
 
         public static void LeftMouseDown(int x, int y)
@@ -100,6 +130,33 @@ namespace PDMapEditor
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
             }
+            else if (objectAtMouse == gizmoRotX)
+            {
+                gizmoLineX.Visible = true;
+                gizmoLineX.Position = gizmoRotX.Position;
+                draggingState = DraggingState.ROTATING_X;
+
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
+            else if (objectAtMouse == gizmoRotY)
+            {
+                gizmoLineY.Visible = true;
+                gizmoLineY.Position = gizmoRotY.Position;
+                draggingState = DraggingState.ROTATING_Y;
+
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
+            else if (objectAtMouse == gizmoRotZ)
+            {
+                gizmoLineZ.Visible = true;
+                gizmoLineZ.Position = gizmoRotZ.Position;
+                draggingState = DraggingState.ROTATING_Z;
+
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
         }
 
         public static void LeftMouseUp(int x, int y)
@@ -107,7 +164,15 @@ namespace PDMapEditor
             if(draggingState == DraggingState.NONE)
             {
                 ISelectable objectAtMouse = GetObjectAtPixel(x, y);
-                Selected = objectAtMouse;
+                Drawable drawable = objectAtMouse as Drawable;
+
+                if (drawable != null)
+                {
+                    if (drawable != gizmoPosX && drawable != gizmoPosY && drawable != gizmoPosZ && drawable != gizmoRotX && drawable != gizmoRotY && drawable != gizmoRotZ)
+                        Selected = objectAtMouse;
+                }
+                else
+                    Selected = null;
             }
 
             draggingState = DraggingState.NONE;
@@ -136,11 +201,21 @@ namespace PDMapEditor
             Drawable selectedDrawable = Selected as Drawable;
 
             UpdatePositionGUI();
-            if (Selected as Pebble == null && Selected as DustCloud == null)
+            if (Selected as Pebble == null && Selected as DustCloud == null) //Don't allow rotation changes if the object cannot be rotated
             {
                 UpdateRotationGUI();
                 Program.main.groupSelectionRotation.Visible = true;
+
+                if(!Program.main.comboGizmoMode.Items.Contains(comboGizmoModeRotationItem))
+                    Program.main.comboGizmoMode.Items.Add(comboGizmoModeRotationItem);
             }
+            else
+            {
+                GizmoMode = GizmoMode.TRANSLATION;
+                Program.main.comboGizmoMode.Items.Remove(comboGizmoModeRotationItem);
+            }
+
+            Program.GLControl.Focus();
         }
         private static void UpdatePositionGUI()
         {
@@ -166,25 +241,71 @@ namespace PDMapEditor
         private static void UpdateSelectionGizmos()
         {
             Drawable selectedDrawable = Selected as Drawable;
-            if(selectedDrawable == null)
-            {
-                gizmoPosX.Visible = false;
-                gizmoPosY.Visible = false;
-                gizmoPosZ.Visible = false;
+
+            gizmoPosX.Visible = false;
+            gizmoPosY.Visible = false;
+            gizmoPosZ.Visible = false;
+
+            gizmoRotX.Visible = false;
+            gizmoRotY.Visible = false;
+            gizmoRotZ.Visible = false;
+
+            ignoreGizmoModeChange = true;
+            if (GizmoMode == GizmoMode.TRANSLATION)
+                Program.main.comboGizmoMode.SelectedIndex = 0;
+            else if (GizmoMode == GizmoMode.ROTATION)
+                Program.main.comboGizmoMode.SelectedIndex = 1;
+            ignoreGizmoModeChange = false;
+
+            if (selectedDrawable == null)
                 return;
-            }
 
             //Gizmos
-            gizmoPosX.Visible = true;
             gizmoPosX.Position = selectedDrawable.Position;
-
-            gizmoPosY.Visible = true;
             gizmoPosY.Position = selectedDrawable.Position;
-
-            gizmoPosZ.Visible = true;
             gizmoPosZ.Position = selectedDrawable.Position;
 
+            gizmoRotX.Position = selectedDrawable.Position;
+            gizmoRotY.Position = selectedDrawable.Position;
+            gizmoRotZ.Position = selectedDrawable.Position;
+
+            ignoreGizmoModeChange = true;
+            if (GizmoMode == GizmoMode.TRANSLATION)
+            {
+                gizmoPosX.Visible = true;
+                gizmoPosY.Visible = true;
+                gizmoPosZ.Visible = true;
+                Program.main.comboGizmoMode.SelectedIndex = 0;
+            }
+            else if(GizmoMode == GizmoMode.ROTATION)
+            {
+                gizmoRotX.Visible = true;
+                gizmoRotY.Visible = true;
+                gizmoRotZ.Visible = true;
+                Program.main.comboGizmoMode.SelectedIndex = 1;
+            }
+            ignoreGizmoModeChange = false;
+
             UpdateSelectionGizmoScale();
+        }
+
+        private static void comboGizmoMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreGizmoModeChange)
+                return;
+
+            if(Program.main.comboGizmoMode.SelectedIndex == 0) //Translation
+            {
+                GizmoMode = GizmoMode.TRANSLATION;
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
+            else if (Program.main.comboGizmoMode.SelectedIndex == 1) //Rotation
+            {
+                GizmoMode = GizmoMode.ROTATION;
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
         }
 
         public static void UpdateSelectionGizmoScale()
@@ -199,13 +320,38 @@ namespace PDMapEditor
             gizmoPosX.Mesh.Scale = new Vector3(scale);
             gizmoPosY.Mesh.Scale = new Vector3(scale);
             gizmoPosZ.Mesh.Scale = new Vector3(scale);
+
+            gizmoRotX.Mesh.Scale = new Vector3(scale);
+            gizmoRotY.Mesh.Scale = new Vector3(scale);
+            gizmoRotZ.Mesh.Scale = new Vector3(scale);
+        }
+
+        public static void KeyDown()
+        {
+            if (ActionKey.IsDown(Action.MODE_TRANSLATION))
+            {
+                GizmoMode = GizmoMode.TRANSLATION;
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
+            else if (ActionKey.IsDown(Action.MODE_ROTATION))
+            {
+                if (Selected as Pebble == null && Selected as DustCloud == null) //Don't allow rotation changes if the object cannot be rotated
+                {
+                    GizmoMode = GizmoMode.ROTATION;
+                    Renderer.UpdateView();
+                    Program.GLControl.Invalidate();
+                }
+                else
+                    SystemSounds.Beep.Play();
+            }
         }
 
         public static void UpdateDragging(int mouseX, int mouseY)
         {
             Drawable selectedDrawable = Selected as Drawable;
 
-            if (draggingState == DraggingState.MOVING_X || draggingState == DraggingState.MOVING_Y || draggingState == DraggingState.MOVING_Z)
+            if (draggingState != DraggingState.NONE)
             {
                 float mouseXDelta = mouseX - lastMouseX;
                 float mouseYDelta = mouseY - lastMouseY;
@@ -215,21 +361,51 @@ namespace PDMapEditor
                 float posY = selectedDrawable.Position.Y;
                 float posZ = selectedDrawable.Position.Z;
 
+                float rotX = selectedDrawable.Rotation.X;
+                float rotY = selectedDrawable.Rotation.Y;
+                float rotZ = selectedDrawable.Rotation.Z;
+
                 switch (draggingState)
                 {
+                    //Position
                     case DraggingState.MOVING_X:
-                        posX = selectedDrawable.Position.X + mouseXDelta * (cameraDistanceApprox / 800);
+                        if(Program.Camera.Position.Z > selectedDrawable.Position.Z) //To fix the user experience
+                            posX = selectedDrawable.Position.X + mouseXDelta * (cameraDistanceApprox / 800);
+                        else
+                            posX = selectedDrawable.Position.X - mouseXDelta * (cameraDistanceApprox / 800);
                         break;
                     case DraggingState.MOVING_Y:
                         posY = selectedDrawable.Position.Y + mouseYDelta * (cameraDistanceApprox / 800);
                         break;
                     case DraggingState.MOVING_Z:
-                        posZ = selectedDrawable.Position.Z - mouseXDelta * (cameraDistanceApprox / 800);
+                        if (Program.Camera.Position.X > selectedDrawable.Position.X) //To fix the user experience
+                            posZ = selectedDrawable.Position.Z - mouseXDelta * (cameraDistanceApprox / 800);
+                        else
+                            posZ = selectedDrawable.Position.Z + mouseXDelta * (cameraDistanceApprox / 800);
+                        break;
+
+                    //Rotation
+                    case DraggingState.ROTATING_X:
+                        if (Program.Camera.Position.X > selectedDrawable.Position.X) //To fix the user experience
+                            rotX = selectedDrawable.Rotation.X - mouseXDelta;
+                        else
+                            rotX = selectedDrawable.Rotation.X + mouseXDelta;
+                        break;
+                    case DraggingState.ROTATING_Y:
+                        rotY = selectedDrawable.Rotation.Y + mouseXDelta;
+                        break;
+                    case DraggingState.ROTATING_Z:
+                        if (Program.Camera.Position.Z > selectedDrawable.Position.Z) //To fix the user experience
+                            rotZ = selectedDrawable.Rotation.Z - mouseXDelta;
+                        else
+                            rotZ = selectedDrawable.Rotation.Z + mouseXDelta;
                         break;
                 }
                 selectedDrawable.Position = new Vector3(posX, posY, posZ);
+                selectedDrawable.Rotation = new Vector3(rotX, rotY, rotZ);
 
                 UpdatePositionGUI();
+                UpdateRotationGUI();
                 UpdateSelectionGizmos();
                 UpdateSelectionGizmoScale();
                 Renderer.UpdateView();
@@ -282,34 +458,28 @@ namespace PDMapEditor
 
                 ISelectable selectable = drawable as ISelectable;
 
-                Mesh mesh = drawable.Mesh;
+                if (drawable.Visible && selectable != null)
+                {
+                    if (!drawable.Mesh.DrawInFront)
+                        DrawDrawable(drawable, indiceat, i);
+                }
+                indiceat += drawable.Mesh.IndiceCount;
+            }
 
-                GL.PointSize(drawable.Mesh.DotSize * 2); //Render larger dots for easier selection of pebbles
-                GL.LineWidth(drawable.Mesh.LineWidth);
+            indiceat = 0;
+            GL.Clear(ClearBufferMask.DepthBufferBit);
+            for (int i = 0; i < Drawable.Drawables.Count; i++)
+            {
+                Drawable drawable = Drawable.Drawables[i];
+
+                ISelectable selectable = drawable as ISelectable;
 
                 if (drawable.Visible && selectable != null)
                 {
-                    // Convert "i", the integer mesh ID, into an RGB color
-                    int r = (i & 0x000000FF) >> 0;
-                    int g = (i & 0x0000FF00) >> 8;
-                    int b = (i & 0x00FF0000) >> 16;
-                    GL.Uniform3(shader.GetUniform("pickingColor"), (float)r / 255, (float)g / 255, (float)b / 255);
-
-                    Matrix4 model = mesh.ModelMatrix;
-                    Matrix4 camera = Program.Camera.GetViewMatrix();
-                    Matrix4 projection = Matrix4.Identity;
-                    if (!Program.Camera.Orthographic)
-                        projection = Matrix4.CreatePerspectiveFieldOfView(Program.Camera.FieldOfView, (float)Program.GLControl.Width / (float)Program.GLControl.Height, Program.Camera.NearClipDistance, Program.Camera.ClipDistance);
-                    else
-                        projection = Matrix4.CreateOrthographic((float)(Program.GLControl.Width / Program.Camera.OrthographicSize), (float)(Program.GLControl.Height / Program.Camera.OrthographicSize), Program.Camera.NearClipDistance, Program.Camera.ClipDistance);
-
-                    GL.UniformMatrix4(shader.GetUniform("inMatM"), false, ref model);
-                    GL.UniformMatrix4(shader.GetUniform("inMatV"), false, ref camera);
-                    GL.UniformMatrix4(shader.GetUniform("inMatP"), false, ref projection);
-
-                    GL.DrawElements(mesh.BeginMode, mesh.IndiceCount, DrawElementsType.UnsignedInt, indiceat * sizeof(int));
+                    if (drawable.Mesh.DrawInFront)
+                        DrawDrawable(drawable, indiceat, i);
                 }
-                indiceat += mesh.IndiceCount;
+                indiceat += drawable.Mesh.IndiceCount;
             }
 
             // Wait until all the pending drawing commands are really done.
@@ -343,6 +513,34 @@ namespace PDMapEditor
             //Program.GLControl.SwapBuffers();
             return objectAtPixel;
         }
+
+        private static void DrawDrawable(Drawable drawable, int index, int id)
+        {
+            // Convert "i", the integer mesh ID, into an RGB color
+            int r = (id & 0x000000FF) >> 0;
+            int g = (id & 0x0000FF00) >> 8;
+            int b = (id & 0x00FF0000) >> 16;
+            GL.Uniform3(shader.GetUniform("pickingColor"), (float)r / 255, (float)g / 255, (float)b / 255);
+
+            Mesh mesh = drawable.Mesh;
+
+            GL.PointSize(mesh.DotSize * 2); //Render larger dots for easier selection of pebbles
+            GL.LineWidth(mesh.LineWidth);
+
+            Matrix4 model = mesh.ModelMatrix;
+            Matrix4 camera = Program.Camera.GetViewMatrix();
+            Matrix4 projection = Matrix4.Identity;
+            if (!Program.Camera.Orthographic)
+                projection = Matrix4.CreatePerspectiveFieldOfView(Program.Camera.FieldOfView, (float)Program.GLControl.Width / (float)Program.GLControl.Height, Program.Camera.NearClipDistance, Program.Camera.ClipDistance);
+            else
+                projection = Matrix4.CreateOrthographic((float)(Program.GLControl.Width / Program.Camera.OrthographicSize), (float)(Program.GLControl.Height / Program.Camera.OrthographicSize), Program.Camera.NearClipDistance, Program.Camera.ClipDistance);
+
+            GL.UniformMatrix4(shader.GetUniform("inMatM"), false, ref model);
+            GL.UniformMatrix4(shader.GetUniform("inMatV"), false, ref camera);
+            GL.UniformMatrix4(shader.GetUniform("inMatP"), false, ref projection);
+
+            GL.DrawElements(mesh.BeginMode, mesh.IndiceCount, DrawElementsType.UnsignedInt, index * sizeof(int));
+        }
     }
 
     enum DraggingState
@@ -351,5 +549,14 @@ namespace PDMapEditor
         MOVING_X,
         MOVING_Y,
         MOVING_Z,
+        ROTATING_X,
+        ROTATING_Y,
+        ROTATING_Z,
+    }
+
+    public enum GizmoMode
+    {
+        TRANSLATION,
+        ROTATION,
     }
 }

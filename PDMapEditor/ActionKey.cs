@@ -35,6 +35,9 @@ namespace PDMapEditor
             new ActionKey("Move right", Action.PAN_RIGHT, Keys.D);
             new ActionKey("Move up", Action.PAN_UP, Keys.E);
             new ActionKey("Move down", Action.PAN_DOWN, Keys.Q);
+
+            new ActionKey("Translation mode", Action.MODE_TRANSLATION, Keys.T);
+            new ActionKey("Rotation mode", Action.MODE_ROTATION, Keys.Z);
         }
 
         public static void KeyDown(PreviewKeyDownEventArgs e)
@@ -118,5 +121,7 @@ namespace PDMapEditor
         PAN_RIGHT,
         PAN_UP,
         PAN_DOWN,
+        MODE_TRANSLATION,
+        MODE_ROTATION,
     }
 }

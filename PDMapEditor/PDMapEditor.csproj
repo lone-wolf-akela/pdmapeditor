@@ -32,10 +32,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>PDMapEditor.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AssimpNet, Version=3.3.1.0, Culture=neutral, PublicKeyToken=0d51b391f59f42a6, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\AssimpNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NLua, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8df2ab518030ea95, processorArchitecture=MSIL">
       <HintPath>..\packages\NLua.1.3.2.1\lib\net45\NLua.dll</HintPath>
@@ -51,6 +58,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
@@ -61,15 +69,10 @@
   <ItemGroup>
     <Compile Include="ActionKey.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="data\Background.cs" />
     <Compile Include="data\DustCloudType.cs" />
     <Compile Include="data\HWData.cs" />
     <Compile Include="data\AsteroidType.cs" />
-    <Compile Include="Updater.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Updater.Designer.cs">
-      <DependentUpon>Updater.cs</DependentUpon>
-    </Compile>
     <Compile Include="Drawable.cs" />
     <Compile Include="editor\Gizmo.cs" />
     <Compile Include="editor\Icosphere.cs" />
@@ -122,9 +125,6 @@
     <Compile Include="Shader.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Utilites.cs" />
-    <EmbeddedResource Include="Updater.resx">
-      <DependentUpon>Updater.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Hotkeys.resx">
       <DependentUpon>Hotkeys.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +165,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\gizmoPosZ.ply">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\gizmoRotX.ply">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\gizmoRotY.ply">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\gizmoRotZ.ply">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="resources\icosphere.obj">
@@ -213,10 +222,13 @@
   <ItemGroup>
     <None Include="resources\flagThread-Yellow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="PDMapEditor.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

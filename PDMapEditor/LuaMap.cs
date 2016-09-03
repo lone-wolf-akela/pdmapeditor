@@ -135,6 +135,12 @@ namespace PDMapEditor
                 file += "\tfogSetType(\"" + Map.FogType + "\")\n";
                 file += "\tfogSetDensity(" + Map.FogDensity.ToString(InvariantCulture) + ")\n";
             }
+            file += "\n";
+
+            file += "\t-- Settings\n";
+            file += "\tloadBackground(\"" + Map.Background.Name + "\")\n";
+            file += "\tsetGlareIntensity(" + Map.GlareIntensity.ToString(InvariantCulture) + ")\n";
+
             file += "end\n";
 
             File.WriteAllText(path, file);
@@ -419,9 +425,16 @@ namespace PDMapEditor
             //STUB
         }
 
-        public void LoadBackground(string background)
+        public void LoadBackground(string name)
         {
-            //STUB
+            Background background = Background.GetBackgroundFromName(name);
+            if (background == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Background \"" + name + "\" not found.");
+                return;
+            }
+
+            Map.Background = background;
         }
 
         public void SetSensorsManagerCameraDistances(float min, float max)
@@ -441,7 +454,7 @@ namespace PDMapEditor
 
         public void SetGlareIntensity(float intensity)
         {
-            //STUB
+            Map.GlareIntensity = intensity;
         }
 
         public void SetLevelShadowColour(float red, float green, float blue, float alpha)
