@@ -71,6 +71,24 @@ namespace PDMapEditor
 
             try { lua.DoString("NonDetermChunk()"); }
             catch (NLua.Exceptions.LuaScriptException e) { new Problem(ProblemTypes.ERROR, e.Message); }
+
+            string description = "";
+            try
+            { description = lua.GetString("levelDesc"); }
+            catch { new Problem(ProblemTypes.ERROR, "Failed to parse level description."); }
+            Map.Description = description;
+
+            int maxPlayers = 2;
+            try { maxPlayers = (int)lua.GetNumber("maxPlayers"); }
+            catch { new Problem(ProblemTypes.ERROR, "Failed to parse maximum player count."); }
+
+            if (maxPlayers > 8 || maxPlayers < 1)
+            {
+                new Problem(ProblemTypes.ERROR, "The maximum player count is not between 1 and 8. Resetting to 2.");
+                maxPlayers = 2;
+            }
+
+            Map.MaxPlayers = maxPlayers;
         }
 
         public void SaveMap(string path)
@@ -152,14 +170,43 @@ namespace PDMapEditor
             }
             sb.AppendLine("");
 
+            //Settings
             sb.AppendLine("\t-- Settings");
             if(Map.Background != null)
                 sb.AppendLine("\tloadBackground(\"" + Map.Background.Name + "\")");
             else
                 sb.AppendLine("\tloadBackground(\"\")");
             sb.AppendLine("\tsetGlareIntensity(" + Map.GlareIntensity.ToString(InvariantCulture) + ")");
+            sb.AppendLine("\tsetLevelShadowColour(" + Map.ShadowColor.X.ToString(InvariantCulture) + ", " + Map.ShadowColor.Y.ToString(InvariantCulture) + ", " + Map.ShadowColor.Z.ToString(InvariantCulture) + ", " + Map.ShadowColor.W.ToString(InvariantCulture) + ")");
+            sb.AppendLine("\tsetSensorsManagerCameraDistances(" + Map.SensorsManagerCameraMin + ", " + Map.SensorsManagerCameraMax + ")");
+
+            sb.AppendLine("");
+
+            //Music
+            sb.AppendLine("\t-- Music");
+            sb.AppendLine("\tsetDefaultMusic(\"data:" + Map.MusicDefault + "\")");
+            sb.AppendLine("\tsetBattleMusic(\"data:" + Map.MusicBattle + "\")");
 
             sb.AppendLine("end");
+
+            sb.AppendLine("");
+            sb.AppendLine("levelDesc = \"" + Map.Description + "\"; -- Level description displayed in the lobby.");
+            sb.AppendLine("maxPlayers = " + Map.MaxPlayers + "; -- Maximum number of players allowed on this level.");
+            sb.AppendLine("");
+
+            sb.AppendLine("player = {}; -- Info on each possible player on this level.");
+            for(int i = 0; i < Map.MaxPlayers; i ++)
+            {
+                sb.AppendLine("player[" + i + "] =");
+                sb.AppendLine("{");
+                sb.AppendLine("\tid = " + i + ",");
+                sb.AppendLine("\tname = \"\",");
+                sb.AppendLine("\tresources = 0,");
+                sb.AppendLine("\traceName = \"Hiigaran\",");
+                sb.AppendLine("\tstartPos = 1");
+                sb.AppendLine("}");
+                sb.AppendLine("");
+            }
 
             File.WriteAllText(path, sb.ToString());
         }
@@ -457,17 +504,24 @@ namespace PDMapEditor
 
         public void SetSensorsManagerCameraDistances(float min, float max)
         {
-            //STUB
+            Map.SensorsManagerCameraMin = min;
+            Map.SensorsManagerCameraMax = max;
         }
 
         public void SetDefaultMusic(string path)
         {
-            //STUB
+            string music = path.ToLower();
+            music = music.Replace("data:", "");
+            music = music.Replace("data_", "");
+            Map.MusicDefault = music;
         }
 
         public void SetBattleMusic(string path)
         {
-            //STUB
+            string music = path.ToLower();
+            music = music.Replace("data:", "");
+            music = music.Replace("data_", "");
+            Map.MusicBattle = music;
         }
 
         public void SetGlareIntensity(float intensity)
@@ -477,7 +531,7 @@ namespace PDMapEditor
 
         public void SetLevelShadowColour(float red, float green, float blue, float alpha)
         {
-            //STUB
+            Map.ShadowColor = new Vector4(red, green, blue, alpha);
         }
 
         public void SetDustCloudAmbient(LuaTable color)

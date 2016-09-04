@@ -250,6 +250,21 @@ namespace PDMapEditor
             }
         }
 
+        public static string GetFileInDataPaths(string relativePath)
+        {
+            foreach(string dataPath in DataPaths)
+            {
+                string combinedPath = Path.Combine(dataPath, relativePath);
+
+                if (File.Exists(combinedPath))
+                {
+                    return combinedPath;
+                }
+            }
+
+            return "";
+        }
+
         #region Lua functions
         public LuaTable StartPebbleConfig()
         {

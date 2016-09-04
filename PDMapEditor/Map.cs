@@ -2,7 +2,9 @@
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +23,27 @@ namespace PDMapEditor
 
         private static float glareIntensity = 0;
         public static float GlareIntensity { get { return glareIntensity; } set { glareIntensity = value; Program.main.sliderGlareIntensity.Value = (int)Math.Round(value * 100); } }
+
+        private static Vector4 shadowColor = new Vector4(0, 0, 0, 1);
+        public static Vector4 ShadowColor { get { return shadowColor; } set { shadowColor = value; Program.main.buttonShadowColor.BackColor = Color.FromArgb((int)Math.Round(value.X * 255), (int)Math.Round(value.Y * 255), (int)Math.Round(value.Z * 255)); Program.main.sliderShadowAlpha.Value = (int)Math.Round(value.W * 100); } }
+
+        private static float sensorsManagerCameraMin = 10000;
+        public static float SensorsManagerCameraMin { get { return sensorsManagerCameraMin; } set { sensorsManagerCameraMin = value; Program.main.numericSensorsManagerCameraMin.Value = (decimal)value; } }
+
+        private static float sensorsManagerCameraMax = 55000;
+        public static float SensorsManagerCameraMax { get { return sensorsManagerCameraMax; } set { sensorsManagerCameraMax = value; Program.main.numericSensorsManagerCameraMax.Value = (decimal)value; } }
+
+        private static int maxPlayers = 2;
+        public static int MaxPlayers { get { return maxPlayers; } set { maxPlayers = value; Program.main.comboMaxPlayers.SelectedIndex = maxPlayers - 1; } }
+
+        private static string musicDefault = "sound/music/ambient/amb_01";
+        public static string MusicDefault { get { return musicDefault; } set { musicDefault = value; Program.main.boxMusicDefault.Text = value; } }
+
+        private static string musicBattle = "sound/music/battle/battle_01";
+        public static string MusicBattle { get { return musicBattle; } set { musicBattle = value; Program.main.boxMusicBattle.Text = value; } }
+
+        private static string description = "";
+        public static string Description { get { return description; } set { description = value; Program.main.boxDescription.Text = value; } }
 
         private static bool fogActive = false;
         public static bool FogActive //Disabled for now
@@ -205,6 +228,15 @@ namespace PDMapEditor
             Map.FogColor = new Vector4(0.38f, 0.21f, 0.06f, 1);
             Map.FogType = "linear";
             Map.FogDensity = 0.15f;
+
+            Map.GlareIntensity = 0;
+            Map.ShadowColor = new Vector4(0, 0, 0, 1);
+
+            Map.MusicDefault = "sound/music/ambient/amb_01";
+            Map.MusicBattle = "sound/music/battle/battle_01";
+
+            Map.MaxPlayers = 2;
+            Map.Description = "";
 
             Renderer.BackgroundColor = new Vector3(0.05f);
 

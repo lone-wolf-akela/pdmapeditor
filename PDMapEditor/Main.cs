@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
+using System.Media;
+using System.IO;
 
 namespace PDMapEditor
 {
@@ -20,6 +22,11 @@ namespace PDMapEditor
         private bool ignoreMapDimensionChange;
         private bool ignoreFogAlphaChange;
         private bool ignoreFogDensityChange;
+
+        private bool playingDefaultMusic;
+        private bool playingBattleMusic;
+
+        SoundPlayer player = new SoundPlayer();
 
         public Main()
         {
@@ -97,13 +104,11 @@ namespace PDMapEditor
         public void glControl_MouseEnter(object sender, EventArgs e)
         {
             Program.GLControl.Focus();
-            Console.WriteLine("Enter");
         }
 
         public void glControl_MouseLeave(object sender, EventArgs e)
         {
             this.Focus();
-            Console.WriteLine("Leave");
         }
 
         public void glControl_MouseMove(object sender, MouseEventArgs e)
@@ -437,6 +442,117 @@ namespace PDMapEditor
         private void sliderGlareIntensity_Scroll(object sender, EventArgs e)
         {
             Map.GlareIntensity = (float)sliderGlareIntensity.Value / 100;
+        }
+
+        private void buttonShadowColor_Click(object sender, EventArgs e)
+        {
+            colorDialog.Color = buttonShadowColor.BackColor;
+            DialogResult result = colorDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                buttonShadowColor.BackColor = colorDialog.Color;
+                Map.ShadowColor = new Vector4((float)colorDialog.Color.R / 255, (float)colorDialog.Color.G / 255, (float)colorDialog.Color.B / 255, Map.FogColor.W);
+            }
+        }
+
+        private void sliderShadowAlpha_Scroll(object sender, EventArgs e)
+        {
+            Map.ShadowColor = new Vector4(Map.ShadowColor.X, Map.ShadowColor.Y, Map.ShadowColor.Z, (float)sliderShadowAlpha.Value / 100);
+        }
+
+        private void numericSensorsManagerCameraMin_ValueChanged(object sender, EventArgs e)
+        {
+            Map.SensorsManagerCameraMin = (float)numericSensorsManagerCameraMin.Value;
+        }
+
+        private void numericSensorsManagerCameraMax_ValueChanged(object sender, EventArgs e)
+        {
+            Map.SensorsManagerCameraMax = (float)numericSensorsManagerCameraMax.Value;
+        }
+
+        private void boxMusicDefault_TextChanged(object sender, EventArgs e)
+        {
+            Map.MusicDefault = boxMusicDefault.Text;
+        }
+
+        private void boxMusicBattle_TextChanged(object sender, EventArgs e)
+        {
+            Map.MusicBattle = boxMusicBattle.Text;
+        }
+
+        public void PlaySound(string path)
+        {
+            player.Play();
+        }
+
+        private void buttonPlayDefault_Click(object sender, EventArgs e)
+        {
+            if (playingDefaultMusic)
+            {
+                player.Stop();
+                buttonPlayDefault.Text = "Play default";
+                playingDefaultMusic = false;
+                return;
+            }
+
+            string path = HWData.GetFileInDataPaths(Map.MusicDefault + ".wav");
+
+            playingDefaultMusic = false;
+            playingBattleMusic = false;
+            buttonPlayDefault.Text = "Play default";
+            buttonPlayBattle.Text = "Play battle";
+
+            player.Stop();
+            if(!File.Exists(path))
+            {
+                MessageBox.Show("File \"" + Map.MusicDefault + ".wav\" does not exist in the specified data paths.", "Failed to play music", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            buttonPlayDefault.Text = "Stop";
+            playingDefaultMusic = true;
+            player.SoundLocation = path;
+            player.Play();
+        }
+
+        private void buttonPlayBattle_Click(object sender, EventArgs e)
+        {
+            if (playingBattleMusic)
+            {
+                player.Stop();
+                buttonPlayBattle.Text = "Play battle";
+                playingBattleMusic = false;
+                return;
+            }
+
+            string path = HWData.GetFileInDataPaths(Map.MusicBattle + ".wav");
+
+            playingDefaultMusic = false;
+            playingBattleMusic = false;
+            buttonPlayDefault.Text = "Play default";
+            buttonPlayBattle.Text = "Play battle";
+
+            player.Stop();
+            if (!File.Exists(path))
+            {
+                MessageBox.Show("File \"" + Map.MusicBattle + ".wav\" does not exist in the specified data paths.", "Failed to play music", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            buttonPlayBattle.Text = "Stop";
+            playingBattleMusic = true;
+            player.SoundLocation = path;
+            player.Play();
+        }
+
+        private void comboMaxPlayers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Map.MaxPlayers = comboMaxPlayers.SelectedIndex + 1;
+        }
+
+        private void boxDescription_TextChanged(object sender, EventArgs e)
+        {
+            Map.Description = boxDescription.Text;
         }
     }
 }
