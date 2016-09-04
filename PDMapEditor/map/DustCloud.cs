@@ -26,6 +26,7 @@ namespace PDMapEditor
             Size = size;
 
             Mesh = new MeshIcosphere(position, new Vector3(type.PixelColor), true);
+            Mesh.Material.Translucent = true;
             Mesh.Material.Opacity = 0.1f;
             Mesh.Scale = new Vector3(size);
 

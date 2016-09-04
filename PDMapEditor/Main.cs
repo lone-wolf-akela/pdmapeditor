@@ -94,14 +94,16 @@ namespace PDMapEditor
             Program.GLControl.Invalidate();
         }
 
-        public void glControl_Enter(object sender, EventArgs e)
+        public void glControl_MouseEnter(object sender, EventArgs e)
         {
             Program.GLControl.Focus();
+            Console.WriteLine("Enter");
         }
 
-        public void glControl_Leave(object sender, EventArgs e)
+        public void glControl_MouseLeave(object sender, EventArgs e)
         {
             this.Focus();
+            Console.WriteLine("Leave");
         }
 
         public void glControl_MouseMove(object sender, MouseEventArgs e)

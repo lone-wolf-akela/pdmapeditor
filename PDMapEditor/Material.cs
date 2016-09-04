@@ -13,6 +13,8 @@ namespace PDMapEditor
 
         public string Name;
 
+        public bool Translucent = false;
+
         public Vector3 DiffuseColor = new Vector3(1, 1, 1);
         public Vector3 SpecularColor = new Vector3(0.1f, 0.1f, 0.1f);
         public float SpecularExponent = 0.3f;

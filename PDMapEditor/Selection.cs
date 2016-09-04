@@ -32,6 +32,8 @@ namespace PDMapEditor
 
         private static float lastMouseX, lastMouseY;
 
+        private static Vector3 rotationAtStart = Vector3.Zero;
+
         //GUI
         private static bool ignorePositionChange;
         private static bool ignoreRotationChange;
@@ -71,18 +73,21 @@ namespace PDMapEditor
             gizmoPosX = new Gizmo(Vector3.Zero, Mesh.GizmoXPos);
             gizmoPosX.Mesh.Scale = new Vector3(25);
             gizmoPosX.Visible = false;
+            gizmoPosX.Mesh.Material.Translucent = true;
             gizmoLineX = new Line(Vector3.Zero + new Vector3(-100000, 0, 0), Vector3.Zero + new Vector3(100000, 0, 0), new Vector3(1, 0, 0));
             gizmoLineX.Visible = false;
 
             gizmoPosY = new Gizmo(Vector3.Zero, Mesh.GizmoYPos);
             gizmoPosY.Mesh.Scale = new Vector3(25);
             gizmoPosY.Visible = false;
+            gizmoPosY.Mesh.Material.Translucent = true;
             gizmoLineY = new Line(Vector3.Zero + new Vector3(0, -100000, 0), Vector3.Zero + new Vector3(0, 100000, 0), new Vector3(0, 1, 0));
             gizmoLineY.Visible = false;
 
             gizmoPosZ = new Gizmo(Vector3.Zero, Mesh.GizmoZPos);
             gizmoPosZ.Mesh.Scale = new Vector3(25);
             gizmoPosZ.Visible = false;
+            gizmoPosZ.Mesh.Material.Translucent = true;
             gizmoLineZ = new Line(Vector3.Zero + new Vector3(0, 0, -100000), Vector3.Zero + new Vector3(0, 0, 100000), new Vector3(0, 0, 1));
             gizmoLineZ.Visible = false;
 
@@ -102,6 +107,7 @@ namespace PDMapEditor
         public static void LeftMouseDown(int x, int y)
         {
             ISelectable objectAtMouse = GetObjectAtPixel(x, y);
+            Drawable selectedDrawable = Selected as Drawable;
 
             if (objectAtMouse == gizmoPosX)
             {
@@ -136,6 +142,8 @@ namespace PDMapEditor
                 gizmoLineX.Position = gizmoRotX.Position;
                 draggingState = DraggingState.ROTATING_X;
 
+                rotationAtStart = selectedDrawable.Rotation;
+
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
             }
@@ -145,6 +153,8 @@ namespace PDMapEditor
                 gizmoLineY.Position = gizmoRotY.Position;
                 draggingState = DraggingState.ROTATING_Y;
 
+                rotationAtStart = selectedDrawable.Rotation;
+
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
             }
@@ -153,6 +163,8 @@ namespace PDMapEditor
                 gizmoLineZ.Visible = true;
                 gizmoLineZ.Position = gizmoRotZ.Position;
                 draggingState = DraggingState.ROTATING_Z;
+
+                rotationAtStart = selectedDrawable.Rotation;
 
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
@@ -179,6 +191,10 @@ namespace PDMapEditor
             gizmoLineX.Visible = false;
             gizmoLineY.Visible = false;
             gizmoLineZ.Visible = false;
+
+            gizmoRotX.Rotation = Vector3.Zero;
+            gizmoRotY.Rotation = Vector3.Zero;
+            gizmoRotZ.Rotation = Vector3.Zero;
 
             Renderer.UpdateView();
             Program.GLControl.Invalidate();
@@ -332,6 +348,75 @@ namespace PDMapEditor
             gizmoRotZ.Mesh.Scale = new Vector3(scale);
         }
 
+        public static void UpdateGizmoFading() //This fades gizmos that are in the way at certain camera angles
+        {
+            if (Selected != null)
+            {
+                Vector2 angles = Program.Camera.Angles;
+
+                //Left
+                float diffX = Math.Abs((float)Math.PI - angles.X);
+                float diffY = Math.Abs((float)Math.PI * 1.5f - angles.Y);
+                float average = (diffX + diffY) / 2;
+
+                float opacity = average * (float)Math.PI;
+                opacity /= 2;
+                gizmoPosX.Mesh.Material.Opacity = opacity;
+
+                if (opacity >= 1)
+                {
+                    //Right
+                    diffX = Math.Abs((float)Math.PI - angles.X);
+                    diffY = Math.Abs((float)Math.PI / 2 - angles.Y);
+                    average = (diffX + diffY) / 2;
+
+                    opacity = average * (float)Math.PI;
+                    opacity /= 2;
+                    gizmoPosX.Mesh.Material.Opacity = opacity;
+                }
+
+                //Top
+                diffX = Math.Abs((float)Math.PI * 1.5f - angles.X);
+                average = diffX;
+
+                opacity = average * (float)Math.PI;
+                opacity /= 2;
+                gizmoPosY.Mesh.Material.Opacity = opacity;
+
+                if (opacity >= 1)
+                {
+                    //Bottom
+                    diffX = Math.Abs((float)Math.PI / 2 - angles.X);
+                    average = diffX;
+
+                    opacity = average * (float)Math.PI;
+                    opacity /= 2;
+                    gizmoPosY.Mesh.Material.Opacity = opacity;
+                }
+
+                //Front
+                diffX = Math.Abs((float)Math.PI - angles.X);
+                diffY = Math.Abs((float)Math.PI - angles.Y);
+                average = (diffX + diffY) / 2;
+
+                opacity = average * (float)Math.PI;
+                opacity /= 2;
+                gizmoPosZ.Mesh.Material.Opacity = opacity;
+
+                if (opacity >= 1)
+                {
+                    //Back
+                    diffX = Math.Abs((float)Math.PI - angles.X);
+                    diffY = Math.Abs((float)0 - angles.Y);
+                    average = (diffX + diffY) / 2;
+
+                    opacity = average * (float)Math.PI;
+                    opacity /= 2;
+                    gizmoPosZ.Mesh.Material.Opacity = opacity;
+                }
+            }
+        }
+
         public static void KeyDown()
         {
             if (ActionKey.IsDown(Action.MODE_TRANSLATION))
@@ -416,6 +501,15 @@ namespace PDMapEditor
                 }
                 selectedDrawable.Position = new Vector3(posX, posY, posZ);
                 selectedDrawable.Rotation = new Vector3(rotX, rotY, rotZ);
+
+                float rotXDelta = rotationAtStart.X - rotX;
+                float rotYDelta = rotationAtStart.Y - rotY;
+                float rotZDelta = rotationAtStart.Z - rotZ;
+                Vector3 rotDelta = new Vector3(rotXDelta, rotYDelta, rotZDelta);
+
+                gizmoRotX.Rotation = -rotDelta;
+                gizmoRotY.Rotation = -rotDelta;
+                gizmoRotZ.Rotation = -rotDelta;
 
                 UpdatePositionGUI();
                 UpdateRotationGUI();

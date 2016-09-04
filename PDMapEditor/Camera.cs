@@ -31,6 +31,8 @@ namespace PDMapEditor
         public float ZoomSpeed = 500000;
         public float PanSpeed = 0.9f;
 
+        private Vector3 panDelta;
+
         const float PAN_MIN_SPEED = 10000;
 
         public Vector3 LookAt = Vector3.Zero;
@@ -47,7 +49,7 @@ namespace PDMapEditor
 
 
         private float lastZoom;
-        private Vector2 angles = new Vector2((float)Math.PI, (float)Math.PI);
+        public Vector2 Angles = new Vector2((float)Math.PI, (float)Math.PI);
 
         private float lastWheelPrecise;
 
@@ -93,8 +95,8 @@ namespace PDMapEditor
             }
             else if (ActionKey.IsDown(Action.VIEW_FRONT))
             {
-                angles.X = (float)Math.PI;
-                angles.Y = (float)Math.PI;
+                Angles.X = (float)Math.PI;
+                Angles.Y = (float)Math.PI;
 
                 UpdatePosition();
                 Renderer.UpdateView();
@@ -102,8 +104,8 @@ namespace PDMapEditor
             }
             else if (ActionKey.IsDown(Action.VIEW_BACK))
             {
-                angles.X = (float)Math.PI;
-                angles.Y = 0;
+                Angles.X = (float)Math.PI;
+                Angles.Y = 0;
 
                 UpdatePosition();
                 Renderer.UpdateView();
@@ -111,8 +113,8 @@ namespace PDMapEditor
             }
             else if (ActionKey.IsDown(Action.VIEW_LEFT))
             {
-                angles.X = (float)Math.PI;
-                angles.Y = (float)-Math.PI / 2;
+                Angles.X = (float)Math.PI;
+                Angles.Y = (float)Math.PI * 1.5f;
 
                 UpdatePosition();
                 Renderer.UpdateView();
@@ -120,8 +122,8 @@ namespace PDMapEditor
             }
             else if (ActionKey.IsDown(Action.VIEW_RIGHT))
             {
-                angles.X = (float)Math.PI;
-                angles.Y = (float)Math.PI / 2;
+                Angles.X = (float)Math.PI;
+                Angles.Y = (float)Math.PI / 2;
 
                 UpdatePosition();
                 Renderer.UpdateView();
@@ -129,10 +131,10 @@ namespace PDMapEditor
             }
             else if (ActionKey.IsDown(Action.VIEW_TOP))
             {
-                angles.X = (float)Math.PI * 1.5f;
-                angles.Y = (float)Math.PI;
+                Angles.X = (float)Math.PI * 1.5f;
+                Angles.Y = (float)Math.PI;
 
-                angles.X = (float)Utilities.Clamp(angles.X, Math.PI - Math.PI / 2, (Math.PI + Math.PI / 2) - 0.000001f);
+                Angles.X = (float)Utilities.Clamp(Angles.X, Math.PI / 2, Math.PI * 1.5f - 0.01f);
 
                 UpdatePosition();
                 Renderer.UpdateView();
@@ -140,10 +142,10 @@ namespace PDMapEditor
             }
             else if (ActionKey.IsDown(Action.VIEW_BOTTOM))
             {
-                angles.X = 0;
-                angles.Y = (float)Math.PI;
+                Angles.X = 0;
+                Angles.Y = (float)Math.PI;
 
-                angles.X = (float)Utilities.Clamp(angles.X, Math.PI - Math.PI / 2, (Math.PI + Math.PI / 2) - 0.000001f);
+                Angles.X = (float)Utilities.Clamp(Angles.X, Math.PI / 2, Math.PI * 1.5f - 0.01f);
 
                 UpdatePosition();
                 Renderer.UpdateView();
@@ -157,8 +159,8 @@ namespace PDMapEditor
 
         public void ResetCamera()
         {
-            angles.X = (float)Math.PI / 2 + (float)Math.PI * 0.75f;
-            angles.Y = (float)Math.PI;
+            Angles.X = (float)Math.PI / 2 + (float)Math.PI * 0.75f;
+            Angles.Y = (float)Math.PI;
 
             LookAt = Vector3.Zero;
 
@@ -179,37 +181,37 @@ namespace PDMapEditor
 
         public void UpdatePanning()
         {
-            Vector3 delta = Vector3.Zero;
+            float angleFactor = (float)(Angles.X - Math.PI) / (float)(Math.PI * 1.5f) * 3;
+            Program.main.labelDebug1.Text = angleFactor.ToString();
 
             if (ActionKey.IsDown(Action.PAN_RIGHT))
-                delta += new Vector3(Renderer.View.M11, Renderer.View.M21, Renderer.View.M31);
+                panDelta += new Vector3(Renderer.View.M11, Renderer.View.M21, Renderer.View.M31);
             else if (ActionKey.IsDown(Action.PAN_LEFT))
-                delta += -new Vector3(Renderer.View.M11, Renderer.View.M21, Renderer.View.M31);
+                panDelta += -new Vector3(Renderer.View.M11, Renderer.View.M21, Renderer.View.M31);
             if (ActionKey.IsDown(Action.PAN_FORWARDS))
-                delta += new Vector3(Renderer.View.M12, 0, Renderer.View.M32); //Ignore x and z rotation of the matrix
+                panDelta += Vector3.Divide(Vector3.Divide(new Vector3(Renderer.View.M12, 0, Renderer.View.M32), angleFactor), 1.2f); //Ignore x and z rotation of the matrix
             else if (ActionKey.IsDown(Action.PAN_BACKWARDS))
-                delta += -new Vector3(Renderer.View.M12, 0, Renderer.View.M32); //Ignore x and z rotation of the matrix
+                panDelta += -Vector3.Divide(Vector3.Divide(new Vector3(Renderer.View.M12, 0, Renderer.View.M32), angleFactor), 1.2f); //Ignore x and z rotation of the matrix
 
             if (ActionKey.IsDown(Action.PAN_UP))
-                delta += Vector3.UnitY;
+                panDelta += Vector3.UnitY;
             else if (ActionKey.IsDown(Action.PAN_DOWN))
-                delta += -Vector3.UnitY;
+                panDelta += -Vector3.UnitY;
 
-            if (delta != Vector3.Zero)
-            {
-                float finalPanSpeed = 1;
+            float finalPanSpeed = 1;
 
-                if(!Orthographic)
-                    finalPanSpeed = (float)Math.Max(PanSpeed * zoom, PAN_MIN_SPEED);
-                else
-                    finalPanSpeed = (float)Math.Max(1 / OrthographicSize * 700, PAN_MIN_SPEED); //The orthographic size gets smaller the more you zoom out, so the speed should raise the lower the size gets
+            if(!Orthographic)
+                finalPanSpeed = (float)Math.Max(PanSpeed * zoom, PAN_MIN_SPEED);
+            else
+                finalPanSpeed = (float)Math.Max(1 / OrthographicSize * 700, PAN_MIN_SPEED); //The orthographic size gets smaller the more you zoom out, so the speed should raise the lower the size gets
 
-                LookAt += delta * finalPanSpeed * (float)Program.ElapsedSeconds;
+            LookAt += panDelta * finalPanSpeed * (float)Program.ElapsedSeconds;
 
-                UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
-            }
+            panDelta = Vector3.Zero;
+
+            UpdatePosition();
+            Renderer.UpdateView();
+            Program.GLControl.Invalidate();
         }
 
         public void Update(bool forceUpdate = false)
@@ -229,10 +231,15 @@ namespace PDMapEditor
                     float deltaX = position.X - lastPos.X;
                     float deltaY = position.Y - lastPos.Y;
 
-                    angles.X += deltaY * 0.01f;
-                    angles.Y -= deltaX * 0.01f;
+                    Angles.X += deltaY * 0.01f;
+                    Angles.Y -= deltaX * 0.01f;
 
-                    angles.X = (float)Utilities.Clamp(angles.X, Math.PI - Math.PI / 2, (Math.PI + Math.PI / 2) - 0.000001f);
+                    Angles.X = (float)Utilities.Clamp(Angles.X, Math.PI / 2, Math.PI * 1.5f - 0.01f);
+                    if (Angles.Y > Math.PI * 2)
+                        Angles.Y = 0;
+
+                    if (Angles.Y < 0)
+                        Angles.Y = (float)Math.PI * 2;
 
                     Renderer.UpdateView();
                     Program.GLControl.Invalidate();
@@ -246,11 +253,11 @@ namespace PDMapEditor
                 else
                 {
                     orthographicSize += zoomDelta * (orthographicSize / 25);
-                    orthographicSize = Utilities.Clamp(orthographicSize, 0.0001f, 1);
+                    orthographicSize = Utilities.Clamp(orthographicSize, 0.01f, 1);
                 }
-            }
 
-            UpdatePosition();
+                UpdatePosition();
+            }
 
             if (lastZoom != zoom)
             {
@@ -272,7 +279,7 @@ namespace PDMapEditor
 
         private void UpdatePosition()
         {
-            Position = LookAt + Vector3.Transform(new Vector3(0, 0, Zoom), Matrix4.CreateRotationX(angles.X) * Matrix4.CreateRotationY(angles.Y));
+            Position = LookAt + Vector3.Transform(new Vector3(0, 0, Zoom), Matrix4.CreateRotationX(Angles.X) * Matrix4.CreateRotationY(Angles.Y));
 
             //Limit camera orbit position to map dimensions
             LookAt.X = Math.Min(LookAt.X, Map.MapDimensions.X);
@@ -284,6 +291,7 @@ namespace PDMapEditor
             LookAt.Z = Math.Min(LookAt.Z, Map.MapDimensions.Z);
             LookAt.Z = Math.Max(LookAt.Z, -Map.MapDimensions.Z);
 
+            Selection.UpdateGizmoFading();
             Selection.UpdateSelectionGizmoScale();
         }
 

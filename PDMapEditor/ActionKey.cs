@@ -105,7 +105,7 @@ namespace PDMapEditor
     }
 
     [Flags]
-    enum Action
+    public enum Action
     {
         TOGGLE_ORTHOGRAPHIC,
         VIEW_FRONT,

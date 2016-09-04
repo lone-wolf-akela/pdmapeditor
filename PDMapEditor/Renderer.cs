@@ -61,22 +61,22 @@ namespace PDMapEditor
             List<Drawable> newList = new List<Drawable>();
             foreach (Drawable drawable in Drawable.Drawables)
                 if(!drawable.Mesh.DrawInFront)
-                    if (drawable.Mesh.Material.Opacity >= 1)
+                    if (!drawable.Mesh.Material.Translucent)
                         newList.Add(drawable);
 
             foreach (Drawable drawable in Drawable.Drawables)
                 if (!drawable.Mesh.DrawInFront)
-                    if (drawable.Mesh.Material.Opacity < 1)
+                    if (drawable.Mesh.Material.Translucent)
                         newList.Add(drawable);
 
             foreach (Drawable drawable in Drawable.Drawables)
                 if (drawable.Mesh.DrawInFront)
-                    if (drawable.Mesh.Material.Opacity >= 1)
+                    if (!drawable.Mesh.Material.Translucent)
                         newList.Add(drawable);
 
             foreach (Drawable drawable in Drawable.Drawables)
                 if (drawable.Mesh.DrawInFront)
-                    if (drawable.Mesh.Material.Opacity < 1)
+                    if (drawable.Mesh.Material.Translucent)
                         newList.Add(drawable);
 
             Drawable.Drawables = newList;
@@ -162,7 +162,7 @@ namespace PDMapEditor
             foreach (Drawable drawable in Drawable.Drawables)
             {
                 if(!drawable.Mesh.DrawInFront)
-                    if(drawable.Mesh.Material.Opacity >= 1)
+                    if(!drawable.Mesh.Material.Translucent)
                         indiceat += DrawDrawable(drawable, indiceat);
             }
 
@@ -170,7 +170,7 @@ namespace PDMapEditor
             foreach (Drawable drawable in Drawable.Drawables)
             {
                 if (!drawable.Mesh.DrawInFront)
-                    if (drawable.Mesh.Material.Opacity < 1)
+                    if (drawable.Mesh.Material.Translucent)
                         indiceat += DrawDrawable(drawable, indiceat);
             }
             GL.DepthMask(true);
@@ -180,7 +180,7 @@ namespace PDMapEditor
             foreach (Drawable drawable in Drawable.Drawables)
             {
                 if (drawable.Mesh.DrawInFront)
-                    if (drawable.Mesh.Material.Opacity >= 1)
+                    if (!drawable.Mesh.Material.Translucent)
                         indiceat += DrawDrawable(drawable, indiceat);
             }
 
@@ -188,7 +188,7 @@ namespace PDMapEditor
             foreach (Drawable drawable in Drawable.Drawables)
             {
                 if (drawable.Mesh.DrawInFront)
-                    if (drawable.Mesh.Material.Opacity < 1)
+                    if (drawable.Mesh.Material.Translucent)
                         indiceat += DrawDrawable(drawable, indiceat);
             }
             GL.DepthMask(true);

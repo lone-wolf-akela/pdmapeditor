@@ -59,10 +59,10 @@ namespace PDMapEditor
             GLControl.VSync = true;
             GLControl.Load += new System.EventHandler(main.glControl_Load);
             GLControl.Paint += new System.Windows.Forms.PaintEventHandler(main.glControl_Render);
-            GLControl.Enter += new System.EventHandler(main.glControl_Enter);
+            GLControl.MouseEnter += new System.EventHandler(main.glControl_MouseEnter);
             GLControl.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(main.glControl_KeyDown);
             GLControl.KeyUp += new System.Windows.Forms.KeyEventHandler(main.glControl_KeyUp);
-            GLControl.Leave += new System.EventHandler(main.glControl_Leave);
+            GLControl.MouseLeave += new System.EventHandler(main.glControl_MouseLeave);
             GLControl.MouseDown += new System.Windows.Forms.MouseEventHandler(main.glControl_MouseDown);
             GLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(main.glControl_MouseMove);
             GLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(main.glControl_MouseUp);
