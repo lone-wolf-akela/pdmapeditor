@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -44,7 +44,25 @@
             this.splitPropertiesAndViewportProblems = new System.Windows.Forms.SplitContainer();
             this.tabControlLeft = new System.Windows.Forms.TabControl();
             this.tabMap = new System.Windows.Forms.TabPage();
+            this.groupMusic = new System.Windows.Forms.GroupBox();
+            this.buttonPlayBattle = new System.Windows.Forms.Button();
+            this.buttonPlayDefault = new System.Windows.Forms.Button();
+            this.labelMusicBattle = new System.Windows.Forms.Label();
+            this.boxMusicBattle = new System.Windows.Forms.TextBox();
+            this.labelMusicDefault = new System.Windows.Forms.Label();
+            this.boxMusicDefault = new System.Windows.Forms.TextBox();
+            this.groupSensorsManager = new System.Windows.Forms.GroupBox();
+            this.labelSensorsManagerCameraMax = new System.Windows.Forms.Label();
+            this.numericSensorsManagerCameraMax = new System.Windows.Forms.NumericUpDown();
+            this.labelSensorsManagerCameraMin = new System.Windows.Forms.Label();
+            this.numericSensorsManagerCameraMin = new System.Windows.Forms.NumericUpDown();
             this.groupGeneral = new System.Windows.Forms.GroupBox();
+            this.labelDescription = new System.Windows.Forms.Label();
+            this.boxDescription = new System.Windows.Forms.TextBox();
+            this.comboMaxPlayers = new System.Windows.Forms.ComboBox();
+            this.labelShadowAlpha = new System.Windows.Forms.Label();
+            this.labelMaxPlayers = new System.Windows.Forms.Label();
+            this.sliderShadowAlpha = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonShadowColor = new System.Windows.Forms.Button();
             this.comboBackground = new System.Windows.Forms.ComboBox();
@@ -97,25 +115,6 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
-            this.labelDebug1 = new System.Windows.Forms.Label();
-            this.groupSensorsManager = new System.Windows.Forms.GroupBox();
-            this.labelSensorsManagerCameraMax = new System.Windows.Forms.Label();
-            this.numericSensorsManagerCameraMax = new System.Windows.Forms.NumericUpDown();
-            this.labelSensorsManagerCameraMin = new System.Windows.Forms.Label();
-            this.numericSensorsManagerCameraMin = new System.Windows.Forms.NumericUpDown();
-            this.sliderShadowAlpha = new System.Windows.Forms.TrackBar();
-            this.labelShadowAlpha = new System.Windows.Forms.Label();
-            this.groupMusic = new System.Windows.Forms.GroupBox();
-            this.boxMusicDefault = new System.Windows.Forms.TextBox();
-            this.labelMusicDefault = new System.Windows.Forms.Label();
-            this.boxMusicBattle = new System.Windows.Forms.TextBox();
-            this.labelMusicBattle = new System.Windows.Forms.Label();
-            this.buttonPlayDefault = new System.Windows.Forms.Button();
-            this.buttonPlayBattle = new System.Windows.Forms.Button();
-            this.comboMaxPlayers = new System.Windows.Forms.ComboBox();
-            this.labelMaxPlayers = new System.Windows.Forms.Label();
-            this.boxDescription = new System.Windows.Forms.TextBox();
-            this.labelDescription = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -123,7 +122,12 @@
             this.splitPropertiesAndViewportProblems.SuspendLayout();
             this.tabControlLeft.SuspendLayout();
             this.tabMap.SuspendLayout();
+            this.groupMusic.SuspendLayout();
+            this.groupSensorsManager.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMin)).BeginInit();
             this.groupGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderShadowAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderGlareIntensity)).BeginInit();
             this.groupFog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderFogAlpha)).BeginInit();
@@ -147,11 +151,6 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
-            this.groupSensorsManager.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMax)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderShadowAlpha)).BeginInit();
-            this.groupMusic.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -276,6 +275,179 @@
             this.tabMap.ToolTipText = "You can set general map settings here.";
             this.tabMap.UseVisualStyleBackColor = true;
             // 
+            // groupMusic
+            // 
+            this.groupMusic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupMusic.Controls.Add(this.buttonPlayBattle);
+            this.groupMusic.Controls.Add(this.buttonPlayDefault);
+            this.groupMusic.Controls.Add(this.labelMusicBattle);
+            this.groupMusic.Controls.Add(this.boxMusicBattle);
+            this.groupMusic.Controls.Add(this.labelMusicDefault);
+            this.groupMusic.Controls.Add(this.boxMusicDefault);
+            this.groupMusic.Location = new System.Drawing.Point(3, 506);
+            this.groupMusic.Name = "groupMusic";
+            this.groupMusic.Size = new System.Drawing.Size(214, 101);
+            this.groupMusic.TabIndex = 9;
+            this.groupMusic.TabStop = false;
+            this.groupMusic.Text = "Music";
+            // 
+            // buttonPlayBattle
+            // 
+            this.buttonPlayBattle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPlayBattle.Location = new System.Drawing.Point(110, 71);
+            this.buttonPlayBattle.Name = "buttonPlayBattle";
+            this.buttonPlayBattle.Size = new System.Drawing.Size(101, 23);
+            this.buttonPlayBattle.TabIndex = 5;
+            this.buttonPlayBattle.Text = "Play battle";
+            this.buttonPlayBattle.UseVisualStyleBackColor = true;
+            this.buttonPlayBattle.Click += new System.EventHandler(this.buttonPlayBattle_Click);
+            // 
+            // buttonPlayDefault
+            // 
+            this.buttonPlayDefault.Location = new System.Drawing.Point(6, 71);
+            this.buttonPlayDefault.Name = "buttonPlayDefault";
+            this.buttonPlayDefault.Size = new System.Drawing.Size(98, 23);
+            this.buttonPlayDefault.TabIndex = 4;
+            this.buttonPlayDefault.Text = "Play default";
+            this.buttonPlayDefault.UseVisualStyleBackColor = true;
+            this.buttonPlayDefault.Click += new System.EventHandler(this.buttonPlayDefault_Click);
+            // 
+            // labelMusicBattle
+            // 
+            this.labelMusicBattle.AutoSize = true;
+            this.labelMusicBattle.Location = new System.Drawing.Point(6, 48);
+            this.labelMusicBattle.Name = "labelMusicBattle";
+            this.labelMusicBattle.Size = new System.Drawing.Size(37, 13);
+            this.labelMusicBattle.TabIndex = 3;
+            this.labelMusicBattle.Text = "Battle:";
+            // 
+            // boxMusicBattle
+            // 
+            this.boxMusicBattle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxMusicBattle.Location = new System.Drawing.Point(51, 45);
+            this.boxMusicBattle.Name = "boxMusicBattle";
+            this.boxMusicBattle.Size = new System.Drawing.Size(157, 20);
+            this.boxMusicBattle.TabIndex = 2;
+            this.boxMusicBattle.TextChanged += new System.EventHandler(this.boxMusicBattle_TextChanged);
+            // 
+            // labelMusicDefault
+            // 
+            this.labelMusicDefault.AutoSize = true;
+            this.labelMusicDefault.Location = new System.Drawing.Point(6, 22);
+            this.labelMusicDefault.Name = "labelMusicDefault";
+            this.labelMusicDefault.Size = new System.Drawing.Size(44, 13);
+            this.labelMusicDefault.TabIndex = 1;
+            this.labelMusicDefault.Text = "Default:";
+            // 
+            // boxMusicDefault
+            // 
+            this.boxMusicDefault.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxMusicDefault.Location = new System.Drawing.Point(51, 19);
+            this.boxMusicDefault.Name = "boxMusicDefault";
+            this.boxMusicDefault.Size = new System.Drawing.Size(157, 20);
+            this.boxMusicDefault.TabIndex = 0;
+            this.boxMusicDefault.TextChanged += new System.EventHandler(this.boxMusicDefault_TextChanged);
+            // 
+            // groupSensorsManager
+            // 
+            this.groupSensorsManager.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSensorsManager.Controls.Add(this.labelSensorsManagerCameraMax);
+            this.groupSensorsManager.Controls.Add(this.numericSensorsManagerCameraMax);
+            this.groupSensorsManager.Controls.Add(this.labelSensorsManagerCameraMin);
+            this.groupSensorsManager.Controls.Add(this.numericSensorsManagerCameraMin);
+            this.groupSensorsManager.Location = new System.Drawing.Point(3, 613);
+            this.groupSensorsManager.Name = "groupSensorsManager";
+            this.groupSensorsManager.Size = new System.Drawing.Size(214, 74);
+            this.groupSensorsManager.TabIndex = 8;
+            this.groupSensorsManager.TabStop = false;
+            this.groupSensorsManager.Text = "Sensors manager camera distances";
+            // 
+            // labelSensorsManagerCameraMax
+            // 
+            this.labelSensorsManagerCameraMax.AutoSize = true;
+            this.labelSensorsManagerCameraMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSensorsManagerCameraMax.Location = new System.Drawing.Point(6, 47);
+            this.labelSensorsManagerCameraMax.Name = "labelSensorsManagerCameraMax";
+            this.labelSensorsManagerCameraMax.Size = new System.Drawing.Size(30, 13);
+            this.labelSensorsManagerCameraMax.TabIndex = 8;
+            this.labelSensorsManagerCameraMax.Text = "Max:";
+            // 
+            // numericSensorsManagerCameraMax
+            // 
+            this.numericSensorsManagerCameraMax.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSensorsManagerCameraMax.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMax.Location = new System.Drawing.Point(51, 45);
+            this.numericSensorsManagerCameraMax.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMax.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMax.Name = "numericSensorsManagerCameraMax";
+            this.numericSensorsManagerCameraMax.Size = new System.Drawing.Size(157, 20);
+            this.numericSensorsManagerCameraMax.TabIndex = 7;
+            this.numericSensorsManagerCameraMax.ThousandsSeparator = true;
+            this.numericSensorsManagerCameraMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMax.ValueChanged += new System.EventHandler(this.numericSensorsManagerCameraMax_ValueChanged);
+            // 
+            // labelSensorsManagerCameraMin
+            // 
+            this.labelSensorsManagerCameraMin.AutoSize = true;
+            this.labelSensorsManagerCameraMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSensorsManagerCameraMin.Location = new System.Drawing.Point(6, 21);
+            this.labelSensorsManagerCameraMin.Name = "labelSensorsManagerCameraMin";
+            this.labelSensorsManagerCameraMin.Size = new System.Drawing.Size(27, 13);
+            this.labelSensorsManagerCameraMin.TabIndex = 6;
+            this.labelSensorsManagerCameraMin.Text = "Min:";
+            // 
+            // numericSensorsManagerCameraMin
+            // 
+            this.numericSensorsManagerCameraMin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSensorsManagerCameraMin.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMin.Location = new System.Drawing.Point(51, 19);
+            this.numericSensorsManagerCameraMin.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMin.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMin.Name = "numericSensorsManagerCameraMin";
+            this.numericSensorsManagerCameraMin.Size = new System.Drawing.Size(157, 20);
+            this.numericSensorsManagerCameraMin.TabIndex = 5;
+            this.numericSensorsManagerCameraMin.ThousandsSeparator = true;
+            this.numericSensorsManagerCameraMin.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericSensorsManagerCameraMin.ValueChanged += new System.EventHandler(this.numericSensorsManagerCameraMin_ValueChanged);
+            // 
             // groupGeneral
             // 
             this.groupGeneral.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -298,6 +470,81 @@
             this.groupGeneral.TabIndex = 7;
             this.groupGeneral.TabStop = false;
             this.groupGeneral.Text = "General";
+            // 
+            // labelDescription
+            // 
+            this.labelDescription.AutoSize = true;
+            this.labelDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDescription.Location = new System.Drawing.Point(6, 43);
+            this.labelDescription.Name = "labelDescription";
+            this.labelDescription.Size = new System.Drawing.Size(63, 13);
+            this.labelDescription.TabIndex = 23;
+            this.labelDescription.Text = "Description:";
+            // 
+            // boxDescription
+            // 
+            this.boxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxDescription.Location = new System.Drawing.Point(90, 40);
+            this.boxDescription.Name = "boxDescription";
+            this.boxDescription.Size = new System.Drawing.Size(118, 20);
+            this.boxDescription.TabIndex = 22;
+            this.boxDescription.TextChanged += new System.EventHandler(this.boxDescription_TextChanged);
+            // 
+            // comboMaxPlayers
+            // 
+            this.comboMaxPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboMaxPlayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboMaxPlayers.FormattingEnabled = true;
+            this.comboMaxPlayers.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"});
+            this.comboMaxPlayers.Location = new System.Drawing.Point(90, 66);
+            this.comboMaxPlayers.Name = "comboMaxPlayers";
+            this.comboMaxPlayers.Size = new System.Drawing.Size(118, 21);
+            this.comboMaxPlayers.TabIndex = 21;
+            this.comboMaxPlayers.SelectedIndexChanged += new System.EventHandler(this.comboMaxPlayers_SelectedIndexChanged);
+            // 
+            // labelShadowAlpha
+            // 
+            this.labelShadowAlpha.AutoSize = true;
+            this.labelShadowAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelShadowAlpha.Location = new System.Drawing.Point(6, 153);
+            this.labelShadowAlpha.Name = "labelShadowAlpha";
+            this.labelShadowAlpha.Size = new System.Drawing.Size(78, 13);
+            this.labelShadowAlpha.TabIndex = 19;
+            this.labelShadowAlpha.Text = "Shadow alpha:";
+            // 
+            // labelMaxPlayers
+            // 
+            this.labelMaxPlayers.AutoSize = true;
+            this.labelMaxPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMaxPlayers.Location = new System.Drawing.Point(6, 69);
+            this.labelMaxPlayers.Name = "labelMaxPlayers";
+            this.labelMaxPlayers.Size = new System.Drawing.Size(66, 13);
+            this.labelMaxPlayers.TabIndex = 20;
+            this.labelMaxPlayers.Text = "Max players:";
+            // 
+            // sliderShadowAlpha
+            // 
+            this.sliderShadowAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderShadowAlpha.AutoSize = false;
+            this.sliderShadowAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderShadowAlpha.Location = new System.Drawing.Point(83, 148);
+            this.sliderShadowAlpha.Maximum = 100;
+            this.sliderShadowAlpha.Name = "sliderShadowAlpha";
+            this.sliderShadowAlpha.Size = new System.Drawing.Size(128, 23);
+            this.sliderShadowAlpha.TabIndex = 18;
+            this.sliderShadowAlpha.TickFrequency = 5;
+            this.sliderShadowAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // label1
             // 
@@ -748,7 +995,7 @@
             this.tabSelection.Controls.Add(this.groupSelectionPosition);
             this.tabSelection.Location = new System.Drawing.Point(4, 22);
             this.tabSelection.Name = "tabSelection";
-            this.tabSelection.Size = new System.Drawing.Size(220, 649);
+            this.tabSelection.Size = new System.Drawing.Size(220, 695);
             this.tabSelection.TabIndex = 1;
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
@@ -1023,9 +1270,9 @@
             this.gridProblems.AllowUserToDeleteRows = false;
             this.gridProblems.AllowUserToResizeColumns = false;
             this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -1033,14 +1280,14 @@
             this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnProblems});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridProblems.Location = new System.Drawing.Point(0, 0);
@@ -1049,9 +1296,9 @@
             this.gridProblems.ReadOnly = true;
             this.gridProblems.RowHeadersVisible = false;
             this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridProblems.RowTemplate.Height = 500;
@@ -1064,9 +1311,9 @@
             // columnProblems
             // 
             this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnProblems.HeaderText = "Problems";
             this.columnProblems.Name = "columnProblems";
             this.columnProblems.ReadOnly = true;
@@ -1136,269 +1383,11 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
-            // labelDebug1
-            // 
-            this.labelDebug1.AutoSize = true;
-            this.labelDebug1.Location = new System.Drawing.Point(378, 7);
-            this.labelDebug1.Name = "labelDebug1";
-            this.labelDebug1.Size = new System.Drawing.Size(35, 13);
-            this.labelDebug1.TabIndex = 13;
-            this.labelDebug1.Text = "label1";
-            // 
-            // groupSensorsManager
-            // 
-            this.groupSensorsManager.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupSensorsManager.Controls.Add(this.labelSensorsManagerCameraMax);
-            this.groupSensorsManager.Controls.Add(this.numericSensorsManagerCameraMax);
-            this.groupSensorsManager.Controls.Add(this.labelSensorsManagerCameraMin);
-            this.groupSensorsManager.Controls.Add(this.numericSensorsManagerCameraMin);
-            this.groupSensorsManager.Location = new System.Drawing.Point(3, 613);
-            this.groupSensorsManager.Name = "groupSensorsManager";
-            this.groupSensorsManager.Size = new System.Drawing.Size(214, 74);
-            this.groupSensorsManager.TabIndex = 8;
-            this.groupSensorsManager.TabStop = false;
-            this.groupSensorsManager.Text = "Sensors manager camera distances";
-            // 
-            // labelSensorsManagerCameraMax
-            // 
-            this.labelSensorsManagerCameraMax.AutoSize = true;
-            this.labelSensorsManagerCameraMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSensorsManagerCameraMax.Location = new System.Drawing.Point(6, 47);
-            this.labelSensorsManagerCameraMax.Name = "labelSensorsManagerCameraMax";
-            this.labelSensorsManagerCameraMax.Size = new System.Drawing.Size(30, 13);
-            this.labelSensorsManagerCameraMax.TabIndex = 8;
-            this.labelSensorsManagerCameraMax.Text = "Max:";
-            // 
-            // numericSensorsManagerCameraMax
-            // 
-            this.numericSensorsManagerCameraMax.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericSensorsManagerCameraMax.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMax.Location = new System.Drawing.Point(51, 45);
-            this.numericSensorsManagerCameraMax.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMax.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMax.Name = "numericSensorsManagerCameraMax";
-            this.numericSensorsManagerCameraMax.Size = new System.Drawing.Size(157, 20);
-            this.numericSensorsManagerCameraMax.TabIndex = 7;
-            this.numericSensorsManagerCameraMax.ThousandsSeparator = true;
-            this.numericSensorsManagerCameraMax.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMax.ValueChanged += new System.EventHandler(this.numericSensorsManagerCameraMax_ValueChanged);
-            // 
-            // labelSensorsManagerCameraMin
-            // 
-            this.labelSensorsManagerCameraMin.AutoSize = true;
-            this.labelSensorsManagerCameraMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSensorsManagerCameraMin.Location = new System.Drawing.Point(6, 21);
-            this.labelSensorsManagerCameraMin.Name = "labelSensorsManagerCameraMin";
-            this.labelSensorsManagerCameraMin.Size = new System.Drawing.Size(27, 13);
-            this.labelSensorsManagerCameraMin.TabIndex = 6;
-            this.labelSensorsManagerCameraMin.Text = "Min:";
-            // 
-            // numericSensorsManagerCameraMin
-            // 
-            this.numericSensorsManagerCameraMin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericSensorsManagerCameraMin.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMin.Location = new System.Drawing.Point(51, 19);
-            this.numericSensorsManagerCameraMin.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMin.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMin.Name = "numericSensorsManagerCameraMin";
-            this.numericSensorsManagerCameraMin.Size = new System.Drawing.Size(157, 20);
-            this.numericSensorsManagerCameraMin.TabIndex = 5;
-            this.numericSensorsManagerCameraMin.ThousandsSeparator = true;
-            this.numericSensorsManagerCameraMin.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericSensorsManagerCameraMin.ValueChanged += new System.EventHandler(this.numericSensorsManagerCameraMin_ValueChanged);
-            // 
-            // sliderShadowAlpha
-            // 
-            this.sliderShadowAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sliderShadowAlpha.AutoSize = false;
-            this.sliderShadowAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.sliderShadowAlpha.Location = new System.Drawing.Point(83, 148);
-            this.sliderShadowAlpha.Maximum = 100;
-            this.sliderShadowAlpha.Name = "sliderShadowAlpha";
-            this.sliderShadowAlpha.Size = new System.Drawing.Size(128, 23);
-            this.sliderShadowAlpha.TabIndex = 18;
-            this.sliderShadowAlpha.TickFrequency = 5;
-            this.sliderShadowAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // labelShadowAlpha
-            // 
-            this.labelShadowAlpha.AutoSize = true;
-            this.labelShadowAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelShadowAlpha.Location = new System.Drawing.Point(6, 153);
-            this.labelShadowAlpha.Name = "labelShadowAlpha";
-            this.labelShadowAlpha.Size = new System.Drawing.Size(78, 13);
-            this.labelShadowAlpha.TabIndex = 19;
-            this.labelShadowAlpha.Text = "Shadow alpha:";
-            // 
-            // groupMusic
-            // 
-            this.groupMusic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupMusic.Controls.Add(this.buttonPlayBattle);
-            this.groupMusic.Controls.Add(this.buttonPlayDefault);
-            this.groupMusic.Controls.Add(this.labelMusicBattle);
-            this.groupMusic.Controls.Add(this.boxMusicBattle);
-            this.groupMusic.Controls.Add(this.labelMusicDefault);
-            this.groupMusic.Controls.Add(this.boxMusicDefault);
-            this.groupMusic.Location = new System.Drawing.Point(3, 506);
-            this.groupMusic.Name = "groupMusic";
-            this.groupMusic.Size = new System.Drawing.Size(214, 101);
-            this.groupMusic.TabIndex = 9;
-            this.groupMusic.TabStop = false;
-            this.groupMusic.Text = "Music";
-            // 
-            // boxMusicDefault
-            // 
-            this.boxMusicDefault.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxMusicDefault.Location = new System.Drawing.Point(51, 19);
-            this.boxMusicDefault.Name = "boxMusicDefault";
-            this.boxMusicDefault.Size = new System.Drawing.Size(157, 20);
-            this.boxMusicDefault.TabIndex = 0;
-            this.boxMusicDefault.TextChanged += new System.EventHandler(this.boxMusicDefault_TextChanged);
-            // 
-            // labelMusicDefault
-            // 
-            this.labelMusicDefault.AutoSize = true;
-            this.labelMusicDefault.Location = new System.Drawing.Point(6, 22);
-            this.labelMusicDefault.Name = "labelMusicDefault";
-            this.labelMusicDefault.Size = new System.Drawing.Size(44, 13);
-            this.labelMusicDefault.TabIndex = 1;
-            this.labelMusicDefault.Text = "Default:";
-            // 
-            // boxMusicBattle
-            // 
-            this.boxMusicBattle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxMusicBattle.Location = new System.Drawing.Point(51, 45);
-            this.boxMusicBattle.Name = "boxMusicBattle";
-            this.boxMusicBattle.Size = new System.Drawing.Size(157, 20);
-            this.boxMusicBattle.TabIndex = 2;
-            this.boxMusicBattle.TextChanged += new System.EventHandler(this.boxMusicBattle_TextChanged);
-            // 
-            // labelMusicBattle
-            // 
-            this.labelMusicBattle.AutoSize = true;
-            this.labelMusicBattle.Location = new System.Drawing.Point(6, 48);
-            this.labelMusicBattle.Name = "labelMusicBattle";
-            this.labelMusicBattle.Size = new System.Drawing.Size(37, 13);
-            this.labelMusicBattle.TabIndex = 3;
-            this.labelMusicBattle.Text = "Battle:";
-            // 
-            // buttonPlayDefault
-            // 
-            this.buttonPlayDefault.Location = new System.Drawing.Point(6, 71);
-            this.buttonPlayDefault.Name = "buttonPlayDefault";
-            this.buttonPlayDefault.Size = new System.Drawing.Size(98, 23);
-            this.buttonPlayDefault.TabIndex = 4;
-            this.buttonPlayDefault.Text = "Play default";
-            this.buttonPlayDefault.UseVisualStyleBackColor = true;
-            this.buttonPlayDefault.Click += new System.EventHandler(this.buttonPlayDefault_Click);
-            // 
-            // buttonPlayBattle
-            // 
-            this.buttonPlayBattle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPlayBattle.Location = new System.Drawing.Point(110, 71);
-            this.buttonPlayBattle.Name = "buttonPlayBattle";
-            this.buttonPlayBattle.Size = new System.Drawing.Size(101, 23);
-            this.buttonPlayBattle.TabIndex = 5;
-            this.buttonPlayBattle.Text = "Play battle";
-            this.buttonPlayBattle.UseVisualStyleBackColor = true;
-            this.buttonPlayBattle.Click += new System.EventHandler(this.buttonPlayBattle_Click);
-            // 
-            // comboMaxPlayers
-            // 
-            this.comboMaxPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboMaxPlayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboMaxPlayers.FormattingEnabled = true;
-            this.comboMaxPlayers.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"});
-            this.comboMaxPlayers.Location = new System.Drawing.Point(90, 66);
-            this.comboMaxPlayers.Name = "comboMaxPlayers";
-            this.comboMaxPlayers.Size = new System.Drawing.Size(118, 21);
-            this.comboMaxPlayers.TabIndex = 21;
-            this.comboMaxPlayers.SelectedIndexChanged += new System.EventHandler(this.comboMaxPlayers_SelectedIndexChanged);
-            // 
-            // labelMaxPlayers
-            // 
-            this.labelMaxPlayers.AutoSize = true;
-            this.labelMaxPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMaxPlayers.Location = new System.Drawing.Point(6, 69);
-            this.labelMaxPlayers.Name = "labelMaxPlayers";
-            this.labelMaxPlayers.Size = new System.Drawing.Size(66, 13);
-            this.labelMaxPlayers.TabIndex = 20;
-            this.labelMaxPlayers.Text = "Max players:";
-            // 
-            // boxDescription
-            // 
-            this.boxDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxDescription.Location = new System.Drawing.Point(90, 40);
-            this.boxDescription.Name = "boxDescription";
-            this.boxDescription.Size = new System.Drawing.Size(118, 20);
-            this.boxDescription.TabIndex = 22;
-            this.boxDescription.TextChanged += new System.EventHandler(this.boxDescription_TextChanged);
-            // 
-            // labelDescription
-            // 
-            this.labelDescription.AutoSize = true;
-            this.labelDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescription.Location = new System.Drawing.Point(6, 43);
-            this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(63, 13);
-            this.labelDescription.TabIndex = 23;
-            this.labelDescription.Text = "Description:";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1102, 746);
-            this.Controls.Add(this.labelDebug1);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);
@@ -1417,8 +1406,15 @@
             this.splitPropertiesAndViewportProblems.ResumeLayout(false);
             this.tabControlLeft.ResumeLayout(false);
             this.tabMap.ResumeLayout(false);
+            this.groupMusic.ResumeLayout(false);
+            this.groupMusic.PerformLayout();
+            this.groupSensorsManager.ResumeLayout(false);
+            this.groupSensorsManager.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMin)).EndInit();
             this.groupGeneral.ResumeLayout(false);
             this.groupGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderShadowAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderGlareIntensity)).EndInit();
             this.groupFog.ResumeLayout(false);
             this.groupFog.PerformLayout();
@@ -1446,13 +1442,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
-            this.groupSensorsManager.ResumeLayout(false);
-            this.groupSensorsManager.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMax)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSensorsManagerCameraMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderShadowAlpha)).EndInit();
-            this.groupMusic.ResumeLayout(false);
-            this.groupMusic.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1522,7 +1511,6 @@
         private System.Windows.Forms.Label labelGlareIntensity;
         public System.Windows.Forms.ComboBox comboBackground;
         public System.Windows.Forms.TrackBar sliderGlareIntensity;
-        public System.Windows.Forms.Label labelDebug1;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Button buttonShadowColor;
         private System.Windows.Forms.GroupBox groupSensorsManager;

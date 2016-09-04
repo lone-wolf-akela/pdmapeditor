@@ -182,7 +182,6 @@ namespace PDMapEditor
         public void UpdatePanning()
         {
             float angleFactor = (float)(Angles.X - Math.PI) / (float)(Math.PI * 1.5f) * 3;
-            Program.main.labelDebug1.Text = angleFactor.ToString();
 
             if (ActionKey.IsDown(Action.PAN_RIGHT))
                 panDelta += new Vector3(Renderer.View.M11, Renderer.View.M21, Renderer.View.M31);

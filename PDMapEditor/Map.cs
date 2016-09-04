@@ -232,6 +232,9 @@ namespace PDMapEditor
             Map.GlareIntensity = 0;
             Map.ShadowColor = new Vector4(0, 0, 0, 1);
 
+            Map.SensorsManagerCameraMin = 10000;
+            Map.SensorsManagerCameraMax = 55000;
+
             Map.MusicDefault = "sound/music/ambient/amb_01";
             Map.MusicBattle = "sound/music/battle/battle_01";
 

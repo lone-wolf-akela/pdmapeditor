@@ -132,8 +132,8 @@ namespace PDMapEditor
                 foreach (XElement element in hotkeys.Elements())
                 {
                     Action action;
-                    System.Enum.TryParse(element.Name.LocalName, out action);
-                    if (action == 0)
+                    bool success = Enum.TryParse(element.Name.LocalName, out action);
+                    if (!success)
                     {
                         Log.WriteLine("Failed to parse element \"" + element.Name.LocalName + "\" from hotkeys.xml.");
                         continue;
@@ -155,7 +155,7 @@ namespace PDMapEditor
                     }
 
                     bool control = false;
-                    bool success = Boolean.TryParse(splitted[1], out control);
+                    success = Boolean.TryParse(splitted[1], out control);
                     if (!success)
                     {
                         Log.WriteLine("Failed to parse value \"" + element.Value + "\" from hotkeys.xml.");
