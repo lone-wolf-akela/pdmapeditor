@@ -78,6 +78,9 @@
     <Compile Include="forms\CustomGLControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="forms\NumericUpDownEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FPSCounter.cs" />
     <Compile Include="Hotkeys.cs">
       <SubType>Form</SubType>
@@ -224,7 +227,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

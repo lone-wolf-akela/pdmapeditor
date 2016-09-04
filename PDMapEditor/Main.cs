@@ -431,7 +431,7 @@ namespace PDMapEditor
         {
             foreach(Background background in Background.Backgrounds)
             {
-                if(background.ComboBackgroundIndex == comboBackground.SelectedIndex)
+                if(background.ComboIndex == comboBackground.SelectedIndex)
                 {
                     Map.Background = background;
                     break;

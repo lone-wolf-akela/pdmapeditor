@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -115,6 +115,22 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
+            this.groupAsteroid = new System.Windows.Forms.GroupBox();
+            this.comboAsteroidType = new System.Windows.Forms.ComboBox();
+            this.labelAsteroidType = new System.Windows.Forms.Label();
+            this.labelAsteroidResourceMultiplier = new System.Windows.Forms.Label();
+            this.groupDustCloud = new System.Windows.Forms.GroupBox();
+            this.labelDustCloudType = new System.Windows.Forms.Label();
+            this.comboDustCloudType = new System.Windows.Forms.ComboBox();
+            this.boxDustCloudName = new System.Windows.Forms.TextBox();
+            this.labelDustCloudName = new System.Windows.Forms.Label();
+            this.buttonDustCloudColor = new System.Windows.Forms.Button();
+            this.labelDustCloudColor = new System.Windows.Forms.Label();
+            this.numericDustCloudSize = new System.Windows.Forms.NumericUpDown();
+            this.labelDustCloudSize = new System.Windows.Forms.Label();
+            this.sliderDustCloudAlpha = new System.Windows.Forms.TrackBar();
+            this.labelDustCloudAlpha = new System.Windows.Forms.Label();
+            this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -151,6 +167,11 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
+            this.groupAsteroid.SuspendLayout();
+            this.groupDustCloud.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -991,6 +1012,8 @@
             // 
             // tabSelection
             // 
+            this.tabSelection.Controls.Add(this.groupDustCloud);
+            this.tabSelection.Controls.Add(this.groupAsteroid);
             this.tabSelection.Controls.Add(this.groupSelectionRotation);
             this.tabSelection.Controls.Add(this.groupSelectionPosition);
             this.tabSelection.Location = new System.Drawing.Point(4, 22);
@@ -1270,9 +1293,9 @@
             this.gridProblems.AllowUserToDeleteRows = false;
             this.gridProblems.AllowUserToResizeColumns = false;
             this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -1280,14 +1303,14 @@
             this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnProblems});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle7;
             this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridProblems.Location = new System.Drawing.Point(0, 0);
@@ -1296,9 +1319,9 @@
             this.gridProblems.ReadOnly = true;
             this.gridProblems.RowHeadersVisible = false;
             this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridProblems.RowTemplate.Height = 500;
@@ -1311,9 +1334,9 @@
             // columnProblems
             // 
             this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle6;
             this.columnProblems.HeaderText = "Problems";
             this.columnProblems.Name = "columnProblems";
             this.columnProblems.ReadOnly = true;
@@ -1383,6 +1406,205 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
+            // groupAsteroid
+            // 
+            this.groupAsteroid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupAsteroid.Controls.Add(this.labelAsteroidResourceMultiplier);
+            this.groupAsteroid.Controls.Add(this.numericAsteroidResourceMultiplier);
+            this.groupAsteroid.Controls.Add(this.labelAsteroidType);
+            this.groupAsteroid.Controls.Add(this.comboAsteroidType);
+            this.groupAsteroid.Location = new System.Drawing.Point(3, 215);
+            this.groupAsteroid.Name = "groupAsteroid";
+            this.groupAsteroid.Size = new System.Drawing.Size(214, 75);
+            this.groupAsteroid.TabIndex = 7;
+            this.groupAsteroid.TabStop = false;
+            this.groupAsteroid.Text = "Asteroid";
+            // 
+            // comboAsteroidType
+            // 
+            this.comboAsteroidType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboAsteroidType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAsteroidType.FormattingEnabled = true;
+            this.comboAsteroidType.Location = new System.Drawing.Point(82, 19);
+            this.comboAsteroidType.Name = "comboAsteroidType";
+            this.comboAsteroidType.Size = new System.Drawing.Size(126, 21);
+            this.comboAsteroidType.TabIndex = 17;
+            // 
+            // labelAsteroidType
+            // 
+            this.labelAsteroidType.AutoSize = true;
+            this.labelAsteroidType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAsteroidType.Location = new System.Drawing.Point(6, 22);
+            this.labelAsteroidType.Name = "labelAsteroidType";
+            this.labelAsteroidType.Size = new System.Drawing.Size(34, 13);
+            this.labelAsteroidType.TabIndex = 18;
+            this.labelAsteroidType.Text = "Type:";
+            // 
+            // labelAsteroidResourceMultiplier
+            // 
+            this.labelAsteroidResourceMultiplier.AutoSize = true;
+            this.labelAsteroidResourceMultiplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAsteroidResourceMultiplier.Location = new System.Drawing.Point(6, 48);
+            this.labelAsteroidResourceMultiplier.Name = "labelAsteroidResourceMultiplier";
+            this.labelAsteroidResourceMultiplier.Size = new System.Drawing.Size(70, 13);
+            this.labelAsteroidResourceMultiplier.TabIndex = 20;
+            this.labelAsteroidResourceMultiplier.Text = "RU Multiplier:";
+            // 
+            // groupDustCloud
+            // 
+            this.groupDustCloud.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupDustCloud.Controls.Add(this.labelDustCloudAlpha);
+            this.groupDustCloud.Controls.Add(this.sliderDustCloudAlpha);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudSize);
+            this.groupDustCloud.Controls.Add(this.numericDustCloudSize);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudColor);
+            this.groupDustCloud.Controls.Add(this.buttonDustCloudColor);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudName);
+            this.groupDustCloud.Controls.Add(this.boxDustCloudName);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudType);
+            this.groupDustCloud.Controls.Add(this.comboDustCloudType);
+            this.groupDustCloud.Location = new System.Drawing.Point(3, 215);
+            this.groupDustCloud.Name = "groupDustCloud";
+            this.groupDustCloud.Size = new System.Drawing.Size(214, 156);
+            this.groupDustCloud.TabIndex = 8;
+            this.groupDustCloud.TabStop = false;
+            this.groupDustCloud.Text = "Dust cloud";
+            // 
+            // labelDustCloudType
+            // 
+            this.labelDustCloudType.AutoSize = true;
+            this.labelDustCloudType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudType.Location = new System.Drawing.Point(6, 48);
+            this.labelDustCloudType.Name = "labelDustCloudType";
+            this.labelDustCloudType.Size = new System.Drawing.Size(34, 13);
+            this.labelDustCloudType.TabIndex = 18;
+            this.labelDustCloudType.Text = "Type:";
+            // 
+            // comboDustCloudType
+            // 
+            this.comboDustCloudType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboDustCloudType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDustCloudType.FormattingEnabled = true;
+            this.comboDustCloudType.Location = new System.Drawing.Point(51, 45);
+            this.comboDustCloudType.Name = "comboDustCloudType";
+            this.comboDustCloudType.Size = new System.Drawing.Size(157, 21);
+            this.comboDustCloudType.TabIndex = 17;
+            // 
+            // boxDustCloudName
+            // 
+            this.boxDustCloudName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxDustCloudName.Location = new System.Drawing.Point(51, 19);
+            this.boxDustCloudName.Name = "boxDustCloudName";
+            this.boxDustCloudName.Size = new System.Drawing.Size(157, 20);
+            this.boxDustCloudName.TabIndex = 23;
+            // 
+            // labelDustCloudName
+            // 
+            this.labelDustCloudName.AutoSize = true;
+            this.labelDustCloudName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudName.Location = new System.Drawing.Point(6, 22);
+            this.labelDustCloudName.Name = "labelDustCloudName";
+            this.labelDustCloudName.Size = new System.Drawing.Size(38, 13);
+            this.labelDustCloudName.TabIndex = 24;
+            this.labelDustCloudName.Text = "Name:";
+            // 
+            // buttonDustCloudColor
+            // 
+            this.buttonDustCloudColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDustCloudColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDustCloudColor.Location = new System.Drawing.Point(51, 72);
+            this.buttonDustCloudColor.Name = "buttonDustCloudColor";
+            this.buttonDustCloudColor.Size = new System.Drawing.Size(157, 20);
+            this.buttonDustCloudColor.TabIndex = 25;
+            this.buttonDustCloudColor.UseVisualStyleBackColor = true;
+            // 
+            // labelDustCloudColor
+            // 
+            this.labelDustCloudColor.AutoSize = true;
+            this.labelDustCloudColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudColor.Location = new System.Drawing.Point(6, 76);
+            this.labelDustCloudColor.Name = "labelDustCloudColor";
+            this.labelDustCloudColor.Size = new System.Drawing.Size(34, 13);
+            this.labelDustCloudColor.TabIndex = 26;
+            this.labelDustCloudColor.Text = "Color:";
+            // 
+            // numericDustCloudSize
+            // 
+            this.numericDustCloudSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericDustCloudSize.DecimalPlaces = 1;
+            this.numericDustCloudSize.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDustCloudSize.Location = new System.Drawing.Point(51, 127);
+            this.numericDustCloudSize.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericDustCloudSize.Name = "numericDustCloudSize";
+            this.numericDustCloudSize.Size = new System.Drawing.Size(157, 20);
+            this.numericDustCloudSize.TabIndex = 27;
+            this.numericDustCloudSize.ThousandsSeparator = true;
+            // 
+            // labelDustCloudSize
+            // 
+            this.labelDustCloudSize.AutoSize = true;
+            this.labelDustCloudSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudSize.Location = new System.Drawing.Point(6, 129);
+            this.labelDustCloudSize.Name = "labelDustCloudSize";
+            this.labelDustCloudSize.Size = new System.Drawing.Size(30, 13);
+            this.labelDustCloudSize.TabIndex = 28;
+            this.labelDustCloudSize.Text = "Size:";
+            // 
+            // sliderDustCloudAlpha
+            // 
+            this.sliderDustCloudAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderDustCloudAlpha.AutoSize = false;
+            this.sliderDustCloudAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderDustCloudAlpha.Location = new System.Drawing.Point(51, 98);
+            this.sliderDustCloudAlpha.Maximum = 100;
+            this.sliderDustCloudAlpha.Name = "sliderDustCloudAlpha";
+            this.sliderDustCloudAlpha.Size = new System.Drawing.Size(157, 23);
+            this.sliderDustCloudAlpha.TabIndex = 29;
+            this.sliderDustCloudAlpha.TickFrequency = 5;
+            this.sliderDustCloudAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+            // 
+            // labelDustCloudAlpha
+            // 
+            this.labelDustCloudAlpha.AutoSize = true;
+            this.labelDustCloudAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudAlpha.Location = new System.Drawing.Point(6, 102);
+            this.labelDustCloudAlpha.Name = "labelDustCloudAlpha";
+            this.labelDustCloudAlpha.Size = new System.Drawing.Size(37, 13);
+            this.labelDustCloudAlpha.TabIndex = 30;
+            this.labelDustCloudAlpha.Text = "Alpha:";
+            // 
+            // numericAsteroidResourceMultiplier
+            // 
+            this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericAsteroidResourceMultiplier.DecimalPlaces = 1;
+            this.numericAsteroidResourceMultiplier.Location = new System.Drawing.Point(82, 46);
+            this.numericAsteroidResourceMultiplier.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericAsteroidResourceMultiplier.Name = "numericAsteroidResourceMultiplier";
+            this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
+            this.numericAsteroidResourceMultiplier.TabIndex = 19;
+            this.numericAsteroidResourceMultiplier.TrailingSign = "%";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1442,6 +1664,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
+            this.groupAsteroid.ResumeLayout(false);
+            this.groupAsteroid.PerformLayout();
+            this.groupDustCloud.ResumeLayout(false);
+            this.groupDustCloud.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1484,7 +1713,6 @@
         private System.Windows.Forms.NumericUpDown numericFogEnd;
         private System.Windows.Forms.TrackBar sliderFogDensity;
         private System.Windows.Forms.Label labelFogDensity;
-        private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.TrackBar sliderFogAlpha;
         private System.Windows.Forms.Label labelFogAlpha;
         private System.Windows.Forms.ToolStripButton buttonNewMap;
@@ -1531,6 +1759,23 @@
         private System.Windows.Forms.Label labelMaxPlayers;
         private System.Windows.Forms.Label labelDescription;
         public System.Windows.Forms.TextBox boxDescription;
+        public System.Windows.Forms.GroupBox groupAsteroid;
+        private System.Windows.Forms.Label labelAsteroidType;
+        public System.Windows.Forms.ComboBox comboAsteroidType;
+        private System.Windows.Forms.Label labelAsteroidResourceMultiplier;
+        public NumericUpDownEx numericAsteroidResourceMultiplier;
+        public System.Windows.Forms.GroupBox groupDustCloud;
+        private System.Windows.Forms.Label labelDustCloudName;
+        public System.Windows.Forms.TextBox boxDustCloudName;
+        private System.Windows.Forms.Label labelDustCloudType;
+        public System.Windows.Forms.ComboBox comboDustCloudType;
+        private System.Windows.Forms.Label labelDustCloudSize;
+        public System.Windows.Forms.NumericUpDown numericDustCloudSize;
+        private System.Windows.Forms.Label labelDustCloudColor;
+        public System.Windows.Forms.Button buttonDustCloudColor;
+        private System.Windows.Forms.Label labelDustCloudAlpha;
+        public System.Windows.Forms.TrackBar sliderDustCloudAlpha;
+        public System.Windows.Forms.ColorDialog colorDialog;
     }
 }
 

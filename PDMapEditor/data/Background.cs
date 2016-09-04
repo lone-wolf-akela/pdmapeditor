@@ -11,7 +11,7 @@ namespace PDMapEditor
         public static List<Background> Backgrounds = new List<Background>();
 
         public string Name;
-        public int ComboBackgroundIndex;
+        public int ComboIndex;
 
         public Background(string name)
         {
@@ -20,7 +20,7 @@ namespace PDMapEditor
             Backgrounds.Add(this);
 
             Program.main.comboBackground.Items.Add(name);
-            ComboBackgroundIndex = Program.main.comboBackground.Items.Count - 1;
+            ComboIndex = Program.main.comboBackground.Items.Count - 1;
         }
 
         public static Background GetBackgroundFromName(string name)

@@ -12,25 +12,43 @@ namespace PDMapEditor
         public static List<DustCloud> DustClouds = new List<DustCloud>();
 
         public string Name;
-        public DustCloudType Type;
-        public Vector4 Color;
+
+        private DustCloudType type;
+        public DustCloudType Type { get { return type; } set { type = value; UpdateColor(); } }
+
+        private Vector4 color;
+        public Vector4 Color { get { return color; } set { color = value; UpdateColor(); } }
+
         public float Unknown1;
-        public float Size;
+
+        private float size;
+        public float Size { get { return size; } set { size = value; UpdateScale(); } }
 
         public DustCloud(string name, DustCloudType type, Vector3 position, Vector4 color, float unknown1, float size) : base (position)
         {
             Name = name;
-            Type = type;
-            Color = color;
             Unknown1 = unknown1;
-            Size = size;
 
-            Mesh = new MeshIcosphere(position, new Vector3(type.PixelColor), true);
+            Mesh = new MeshIcosphere(position, Vector3.One, true);
             Mesh.Material.Translucent = true;
-            Mesh.Material.Opacity = 0.1f;
             Mesh.Scale = new Vector3(size);
 
             DustClouds.Add(this);
+
+            Type = type;
+            Size = size;
+            Color = color;
+        }
+
+        private void UpdateScale()
+        {
+            Mesh.Scale = new Vector3(Size);
+        }
+
+        private void UpdateColor()
+        {
+            Mesh.Material.DiffuseColor = Vector3.Multiply(new Vector3(Color), new Vector3(Type.PixelColor));
+            Mesh.Material.Opacity = Color.W * Type.PixelColor.W * 0.1f;
         }
     }
 }

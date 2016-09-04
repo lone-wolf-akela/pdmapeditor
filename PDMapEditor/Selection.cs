@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 using OpenTK;
 using System.Media;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace PDMapEditor
 {
@@ -58,13 +60,24 @@ namespace PDMapEditor
 
             Program.main.tabControlLeft.TabPages.Remove(Program.main.tabSelection);
 
-            Program.main.numericSelectionPositionX.ValueChanged += new System.EventHandler(PositionChanged);
-            Program.main.numericSelectionPositionY.ValueChanged += new System.EventHandler(PositionChanged);
-            Program.main.numericSelectionPositionZ.ValueChanged += new System.EventHandler(PositionChanged);
+            Program.main.numericSelectionPositionX.ValueChanged += new EventHandler(PositionChanged);
+            Program.main.numericSelectionPositionY.ValueChanged += new EventHandler(PositionChanged);
+            Program.main.numericSelectionPositionZ.ValueChanged += new EventHandler(PositionChanged);
 
-            Program.main.numericSelectionRotationX.ValueChanged += new System.EventHandler(RotationChanged);
-            Program.main.numericSelectionRotationY.ValueChanged += new System.EventHandler(RotationChanged);
-            Program.main.numericSelectionRotationZ.ValueChanged += new System.EventHandler(RotationChanged);
+            Program.main.numericSelectionRotationX.ValueChanged += new EventHandler(RotationChanged);
+            Program.main.numericSelectionRotationY.ValueChanged += new EventHandler(RotationChanged);
+            Program.main.numericSelectionRotationZ.ValueChanged += new EventHandler(RotationChanged);
+
+            //Asteroid
+            Program.main.comboAsteroidType.SelectedIndexChanged += new EventHandler(AsteroidTypeChanged);
+            Program.main.numericAsteroidResourceMultiplier.ValueChanged += new EventHandler(AsteroidResourceMultiplierChanged);
+
+            //Dust cloud
+            Program.main.boxDustCloudName.TextChanged += new EventHandler(DustCloudNameChanged);
+            Program.main.comboDustCloudType.SelectedIndexChanged += new EventHandler(DustCloudTypeChanged);
+            Program.main.buttonDustCloudColor.Click+= new EventHandler(DustCloudColorClicked);
+            Program.main.sliderDustCloudAlpha.Scroll += new EventHandler(DustCloudAlphaChanged);
+            Program.main.numericDustCloudSize.ValueChanged += new EventHandler(DustCloudSizeChanged);
         }
 
         public static void CreateGizmos()
@@ -203,6 +216,10 @@ namespace PDMapEditor
         private static void UpdateSelectionGUI()
         {
             Program.main.groupSelectionRotation.Visible = false;
+
+            Program.main.groupAsteroid.Visible = false;
+            Program.main.groupDustCloud.Visible = false;
+
             if (Selected == null)
             {
                 Program.main.tabControlLeft.SelectedIndex = 0;
@@ -231,8 +248,79 @@ namespace PDMapEditor
                 Program.main.comboGizmoMode.Items.Remove(comboGizmoModeRotationItem);
             }
 
+            //Show individual groups for the properties
+            Asteroid selectedAsteroid = Selected as Asteroid;
+            if(selectedAsteroid != null)
+            {
+                Program.main.groupAsteroid.Visible = true;
+                Program.main.comboAsteroidType.SelectedIndex = selectedAsteroid.Type.ComboIndex;
+                Program.main.numericAsteroidResourceMultiplier.Value = (decimal)selectedAsteroid.Multiplier;
+            }
+
+            DustCloud selectedDustCloud = Selected as DustCloud;
+            if (selectedDustCloud != null)
+            {
+                Program.main.groupDustCloud.Visible = true;
+                Program.main.boxDustCloudName.Text = selectedDustCloud.Name;
+                Program.main.comboDustCloudType.SelectedIndex = selectedDustCloud.Type.ComboIndex;
+                Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(selectedDustCloud.Color.X * 255), (int)Math.Round(selectedDustCloud.Color.Y * 255), (int)Math.Round(selectedDustCloud.Color.Z * 255));
+                Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(selectedDustCloud.Color.W * 100);
+                Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Size;
+            }
+
             Program.GLControl.Focus();
         }
+
+        #region Asteroid
+        private static void AsteroidResourceMultiplierChanged(object sender, EventArgs e)
+        {
+            Asteroid selectedAsteroid = Selected as Asteroid;
+            selectedAsteroid.Multiplier = (float)Program.main.numericAsteroidResourceMultiplier.Value;
+        }
+        private static void AsteroidTypeChanged(object sender, EventArgs e)
+        {
+            Asteroid selectedAsteroid = Selected as Asteroid;
+            selectedAsteroid.Type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
+        }
+        #endregion
+
+        #region Dust cloud
+        private static void DustCloudNameChanged(object sender, EventArgs e)
+        {
+            DustCloud selectedDustCloud = Selected as DustCloud;
+            selectedDustCloud.Name = Program.main.boxDustCloudName.Text;
+        }
+        private static void DustCloudTypeChanged(object sender, EventArgs e)
+        {
+            DustCloud selectedDustCloud = Selected as DustCloud;
+            selectedDustCloud.Type = DustCloudType.GetTypeFromComboIndex(Program.main.comboDustCloudType.SelectedIndex);
+        }
+        private static void DustCloudColorClicked(object sender, EventArgs e)
+        {
+            Program.main.colorDialog.Color = Program.main.buttonDustCloudColor.BackColor;
+            DialogResult result = Program.main.colorDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                Color color = Program.main.colorDialog.Color;
+                Program.main.buttonDustCloudColor.BackColor = color;
+
+                DustCloud selectedDustCloud = Selected as DustCloud;
+                selectedDustCloud.Color = new Vector4((float)color.R / 255, (float)color.G / 255, (float)color.B / 255, selectedDustCloud.Color.W);
+            }
+        }
+        private static void DustCloudAlphaChanged(object sender, EventArgs e)
+        {
+            DustCloud selectedDustCloud = Selected as DustCloud;
+            selectedDustCloud.Color = new Vector4(selectedDustCloud.Color.X, selectedDustCloud.Color.Y, selectedDustCloud.Color.Z, (float)Program.main.sliderDustCloudAlpha.Value / 100);
+        }
+
+        private static void DustCloudSizeChanged(object sender, EventArgs e)
+        {
+            DustCloud selectedDustCloud = Selected as DustCloud;
+            selectedDustCloud.Size = (float)Program.main.numericDustCloudSize.Value;
+        }
+        #endregion
+
         private static void UpdatePositionGUI()
         {
             Drawable selectedDrawable = Selected as Drawable;
@@ -433,6 +521,15 @@ namespace PDMapEditor
                     Renderer.UpdateView();
                     Program.GLControl.Invalidate();
                 }
+                else
+                    SystemSounds.Beep.Play();
+            }
+            
+            if(ActionKey.IsDown(Action.CAM_FOCUS_SELECTION))
+            {
+                Drawable selectedDrawable = Selected as Drawable;
+                if (selectedDrawable != null)
+                    Program.Camera.LookAt = selectedDrawable.Position;
                 else
                     SystemSounds.Beep.Play();
             }

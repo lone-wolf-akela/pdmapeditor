@@ -11,25 +11,30 @@ namespace PDMapEditor
     {
         public static List<Asteroid> Asteroids = new List<Asteroid>();
 
-        public AsteroidType Type;
+        private AsteroidType type;
+        public AsteroidType Type { get { return type; } set { type = value; UpdateScale(); } }
+
         public float Multiplier;
         public float RotSpeed;
 
         public Asteroid(AsteroidType type, Vector3 position, Vector3 rotation, float multiplier, float rotSpeed) : base (position, rotation)
         {
-            Type = type;
-
             Mesh = new Mesh(position, rotation, Mesh.Asteroid);
             Mesh.Material.DiffuseColor = new Vector3(type.PixelColor);
 
             Multiplier = multiplier;
             RotSpeed = rotSpeed;
 
-            float scale = type.ResourceValue / 140;
-            scale = Math.Max(scale, 35);
-            Mesh.Scale = new Vector3(scale);
+            Type = type;
 
             Asteroids.Add(this);
+        }
+
+        private void UpdateScale()
+        {
+            float scale = Type.ResourceValue / 140;
+            scale = Math.Max(scale, 35);
+            Mesh.Scale = new Vector3(scale);
         }
     }
 }

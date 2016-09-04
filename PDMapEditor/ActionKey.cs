@@ -38,6 +38,8 @@ namespace PDMapEditor
 
             new ActionKey("Translation mode", Action.MODE_TRANSLATION, Keys.T);
             new ActionKey("Rotation mode", Action.MODE_ROTATION, Keys.Z);
+
+            new ActionKey("Focus selection", Action.CAM_FOCUS_SELECTION, Keys.F);
         }
 
         public static void KeyDown(PreviewKeyDownEventArgs e)
@@ -123,5 +125,6 @@ namespace PDMapEditor
         PAN_DOWN,
         MODE_TRANSLATION,
         MODE_ROTATION,
+        CAM_FOCUS_SELECTION,
     }
 }
