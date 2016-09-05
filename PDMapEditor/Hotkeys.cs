@@ -97,7 +97,10 @@ namespace PDMapEditor
         {
             if (selectedActionKey != null)
             {
-                selectedActionKey.Key = keyData;
+                if (keyData.HasFlag(Keys.Control) && keyData.HasFlag(Keys.ControlKey))
+                    selectedActionKey.Key = Keys.ControlKey;
+                else
+                    selectedActionKey.Key = keyData;
                 selectedActionKey.Button.Text = selectedActionKey.Key.ToString();
                 this.Focus();
             }

@@ -244,7 +244,7 @@ namespace PDMapEditor
             Renderer.BackgroundColor = new Vector3(0.05f);
 
             Selection.CreateGizmos();
-            Selection.Selected = null;
+            Selection.Selected.Clear();
         }
     }
 }

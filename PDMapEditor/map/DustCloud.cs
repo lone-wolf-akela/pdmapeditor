@@ -24,6 +24,8 @@ namespace PDMapEditor
         private float size;
         public float Size { get { return size; } set { size = value; UpdateScale(); } }
 
+        public bool AllowRotation { get; set; }
+
         public DustCloud(string name, DustCloudType type, Vector3 position, Vector4 color, float unknown1, float size) : base (position)
         {
             Name = name;
@@ -38,6 +40,8 @@ namespace PDMapEditor
             Type = type;
             Size = size;
             Color = color;
+
+            AllowRotation = false;
         }
 
         private void UpdateScale()

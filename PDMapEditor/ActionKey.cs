@@ -40,6 +40,7 @@ namespace PDMapEditor
             new ActionKey("Rotation mode", Action.MODE_ROTATION, Keys.Z);
 
             new ActionKey("Focus selection", Action.CAM_FOCUS_SELECTION, Keys.F);
+            new ActionKey("Add to selection", Action.SELECTION_ADD, Keys.ControlKey, true);
         }
 
         public static void KeyDown(PreviewKeyDownEventArgs e)
@@ -126,5 +127,6 @@ namespace PDMapEditor
         MODE_TRANSLATION,
         MODE_ROTATION,
         CAM_FOCUS_SELECTION,
+        SELECTION_ADD,
     }
 }

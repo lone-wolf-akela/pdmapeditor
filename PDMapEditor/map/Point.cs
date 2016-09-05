@@ -12,6 +12,7 @@ namespace PDMapEditor
         public static List<Point> Points = new List<Point>();
 
         public string Name;
+        public bool AllowRotation { get; set; }
 
         public Point(string name, Vector3 position, Vector3 rotation) : base (position, rotation)
         {
@@ -21,6 +22,8 @@ namespace PDMapEditor
             Mesh.Material.DiffuseColor = new Vector3(1, 0, 0);
             Mesh.Scale = new Vector3(100);
             Points.Add(this);
+
+            AllowRotation = true;
         }
     }
 }

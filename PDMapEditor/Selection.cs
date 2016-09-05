@@ -8,6 +8,8 @@ using OpenTK;
 using System.Media;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace PDMapEditor
 {
@@ -36,6 +38,8 @@ namespace PDMapEditor
 
         private static Vector3 rotationAtStart = Vector3.Zero;
 
+        private static Vector3 averagePosition = Vector3.Zero;
+
         //GUI
         private static bool ignorePositionChange;
         private static bool ignoreRotationChange;
@@ -43,12 +47,15 @@ namespace PDMapEditor
         private static bool ignoreGizmoModeChange;
         private static object comboGizmoModeRotationItem;
 
-        private static ISelectable selected;
-        public static ISelectable Selected { get { return selected; } set { selected = value; UpdateSelectionGUI(); UpdateSelectionGizmos(); } }
+        //private static ISelectable selected;
+        //public static ISelectable Selected { get { return selected; } set { selected = value; UpdateSelectionGUI(); UpdateSelectionGizmos(); } }
+
+        public static ObservableCollection<ISelectable> Selected = new ObservableCollection<ISelectable>();
 
         public static void Init()
         {
             shader = new Shader("picking.vs", "picking.fs", true);
+            Selected.CollectionChanged += SelectedChanged;
 
             //GUI
             Program.main.comboGizmoMode.Items.Add("Translation");
@@ -84,6 +91,23 @@ namespace PDMapEditor
 
             //Pebble
             Program.main.comboPebbleType.SelectedIndexChanged += new EventHandler(PebbleTypeChanged);
+        }
+
+        private static void SelectedChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            UpdateAveragePosition();
+            UpdateSelectionGUI();
+            UpdateSelectionGizmos();
+        }
+
+        private static void UpdateAveragePosition()
+        {
+            averagePosition = Vector3.Zero;
+            foreach(ISelectable selectable in Selected)
+            {
+                averagePosition = Vector3.Add(averagePosition, selectable.Position);
+            }
+            averagePosition = Vector3.Divide(averagePosition, Selected.Count);
         }
 
         public static void CreateGizmos()
@@ -126,7 +150,6 @@ namespace PDMapEditor
         public static void LeftMouseDown(int x, int y)
         {
             ISelectable objectAtMouse = GetObjectAtPixel(x, y);
-            Drawable selectedDrawable = Selected as Drawable;
 
             if (objectAtMouse == gizmoPosX)
             {
@@ -161,7 +184,7 @@ namespace PDMapEditor
                 gizmoLineX.Position = gizmoRotX.Position;
                 draggingState = DraggingState.ROTATING_X;
 
-                rotationAtStart = selectedDrawable.Rotation;
+                rotationAtStart = Selected[0].Rotation;
 
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
@@ -172,7 +195,7 @@ namespace PDMapEditor
                 gizmoLineY.Position = gizmoRotY.Position;
                 draggingState = DraggingState.ROTATING_Y;
 
-                rotationAtStart = selectedDrawable.Rotation;
+                rotationAtStart = Selected[0].Rotation;
 
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
@@ -183,7 +206,7 @@ namespace PDMapEditor
                 gizmoLineZ.Position = gizmoRotZ.Position;
                 draggingState = DraggingState.ROTATING_Z;
 
-                rotationAtStart = selectedDrawable.Rotation;
+                rotationAtStart = Selected[0].Rotation;
 
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
@@ -200,10 +223,17 @@ namespace PDMapEditor
                 if (drawable != null)
                 {
                     if (drawable != gizmoPosX && drawable != gizmoPosY && drawable != gizmoPosZ && drawable != gizmoRotX && drawable != gizmoRotY && drawable != gizmoRotZ)
-                        Selected = objectAtMouse;
+                        if (ActionKey.IsDown(Action.SELECTION_ADD))
+                            Selected.Add(objectAtMouse);
+                        else
+                        {
+                            Selected.Clear();
+                            Selected.Add(objectAtMouse);
+                        }
                 }
                 else
-                    Selected = null;
+                    if (!ActionKey.IsDown(Action.SELECTION_ADD))
+                        Selected.Clear();
             }
 
             draggingState = DraggingState.NONE;
@@ -228,7 +258,7 @@ namespace PDMapEditor
             Program.main.groupPoint.Visible = false;
             Program.main.groupPebble.Visible = false;
 
-            if (Selected == null)
+            if (Selected.Count == 0)
             {
                 Program.main.tabControlLeft.SelectedIndex = 0;
                 Program.main.tabControlLeft.TabPages.Remove(Program.main.tabSelection);
@@ -239,10 +269,19 @@ namespace PDMapEditor
                 Program.main.tabControlLeft.TabPages.Add(Program.main.tabSelection);
 
             Program.main.tabControlLeft.SelectedIndex = 1;
-            Drawable selectedDrawable = Selected as Drawable;
 
             UpdatePositionGUI();
-            if (Selected as Pebble == null && Selected as DustCloud == null) //Don't allow rotation changes if the object cannot be rotated
+
+            bool allowRotation = true;
+            foreach(ISelectable selectable in Selected)
+            {
+                if (!selectable.AllowRotation)
+                {
+                    allowRotation = false;
+                    break;
+                }
+            }
+            if (allowRotation) //Don't allow rotation changes if one of the objects cannot be rotated
             {
                 UpdateRotationGUI();
                 Program.main.groupSelectionRotation.Visible = true;
@@ -256,38 +295,41 @@ namespace PDMapEditor
                 Program.main.comboGizmoMode.Items.Remove(comboGizmoModeRotationItem);
             }
 
-            //Show individual groups for the properties
-            Asteroid selectedAsteroid = Selected as Asteroid;
-            if(selectedAsteroid != null)
+            if (Selected.Count == 1)
             {
-                Program.main.groupAsteroid.Visible = true;
-                Program.main.comboAsteroidType.SelectedIndex = selectedAsteroid.Type.ComboIndex;
-                Program.main.numericAsteroidResourceMultiplier.Value = (decimal)selectedAsteroid.Multiplier;
-            }
+                //Show individual groups for the properties
+                Asteroid selectedAsteroid = Selected[0] as Asteroid;
+                if (selectedAsteroid != null)
+                {
+                    Program.main.groupAsteroid.Visible = true;
+                    Program.main.comboAsteroidType.SelectedIndex = selectedAsteroid.Type.ComboIndex;
+                    Program.main.numericAsteroidResourceMultiplier.Value = (decimal)selectedAsteroid.Multiplier;
+                }
 
-            DustCloud selectedDustCloud = Selected as DustCloud;
-            if (selectedDustCloud != null)
-            {
-                Program.main.groupDustCloud.Visible = true;
-                Program.main.boxDustCloudName.Text = selectedDustCloud.Name;
-                Program.main.comboDustCloudType.SelectedIndex = selectedDustCloud.Type.ComboIndex;
-                Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(selectedDustCloud.Color.X * 255), (int)Math.Round(selectedDustCloud.Color.Y * 255), (int)Math.Round(selectedDustCloud.Color.Z * 255));
-                Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(selectedDustCloud.Color.W * 100);
-                Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Size;
-            }
+                DustCloud selectedDustCloud = Selected[0] as DustCloud;
+                if (selectedDustCloud != null)
+                {
+                    Program.main.groupDustCloud.Visible = true;
+                    Program.main.boxDustCloudName.Text = selectedDustCloud.Name;
+                    Program.main.comboDustCloudType.SelectedIndex = selectedDustCloud.Type.ComboIndex;
+                    Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(selectedDustCloud.Color.X * 255), (int)Math.Round(selectedDustCloud.Color.Y * 255), (int)Math.Round(selectedDustCloud.Color.Z * 255));
+                    Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(selectedDustCloud.Color.W * 100);
+                    Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Size;
+                }
 
-            Point selectedPoint = Selected as Point;
-            if (selectedPoint != null)
-            {
-                Program.main.groupPoint.Visible = true;
-                Program.main.boxPointName.Text = selectedPoint.Name;
-            }
+                Point selectedPoint = Selected[0] as Point;
+                if (selectedPoint != null)
+                {
+                    Program.main.groupPoint.Visible = true;
+                    Program.main.boxPointName.Text = selectedPoint.Name;
+                }
 
-            Pebble selectedPebble = Selected as Pebble;
-            if (selectedPebble != null)
-            {
-                Program.main.groupPebble.Visible = true;
-                Program.main.comboPebbleType.SelectedIndex = selectedPebble.Type.ComboIndex;
+                Pebble selectedPebble = Selected[0] as Pebble;
+                if (selectedPebble != null)
+                {
+                    Program.main.groupPebble.Visible = true;
+                    Program.main.comboPebbleType.SelectedIndex = selectedPebble.Type.ComboIndex;
+                }
             }
 
             Program.GLControl.Focus();
@@ -296,12 +338,12 @@ namespace PDMapEditor
         #region Asteroid
         private static void AsteroidResourceMultiplierChanged(object sender, EventArgs e)
         {
-            Asteroid selectedAsteroid = Selected as Asteroid;
+            Asteroid selectedAsteroid = Selected[0] as Asteroid;
             selectedAsteroid.Multiplier = (float)Program.main.numericAsteroidResourceMultiplier.Value;
         }
         private static void AsteroidTypeChanged(object sender, EventArgs e)
         {
-            Asteroid selectedAsteroid = Selected as Asteroid;
+            Asteroid selectedAsteroid = Selected[0] as Asteroid;
             selectedAsteroid.Type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
         }
         #endregion
@@ -309,12 +351,12 @@ namespace PDMapEditor
         #region Dust cloud
         private static void DustCloudNameChanged(object sender, EventArgs e)
         {
-            DustCloud selectedDustCloud = Selected as DustCloud;
+            DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Name = Program.main.boxDustCloudName.Text;
         }
         private static void DustCloudTypeChanged(object sender, EventArgs e)
         {
-            DustCloud selectedDustCloud = Selected as DustCloud;
+            DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Type = DustCloudType.GetTypeFromComboIndex(Program.main.comboDustCloudType.SelectedIndex);
         }
         private static void DustCloudColorClicked(object sender, EventArgs e)
@@ -326,19 +368,19 @@ namespace PDMapEditor
                 Color color = Program.main.colorDialog.Color;
                 Program.main.buttonDustCloudColor.BackColor = color;
 
-                DustCloud selectedDustCloud = Selected as DustCloud;
+                DustCloud selectedDustCloud = Selected[0] as DustCloud;
                 selectedDustCloud.Color = new Vector4((float)color.R / 255, (float)color.G / 255, (float)color.B / 255, selectedDustCloud.Color.W);
             }
         }
         private static void DustCloudAlphaChanged(object sender, EventArgs e)
         {
-            DustCloud selectedDustCloud = Selected as DustCloud;
+            DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Color = new Vector4(selectedDustCloud.Color.X, selectedDustCloud.Color.Y, selectedDustCloud.Color.Z, (float)Program.main.sliderDustCloudAlpha.Value / 100);
         }
 
         private static void DustCloudSizeChanged(object sender, EventArgs e)
         {
-            DustCloud selectedDustCloud = Selected as DustCloud;
+            DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Size = (float)Program.main.numericDustCloudSize.Value;
         }
         #endregion
@@ -346,7 +388,7 @@ namespace PDMapEditor
         #region Point
         private static void PointNameChanged(object sender, EventArgs e)
         {
-            Point selectedPoint = Selected as Point;
+            Point selectedPoint = Selected[0] as Point;
             selectedPoint.Name = Program.main.boxPointName.Text;
         }
         #endregion
@@ -354,36 +396,33 @@ namespace PDMapEditor
         #region Pebble
         private static void PebbleTypeChanged(object sender, EventArgs e)
         {
-            Pebble selectedPebble = Selected as Pebble;
+            Pebble selectedPebble = Selected[0] as Pebble;
             selectedPebble.Type = PebbleType.GetTypeFromComboIndex(selectedPebble.Type.ComboIndex);
         }
         #endregion
 
         private static void UpdatePositionGUI()
         {
-            Drawable selectedDrawable = Selected as Drawable;
-
             ignorePositionChange = true;
-            Program.main.numericSelectionPositionX.Value = (decimal)selectedDrawable.Position.X;
-            Program.main.numericSelectionPositionY.Value = (decimal)selectedDrawable.Position.Y;
-            Program.main.numericSelectionPositionZ.Value = (decimal)selectedDrawable.Position.Z;
+            Program.main.numericSelectionPositionX.Value = (decimal)averagePosition.X;
+            Program.main.numericSelectionPositionY.Value = (decimal)averagePosition.Y;
+            Program.main.numericSelectionPositionZ.Value = (decimal)averagePosition.Z;
             ignoreRotationChange = false;
         }
         private static void UpdateRotationGUI()
         {
-            Drawable selectedDrawable = Selected as Drawable;
-
-            ignoreRotationChange = true;
-            Program.main.numericSelectionRotationX.Value = (decimal)selectedDrawable.Rotation.X;
-            Program.main.numericSelectionRotationY.Value = (decimal)selectedDrawable.Rotation.Y;
-            Program.main.numericSelectionRotationZ.Value = (decimal)selectedDrawable.Rotation.Z;
-            ignoreRotationChange = false;
+            if (Selected.Count == 1)
+            {
+                ignoreRotationChange = true;
+                Program.main.numericSelectionRotationX.Value = (decimal)Selected[0].Rotation.X;
+                Program.main.numericSelectionRotationY.Value = (decimal)Selected[0].Rotation.Y;
+                Program.main.numericSelectionRotationZ.Value = (decimal)Selected[0].Rotation.Z;
+                ignoreRotationChange = false;
+            }
         }
 
         private static void UpdateSelectionGizmos()
         {
-            Drawable selectedDrawable = Selected as Drawable;
-
             gizmoPosX.Visible = false;
             gizmoPosY.Visible = false;
             gizmoPosZ.Visible = false;
@@ -399,17 +438,17 @@ namespace PDMapEditor
                 Program.main.comboGizmoMode.SelectedIndex = 1;
             ignoreGizmoModeChange = false;
 
-            if (selectedDrawable == null)
+            if (Selected.Count == 0)
                 return;
 
             //Gizmos
-            gizmoPosX.Position = selectedDrawable.Position;
-            gizmoPosY.Position = selectedDrawable.Position;
-            gizmoPosZ.Position = selectedDrawable.Position;
+            gizmoPosX.Position = averagePosition;
+            gizmoPosY.Position = averagePosition;
+            gizmoPosZ.Position = averagePosition;
 
-            gizmoRotX.Position = selectedDrawable.Position;
-            gizmoRotY.Position = selectedDrawable.Position;
-            gizmoRotZ.Position = selectedDrawable.Position;
+            gizmoRotX.Position = averagePosition;
+            gizmoRotY.Position = averagePosition;
+            gizmoRotZ.Position = averagePosition;
 
             ignoreGizmoModeChange = true;
             if (GizmoMode == GizmoMode.TRANSLATION)
@@ -452,14 +491,13 @@ namespace PDMapEditor
 
         public static void UpdateSelectionGizmoScale()
         {
-            Drawable selectedDrawable = Selected as Drawable;
-            if (selectedDrawable == null)
+            if (Selected.Count == 0)
                 return;
 
             Vector3 scale = Vector3.One;
             if (!Program.Camera.Orthographic)
             {
-                float cameraDistanceApprox = (Program.Camera.Position - selectedDrawable.Position).LengthFast;
+                float cameraDistanceApprox = (Program.Camera.Position - averagePosition).LengthFast;
                 scale = new Vector3(cameraDistanceApprox / 700);
             }
             else
@@ -476,7 +514,7 @@ namespace PDMapEditor
 
         public static void UpdateGizmoFading() //This fades gizmos that are in the way at certain camera angles
         {
-            if (Selected != null)
+            if (Selected.Count > 0)
             {
                 Vector2 angles = Program.Camera.Angles;
 
@@ -553,7 +591,17 @@ namespace PDMapEditor
             }
             else if (ActionKey.IsDown(Action.MODE_ROTATION))
             {
-                if (Selected as Pebble == null && Selected as DustCloud == null) //Don't allow rotation changes if the object cannot be rotated
+                bool allowRotation = true;
+                foreach (ISelectable selectable in Selected)
+                {
+                    if (!selectable.AllowRotation)
+                    {
+                        allowRotation = false;
+                        break;
+                    }
+                }
+
+                if (allowRotation) //Don't allow rotation changes if the object cannot be rotated
                 {
                     GizmoMode = GizmoMode.ROTATION;
                     Renderer.UpdateView();
@@ -565,9 +613,8 @@ namespace PDMapEditor
             
             if(ActionKey.IsDown(Action.CAM_FOCUS_SELECTION))
             {
-                Drawable selectedDrawable = Selected as Drawable;
-                if (selectedDrawable != null)
-                    Program.Camera.LookAt = selectedDrawable.Position;
+                if (Selected.Count > 0)
+                    Program.Camera.LookAt = averagePosition;
                 else
                     SystemSounds.Beep.Play();
             }
@@ -575,21 +622,22 @@ namespace PDMapEditor
 
         public static void UpdateDragging(int mouseX, int mouseY)
         {
-            Drawable selectedDrawable = Selected as Drawable;
-
             if (draggingState != DraggingState.NONE)
             {
                 float mouseXDelta = mouseX - lastMouseX;
                 float mouseYDelta = mouseY - lastMouseY;
-                float cameraDistanceApprox = (Program.Camera.Position - selectedDrawable.Position).LengthFast;
+                float cameraDistanceApprox = (Program.Camera.Position - averagePosition).LengthFast;
 
-                float posX = selectedDrawable.Position.X;
-                float posY = selectedDrawable.Position.Y;
-                float posZ = selectedDrawable.Position.Z;
+                float posX = averagePosition.X;
+                float posY = averagePosition.Y;
+                float posZ = averagePosition.Z;
 
-                float rotX = selectedDrawable.Rotation.X;
-                float rotY = selectedDrawable.Rotation.Y;
-                float rotZ = selectedDrawable.Rotation.Z;
+                //float rotX = selectedDrawable.Rotation.X;
+                //float rotY = selectedDrawable.Rotation.Y;
+                //float rotZ = selectedDrawable.Rotation.Z;
+                float rotX = 0;
+                float rotY = 0;
+                float rotZ = 0;
 
                 float speedMultiplier = 1;
 
@@ -602,49 +650,58 @@ namespace PDMapEditor
                 {
                     //Position
                     case DraggingState.MOVING_X:
-                        if(Program.Camera.Position.Z > selectedDrawable.Position.Z) //To fix the user experience
-                            posX = selectedDrawable.Position.X + mouseXDelta * speedMultiplier;
+                        if(Program.Camera.Position.Z > averagePosition.Z) //To fix the user experience
+                            posX = averagePosition.X + mouseXDelta * speedMultiplier;
                         else
-                            posX = selectedDrawable.Position.X - mouseXDelta * speedMultiplier;
+                            posX = averagePosition.X - mouseXDelta * speedMultiplier;
                         break;
                     case DraggingState.MOVING_Y:
-                        posY = selectedDrawable.Position.Y + mouseYDelta * speedMultiplier;
+                        posY = averagePosition.Y + mouseYDelta * speedMultiplier;
                         break;
                     case DraggingState.MOVING_Z:
-                        if (Program.Camera.Position.X > selectedDrawable.Position.X) //To fix the user experience
-                            posZ = selectedDrawable.Position.Z - mouseXDelta * speedMultiplier;
+                        if (Program.Camera.Position.X > averagePosition.X) //To fix the user experience
+                            posZ = averagePosition.Z - mouseXDelta * speedMultiplier;
                         else
-                            posZ = selectedDrawable.Position.Z + mouseXDelta * speedMultiplier;
+                            posZ = averagePosition.Z + mouseXDelta * speedMultiplier;
                         break;
 
                     //Rotation
                     case DraggingState.ROTATING_X:
-                        if (Program.Camera.Position.X > selectedDrawable.Position.X) //To fix the user experience
-                            rotX = selectedDrawable.Rotation.X - mouseXDelta;
+                        if (Program.Camera.Position.X > averagePosition.X) //To fix the user experience
+                            //rotX = selectedDrawable.Rotation.X - mouseXDelta;
+                            rotX = -mouseXDelta;
                         else
-                            rotX = selectedDrawable.Rotation.X + mouseXDelta;
-                        break;
+                            //rotX = selectedDrawable.Rotation.X + mouseXDelta;
+                            rotX = mouseXDelta;
+                            break;
                     case DraggingState.ROTATING_Y:
-                        rotY = selectedDrawable.Rotation.Y + mouseXDelta;
+                        //rotY = selectedDrawable.Rotation.Y + mouseXDelta;
+                        rotY = mouseXDelta;
                         break;
                     case DraggingState.ROTATING_Z:
-                        if (Program.Camera.Position.Z > selectedDrawable.Position.Z) //To fix the user experience
-                            rotZ = selectedDrawable.Rotation.Z - mouseXDelta;
+                        if (Program.Camera.Position.Z > averagePosition.Z) //To fix the user experience
+                            //rotZ = selectedDrawable.Rotation.Z - mouseXDelta;
+                            rotZ = -mouseXDelta;
                         else
-                            rotZ = selectedDrawable.Rotation.Z + mouseXDelta;
-                        break;
+                            //rotZ = selectedDrawable.Rotation.Z + mouseXDelta;
+                            rotZ = -mouseXDelta;
+                            break;
                 }
-                selectedDrawable.Position = new Vector3(posX, posY, posZ);
-                selectedDrawable.Rotation = new Vector3(rotX, rotY, rotZ);
 
-                float rotXDelta = rotationAtStart.X - rotX;
-                float rotYDelta = rotationAtStart.Y - rotY;
-                float rotZDelta = rotationAtStart.Z - rotZ;
-                Vector3 rotDelta = new Vector3(rotXDelta, rotYDelta, rotZDelta);
+                Vector3 deltaPos = new Vector3(posX, posY, posZ);
+                Vector3 deltaRot = new Vector3(rotX, rotY, rotZ);
 
-                gizmoRotX.Rotation = -rotDelta;
-                gizmoRotY.Rotation = -rotDelta;
-                gizmoRotZ.Rotation = -rotDelta;
+                foreach(ISelectable selectable in Selected)
+                {
+                    selectable.Position -= averagePosition - deltaPos;
+                    selectable.Rotation += deltaRot;
+                }
+
+                averagePosition = deltaPos;
+
+                gizmoRotX.Rotation += deltaRot;
+                gizmoRotY.Rotation += deltaRot;
+                gizmoRotZ.Rotation += deltaRot;
 
                 UpdatePositionGUI();
                 UpdateRotationGUI();
@@ -663,8 +720,7 @@ namespace PDMapEditor
             if (Selected == null || ignorePositionChange)
                 return;
 
-            Drawable selectedDrawable = Selected as Drawable;
-            selectedDrawable.Position = new Vector3((float)Program.main.numericSelectionPositionX.Value, (float)Program.main.numericSelectionPositionY.Value, (float)Program.main.numericSelectionPositionZ.Value);
+            averagePosition = new Vector3((float)Program.main.numericSelectionPositionX.Value, (float)Program.main.numericSelectionPositionY.Value, (float)Program.main.numericSelectionPositionZ.Value);
 
             UpdateSelectionGizmos();
             Renderer.UpdateView();
@@ -676,8 +732,11 @@ namespace PDMapEditor
             if (Selected == null || ignoreRotationChange)
                 return;
 
-            Drawable selectedDrawable = Selected as Drawable;
-            selectedDrawable.Rotation = new Vector3((float)Program.main.numericSelectionRotationX.Value, (float)Program.main.numericSelectionRotationY.Value, (float)Program.main.numericSelectionRotationZ.Value);
+            foreach(ISelectable selectable in Selected)
+            {
+                selectable.Rotation = new Vector3((float)Program.main.numericSelectionRotationX.Value, (float)Program.main.numericSelectionRotationY.Value, (float)Program.main.numericSelectionRotationZ.Value);
+            }
+            //selectedDrawable.Rotation = new Vector3((float)Program.main.numericSelectionRotationX.Value, (float)Program.main.numericSelectionRotationY.Value, (float)Program.main.numericSelectionRotationZ.Value);
 
             Renderer.UpdateView();
             Program.GLControl.Invalidate();

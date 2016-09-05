@@ -17,6 +17,8 @@ namespace PDMapEditor
         public float Multiplier;
         public float RotSpeed;
 
+        public bool AllowRotation { get; set; }
+
         public Asteroid(AsteroidType type, Vector3 position, Vector3 rotation, float multiplier, float rotSpeed) : base (position, rotation)
         {
             Mesh = new Mesh(position, rotation, Mesh.Asteroid);
@@ -28,6 +30,8 @@ namespace PDMapEditor
             Type = type;
 
             Asteroids.Add(this);
+
+            AllowRotation = true;
         }
 
         private void UpdateScale()
