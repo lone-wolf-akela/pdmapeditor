@@ -44,6 +44,12 @@ namespace PDMapEditor
         public static bool rectangleSelecting;
         private static bool clickingLeft;
 
+        //Selection lines
+        static Mesh2D selectionLineA = new Mesh2D();
+        static Mesh2D selectionLineB = new Mesh2D();
+        static Mesh2D selectionLineC = new Mesh2D();
+        static Mesh2D selectionLineD = new Mesh2D();
+
         //GUI
         private static bool ignorePositionChange;
         private static bool ignoreRotationChange;
@@ -156,8 +162,6 @@ namespace PDMapEditor
             mouseClickX = x;
             mouseClickY = y;
 
-            clickingLeft = true;
-
             ISelectable objectAtMouse = GetObjectAtPixel(x, y);
 
             if (objectAtMouse == gizmoPosX)
@@ -220,6 +224,8 @@ namespace PDMapEditor
                 Renderer.UpdateView();
                 Program.GLControl.Invalidate();
             }
+            else
+                clickingLeft = true;
         }
         
         public static void UpdateRectangleSelection(int mouseX, int mouseY)
@@ -228,14 +234,41 @@ namespace PDMapEditor
             {
                 float diffX = Math.Abs(mouseClickX - mouseX);
                 float diffY = Math.Abs(mouseClickY - mouseY);
-                if (diffX + diffY > 10 && !rectangleSelecting)
+                if (diffX + diffY > 5 && !rectangleSelecting)
                 {
                     rectangleSelecting = true;
+                    selectionLineA.Visible = true;
+                    selectionLineB.Visible = true;
+                    selectionLineC.Visible = true;
+                    selectionLineD.Visible = true;
                 }
 
                 if (rectangleSelecting)
                 {
+                    float clickXRel = ((float)mouseClickX / Program.GLControl.ClientSize.Width);
+                    clickXRel = (clickXRel - 0.5f) * 2;
+                    float clickYRel = ((float)mouseClickY / Program.GLControl.ClientSize.Height);
+                    clickYRel = (clickYRel - 0.5f) * 2;
 
+                    float mouseXRel = ((float)mouseX / Program.GLControl.ClientSize.Width);
+                    mouseXRel = (mouseXRel - 0.5f) * 2;
+                    float mouseYRel = ((float)mouseY / Program.GLControl.ClientSize.Height);
+                    mouseYRel = (mouseYRel - 0.5f) * 2;
+
+                    selectionLineA.Start = new Vector2(clickXRel, clickYRel);
+                    selectionLineA.End = new Vector2(mouseXRel, clickYRel);
+
+                    selectionLineB.Start = new Vector2(mouseXRel, clickYRel);
+                    selectionLineB.End = new Vector2(mouseXRel, mouseYRel);
+
+                    selectionLineC.Start = new Vector2(mouseXRel, mouseYRel);
+                    selectionLineC.End = new Vector2(clickXRel, mouseYRel);
+
+                    selectionLineD.Start = new Vector2(clickXRel, mouseYRel);
+                    selectionLineD.End = new Vector2(clickXRel, clickYRel);
+
+                    Renderer.Update2DMeshData();
+                    Program.GLControl.Invalidate();
                 }
             }
         }
@@ -246,6 +279,11 @@ namespace PDMapEditor
             {
                 if (rectangleSelecting) //Rectangle selection
                 {
+                    selectionLineA.Visible = false;
+                    selectionLineB.Visible = false;
+                    selectionLineC.Visible = false;
+                    selectionLineD.Visible = false;
+
                     int startX = Math.Min(mouseClickX, x);
                     int startY = Math.Min(mouseClickY, y);
 
@@ -365,8 +403,12 @@ namespace PDMapEditor
                     Program.main.groupDustCloud.Visible = true;
                     Program.main.boxDustCloudName.Text = selectedDustCloud.Name;
                     Program.main.comboDustCloudType.SelectedIndex = selectedDustCloud.Type.ComboIndex;
-                    Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(selectedDustCloud.Color.X * 255), (int)Math.Round(selectedDustCloud.Color.Y * 255), (int)Math.Round(selectedDustCloud.Color.Z * 255));
-                    Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(selectedDustCloud.Color.W * 100);
+
+                    //This is BAD, dust clouds can have color values above 1
+                    //TODO: Replace color dialog and slider for better controls
+                    Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(Math.Min(selectedDustCloud.Color.X * 255, 255)), (int)Math.Round(Math.Min(selectedDustCloud.Color.Y * 255, 255)), (int)Math.Round(Math.Min(selectedDustCloud.Color.Z * 255, 255)));
+                    Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(Math.Min(selectedDustCloud.Color.W * 100, 100));
+
                     Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Size;
                 }
 
@@ -398,6 +440,9 @@ namespace PDMapEditor
         {
             Asteroid selectedAsteroid = Selected[0] as Asteroid;
             selectedAsteroid.Type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
+
+            Renderer.UpdateView();
+            Program.GLControl.Invalidate();
         }
         #endregion
 
@@ -411,6 +456,7 @@ namespace PDMapEditor
         {
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Type = DustCloudType.GetTypeFromComboIndex(Program.main.comboDustCloudType.SelectedIndex);
+            Program.GLControl.Invalidate();
         }
         private static void DustCloudColorClicked(object sender, EventArgs e)
         {
@@ -423,18 +469,23 @@ namespace PDMapEditor
 
                 DustCloud selectedDustCloud = Selected[0] as DustCloud;
                 selectedDustCloud.Color = new Vector4((float)color.R / 255, (float)color.G / 255, (float)color.B / 255, selectedDustCloud.Color.W);
+                Program.GLControl.Invalidate();
             }
         }
         private static void DustCloudAlphaChanged(object sender, EventArgs e)
         {
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Color = new Vector4(selectedDustCloud.Color.X, selectedDustCloud.Color.Y, selectedDustCloud.Color.Z, (float)Program.main.sliderDustCloudAlpha.Value / 100);
+            Program.GLControl.Invalidate();
         }
 
         private static void DustCloudSizeChanged(object sender, EventArgs e)
         {
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Size = (float)Program.main.numericDustCloudSize.Value;
+
+            Renderer.UpdateView();
+            Program.GLControl.Invalidate();
         }
         #endregion
 
@@ -451,6 +502,7 @@ namespace PDMapEditor
         {
             Pebble selectedPebble = Selected[0] as Pebble;
             selectedPebble.Type = PebbleType.GetTypeFromComboIndex(selectedPebble.Type.ComboIndex);
+            Program.GLControl.Invalidate();
         }
         #endregion
 
@@ -667,7 +719,11 @@ namespace PDMapEditor
             if(ActionKey.IsDown(Action.CAM_FOCUS_SELECTION))
             {
                 if (Selected.Count > 0)
+                {
                     Program.Camera.LookAt = averagePosition;
+                    Renderer.UpdateView();
+                    Program.GLControl.Invalidate();
+                }
                 else
                     SystemSounds.Beep.Play();
             }

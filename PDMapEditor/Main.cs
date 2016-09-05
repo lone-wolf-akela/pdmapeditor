@@ -81,8 +81,6 @@ namespace PDMapEditor
 
             Program.Camera.Update();
             Program.Camera.UpdatePanning();
-
-            labelDebug1.Text = "rectSelecting: " + Selection.rectangleSelecting.ToString();
         }
 
         public void glControl_Render(object sender, PaintEventArgs e)
@@ -92,6 +90,7 @@ namespace PDMapEditor
 
             FPSCounter.Update();
             Renderer.Render();
+            Renderer.Render2D();
         }
 
         public void glControl_Resize(object sender, EventArgs e)

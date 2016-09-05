@@ -16,6 +16,7 @@ namespace PDMapEditor
         public static Matrix4 ViewProjection = Matrix4.Identity;
 
         private static Shader shader;
+        private static Shader shader2D;
 
         private static Vector3 backgroundColor = new Vector3(0.05f, 0.05f, 0.05f);
         public static Vector3 BackgroundColor { get { return backgroundColor; } set { backgroundColor = value; GL.ClearColor(value.X, value.Y, value.Z, 1); } }
@@ -28,6 +29,9 @@ namespace PDMapEditor
         static int uv0_buffer = 0;
         public static int ind_buffer = 0;
 
+        static int pos_buffer_2D = 0;
+        static int ind_buffer_2D = 0;
+
         public static void Init()
         {
             BackgroundColor = new Vector3(0.05f, 0.05f, 0.05f);
@@ -37,15 +41,18 @@ namespace PDMapEditor
             GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
-            GL.LineWidth(1);
-
             // Gen buffers
             GL.GenBuffers(1, out pos_buffer);
             GL.GenBuffers(1, out uv0_buffer);
             GL.GenBuffers(1, out col_buffer);
             GL.GenBuffers(1, out ind_buffer);
 
+            //2D Buffers
+            GL.GenBuffers(1, out pos_buffer_2D);
+            GL.GenBuffers(1, out ind_buffer_2D);
+
             shader = new Shader("editor.vs", "editor.fs", true);
+            shader2D = new Shader("2d.vs", "2d.fs", true);
 
             Log.WriteLine("Renderer initialized.");
         }
@@ -101,6 +108,28 @@ namespace PDMapEditor
             // Buffer index data
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ind_buffer);
             GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(indicedata.Length * sizeof(int)), indicedata, BufferUsageHint.StaticDraw);
+        }
+
+        public static void Update2DMeshData()
+        {
+            List<Vector2> vertices = new List<Vector2>();
+            List<int> indices = new List<int>();
+            int vertexCount = 0;
+
+            foreach (Mesh2D mesh in Mesh2D.Meshes2D)
+            {
+                vertices.AddRange(mesh.Vertices);
+                indices.AddRange(mesh.GetIndices(vertexCount).ToList());
+                vertexCount += mesh.VertexCount;
+            }
+            Vector2[] vertData = vertices.ToArray();
+            int[] indexData = indices.ToArray();
+
+            BindBufferData(pos_buffer_2D, vertData, false);
+
+            // Buffer index data
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, ind_buffer_2D);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, (IntPtr)(indexData.Length * sizeof(int)), indexData, BufferUsageHint.StaticDraw);
         }
 
         private static void BindBufferData(int buffer, Vector2[] data, bool normalized)
@@ -192,9 +221,28 @@ namespace PDMapEditor
                         indiceat += DrawDrawable(drawable, indiceat);
             }
             GL.DepthMask(true);
+        }
 
+        public static void Render2D()
+        {
+            //2D Rendering
+            GL.UseProgram(shader2D.ProgramID);
+            shader2D.LinkAttrib2(pos_buffer_2D, "inPos", false);
 
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, ind_buffer_2D);
 
+            int indiceat = 0;
+            foreach (Mesh2D mesh in Mesh2D.Meshes2D)
+            {
+                if (mesh.Visible)
+                {
+                    GL.PointSize(mesh.DotSize);
+                    GL.LineWidth(mesh.LineWidth);
+
+                    GL.DrawElements(mesh.BeginMode, mesh.IndiceCount, DrawElementsType.UnsignedInt, indiceat * sizeof(int));
+                }
+                indiceat += mesh.IndiceCount;
+            }
 
             Program.GLControl.SwapBuffers();
         }

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -111,7 +111,6 @@
             this.comboDustCloudType = new System.Windows.Forms.ComboBox();
             this.groupAsteroid = new System.Windows.Forms.GroupBox();
             this.labelAsteroidResourceMultiplier = new System.Windows.Forms.Label();
-            this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
             this.labelAsteroidType = new System.Windows.Forms.Label();
             this.comboAsteroidType = new System.Windows.Forms.ComboBox();
             this.groupSelectionRotation = new System.Windows.Forms.GroupBox();
@@ -137,7 +136,7 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
-            this.labelDebug1 = new System.Windows.Forms.Label();
+            this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -168,7 +167,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
             this.groupAsteroid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
             this.groupSelectionRotation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).BeginInit();
@@ -181,6 +179,7 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -1262,22 +1261,6 @@
             this.labelAsteroidResourceMultiplier.TabIndex = 20;
             this.labelAsteroidResourceMultiplier.Text = "RU Multiplier:";
             // 
-            // numericAsteroidResourceMultiplier
-            // 
-            this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericAsteroidResourceMultiplier.DecimalPlaces = 1;
-            this.numericAsteroidResourceMultiplier.Location = new System.Drawing.Point(82, 46);
-            this.numericAsteroidResourceMultiplier.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericAsteroidResourceMultiplier.Name = "numericAsteroidResourceMultiplier";
-            this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
-            this.numericAsteroidResourceMultiplier.TabIndex = 19;
-            this.numericAsteroidResourceMultiplier.TrailingSign = "%";
-            // 
             // labelAsteroidType
             // 
             this.labelAsteroidType.AutoSize = true;
@@ -1569,9 +1552,9 @@
             this.gridProblems.AllowUserToDeleteRows = false;
             this.gridProblems.AllowUserToResizeColumns = false;
             this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -1579,14 +1562,14 @@
             this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnProblems});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridProblems.Location = new System.Drawing.Point(0, 0);
@@ -1595,9 +1578,9 @@
             this.gridProblems.ReadOnly = true;
             this.gridProblems.RowHeadersVisible = false;
             this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridProblems.RowTemplate.Height = 500;
@@ -1610,9 +1593,9 @@
             // columnProblems
             // 
             this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnProblems.HeaderText = "Problems";
             this.columnProblems.Name = "columnProblems";
             this.columnProblems.ReadOnly = true;
@@ -1682,21 +1665,27 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
-            // labelDebug1
+            // numericAsteroidResourceMultiplier
             // 
-            this.labelDebug1.AutoSize = true;
-            this.labelDebug1.Location = new System.Drawing.Point(442, 5);
-            this.labelDebug1.Name = "labelDebug1";
-            this.labelDebug1.Size = new System.Drawing.Size(35, 13);
-            this.labelDebug1.TabIndex = 13;
-            this.labelDebug1.Text = "label2";
+            this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericAsteroidResourceMultiplier.DecimalPlaces = 1;
+            this.numericAsteroidResourceMultiplier.Location = new System.Drawing.Point(82, 46);
+            this.numericAsteroidResourceMultiplier.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericAsteroidResourceMultiplier.Name = "numericAsteroidResourceMultiplier";
+            this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
+            this.numericAsteroidResourceMultiplier.TabIndex = 19;
+            this.numericAsteroidResourceMultiplier.TrailingSign = "%";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1102, 746);
-            this.Controls.Add(this.labelDebug1);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);
@@ -1747,7 +1736,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
             this.groupAsteroid.ResumeLayout(false);
             this.groupAsteroid.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
             this.groupSelectionRotation.ResumeLayout(false);
             this.groupSelectionRotation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).EndInit();
@@ -1762,6 +1750,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1873,7 +1862,6 @@
         public System.Windows.Forms.GroupBox groupPebble;
         private System.Windows.Forms.Label labelPebbleType;
         public System.Windows.Forms.ComboBox comboPebbleType;
-        public System.Windows.Forms.Label labelDebug1;
     }
 }
 

@@ -107,6 +107,7 @@
     <Compile Include="data\PebbleType.cs" />
     <Compile Include="Material.cs" />
     <Compile Include="Mesh.cs" />
+    <Compile Include="meshes2D\Mesh2D.cs" />
     <Compile Include="meshes\MeshDot.cs" />
     <Compile Include="meshes\MeshLine.cs" />
     <Compile Include="meshes\MeshIcosphere.cs" />
@@ -196,6 +197,12 @@
     <None Include="resources\text270.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="shaders\2d.fs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="shaders\2d.vs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="shaders\editor.fs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -227,7 +234,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

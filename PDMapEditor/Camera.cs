@@ -183,6 +183,10 @@ namespace PDMapEditor
         {
             float angleFactor = (float)(Angles.X - Math.PI) / (float)(Math.PI * 1.5f) * 3;
 
+            bool posChanged = false;
+            if (ActionKey.IsDown(Action.PAN_RIGHT) || ActionKey.IsDown(Action.PAN_LEFT) || ActionKey.IsDown(Action.PAN_FORWARDS) || ActionKey.IsDown(Action.PAN_BACKWARDS) || ActionKey.IsDown(Action.PAN_UP) || ActionKey.IsDown(Action.PAN_DOWN))
+                posChanged = true;
+
             if (ActionKey.IsDown(Action.PAN_RIGHT))
                 panDelta += new Vector3(Renderer.View.M11, Renderer.View.M21, Renderer.View.M31);
             else if (ActionKey.IsDown(Action.PAN_LEFT))
@@ -197,20 +201,23 @@ namespace PDMapEditor
             else if (ActionKey.IsDown(Action.PAN_DOWN))
                 panDelta += -Vector3.UnitY;
 
-            float finalPanSpeed = 1;
+            if (Program.GLControl.Focused) //VERY UGLY, THERE HAS TO BE A BETTER SOLUTION?
+            {
+                float finalPanSpeed = 1;
 
-            if(!Orthographic)
-                finalPanSpeed = (float)Math.Max(PanSpeed * zoom, PAN_MIN_SPEED);
-            else
-                finalPanSpeed = (float)Math.Max(1 / OrthographicSize * 700, PAN_MIN_SPEED); //The orthographic size gets smaller the more you zoom out, so the speed should raise the lower the size gets
+                if (!Orthographic)
+                    finalPanSpeed = (float)Math.Max(PanSpeed * zoom, PAN_MIN_SPEED);
+                else
+                    finalPanSpeed = (float)Math.Max(1 / OrthographicSize * 700, PAN_MIN_SPEED); //The orthographic size gets smaller the more you zoom out, so the speed should raise the lower the size gets
 
-            LookAt += panDelta * finalPanSpeed * (float)Program.ElapsedSeconds;
+                LookAt += panDelta * finalPanSpeed * (float)Program.ElapsedSeconds;
 
-            panDelta = Vector3.Zero;
+                panDelta = Vector3.Zero;
 
-            UpdatePosition();
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
+                UpdatePosition();
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
         }
 
         public void Update(bool forceUpdate = false)
