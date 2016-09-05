@@ -407,7 +407,7 @@ namespace PDMapEditor
             Program.main.numericSelectionPositionX.Value = (decimal)averagePosition.X;
             Program.main.numericSelectionPositionY.Value = (decimal)averagePosition.Y;
             Program.main.numericSelectionPositionZ.Value = (decimal)averagePosition.Z;
-            ignoreRotationChange = false;
+            ignorePositionChange = false;
         }
         private static void UpdateRotationGUI()
         {
@@ -717,10 +717,17 @@ namespace PDMapEditor
 
         private static void PositionChanged(object sender, EventArgs e)
         {
-            if (Selected == null || ignorePositionChange)
+            if (ignorePositionChange)
                 return;
 
-            averagePosition = new Vector3((float)Program.main.numericSelectionPositionX.Value, (float)Program.main.numericSelectionPositionY.Value, (float)Program.main.numericSelectionPositionZ.Value);
+            Vector3 newPosition = new Vector3((float)Program.main.numericSelectionPositionX.Value, (float)Program.main.numericSelectionPositionY.Value, (float)Program.main.numericSelectionPositionZ.Value);
+
+            foreach (ISelectable selectable in Selected)
+            {
+                selectable.Position -= averagePosition - newPosition;
+            }
+
+            averagePosition = newPosition;
 
             UpdateSelectionGizmos();
             Renderer.UpdateView();
