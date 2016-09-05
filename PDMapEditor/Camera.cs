@@ -253,7 +253,7 @@ namespace PDMapEditor
 
                 if (!this.Orthographic)
                 {
-                    zoom -= zoomDelta * ZoomSpeed * 0.01f;
+                    zoom -= zoomDelta * ZoomSpeed * (zoom / 3000000);
                     zoom = Utilities.Clamp(zoom, MinZoom, MaxZoom);
                 }
                 else
