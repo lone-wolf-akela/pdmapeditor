@@ -78,6 +78,12 @@ namespace PDMapEditor
             Program.main.buttonDustCloudColor.Click+= new EventHandler(DustCloudColorClicked);
             Program.main.sliderDustCloudAlpha.Scroll += new EventHandler(DustCloudAlphaChanged);
             Program.main.numericDustCloudSize.ValueChanged += new EventHandler(DustCloudSizeChanged);
+
+            //Point
+            Program.main.boxPointName.TextChanged += new EventHandler(PointNameChanged);
+
+            //Pebble
+            Program.main.comboPebbleType.SelectedIndexChanged += new EventHandler(PebbleTypeChanged);
         }
 
         public static void CreateGizmos()
@@ -219,6 +225,8 @@ namespace PDMapEditor
 
             Program.main.groupAsteroid.Visible = false;
             Program.main.groupDustCloud.Visible = false;
+            Program.main.groupPoint.Visible = false;
+            Program.main.groupPebble.Visible = false;
 
             if (Selected == null)
             {
@@ -266,6 +274,20 @@ namespace PDMapEditor
                 Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(selectedDustCloud.Color.X * 255), (int)Math.Round(selectedDustCloud.Color.Y * 255), (int)Math.Round(selectedDustCloud.Color.Z * 255));
                 Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(selectedDustCloud.Color.W * 100);
                 Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Size;
+            }
+
+            Point selectedPoint = Selected as Point;
+            if (selectedPoint != null)
+            {
+                Program.main.groupPoint.Visible = true;
+                Program.main.boxPointName.Text = selectedPoint.Name;
+            }
+
+            Pebble selectedPebble = Selected as Pebble;
+            if (selectedPebble != null)
+            {
+                Program.main.groupPebble.Visible = true;
+                Program.main.comboPebbleType.SelectedIndex = selectedPebble.Type.ComboIndex;
             }
 
             Program.GLControl.Focus();
@@ -318,6 +340,22 @@ namespace PDMapEditor
         {
             DustCloud selectedDustCloud = Selected as DustCloud;
             selectedDustCloud.Size = (float)Program.main.numericDustCloudSize.Value;
+        }
+        #endregion
+
+        #region Point
+        private static void PointNameChanged(object sender, EventArgs e)
+        {
+            Point selectedPoint = Selected as Point;
+            selectedPoint.Name = Program.main.boxPointName.Text;
+        }
+        #endregion
+
+        #region Pebble
+        private static void PebbleTypeChanged(object sender, EventArgs e)
+        {
+            Pebble selectedPebble = Selected as Pebble;
+            selectedPebble.Type = PebbleType.GetTypeFromComboIndex(selectedPebble.Type.ComboIndex);
         }
         #endregion
 

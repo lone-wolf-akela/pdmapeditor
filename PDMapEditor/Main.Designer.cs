@@ -92,6 +92,21 @@
             this.labelMapDimensionsX = new System.Windows.Forms.Label();
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
             this.tabSelection = new System.Windows.Forms.TabPage();
+            this.groupDustCloud = new System.Windows.Forms.GroupBox();
+            this.labelDustCloudAlpha = new System.Windows.Forms.Label();
+            this.sliderDustCloudAlpha = new System.Windows.Forms.TrackBar();
+            this.labelDustCloudSize = new System.Windows.Forms.Label();
+            this.numericDustCloudSize = new System.Windows.Forms.NumericUpDown();
+            this.labelDustCloudColor = new System.Windows.Forms.Label();
+            this.buttonDustCloudColor = new System.Windows.Forms.Button();
+            this.labelDustCloudName = new System.Windows.Forms.Label();
+            this.boxDustCloudName = new System.Windows.Forms.TextBox();
+            this.labelDustCloudType = new System.Windows.Forms.Label();
+            this.comboDustCloudType = new System.Windows.Forms.ComboBox();
+            this.groupAsteroid = new System.Windows.Forms.GroupBox();
+            this.labelAsteroidResourceMultiplier = new System.Windows.Forms.Label();
+            this.labelAsteroidType = new System.Windows.Forms.Label();
+            this.comboAsteroidType = new System.Windows.Forms.ComboBox();
             this.groupSelectionRotation = new System.Windows.Forms.GroupBox();
             this.labelSelectionRotationZ = new System.Windows.Forms.Label();
             this.numericSelectionRotationZ = new System.Windows.Forms.NumericUpDown();
@@ -115,22 +130,13 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
-            this.groupAsteroid = new System.Windows.Forms.GroupBox();
-            this.comboAsteroidType = new System.Windows.Forms.ComboBox();
-            this.labelAsteroidType = new System.Windows.Forms.Label();
-            this.labelAsteroidResourceMultiplier = new System.Windows.Forms.Label();
-            this.groupDustCloud = new System.Windows.Forms.GroupBox();
-            this.labelDustCloudType = new System.Windows.Forms.Label();
-            this.comboDustCloudType = new System.Windows.Forms.ComboBox();
-            this.boxDustCloudName = new System.Windows.Forms.TextBox();
-            this.labelDustCloudName = new System.Windows.Forms.Label();
-            this.buttonDustCloudColor = new System.Windows.Forms.Button();
-            this.labelDustCloudColor = new System.Windows.Forms.Label();
-            this.numericDustCloudSize = new System.Windows.Forms.NumericUpDown();
-            this.labelDustCloudSize = new System.Windows.Forms.Label();
-            this.sliderDustCloudAlpha = new System.Windows.Forms.TrackBar();
-            this.labelDustCloudAlpha = new System.Windows.Forms.Label();
+            this.groupPoint = new System.Windows.Forms.GroupBox();
+            this.labelPointName = new System.Windows.Forms.Label();
+            this.boxPointName = new System.Windows.Forms.TextBox();
             this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
+            this.groupPebble = new System.Windows.Forms.GroupBox();
+            this.labelPebbleType = new System.Windows.Forms.Label();
+            this.comboPebbleType = new System.Windows.Forms.ComboBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -155,6 +161,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
             this.tabSelection.SuspendLayout();
+            this.groupDustCloud.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
+            this.groupAsteroid.SuspendLayout();
             this.groupSelectionRotation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).BeginInit();
@@ -167,11 +177,9 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
-            this.groupAsteroid.SuspendLayout();
-            this.groupDustCloud.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
+            this.groupPoint.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
+            this.groupPebble.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -1012,6 +1020,8 @@
             // 
             // tabSelection
             // 
+            this.tabSelection.Controls.Add(this.groupPebble);
+            this.tabSelection.Controls.Add(this.groupPoint);
             this.tabSelection.Controls.Add(this.groupDustCloud);
             this.tabSelection.Controls.Add(this.groupAsteroid);
             this.tabSelection.Controls.Add(this.groupSelectionRotation);
@@ -1022,6 +1032,189 @@
             this.tabSelection.TabIndex = 1;
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
+            // 
+            // groupDustCloud
+            // 
+            this.groupDustCloud.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupDustCloud.Controls.Add(this.labelDustCloudAlpha);
+            this.groupDustCloud.Controls.Add(this.sliderDustCloudAlpha);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudSize);
+            this.groupDustCloud.Controls.Add(this.numericDustCloudSize);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudColor);
+            this.groupDustCloud.Controls.Add(this.buttonDustCloudColor);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudName);
+            this.groupDustCloud.Controls.Add(this.boxDustCloudName);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudType);
+            this.groupDustCloud.Controls.Add(this.comboDustCloudType);
+            this.groupDustCloud.Location = new System.Drawing.Point(3, 215);
+            this.groupDustCloud.Name = "groupDustCloud";
+            this.groupDustCloud.Size = new System.Drawing.Size(214, 156);
+            this.groupDustCloud.TabIndex = 8;
+            this.groupDustCloud.TabStop = false;
+            this.groupDustCloud.Text = "Dust cloud";
+            // 
+            // labelDustCloudAlpha
+            // 
+            this.labelDustCloudAlpha.AutoSize = true;
+            this.labelDustCloudAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudAlpha.Location = new System.Drawing.Point(6, 102);
+            this.labelDustCloudAlpha.Name = "labelDustCloudAlpha";
+            this.labelDustCloudAlpha.Size = new System.Drawing.Size(37, 13);
+            this.labelDustCloudAlpha.TabIndex = 30;
+            this.labelDustCloudAlpha.Text = "Alpha:";
+            // 
+            // sliderDustCloudAlpha
+            // 
+            this.sliderDustCloudAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderDustCloudAlpha.AutoSize = false;
+            this.sliderDustCloudAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderDustCloudAlpha.Location = new System.Drawing.Point(51, 98);
+            this.sliderDustCloudAlpha.Maximum = 100;
+            this.sliderDustCloudAlpha.Name = "sliderDustCloudAlpha";
+            this.sliderDustCloudAlpha.Size = new System.Drawing.Size(157, 23);
+            this.sliderDustCloudAlpha.TabIndex = 29;
+            this.sliderDustCloudAlpha.TickFrequency = 5;
+            this.sliderDustCloudAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+            // 
+            // labelDustCloudSize
+            // 
+            this.labelDustCloudSize.AutoSize = true;
+            this.labelDustCloudSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudSize.Location = new System.Drawing.Point(6, 129);
+            this.labelDustCloudSize.Name = "labelDustCloudSize";
+            this.labelDustCloudSize.Size = new System.Drawing.Size(30, 13);
+            this.labelDustCloudSize.TabIndex = 28;
+            this.labelDustCloudSize.Text = "Size:";
+            // 
+            // numericDustCloudSize
+            // 
+            this.numericDustCloudSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericDustCloudSize.DecimalPlaces = 1;
+            this.numericDustCloudSize.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDustCloudSize.Location = new System.Drawing.Point(51, 127);
+            this.numericDustCloudSize.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericDustCloudSize.Name = "numericDustCloudSize";
+            this.numericDustCloudSize.Size = new System.Drawing.Size(157, 20);
+            this.numericDustCloudSize.TabIndex = 27;
+            this.numericDustCloudSize.ThousandsSeparator = true;
+            // 
+            // labelDustCloudColor
+            // 
+            this.labelDustCloudColor.AutoSize = true;
+            this.labelDustCloudColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudColor.Location = new System.Drawing.Point(6, 76);
+            this.labelDustCloudColor.Name = "labelDustCloudColor";
+            this.labelDustCloudColor.Size = new System.Drawing.Size(34, 13);
+            this.labelDustCloudColor.TabIndex = 26;
+            this.labelDustCloudColor.Text = "Color:";
+            // 
+            // buttonDustCloudColor
+            // 
+            this.buttonDustCloudColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDustCloudColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDustCloudColor.Location = new System.Drawing.Point(51, 72);
+            this.buttonDustCloudColor.Name = "buttonDustCloudColor";
+            this.buttonDustCloudColor.Size = new System.Drawing.Size(157, 20);
+            this.buttonDustCloudColor.TabIndex = 25;
+            this.buttonDustCloudColor.UseVisualStyleBackColor = true;
+            // 
+            // labelDustCloudName
+            // 
+            this.labelDustCloudName.AutoSize = true;
+            this.labelDustCloudName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudName.Location = new System.Drawing.Point(6, 22);
+            this.labelDustCloudName.Name = "labelDustCloudName";
+            this.labelDustCloudName.Size = new System.Drawing.Size(38, 13);
+            this.labelDustCloudName.TabIndex = 24;
+            this.labelDustCloudName.Text = "Name:";
+            // 
+            // boxDustCloudName
+            // 
+            this.boxDustCloudName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxDustCloudName.Location = new System.Drawing.Point(51, 19);
+            this.boxDustCloudName.Name = "boxDustCloudName";
+            this.boxDustCloudName.Size = new System.Drawing.Size(157, 20);
+            this.boxDustCloudName.TabIndex = 23;
+            // 
+            // labelDustCloudType
+            // 
+            this.labelDustCloudType.AutoSize = true;
+            this.labelDustCloudType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudType.Location = new System.Drawing.Point(6, 48);
+            this.labelDustCloudType.Name = "labelDustCloudType";
+            this.labelDustCloudType.Size = new System.Drawing.Size(34, 13);
+            this.labelDustCloudType.TabIndex = 18;
+            this.labelDustCloudType.Text = "Type:";
+            // 
+            // comboDustCloudType
+            // 
+            this.comboDustCloudType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboDustCloudType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDustCloudType.FormattingEnabled = true;
+            this.comboDustCloudType.Location = new System.Drawing.Point(51, 45);
+            this.comboDustCloudType.Name = "comboDustCloudType";
+            this.comboDustCloudType.Size = new System.Drawing.Size(157, 21);
+            this.comboDustCloudType.TabIndex = 17;
+            // 
+            // groupAsteroid
+            // 
+            this.groupAsteroid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupAsteroid.Controls.Add(this.labelAsteroidResourceMultiplier);
+            this.groupAsteroid.Controls.Add(this.numericAsteroidResourceMultiplier);
+            this.groupAsteroid.Controls.Add(this.labelAsteroidType);
+            this.groupAsteroid.Controls.Add(this.comboAsteroidType);
+            this.groupAsteroid.Location = new System.Drawing.Point(3, 215);
+            this.groupAsteroid.Name = "groupAsteroid";
+            this.groupAsteroid.Size = new System.Drawing.Size(214, 75);
+            this.groupAsteroid.TabIndex = 7;
+            this.groupAsteroid.TabStop = false;
+            this.groupAsteroid.Text = "Asteroid";
+            // 
+            // labelAsteroidResourceMultiplier
+            // 
+            this.labelAsteroidResourceMultiplier.AutoSize = true;
+            this.labelAsteroidResourceMultiplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAsteroidResourceMultiplier.Location = new System.Drawing.Point(6, 48);
+            this.labelAsteroidResourceMultiplier.Name = "labelAsteroidResourceMultiplier";
+            this.labelAsteroidResourceMultiplier.Size = new System.Drawing.Size(70, 13);
+            this.labelAsteroidResourceMultiplier.TabIndex = 20;
+            this.labelAsteroidResourceMultiplier.Text = "RU Multiplier:";
+            // 
+            // labelAsteroidType
+            // 
+            this.labelAsteroidType.AutoSize = true;
+            this.labelAsteroidType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAsteroidType.Location = new System.Drawing.Point(6, 22);
+            this.labelAsteroidType.Name = "labelAsteroidType";
+            this.labelAsteroidType.Size = new System.Drawing.Size(34, 13);
+            this.labelAsteroidType.TabIndex = 18;
+            this.labelAsteroidType.Text = "Type:";
+            // 
+            // comboAsteroidType
+            // 
+            this.comboAsteroidType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboAsteroidType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAsteroidType.FormattingEnabled = true;
+            this.comboAsteroidType.Location = new System.Drawing.Point(82, 19);
+            this.comboAsteroidType.Name = "comboAsteroidType";
+            this.comboAsteroidType.Size = new System.Drawing.Size(126, 21);
+            this.comboAsteroidType.TabIndex = 17;
             // 
             // groupSelectionRotation
             // 
@@ -1406,188 +1599,37 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
-            // groupAsteroid
+            // groupPoint
             // 
-            this.groupAsteroid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupPoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupAsteroid.Controls.Add(this.labelAsteroidResourceMultiplier);
-            this.groupAsteroid.Controls.Add(this.numericAsteroidResourceMultiplier);
-            this.groupAsteroid.Controls.Add(this.labelAsteroidType);
-            this.groupAsteroid.Controls.Add(this.comboAsteroidType);
-            this.groupAsteroid.Location = new System.Drawing.Point(3, 215);
-            this.groupAsteroid.Name = "groupAsteroid";
-            this.groupAsteroid.Size = new System.Drawing.Size(214, 75);
-            this.groupAsteroid.TabIndex = 7;
-            this.groupAsteroid.TabStop = false;
-            this.groupAsteroid.Text = "Asteroid";
+            this.groupPoint.Controls.Add(this.labelPointName);
+            this.groupPoint.Controls.Add(this.boxPointName);
+            this.groupPoint.Location = new System.Drawing.Point(3, 215);
+            this.groupPoint.Name = "groupPoint";
+            this.groupPoint.Size = new System.Drawing.Size(214, 47);
+            this.groupPoint.TabIndex = 9;
+            this.groupPoint.TabStop = false;
+            this.groupPoint.Text = "Point";
             // 
-            // comboAsteroidType
+            // labelPointName
             // 
-            this.comboAsteroidType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelPointName.AutoSize = true;
+            this.labelPointName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPointName.Location = new System.Drawing.Point(6, 22);
+            this.labelPointName.Name = "labelPointName";
+            this.labelPointName.Size = new System.Drawing.Size(38, 13);
+            this.labelPointName.TabIndex = 24;
+            this.labelPointName.Text = "Name:";
+            // 
+            // boxPointName
+            // 
+            this.boxPointName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboAsteroidType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboAsteroidType.FormattingEnabled = true;
-            this.comboAsteroidType.Location = new System.Drawing.Point(82, 19);
-            this.comboAsteroidType.Name = "comboAsteroidType";
-            this.comboAsteroidType.Size = new System.Drawing.Size(126, 21);
-            this.comboAsteroidType.TabIndex = 17;
-            // 
-            // labelAsteroidType
-            // 
-            this.labelAsteroidType.AutoSize = true;
-            this.labelAsteroidType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAsteroidType.Location = new System.Drawing.Point(6, 22);
-            this.labelAsteroidType.Name = "labelAsteroidType";
-            this.labelAsteroidType.Size = new System.Drawing.Size(34, 13);
-            this.labelAsteroidType.TabIndex = 18;
-            this.labelAsteroidType.Text = "Type:";
-            // 
-            // labelAsteroidResourceMultiplier
-            // 
-            this.labelAsteroidResourceMultiplier.AutoSize = true;
-            this.labelAsteroidResourceMultiplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAsteroidResourceMultiplier.Location = new System.Drawing.Point(6, 48);
-            this.labelAsteroidResourceMultiplier.Name = "labelAsteroidResourceMultiplier";
-            this.labelAsteroidResourceMultiplier.Size = new System.Drawing.Size(70, 13);
-            this.labelAsteroidResourceMultiplier.TabIndex = 20;
-            this.labelAsteroidResourceMultiplier.Text = "RU Multiplier:";
-            // 
-            // groupDustCloud
-            // 
-            this.groupDustCloud.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupDustCloud.Controls.Add(this.labelDustCloudAlpha);
-            this.groupDustCloud.Controls.Add(this.sliderDustCloudAlpha);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudSize);
-            this.groupDustCloud.Controls.Add(this.numericDustCloudSize);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudColor);
-            this.groupDustCloud.Controls.Add(this.buttonDustCloudColor);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudName);
-            this.groupDustCloud.Controls.Add(this.boxDustCloudName);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudType);
-            this.groupDustCloud.Controls.Add(this.comboDustCloudType);
-            this.groupDustCloud.Location = new System.Drawing.Point(3, 215);
-            this.groupDustCloud.Name = "groupDustCloud";
-            this.groupDustCloud.Size = new System.Drawing.Size(214, 156);
-            this.groupDustCloud.TabIndex = 8;
-            this.groupDustCloud.TabStop = false;
-            this.groupDustCloud.Text = "Dust cloud";
-            // 
-            // labelDustCloudType
-            // 
-            this.labelDustCloudType.AutoSize = true;
-            this.labelDustCloudType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudType.Location = new System.Drawing.Point(6, 48);
-            this.labelDustCloudType.Name = "labelDustCloudType";
-            this.labelDustCloudType.Size = new System.Drawing.Size(34, 13);
-            this.labelDustCloudType.TabIndex = 18;
-            this.labelDustCloudType.Text = "Type:";
-            // 
-            // comboDustCloudType
-            // 
-            this.comboDustCloudType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboDustCloudType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDustCloudType.FormattingEnabled = true;
-            this.comboDustCloudType.Location = new System.Drawing.Point(51, 45);
-            this.comboDustCloudType.Name = "comboDustCloudType";
-            this.comboDustCloudType.Size = new System.Drawing.Size(157, 21);
-            this.comboDustCloudType.TabIndex = 17;
-            // 
-            // boxDustCloudName
-            // 
-            this.boxDustCloudName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxDustCloudName.Location = new System.Drawing.Point(51, 19);
-            this.boxDustCloudName.Name = "boxDustCloudName";
-            this.boxDustCloudName.Size = new System.Drawing.Size(157, 20);
-            this.boxDustCloudName.TabIndex = 23;
-            // 
-            // labelDustCloudName
-            // 
-            this.labelDustCloudName.AutoSize = true;
-            this.labelDustCloudName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudName.Location = new System.Drawing.Point(6, 22);
-            this.labelDustCloudName.Name = "labelDustCloudName";
-            this.labelDustCloudName.Size = new System.Drawing.Size(38, 13);
-            this.labelDustCloudName.TabIndex = 24;
-            this.labelDustCloudName.Text = "Name:";
-            // 
-            // buttonDustCloudColor
-            // 
-            this.buttonDustCloudColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDustCloudColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDustCloudColor.Location = new System.Drawing.Point(51, 72);
-            this.buttonDustCloudColor.Name = "buttonDustCloudColor";
-            this.buttonDustCloudColor.Size = new System.Drawing.Size(157, 20);
-            this.buttonDustCloudColor.TabIndex = 25;
-            this.buttonDustCloudColor.UseVisualStyleBackColor = true;
-            // 
-            // labelDustCloudColor
-            // 
-            this.labelDustCloudColor.AutoSize = true;
-            this.labelDustCloudColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudColor.Location = new System.Drawing.Point(6, 76);
-            this.labelDustCloudColor.Name = "labelDustCloudColor";
-            this.labelDustCloudColor.Size = new System.Drawing.Size(34, 13);
-            this.labelDustCloudColor.TabIndex = 26;
-            this.labelDustCloudColor.Text = "Color:";
-            // 
-            // numericDustCloudSize
-            // 
-            this.numericDustCloudSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericDustCloudSize.DecimalPlaces = 1;
-            this.numericDustCloudSize.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericDustCloudSize.Location = new System.Drawing.Point(51, 127);
-            this.numericDustCloudSize.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericDustCloudSize.Name = "numericDustCloudSize";
-            this.numericDustCloudSize.Size = new System.Drawing.Size(157, 20);
-            this.numericDustCloudSize.TabIndex = 27;
-            this.numericDustCloudSize.ThousandsSeparator = true;
-            // 
-            // labelDustCloudSize
-            // 
-            this.labelDustCloudSize.AutoSize = true;
-            this.labelDustCloudSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudSize.Location = new System.Drawing.Point(6, 129);
-            this.labelDustCloudSize.Name = "labelDustCloudSize";
-            this.labelDustCloudSize.Size = new System.Drawing.Size(30, 13);
-            this.labelDustCloudSize.TabIndex = 28;
-            this.labelDustCloudSize.Text = "Size:";
-            // 
-            // sliderDustCloudAlpha
-            // 
-            this.sliderDustCloudAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sliderDustCloudAlpha.AutoSize = false;
-            this.sliderDustCloudAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.sliderDustCloudAlpha.Location = new System.Drawing.Point(51, 98);
-            this.sliderDustCloudAlpha.Maximum = 100;
-            this.sliderDustCloudAlpha.Name = "sliderDustCloudAlpha";
-            this.sliderDustCloudAlpha.Size = new System.Drawing.Size(157, 23);
-            this.sliderDustCloudAlpha.TabIndex = 29;
-            this.sliderDustCloudAlpha.TickFrequency = 5;
-            this.sliderDustCloudAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // labelDustCloudAlpha
-            // 
-            this.labelDustCloudAlpha.AutoSize = true;
-            this.labelDustCloudAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudAlpha.Location = new System.Drawing.Point(6, 102);
-            this.labelDustCloudAlpha.Name = "labelDustCloudAlpha";
-            this.labelDustCloudAlpha.Size = new System.Drawing.Size(37, 13);
-            this.labelDustCloudAlpha.TabIndex = 30;
-            this.labelDustCloudAlpha.Text = "Alpha:";
+            this.boxPointName.Location = new System.Drawing.Point(51, 19);
+            this.boxPointName.Name = "boxPointName";
+            this.boxPointName.Size = new System.Drawing.Size(157, 20);
+            this.boxPointName.TabIndex = 23;
             // 
             // numericAsteroidResourceMultiplier
             // 
@@ -1604,6 +1646,40 @@
             this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
             this.numericAsteroidResourceMultiplier.TabIndex = 19;
             this.numericAsteroidResourceMultiplier.TrailingSign = "%";
+            // 
+            // groupPebble
+            // 
+            this.groupPebble.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupPebble.Controls.Add(this.labelPebbleType);
+            this.groupPebble.Controls.Add(this.comboPebbleType);
+            this.groupPebble.Location = new System.Drawing.Point(3, 215);
+            this.groupPebble.Name = "groupPebble";
+            this.groupPebble.Size = new System.Drawing.Size(214, 47);
+            this.groupPebble.TabIndex = 10;
+            this.groupPebble.TabStop = false;
+            this.groupPebble.Text = "Pebble";
+            // 
+            // labelPebbleType
+            // 
+            this.labelPebbleType.AutoSize = true;
+            this.labelPebbleType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPebbleType.Location = new System.Drawing.Point(6, 22);
+            this.labelPebbleType.Name = "labelPebbleType";
+            this.labelPebbleType.Size = new System.Drawing.Size(34, 13);
+            this.labelPebbleType.TabIndex = 20;
+            this.labelPebbleType.Text = "Type:";
+            // 
+            // comboPebbleType
+            // 
+            this.comboPebbleType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboPebbleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPebbleType.FormattingEnabled = true;
+            this.comboPebbleType.Location = new System.Drawing.Point(51, 19);
+            this.comboPebbleType.Name = "comboPebbleType";
+            this.comboPebbleType.Size = new System.Drawing.Size(157, 21);
+            this.comboPebbleType.TabIndex = 19;
             // 
             // Main
             // 
@@ -1650,6 +1726,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
             this.tabSelection.ResumeLayout(false);
+            this.groupDustCloud.ResumeLayout(false);
+            this.groupDustCloud.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
+            this.groupAsteroid.ResumeLayout(false);
+            this.groupAsteroid.PerformLayout();
             this.groupSelectionRotation.ResumeLayout(false);
             this.groupSelectionRotation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).EndInit();
@@ -1664,13 +1746,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
-            this.groupAsteroid.ResumeLayout(false);
-            this.groupAsteroid.PerformLayout();
-            this.groupDustCloud.ResumeLayout(false);
-            this.groupDustCloud.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).EndInit();
+            this.groupPoint.ResumeLayout(false);
+            this.groupPoint.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
+            this.groupPebble.ResumeLayout(false);
+            this.groupPebble.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1776,6 +1856,12 @@
         private System.Windows.Forms.Label labelDustCloudAlpha;
         public System.Windows.Forms.TrackBar sliderDustCloudAlpha;
         public System.Windows.Forms.ColorDialog colorDialog;
+        public System.Windows.Forms.GroupBox groupPoint;
+        private System.Windows.Forms.Label labelPointName;
+        public System.Windows.Forms.TextBox boxPointName;
+        public System.Windows.Forms.GroupBox groupPebble;
+        private System.Windows.Forms.Label labelPebbleType;
+        public System.Windows.Forms.ComboBox comboPebbleType;
     }
 }
 
