@@ -193,6 +193,9 @@ namespace PDMapEditor
             }
             GL.DepthMask(true);
 
+
+
+
             Program.GLControl.SwapBuffers();
         }
 

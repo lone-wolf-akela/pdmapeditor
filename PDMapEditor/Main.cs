@@ -81,6 +81,8 @@ namespace PDMapEditor
 
             Program.Camera.Update();
             Program.Camera.UpdatePanning();
+
+            labelDebug1.Text = "rectSelecting: " + Selection.rectangleSelecting.ToString();
         }
 
         public void glControl_Render(object sender, PaintEventArgs e)
@@ -114,6 +116,7 @@ namespace PDMapEditor
         public void glControl_MouseMove(object sender, MouseEventArgs e)
         {
             Selection.UpdateDragging(e.X, Program.GLControl.ClientSize.Height - e.Y);
+            Selection.UpdateRectangleSelection(e.X, Program.GLControl.ClientSize.Height - e.Y);
         }
 
         public void glControl_MouseDown(object sender, MouseEventArgs e)

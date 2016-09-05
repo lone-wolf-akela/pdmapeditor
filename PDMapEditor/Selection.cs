@@ -36,9 +36,13 @@ namespace PDMapEditor
 
         private static float lastMouseX, lastMouseY;
 
+        private static int mouseClickX, mouseClickY;
+
         private static Vector3 rotationAtStart = Vector3.Zero;
 
         private static Vector3 averagePosition = Vector3.Zero;
+        public static bool rectangleSelecting;
+        private static bool clickingLeft;
 
         //GUI
         private static bool ignorePositionChange;
@@ -149,6 +153,11 @@ namespace PDMapEditor
 
         public static void LeftMouseDown(int x, int y)
         {
+            mouseClickX = x;
+            mouseClickY = y;
+
+            clickingLeft = true;
+
             ISelectable objectAtMouse = GetObjectAtPixel(x, y);
 
             if (objectAtMouse == gizmoPosX)
@@ -212,28 +221,70 @@ namespace PDMapEditor
                 Program.GLControl.Invalidate();
             }
         }
+        
+        public static void UpdateRectangleSelection(int mouseX, int mouseY)
+        {
+            if (clickingLeft)
+            {
+                float diffX = Math.Abs(mouseClickX - mouseX);
+                float diffY = Math.Abs(mouseClickY - mouseY);
+                if (diffX + diffY > 10 && !rectangleSelecting)
+                {
+                    rectangleSelecting = true;
+                }
+
+                if (rectangleSelecting)
+                {
+
+                }
+            }
+        }
 
         public static void LeftMouseUp(int x, int y)
         {
-            if(draggingState == DraggingState.NONE)
+            if (draggingState == DraggingState.NONE)
             {
-                ISelectable objectAtMouse = GetObjectAtPixel(x, y);
-                Drawable drawable = objectAtMouse as Drawable;
-
-                if (drawable != null)
+                if (rectangleSelecting) //Rectangle selection
                 {
-                    if (drawable != gizmoPosX && drawable != gizmoPosY && drawable != gizmoPosZ && drawable != gizmoRotX && drawable != gizmoRotY && drawable != gizmoRotZ)
-                        if (ActionKey.IsDown(Action.SELECTION_ADD))
-                            Selected.Add(objectAtMouse);
-                        else
-                        {
-                            Selected.Clear();
-                            Selected.Add(objectAtMouse);
-                        }
-                }
-                else
-                    if (!ActionKey.IsDown(Action.SELECTION_ADD))
+                    int startX = Math.Min(mouseClickX, x);
+                    int startY = Math.Min(mouseClickY, y);
+
+                    int width = Math.Abs(mouseClickX - x);
+                    int height = Math.Abs(mouseClickY - y);
+
+                    List<ISelectable> objects = GetObjectsInRectangle(startX, startY, width, height);
+
+                    if (objects.Count > 0)
+                    {
                         Selected.Clear();
+                        foreach (ISelectable obj in objects)
+                        {
+                            Selected.Add(obj);
+                        }
+                    }
+                }
+                else //Single selection
+                {
+                    ISelectable objectAtMouse = GetObjectAtPixel(x, y);
+                    Drawable drawable = objectAtMouse as Drawable;
+
+                    if (drawable != null)
+                    {
+                        if (drawable != gizmoPosX && drawable != gizmoPosY && drawable != gizmoPosZ && drawable != gizmoRotX && drawable != gizmoRotY && drawable != gizmoRotZ)
+                            if (ActionKey.IsDown(Action.SELECTION_ADD))
+                                Selected.Add(objectAtMouse);
+                            else
+                            {
+                                Selected.Clear();
+                                Selected.Add(objectAtMouse);
+                            }
+                    }
+                    else
+                        if (!ActionKey.IsDown(Action.SELECTION_ADD))
+                        Selected.Clear();
+                }
+
+                rectangleSelecting = false;
             }
 
             draggingState = DraggingState.NONE;
@@ -244,6 +295,8 @@ namespace PDMapEditor
             gizmoRotX.Rotation = Vector3.Zero;
             gizmoRotY.Rotation = Vector3.Zero;
             gizmoRotZ.Rotation = Vector3.Zero;
+
+            clickingLeft = false;
 
             Renderer.UpdateView();
             Program.GLControl.Invalidate();
@@ -749,7 +802,7 @@ namespace PDMapEditor
             Program.GLControl.Invalidate();
         }
 
-        public static ISelectable GetObjectAtPixel(int x, int y)
+        public static void DrawSelectionScene()
         {
             GL.ClearColor(1, 1, 1, 1);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -760,7 +813,7 @@ namespace PDMapEditor
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, Renderer.ind_buffer);
 
             int indiceat = 0;
-            for (int i = 0; i < Drawable.Drawables.Count; i ++)
+            for (int i = 0; i < Drawable.Drawables.Count; i++)
             {
                 Drawable drawable = Drawable.Drawables[i];
 
@@ -798,6 +851,11 @@ namespace PDMapEditor
             GL.Finish();
 
             GL.PixelStore(PixelStoreParameter.UnpackAlignment, 1);
+        }
+
+        public static ISelectable GetObjectAtPixel(int x, int y)
+        {
+            DrawSelectionScene();
 
             byte[] pixel = new byte[3];
             GL.ReadPixels(x, y, 1, 1, PixelFormat.Rgb, PixelType.UnsignedByte, pixel);
@@ -820,6 +878,51 @@ namespace PDMapEditor
 
             //Program.GLControl.SwapBuffers();
             return objectAtPixel;
+        }
+
+        public static List<ISelectable> GetObjectsInRectangle(int x, int y, int width, int height)
+        {
+            DrawSelectionScene();
+
+            byte[,,] pixel = new byte[width, height, 4];
+            GL.ReadPixels(x, y, width, height, PixelFormat.Rgba, PixelType.UnsignedByte, pixel);
+
+            List<ISelectable> objects = new List<ISelectable>();
+
+            for(int pixelX = 0; pixelX < width; pixelX++)
+            {
+                for (int pixelY = 0; pixelY < height; pixelY++)
+                {
+                    // Convert the color back to an integer ID
+                    int pickedID =
+                        pixel[pixelX, pixelY, 0] +
+                        pixel[pixelX, pixelY, 1] * 256 +
+                        pixel[pixelX, pixelY, 2] * 256 * 256;
+
+                    ISelectable objectAtPixel = null;
+
+                    if (pickedID == 0x00FFFFFF) //Background
+                        objectAtPixel = null;
+                    else
+                    {
+                        if (pickedID <= Drawable.Drawables.Count - 1)
+                            objectAtPixel = Drawable.Drawables[pickedID] as ISelectable;
+
+                        if (objectAtPixel == null)
+                            continue;
+
+                        if (objects.Contains(objectAtPixel))
+                            continue;
+
+                        objects.Add(objectAtPixel);
+                    }
+                }
+            }
+
+            GL.ClearColor(Renderer.BackgroundColor.X, Renderer.BackgroundColor.Y, Renderer.BackgroundColor.Z, 1);
+
+            //Program.GLControl.SwapBuffers();
+            return objects;
         }
 
         private static void DrawDrawable(Drawable drawable, int index, int id)

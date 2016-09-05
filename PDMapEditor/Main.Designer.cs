@@ -92,6 +92,12 @@
             this.labelMapDimensionsX = new System.Windows.Forms.Label();
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
             this.tabSelection = new System.Windows.Forms.TabPage();
+            this.groupPebble = new System.Windows.Forms.GroupBox();
+            this.labelPebbleType = new System.Windows.Forms.Label();
+            this.comboPebbleType = new System.Windows.Forms.ComboBox();
+            this.groupPoint = new System.Windows.Forms.GroupBox();
+            this.labelPointName = new System.Windows.Forms.Label();
+            this.boxPointName = new System.Windows.Forms.TextBox();
             this.groupDustCloud = new System.Windows.Forms.GroupBox();
             this.labelDustCloudAlpha = new System.Windows.Forms.Label();
             this.sliderDustCloudAlpha = new System.Windows.Forms.TrackBar();
@@ -105,6 +111,7 @@
             this.comboDustCloudType = new System.Windows.Forms.ComboBox();
             this.groupAsteroid = new System.Windows.Forms.GroupBox();
             this.labelAsteroidResourceMultiplier = new System.Windows.Forms.Label();
+            this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
             this.labelAsteroidType = new System.Windows.Forms.Label();
             this.comboAsteroidType = new System.Windows.Forms.ComboBox();
             this.groupSelectionRotation = new System.Windows.Forms.GroupBox();
@@ -130,13 +137,7 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
-            this.groupPoint = new System.Windows.Forms.GroupBox();
-            this.labelPointName = new System.Windows.Forms.Label();
-            this.boxPointName = new System.Windows.Forms.TextBox();
-            this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
-            this.groupPebble = new System.Windows.Forms.GroupBox();
-            this.labelPebbleType = new System.Windows.Forms.Label();
-            this.comboPebbleType = new System.Windows.Forms.ComboBox();
+            this.labelDebug1 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -161,10 +162,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
             this.tabSelection.SuspendLayout();
+            this.groupPebble.SuspendLayout();
+            this.groupPoint.SuspendLayout();
             this.groupDustCloud.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
             this.groupAsteroid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
             this.groupSelectionRotation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).BeginInit();
@@ -177,9 +181,6 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
-            this.groupPoint.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
-            this.groupPebble.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -1033,6 +1034,72 @@
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
             // 
+            // groupPebble
+            // 
+            this.groupPebble.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupPebble.Controls.Add(this.labelPebbleType);
+            this.groupPebble.Controls.Add(this.comboPebbleType);
+            this.groupPebble.Location = new System.Drawing.Point(3, 215);
+            this.groupPebble.Name = "groupPebble";
+            this.groupPebble.Size = new System.Drawing.Size(214, 47);
+            this.groupPebble.TabIndex = 10;
+            this.groupPebble.TabStop = false;
+            this.groupPebble.Text = "Pebble";
+            // 
+            // labelPebbleType
+            // 
+            this.labelPebbleType.AutoSize = true;
+            this.labelPebbleType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPebbleType.Location = new System.Drawing.Point(6, 22);
+            this.labelPebbleType.Name = "labelPebbleType";
+            this.labelPebbleType.Size = new System.Drawing.Size(34, 13);
+            this.labelPebbleType.TabIndex = 20;
+            this.labelPebbleType.Text = "Type:";
+            // 
+            // comboPebbleType
+            // 
+            this.comboPebbleType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboPebbleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPebbleType.FormattingEnabled = true;
+            this.comboPebbleType.Location = new System.Drawing.Point(51, 19);
+            this.comboPebbleType.Name = "comboPebbleType";
+            this.comboPebbleType.Size = new System.Drawing.Size(157, 21);
+            this.comboPebbleType.TabIndex = 19;
+            // 
+            // groupPoint
+            // 
+            this.groupPoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupPoint.Controls.Add(this.labelPointName);
+            this.groupPoint.Controls.Add(this.boxPointName);
+            this.groupPoint.Location = new System.Drawing.Point(3, 215);
+            this.groupPoint.Name = "groupPoint";
+            this.groupPoint.Size = new System.Drawing.Size(214, 47);
+            this.groupPoint.TabIndex = 9;
+            this.groupPoint.TabStop = false;
+            this.groupPoint.Text = "Point";
+            // 
+            // labelPointName
+            // 
+            this.labelPointName.AutoSize = true;
+            this.labelPointName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPointName.Location = new System.Drawing.Point(6, 22);
+            this.labelPointName.Name = "labelPointName";
+            this.labelPointName.Size = new System.Drawing.Size(38, 13);
+            this.labelPointName.TabIndex = 24;
+            this.labelPointName.Text = "Name:";
+            // 
+            // boxPointName
+            // 
+            this.boxPointName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxPointName.Location = new System.Drawing.Point(51, 19);
+            this.boxPointName.Name = "boxPointName";
+            this.boxPointName.Size = new System.Drawing.Size(157, 20);
+            this.boxPointName.TabIndex = 23;
+            // 
             // groupDustCloud
             // 
             this.groupDustCloud.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1194,6 +1261,22 @@
             this.labelAsteroidResourceMultiplier.Size = new System.Drawing.Size(70, 13);
             this.labelAsteroidResourceMultiplier.TabIndex = 20;
             this.labelAsteroidResourceMultiplier.Text = "RU Multiplier:";
+            // 
+            // numericAsteroidResourceMultiplier
+            // 
+            this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericAsteroidResourceMultiplier.DecimalPlaces = 1;
+            this.numericAsteroidResourceMultiplier.Location = new System.Drawing.Point(82, 46);
+            this.numericAsteroidResourceMultiplier.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericAsteroidResourceMultiplier.Name = "numericAsteroidResourceMultiplier";
+            this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
+            this.numericAsteroidResourceMultiplier.TabIndex = 19;
+            this.numericAsteroidResourceMultiplier.TrailingSign = "%";
             // 
             // labelAsteroidType
             // 
@@ -1599,93 +1682,21 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
-            // groupPoint
+            // labelDebug1
             // 
-            this.groupPoint.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupPoint.Controls.Add(this.labelPointName);
-            this.groupPoint.Controls.Add(this.boxPointName);
-            this.groupPoint.Location = new System.Drawing.Point(3, 215);
-            this.groupPoint.Name = "groupPoint";
-            this.groupPoint.Size = new System.Drawing.Size(214, 47);
-            this.groupPoint.TabIndex = 9;
-            this.groupPoint.TabStop = false;
-            this.groupPoint.Text = "Point";
-            // 
-            // labelPointName
-            // 
-            this.labelPointName.AutoSize = true;
-            this.labelPointName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPointName.Location = new System.Drawing.Point(6, 22);
-            this.labelPointName.Name = "labelPointName";
-            this.labelPointName.Size = new System.Drawing.Size(38, 13);
-            this.labelPointName.TabIndex = 24;
-            this.labelPointName.Text = "Name:";
-            // 
-            // boxPointName
-            // 
-            this.boxPointName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxPointName.Location = new System.Drawing.Point(51, 19);
-            this.boxPointName.Name = "boxPointName";
-            this.boxPointName.Size = new System.Drawing.Size(157, 20);
-            this.boxPointName.TabIndex = 23;
-            // 
-            // numericAsteroidResourceMultiplier
-            // 
-            this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericAsteroidResourceMultiplier.DecimalPlaces = 1;
-            this.numericAsteroidResourceMultiplier.Location = new System.Drawing.Point(82, 46);
-            this.numericAsteroidResourceMultiplier.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericAsteroidResourceMultiplier.Name = "numericAsteroidResourceMultiplier";
-            this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
-            this.numericAsteroidResourceMultiplier.TabIndex = 19;
-            this.numericAsteroidResourceMultiplier.TrailingSign = "%";
-            // 
-            // groupPebble
-            // 
-            this.groupPebble.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupPebble.Controls.Add(this.labelPebbleType);
-            this.groupPebble.Controls.Add(this.comboPebbleType);
-            this.groupPebble.Location = new System.Drawing.Point(3, 215);
-            this.groupPebble.Name = "groupPebble";
-            this.groupPebble.Size = new System.Drawing.Size(214, 47);
-            this.groupPebble.TabIndex = 10;
-            this.groupPebble.TabStop = false;
-            this.groupPebble.Text = "Pebble";
-            // 
-            // labelPebbleType
-            // 
-            this.labelPebbleType.AutoSize = true;
-            this.labelPebbleType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPebbleType.Location = new System.Drawing.Point(6, 22);
-            this.labelPebbleType.Name = "labelPebbleType";
-            this.labelPebbleType.Size = new System.Drawing.Size(34, 13);
-            this.labelPebbleType.TabIndex = 20;
-            this.labelPebbleType.Text = "Type:";
-            // 
-            // comboPebbleType
-            // 
-            this.comboPebbleType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboPebbleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboPebbleType.FormattingEnabled = true;
-            this.comboPebbleType.Location = new System.Drawing.Point(51, 19);
-            this.comboPebbleType.Name = "comboPebbleType";
-            this.comboPebbleType.Size = new System.Drawing.Size(157, 21);
-            this.comboPebbleType.TabIndex = 19;
+            this.labelDebug1.AutoSize = true;
+            this.labelDebug1.Location = new System.Drawing.Point(442, 5);
+            this.labelDebug1.Name = "labelDebug1";
+            this.labelDebug1.Size = new System.Drawing.Size(35, 13);
+            this.labelDebug1.TabIndex = 13;
+            this.labelDebug1.Text = "label2";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1102, 746);
+            this.Controls.Add(this.labelDebug1);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);
@@ -1726,12 +1737,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
             this.tabSelection.ResumeLayout(false);
+            this.groupPebble.ResumeLayout(false);
+            this.groupPebble.PerformLayout();
+            this.groupPoint.ResumeLayout(false);
+            this.groupPoint.PerformLayout();
             this.groupDustCloud.ResumeLayout(false);
             this.groupDustCloud.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
             this.groupAsteroid.ResumeLayout(false);
             this.groupAsteroid.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
             this.groupSelectionRotation.ResumeLayout(false);
             this.groupSelectionRotation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).EndInit();
@@ -1746,11 +1762,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
-            this.groupPoint.ResumeLayout(false);
-            this.groupPoint.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
-            this.groupPebble.ResumeLayout(false);
-            this.groupPebble.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1862,6 +1873,7 @@
         public System.Windows.Forms.GroupBox groupPebble;
         private System.Windows.Forms.Label labelPebbleType;
         public System.Windows.Forms.ComboBox comboPebbleType;
+        public System.Windows.Forms.Label labelDebug1;
     }
 }
 
