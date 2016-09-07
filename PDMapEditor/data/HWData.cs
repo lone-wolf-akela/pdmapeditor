@@ -18,6 +18,7 @@ namespace PDMapEditor
         static LuaTable pebbleConfig;
         static LuaTable asteroidConfig;
         static LuaTable dustCloudConfig;
+        static LuaTable nebulaConfig;
         static LuaTable shipConfig;
 
         static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
@@ -93,6 +94,19 @@ namespace PDMapEditor
                     foreach (string file in files)
                     {
                         ParseDustCloudType(file);
+                    }
+                }
+
+                //Parse nebula types
+                string nebulaTypesPath = Path.Combine(dataPath, "resource/nebula");
+
+                //Check if nebula types folder exists
+                if (Directory.Exists(nebulaTypesPath))
+                {
+                    string[] files = Directory.GetFiles(nebulaTypesPath, "*.resource", SearchOption.AllDirectories);
+                    foreach (string file in files)
+                    {
+                        ParseNebulaType(file);
                     }
                 }
 
@@ -270,6 +284,30 @@ namespace PDMapEditor
                 //Overwrite existing style
                 existingType.Name = name;
                 existingType.PixelColor = pixelColor;
+            }
+        }
+
+        private static void ParseNebulaType(string path)
+        {
+            string name = Path.GetFileNameWithoutExtension(path).ToLower();
+
+            NebulaType existingType = null;
+            foreach (NebulaType type in NebulaType.NebulaTypes)
+            {
+                if (type.Name == name)
+                {
+                    existingType = type;
+                    break;
+                }
+            }
+
+            //Check if a type with that name already exists (because of multiple data paths)
+            if (existingType == null)
+                new NebulaType(name);
+            else
+            {
+                //Overwrite existing style
+                existingType.Name = name;
             }
         }
 

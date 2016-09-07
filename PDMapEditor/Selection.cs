@@ -96,6 +96,13 @@ namespace PDMapEditor
             Program.main.sliderDustCloudAlpha.Scroll += new EventHandler(DustCloudAlphaChanged);
             Program.main.numericDustCloudSize.ValueChanged += new EventHandler(DustCloudSizeChanged);
 
+            //Nebula
+            Program.main.boxNebulaName.TextChanged += new EventHandler(NebulaNameChanged);
+            Program.main.comboNebulaType.SelectedIndexChanged += new EventHandler(NebulaTypeChanged);
+            Program.main.buttonNebulaColor.Click += new EventHandler(NebulaColorClicked);
+            Program.main.sliderNebulaAlpha.Scroll += new EventHandler(NebulaAlphaChanged);
+            Program.main.numericNebulaSize.ValueChanged += new EventHandler(NebulaSizeChanged);
+
             //Point
             Program.main.boxPointName.TextChanged += new EventHandler(PointNameChanged);
 
@@ -353,6 +360,7 @@ namespace PDMapEditor
 
             Program.main.groupAsteroid.Visible = false;
             Program.main.groupDustCloud.Visible = false;
+            Program.main.groupNebula.Visible = false;
             Program.main.groupPoint.Visible = false;
             Program.main.groupPebble.Visible = false;
             Program.main.groupSquadron.Visible = false;
@@ -418,6 +426,17 @@ namespace PDMapEditor
                     Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(Math.Min(selectedDustCloud.Color.W * 100, 100));
 
                     Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Size;
+                }
+
+                Nebula selectedNebula = Selected[0] as Nebula;
+                if (selectedNebula != null)
+                {
+                    Program.main.groupNebula.Visible = true;
+                    Program.main.boxNebulaName.Text = selectedNebula.Name;
+                    Program.main.comboNebulaType.SelectedIndex = selectedNebula.Type.ComboIndex;
+                    Program.main.buttonNebulaColor.BackColor = Color.FromArgb(255, (int)Math.Round(Math.Min(selectedNebula.Color.X * 255, 255)), (int)Math.Round(Math.Min(selectedNebula.Color.Y * 255, 255)), (int)Math.Round(Math.Min(selectedNebula.Color.Z * 255, 255)));
+                    Program.main.sliderNebulaAlpha.Value = (int)Math.Round(Math.Min(selectedNebula.Color.W * 100, 100));
+                    Program.main.numericNebulaSize.Value = (decimal)selectedNebula.Size;
                 }
 
                 Point selectedPoint = Selected[0] as Point;
@@ -502,6 +521,49 @@ namespace PDMapEditor
         {
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Size = (float)Program.main.numericDustCloudSize.Value;
+
+            Renderer.UpdateView();
+            Program.GLControl.Invalidate();
+        }
+        #endregion
+
+        #region Nebula
+        private static void NebulaNameChanged(object sender, EventArgs e)
+        {
+            Nebula selected = Selected[0] as Nebula;
+            selected.Name = Program.main.boxNebulaName.Text;
+        }
+        private static void NebulaTypeChanged(object sender, EventArgs e)
+        {
+            Nebula selected = Selected[0] as Nebula;
+            selected.Type = NebulaType.GetTypeFromComboIndex(Program.main.comboNebulaType.SelectedIndex);
+            Program.GLControl.Invalidate();
+        }
+        private static void NebulaColorClicked(object sender, EventArgs e)
+        {
+            Program.main.colorDialog.Color = Program.main.buttonNebulaColor.BackColor;
+            DialogResult result = Program.main.colorDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                Color color = Program.main.colorDialog.Color;
+                Program.main.buttonNebulaColor.BackColor = color;
+
+                Nebula selected = Selected[0] as Nebula;
+                selected.Color = new Vector4((float)color.R / 255, (float)color.G / 255, (float)color.B / 255, selected.Color.W);
+                Program.GLControl.Invalidate();
+            }
+        }
+        private static void NebulaAlphaChanged(object sender, EventArgs e)
+        {
+            Nebula selected = Selected[0] as Nebula;
+            selected.Color = new Vector4(selected.Color.X, selected.Color.Y, selected.Color.Z, (float)Program.main.sliderNebulaAlpha.Value / 100);
+            Program.GLControl.Invalidate();
+        }
+
+        private static void NebulaSizeChanged(object sender, EventArgs e)
+        {
+            Nebula selected = Selected[0] as Nebula;
+            selected.Size = (float)Program.main.numericNebulaSize.Value;
 
             Renderer.UpdateView();
             Program.GLControl.Invalidate();

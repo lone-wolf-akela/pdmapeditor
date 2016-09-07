@@ -154,6 +154,17 @@ namespace PDMapEditor
                 }
                 sb.AppendLine("");
             }
+
+            if (Nebula.Nebulas.Count > 0)
+            {
+                sb.AppendLine("\t-- Nebulas");
+                foreach (Nebula nebula in Nebula.Nebulas)
+                {
+                    sb.AppendLine("\taddNebula(\"" + nebula.Name + "\", \"" + nebula.Type.Name + "\", " + WriteFloatLuaTable(nebula.Position.X, nebula.Position.Y, nebula.Position.Z) + ", " + WriteFloatLuaTable(nebula.Color.X, nebula.Color.Y, nebula.Color.Z, nebula.Color.W) + ", " + nebula.Unknown.ToString(InvariantCulture) + ", " + nebula.Size.ToString(InvariantCulture) + ")");
+                }
+                sb.AppendLine("");
+            }
+
             sb.AppendLine("\t-- Settings");
             sb.AppendLine("\tsetWorldBoundsInner(" + WriteFloatLuaTable(0, 0, 0) + ", " + WriteFloatLuaTable(Map.MapDimensions.X, Map.MapDimensions.Y, Map.MapDimensions.Z) + ")");
             sb.AppendLine("end");
@@ -413,9 +424,23 @@ namespace PDMapEditor
             //STUB
         }
 
-        public static void AddNebula(string name, string type, LuaTable position, LuaTable color, float size, float size2)
+        public static void AddNebula(string name, string type, LuaTable position, LuaTable color, float unknown, float size)
         {
-            //STUB
+            //Log.WriteLine("Adding nebula \"" + name + "\".");
+
+            Vector3 pos = LuaTableToVector3(position);
+            Vector4 col = LuaTableToVector4(color);
+
+            string newType = type.ToLower();
+            NebulaType nebulaType = NebulaType.GetTypeFromName(newType);
+
+            if (nebulaType == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Nebula type \"" + newType + "\" not found. Skipping nebula \"" + name + "\".");
+                return;
+            }
+
+            new Nebula(name, nebulaType, pos, col, unknown, size);
         }
 
         public static void AddNebulaWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float unknown, float size, float unknown2)

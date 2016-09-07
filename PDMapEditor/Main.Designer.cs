@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -92,6 +92,16 @@
             this.labelMapDimensionsX = new System.Windows.Forms.Label();
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
             this.tabSelection = new System.Windows.Forms.TabPage();
+            this.groupSquadron = new System.Windows.Forms.GroupBox();
+            this.checkSquadronInHyperspace = new System.Windows.Forms.CheckBox();
+            this.labelSquadronPlayer = new System.Windows.Forms.Label();
+            this.comboSquadronPlayer = new System.Windows.Forms.ComboBox();
+            this.labelSquadronSize = new System.Windows.Forms.Label();
+            this.numericSquadronSize = new System.Windows.Forms.NumericUpDown();
+            this.labelSquadronName = new System.Windows.Forms.Label();
+            this.boxSquadronName = new System.Windows.Forms.TextBox();
+            this.labelSquadronType = new System.Windows.Forms.Label();
+            this.comboSquadronType = new System.Windows.Forms.ComboBox();
             this.groupPebble = new System.Windows.Forms.GroupBox();
             this.labelPebbleType = new System.Windows.Forms.Label();
             this.comboPebbleType = new System.Windows.Forms.ComboBox();
@@ -111,6 +121,7 @@
             this.comboDustCloudType = new System.Windows.Forms.ComboBox();
             this.groupAsteroid = new System.Windows.Forms.GroupBox();
             this.labelAsteroidResourceMultiplier = new System.Windows.Forms.Label();
+            this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
             this.labelAsteroidType = new System.Windows.Forms.Label();
             this.comboAsteroidType = new System.Windows.Forms.ComboBox();
             this.groupSelectionRotation = new System.Windows.Forms.GroupBox();
@@ -136,17 +147,17 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
-            this.groupSquadron = new System.Windows.Forms.GroupBox();
-            this.labelSquadronSize = new System.Windows.Forms.Label();
-            this.numericSquadronSize = new System.Windows.Forms.NumericUpDown();
-            this.labelSquadronName = new System.Windows.Forms.Label();
-            this.boxSquadronName = new System.Windows.Forms.TextBox();
-            this.labelSquadronType = new System.Windows.Forms.Label();
-            this.comboSquadronType = new System.Windows.Forms.ComboBox();
-            this.labelSquadronPlayer = new System.Windows.Forms.Label();
-            this.comboSquadronPlayer = new System.Windows.Forms.ComboBox();
-            this.checkSquadronInHyperspace = new System.Windows.Forms.CheckBox();
-            this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
+            this.groupNebula = new System.Windows.Forms.GroupBox();
+            this.labelNebulaAlpha = new System.Windows.Forms.Label();
+            this.sliderNebulaAlpha = new System.Windows.Forms.TrackBar();
+            this.labelNebulaSize = new System.Windows.Forms.Label();
+            this.numericNebulaSize = new System.Windows.Forms.NumericUpDown();
+            this.labelNebulaColor = new System.Windows.Forms.Label();
+            this.buttonNebulaColor = new System.Windows.Forms.Button();
+            this.labelNebulaName = new System.Windows.Forms.Label();
+            this.boxNebulaName = new System.Windows.Forms.TextBox();
+            this.labelNebulaType = new System.Windows.Forms.Label();
+            this.comboNebulaType = new System.Windows.Forms.ComboBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -171,12 +182,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
             this.tabSelection.SuspendLayout();
+            this.groupSquadron.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).BeginInit();
             this.groupPebble.SuspendLayout();
             this.groupPoint.SuspendLayout();
             this.groupDustCloud.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
             this.groupAsteroid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
             this.groupSelectionRotation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationY)).BeginInit();
@@ -189,9 +203,9 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
-            this.groupSquadron.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
+            this.groupNebula.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -1032,6 +1046,7 @@
             // 
             // tabSelection
             // 
+            this.tabSelection.Controls.Add(this.groupNebula);
             this.tabSelection.Controls.Add(this.groupSquadron);
             this.tabSelection.Controls.Add(this.groupPebble);
             this.tabSelection.Controls.Add(this.groupPoint);
@@ -1045,6 +1060,131 @@
             this.tabSelection.TabIndex = 1;
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
+            // 
+            // groupSquadron
+            // 
+            this.groupSquadron.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSquadron.Controls.Add(this.checkSquadronInHyperspace);
+            this.groupSquadron.Controls.Add(this.labelSquadronPlayer);
+            this.groupSquadron.Controls.Add(this.comboSquadronPlayer);
+            this.groupSquadron.Controls.Add(this.labelSquadronSize);
+            this.groupSquadron.Controls.Add(this.numericSquadronSize);
+            this.groupSquadron.Controls.Add(this.labelSquadronName);
+            this.groupSquadron.Controls.Add(this.boxSquadronName);
+            this.groupSquadron.Controls.Add(this.labelSquadronType);
+            this.groupSquadron.Controls.Add(this.comboSquadronType);
+            this.groupSquadron.Location = new System.Drawing.Point(3, 215);
+            this.groupSquadron.Name = "groupSquadron";
+            this.groupSquadron.Size = new System.Drawing.Size(214, 149);
+            this.groupSquadron.TabIndex = 31;
+            this.groupSquadron.TabStop = false;
+            this.groupSquadron.Text = "Squadron";
+            // 
+            // checkSquadronInHyperspace
+            // 
+            this.checkSquadronInHyperspace.AutoSize = true;
+            this.checkSquadronInHyperspace.Location = new System.Drawing.Point(9, 125);
+            this.checkSquadronInHyperspace.Name = "checkSquadronInHyperspace";
+            this.checkSquadronInHyperspace.Size = new System.Drawing.Size(93, 17);
+            this.checkSquadronInHyperspace.TabIndex = 31;
+            this.checkSquadronInHyperspace.Text = "In hyperspace";
+            this.checkSquadronInHyperspace.UseVisualStyleBackColor = true;
+            // 
+            // labelSquadronPlayer
+            // 
+            this.labelSquadronPlayer.AutoSize = true;
+            this.labelSquadronPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronPlayer.Location = new System.Drawing.Point(6, 75);
+            this.labelSquadronPlayer.Name = "labelSquadronPlayer";
+            this.labelSquadronPlayer.Size = new System.Drawing.Size(41, 13);
+            this.labelSquadronPlayer.TabIndex = 30;
+            this.labelSquadronPlayer.Text = "Owner:";
+            // 
+            // comboSquadronPlayer
+            // 
+            this.comboSquadronPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboSquadronPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSquadronPlayer.FormattingEnabled = true;
+            this.comboSquadronPlayer.Items.AddRange(new object[] {
+            "-1",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.comboSquadronPlayer.Location = new System.Drawing.Point(51, 72);
+            this.comboSquadronPlayer.Name = "comboSquadronPlayer";
+            this.comboSquadronPlayer.Size = new System.Drawing.Size(157, 21);
+            this.comboSquadronPlayer.TabIndex = 29;
+            // 
+            // labelSquadronSize
+            // 
+            this.labelSquadronSize.AutoSize = true;
+            this.labelSquadronSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronSize.Location = new System.Drawing.Point(6, 101);
+            this.labelSquadronSize.Name = "labelSquadronSize";
+            this.labelSquadronSize.Size = new System.Drawing.Size(30, 13);
+            this.labelSquadronSize.TabIndex = 28;
+            this.labelSquadronSize.Text = "Size:";
+            // 
+            // numericSquadronSize
+            // 
+            this.numericSquadronSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSquadronSize.Location = new System.Drawing.Point(51, 99);
+            this.numericSquadronSize.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericSquadronSize.Name = "numericSquadronSize";
+            this.numericSquadronSize.Size = new System.Drawing.Size(157, 20);
+            this.numericSquadronSize.TabIndex = 27;
+            // 
+            // labelSquadronName
+            // 
+            this.labelSquadronName.AutoSize = true;
+            this.labelSquadronName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronName.Location = new System.Drawing.Point(6, 22);
+            this.labelSquadronName.Name = "labelSquadronName";
+            this.labelSquadronName.Size = new System.Drawing.Size(38, 13);
+            this.labelSquadronName.TabIndex = 24;
+            this.labelSquadronName.Text = "Name:";
+            // 
+            // boxSquadronName
+            // 
+            this.boxSquadronName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxSquadronName.Location = new System.Drawing.Point(51, 19);
+            this.boxSquadronName.Name = "boxSquadronName";
+            this.boxSquadronName.Size = new System.Drawing.Size(157, 20);
+            this.boxSquadronName.TabIndex = 23;
+            // 
+            // labelSquadronType
+            // 
+            this.labelSquadronType.AutoSize = true;
+            this.labelSquadronType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronType.Location = new System.Drawing.Point(6, 48);
+            this.labelSquadronType.Name = "labelSquadronType";
+            this.labelSquadronType.Size = new System.Drawing.Size(34, 13);
+            this.labelSquadronType.TabIndex = 18;
+            this.labelSquadronType.Text = "Type:";
+            // 
+            // comboSquadronType
+            // 
+            this.comboSquadronType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboSquadronType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSquadronType.FormattingEnabled = true;
+            this.comboSquadronType.Location = new System.Drawing.Point(51, 45);
+            this.comboSquadronType.Name = "comboSquadronType";
+            this.comboSquadronType.Size = new System.Drawing.Size(157, 21);
+            this.comboSquadronType.TabIndex = 17;
             // 
             // groupPebble
             // 
@@ -1273,6 +1413,22 @@
             this.labelAsteroidResourceMultiplier.Size = new System.Drawing.Size(70, 13);
             this.labelAsteroidResourceMultiplier.TabIndex = 20;
             this.labelAsteroidResourceMultiplier.Text = "RU Multiplier:";
+            // 
+            // numericAsteroidResourceMultiplier
+            // 
+            this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericAsteroidResourceMultiplier.DecimalPlaces = 1;
+            this.numericAsteroidResourceMultiplier.Location = new System.Drawing.Point(82, 46);
+            this.numericAsteroidResourceMultiplier.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericAsteroidResourceMultiplier.Name = "numericAsteroidResourceMultiplier";
+            this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
+            this.numericAsteroidResourceMultiplier.TabIndex = 19;
+            this.numericAsteroidResourceMultiplier.TrailingSign = "%";
             // 
             // labelAsteroidType
             // 
@@ -1565,9 +1721,9 @@
             this.gridProblems.AllowUserToDeleteRows = false;
             this.gridProblems.AllowUserToResizeColumns = false;
             this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -1575,14 +1731,14 @@
             this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnProblems});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle7;
             this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridProblems.Location = new System.Drawing.Point(0, 0);
@@ -1591,9 +1747,9 @@
             this.gridProblems.ReadOnly = true;
             this.gridProblems.RowHeadersVisible = false;
             this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridProblems.RowTemplate.Height = 500;
@@ -1606,9 +1762,9 @@
             // columnProblems
             // 
             this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle6;
             this.columnProblems.HeaderText = "Problems";
             this.columnProblems.Name = "columnProblems";
             this.columnProblems.ReadOnly = true;
@@ -1678,146 +1834,142 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
-            // groupSquadron
+            // groupNebula
             // 
-            this.groupSquadron.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupNebula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupSquadron.Controls.Add(this.checkSquadronInHyperspace);
-            this.groupSquadron.Controls.Add(this.labelSquadronPlayer);
-            this.groupSquadron.Controls.Add(this.comboSquadronPlayer);
-            this.groupSquadron.Controls.Add(this.labelSquadronSize);
-            this.groupSquadron.Controls.Add(this.numericSquadronSize);
-            this.groupSquadron.Controls.Add(this.labelSquadronName);
-            this.groupSquadron.Controls.Add(this.boxSquadronName);
-            this.groupSquadron.Controls.Add(this.labelSquadronType);
-            this.groupSquadron.Controls.Add(this.comboSquadronType);
-            this.groupSquadron.Location = new System.Drawing.Point(3, 215);
-            this.groupSquadron.Name = "groupSquadron";
-            this.groupSquadron.Size = new System.Drawing.Size(214, 149);
-            this.groupSquadron.TabIndex = 31;
-            this.groupSquadron.TabStop = false;
-            this.groupSquadron.Text = "Squadron";
+            this.groupNebula.Controls.Add(this.labelNebulaAlpha);
+            this.groupNebula.Controls.Add(this.sliderNebulaAlpha);
+            this.groupNebula.Controls.Add(this.labelNebulaSize);
+            this.groupNebula.Controls.Add(this.numericNebulaSize);
+            this.groupNebula.Controls.Add(this.labelNebulaColor);
+            this.groupNebula.Controls.Add(this.buttonNebulaColor);
+            this.groupNebula.Controls.Add(this.labelNebulaName);
+            this.groupNebula.Controls.Add(this.boxNebulaName);
+            this.groupNebula.Controls.Add(this.labelNebulaType);
+            this.groupNebula.Controls.Add(this.comboNebulaType);
+            this.groupNebula.Location = new System.Drawing.Point(3, 215);
+            this.groupNebula.Name = "groupNebula";
+            this.groupNebula.Size = new System.Drawing.Size(214, 156);
+            this.groupNebula.TabIndex = 31;
+            this.groupNebula.TabStop = false;
+            this.groupNebula.Text = "Nebula";
             // 
-            // labelSquadronSize
+            // labelNebulaAlpha
             // 
-            this.labelSquadronSize.AutoSize = true;
-            this.labelSquadronSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSquadronSize.Location = new System.Drawing.Point(6, 101);
-            this.labelSquadronSize.Name = "labelSquadronSize";
-            this.labelSquadronSize.Size = new System.Drawing.Size(30, 13);
-            this.labelSquadronSize.TabIndex = 28;
-            this.labelSquadronSize.Text = "Size:";
+            this.labelNebulaAlpha.AutoSize = true;
+            this.labelNebulaAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaAlpha.Location = new System.Drawing.Point(6, 102);
+            this.labelNebulaAlpha.Name = "labelNebulaAlpha";
+            this.labelNebulaAlpha.Size = new System.Drawing.Size(37, 13);
+            this.labelNebulaAlpha.TabIndex = 30;
+            this.labelNebulaAlpha.Text = "Alpha:";
             // 
-            // numericSquadronSize
+            // sliderNebulaAlpha
             // 
-            this.numericSquadronSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.sliderNebulaAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericSquadronSize.Location = new System.Drawing.Point(51, 99);
-            this.numericSquadronSize.Maximum = new decimal(new int[] {
-            255,
+            this.sliderNebulaAlpha.AutoSize = false;
+            this.sliderNebulaAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderNebulaAlpha.Location = new System.Drawing.Point(51, 98);
+            this.sliderNebulaAlpha.Maximum = 100;
+            this.sliderNebulaAlpha.Name = "sliderNebulaAlpha";
+            this.sliderNebulaAlpha.Size = new System.Drawing.Size(157, 23);
+            this.sliderNebulaAlpha.TabIndex = 29;
+            this.sliderNebulaAlpha.TickFrequency = 5;
+            this.sliderNebulaAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+            // 
+            // labelNebulaSize
+            // 
+            this.labelNebulaSize.AutoSize = true;
+            this.labelNebulaSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaSize.Location = new System.Drawing.Point(6, 129);
+            this.labelNebulaSize.Name = "labelNebulaSize";
+            this.labelNebulaSize.Size = new System.Drawing.Size(30, 13);
+            this.labelNebulaSize.TabIndex = 28;
+            this.labelNebulaSize.Text = "Size:";
+            // 
+            // numericNebulaSize
+            // 
+            this.numericNebulaSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericNebulaSize.DecimalPlaces = 1;
+            this.numericNebulaSize.Increment = new decimal(new int[] {
+            100,
             0,
             0,
             0});
-            this.numericSquadronSize.Name = "numericSquadronSize";
-            this.numericSquadronSize.Size = new System.Drawing.Size(157, 20);
-            this.numericSquadronSize.TabIndex = 27;
-            // 
-            // labelSquadronName
-            // 
-            this.labelSquadronName.AutoSize = true;
-            this.labelSquadronName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSquadronName.Location = new System.Drawing.Point(6, 22);
-            this.labelSquadronName.Name = "labelSquadronName";
-            this.labelSquadronName.Size = new System.Drawing.Size(38, 13);
-            this.labelSquadronName.TabIndex = 24;
-            this.labelSquadronName.Text = "Name:";
-            // 
-            // boxSquadronName
-            // 
-            this.boxSquadronName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxSquadronName.Location = new System.Drawing.Point(51, 19);
-            this.boxSquadronName.Name = "boxSquadronName";
-            this.boxSquadronName.Size = new System.Drawing.Size(157, 20);
-            this.boxSquadronName.TabIndex = 23;
-            // 
-            // labelSquadronType
-            // 
-            this.labelSquadronType.AutoSize = true;
-            this.labelSquadronType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSquadronType.Location = new System.Drawing.Point(6, 48);
-            this.labelSquadronType.Name = "labelSquadronType";
-            this.labelSquadronType.Size = new System.Drawing.Size(34, 13);
-            this.labelSquadronType.TabIndex = 18;
-            this.labelSquadronType.Text = "Type:";
-            // 
-            // comboSquadronType
-            // 
-            this.comboSquadronType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboSquadronType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSquadronType.FormattingEnabled = true;
-            this.comboSquadronType.Location = new System.Drawing.Point(51, 45);
-            this.comboSquadronType.Name = "comboSquadronType";
-            this.comboSquadronType.Size = new System.Drawing.Size(157, 21);
-            this.comboSquadronType.TabIndex = 17;
-            // 
-            // labelSquadronPlayer
-            // 
-            this.labelSquadronPlayer.AutoSize = true;
-            this.labelSquadronPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSquadronPlayer.Location = new System.Drawing.Point(6, 75);
-            this.labelSquadronPlayer.Name = "labelSquadronPlayer";
-            this.labelSquadronPlayer.Size = new System.Drawing.Size(41, 13);
-            this.labelSquadronPlayer.TabIndex = 30;
-            this.labelSquadronPlayer.Text = "Owner:";
-            // 
-            // comboSquadronPlayer
-            // 
-            this.comboSquadronPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboSquadronPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSquadronPlayer.FormattingEnabled = true;
-            this.comboSquadronPlayer.Items.AddRange(new object[] {
-            "-1",
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7"});
-            this.comboSquadronPlayer.Location = new System.Drawing.Point(51, 72);
-            this.comboSquadronPlayer.Name = "comboSquadronPlayer";
-            this.comboSquadronPlayer.Size = new System.Drawing.Size(157, 21);
-            this.comboSquadronPlayer.TabIndex = 29;
-            // 
-            // checkSquadronInHyperspace
-            // 
-            this.checkSquadronInHyperspace.AutoSize = true;
-            this.checkSquadronInHyperspace.Location = new System.Drawing.Point(9, 125);
-            this.checkSquadronInHyperspace.Name = "checkSquadronInHyperspace";
-            this.checkSquadronInHyperspace.Size = new System.Drawing.Size(93, 17);
-            this.checkSquadronInHyperspace.TabIndex = 31;
-            this.checkSquadronInHyperspace.Text = "In hyperspace";
-            this.checkSquadronInHyperspace.UseVisualStyleBackColor = true;
-            // 
-            // numericAsteroidResourceMultiplier
-            // 
-            this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericAsteroidResourceMultiplier.DecimalPlaces = 1;
-            this.numericAsteroidResourceMultiplier.Location = new System.Drawing.Point(82, 46);
-            this.numericAsteroidResourceMultiplier.Maximum = new decimal(new int[] {
-            100000,
+            this.numericNebulaSize.Location = new System.Drawing.Point(51, 127);
+            this.numericNebulaSize.Maximum = new decimal(new int[] {
+            500000,
             0,
             0,
             0});
-            this.numericAsteroidResourceMultiplier.Name = "numericAsteroidResourceMultiplier";
-            this.numericAsteroidResourceMultiplier.Size = new System.Drawing.Size(126, 20);
-            this.numericAsteroidResourceMultiplier.TabIndex = 19;
-            this.numericAsteroidResourceMultiplier.TrailingSign = "%";
+            this.numericNebulaSize.Name = "numericNebulaSize";
+            this.numericNebulaSize.Size = new System.Drawing.Size(157, 20);
+            this.numericNebulaSize.TabIndex = 27;
+            this.numericNebulaSize.ThousandsSeparator = true;
+            // 
+            // labelNebulaColor
+            // 
+            this.labelNebulaColor.AutoSize = true;
+            this.labelNebulaColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaColor.Location = new System.Drawing.Point(6, 76);
+            this.labelNebulaColor.Name = "labelNebulaColor";
+            this.labelNebulaColor.Size = new System.Drawing.Size(34, 13);
+            this.labelNebulaColor.TabIndex = 26;
+            this.labelNebulaColor.Text = "Color:";
+            // 
+            // buttonNebulaColor
+            // 
+            this.buttonNebulaColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNebulaColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNebulaColor.Location = new System.Drawing.Point(51, 72);
+            this.buttonNebulaColor.Name = "buttonNebulaColor";
+            this.buttonNebulaColor.Size = new System.Drawing.Size(157, 20);
+            this.buttonNebulaColor.TabIndex = 25;
+            this.buttonNebulaColor.UseVisualStyleBackColor = true;
+            // 
+            // labelNebulaName
+            // 
+            this.labelNebulaName.AutoSize = true;
+            this.labelNebulaName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaName.Location = new System.Drawing.Point(6, 22);
+            this.labelNebulaName.Name = "labelNebulaName";
+            this.labelNebulaName.Size = new System.Drawing.Size(38, 13);
+            this.labelNebulaName.TabIndex = 24;
+            this.labelNebulaName.Text = "Name:";
+            // 
+            // boxNebulaName
+            // 
+            this.boxNebulaName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxNebulaName.Location = new System.Drawing.Point(51, 19);
+            this.boxNebulaName.Name = "boxNebulaName";
+            this.boxNebulaName.Size = new System.Drawing.Size(157, 20);
+            this.boxNebulaName.TabIndex = 23;
+            // 
+            // labelNebulaType
+            // 
+            this.labelNebulaType.AutoSize = true;
+            this.labelNebulaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaType.Location = new System.Drawing.Point(6, 48);
+            this.labelNebulaType.Name = "labelNebulaType";
+            this.labelNebulaType.Size = new System.Drawing.Size(34, 13);
+            this.labelNebulaType.TabIndex = 18;
+            this.labelNebulaType.Text = "Type:";
+            // 
+            // comboNebulaType
+            // 
+            this.comboNebulaType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboNebulaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboNebulaType.FormattingEnabled = true;
+            this.comboNebulaType.Location = new System.Drawing.Point(51, 45);
+            this.comboNebulaType.Name = "comboNebulaType";
+            this.comboNebulaType.Size = new System.Drawing.Size(157, 21);
+            this.comboNebulaType.TabIndex = 17;
             // 
             // Main
             // 
@@ -1864,6 +2016,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
             this.tabSelection.ResumeLayout(false);
+            this.groupSquadron.ResumeLayout(false);
+            this.groupSquadron.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).EndInit();
             this.groupPebble.ResumeLayout(false);
             this.groupPebble.PerformLayout();
             this.groupPoint.ResumeLayout(false);
@@ -1874,6 +2029,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
             this.groupAsteroid.ResumeLayout(false);
             this.groupAsteroid.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
             this.groupSelectionRotation.ResumeLayout(false);
             this.groupSelectionRotation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionRotationZ)).EndInit();
@@ -1888,10 +2044,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
-            this.groupSquadron.ResumeLayout(false);
-            this.groupSquadron.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
+            this.groupNebula.ResumeLayout(false);
+            this.groupNebula.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2013,6 +2169,17 @@
         private System.Windows.Forms.Label labelSquadronType;
         public System.Windows.Forms.ComboBox comboSquadronType;
         public System.Windows.Forms.CheckBox checkSquadronInHyperspace;
+        public System.Windows.Forms.GroupBox groupNebula;
+        private System.Windows.Forms.Label labelNebulaAlpha;
+        public System.Windows.Forms.TrackBar sliderNebulaAlpha;
+        private System.Windows.Forms.Label labelNebulaSize;
+        public System.Windows.Forms.NumericUpDown numericNebulaSize;
+        private System.Windows.Forms.Label labelNebulaColor;
+        public System.Windows.Forms.Button buttonNebulaColor;
+        private System.Windows.Forms.Label labelNebulaName;
+        public System.Windows.Forms.TextBox boxNebulaName;
+        private System.Windows.Forms.Label labelNebulaType;
+        public System.Windows.Forms.ComboBox comboNebulaType;
     }
 }
 

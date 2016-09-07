@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="ActionKey.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="data\NebulaType.cs" />
     <Compile Include="data\FamilyList.cs" />
     <Compile Include="data\ShipType.cs" />
     <Compile Include="data\Background.cs" />
@@ -101,6 +102,7 @@
     </Compile>
     <Compile Include="LuaMap.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="map\Nebula.cs" />
     <Compile Include="map\DustCloud.cs" />
     <Compile Include="map\Squadron.cs" />
     <Compile Include="map\Point.cs" />
