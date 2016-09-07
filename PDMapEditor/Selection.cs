@@ -101,6 +101,13 @@ namespace PDMapEditor
 
             //Pebble
             Program.main.comboPebbleType.SelectedIndexChanged += new EventHandler(PebbleTypeChanged);
+
+            //Squadron
+            Program.main.boxSquadronName.TextChanged += new EventHandler(SquadronNameChanged);
+            Program.main.comboSquadronType.SelectedIndexChanged += new EventHandler(SquadronTypeChanged);
+            Program.main.comboSquadronPlayer.SelectedIndexChanged += new EventHandler(SquadronPlayerChanged);
+            Program.main.numericSquadronSize.ValueChanged += new EventHandler(SquadronSizeChanged);
+            Program.main.checkSquadronInHyperspace.CheckedChanged += new EventHandler(SquadronInHyperspaceChanged);
         }
 
         private static void SelectedChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -348,6 +355,7 @@ namespace PDMapEditor
             Program.main.groupDustCloud.Visible = false;
             Program.main.groupPoint.Visible = false;
             Program.main.groupPebble.Visible = false;
+            Program.main.groupSquadron.Visible = false;
 
             if (Selected.Count == 0)
             {
@@ -424,6 +432,17 @@ namespace PDMapEditor
                 {
                     Program.main.groupPebble.Visible = true;
                     Program.main.comboPebbleType.SelectedIndex = selectedPebble.Type.ComboIndex;
+                }
+
+                Squadron selectedSquadron = Selected[0] as Squadron;
+                if (selectedSquadron != null)
+                {
+                    Program.main.groupSquadron.Visible = true;
+                    Program.main.boxSquadronName.Text = selectedSquadron.Name;
+                    Program.main.comboSquadronType.SelectedIndex = selectedSquadron.Type.ComboIndex;
+                    Program.main.comboSquadronPlayer.SelectedIndex = selectedSquadron.Player + 1;
+                    Program.main.numericSquadronSize.Value = selectedSquadron.SquadronSize;
+                    Program.main.checkSquadronInHyperspace.Checked = selectedSquadron.InHyperspace;
                 }
             }
 
@@ -503,6 +522,35 @@ namespace PDMapEditor
             Pebble selectedPebble = Selected[0] as Pebble;
             selectedPebble.Type = PebbleType.GetTypeFromComboIndex(selectedPebble.Type.ComboIndex);
             Program.GLControl.Invalidate();
+        }
+        #endregion
+
+        #region Squadron
+        private static void SquadronNameChanged(object sender, EventArgs e)
+        {
+            Squadron selected = Selected[0] as Squadron;
+            selected.Name = Program.main.boxSquadronName.Text;
+        }
+        private static void SquadronTypeChanged(object sender, EventArgs e)
+        {
+            Squadron selected = Selected[0] as Squadron;
+            selected.Type = ShipType.GetTypeFromComboIndex(Program.main.comboSquadronType.SelectedIndex);
+        }
+        private static void SquadronPlayerChanged(object sender, EventArgs e)
+        {
+            Squadron selected = Selected[0] as Squadron;
+            selected.Player = Program.main.comboSquadronPlayer.SelectedIndex - 1;
+        }
+        private static void SquadronSizeChanged(object sender, EventArgs e)
+        {
+            Squadron selected = Selected[0] as Squadron;
+            selected.SquadronSize = (int)Program.main.numericSquadronSize.Value;
+        }
+
+        private static void SquadronInHyperspaceChanged(object sender, EventArgs e)
+        {
+            Squadron selected = Selected[0] as Squadron;
+            selected.InHyperspace = Program.main.checkSquadronInHyperspace.Checked;
         }
         #endregion
 

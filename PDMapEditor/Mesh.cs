@@ -18,6 +18,7 @@ namespace PDMapEditor
         public static Assimp.Mesh IcosphereHigh;
         public static Assimp.Mesh Asteroid;
         public static Assimp.Mesh Point;
+        public static Assimp.Mesh Cube;
 
         public static Assimp.Mesh Text000;
         public static Assimp.Mesh Text090;

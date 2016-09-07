@@ -12,19 +12,17 @@ namespace PDMapEditor
         public static List<ShipType> ShipTypes = new List<ShipType>();
 
         public string Name;
-        public AvoidanceFamily AvoidanceFamily;
 
         public int ComboIndex = -1;
 
-        public ShipType(string name, AvoidanceFamily avoidanceFamily)
+        public ShipType(string name)
         {
             Name = name;
-            AvoidanceFamily = avoidanceFamily;
 
             ShipTypes.Add(this);
 
-            //Program.main.comboShipType.Items.Add(Name);
-            //ComboIndex = Program.main.comboShipType.Items.Count - 1;
+            Program.main.comboSquadronType.Items.Add(Name);
+            ComboIndex = Program.main.comboSquadronType.Items.Count - 1;
         }
 
         public static ShipType GetTypeFromName(string name)
@@ -50,7 +48,7 @@ namespace PDMapEditor
         }
     }
 
-    public enum AvoidanceFamily
+    public enum AvoidanceFamily //Unused
     {
         None,
         DontAvoid,

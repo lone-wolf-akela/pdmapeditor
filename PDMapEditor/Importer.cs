@@ -34,6 +34,8 @@ namespace PDMapEditor
             scene = importer.ImportFile(@"resources/point.obj", PostProcessPreset.TargetRealTimeQuality);
             Mesh.Point = scene.Meshes[0];
 
+            scene = importer.ImportFile(@"resources/cube.obj", PostProcessPreset.TargetRealTimeQuality);
+            Mesh.Cube = scene.Meshes[0];
 
             scene = importer.ImportFile(@"resources/gizmoPosX.ply", PostProcessPreset.TargetRealTimeQuality);
             Mesh.GizmoXPos = scene.Meshes[0];

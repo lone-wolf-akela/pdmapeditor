@@ -77,7 +77,7 @@ namespace PDMapEditor
             string description = "";
             try
             { description = lua.GetString("levelDesc"); }
-            catch { new Problem(ProblemTypes.ERROR, "Failed to parse level description."); }
+            catch { new Problem(ProblemTypes.WARNING, "Failed to parse level description."); }
             Map.Description = description;
 
             int maxPlayers = 2;
@@ -117,6 +117,20 @@ namespace PDMapEditor
                 foreach (Point point in Point.Points)
                 {
                     sb.AppendLine("\taddPoint(\"" + point.Name + "\", " + WriteFloatLuaTable(point.Position.X, point.Position.Y, point.Position.Z) + ", " + WriteFloatLuaTable(point.Rotation.X, point.Rotation.Y, point.Rotation.Z) + ")");
+                }
+                sb.AppendLine("");
+            }
+
+            if (Squadron.Squadrons.Count > 0)
+            {
+                sb.AppendLine("\t-- Squadrons");
+                foreach (Squadron squadron in Squadron.Squadrons)
+                {
+                    string inHyperspace = "0";
+                    if (squadron.InHyperspace)
+                        inHyperspace = "1";
+
+                    sb.AppendLine("\taddSquadron(\"" + squadron.Name + "\", \"" + squadron.Type.Name + "\", " + WriteFloatLuaTable(squadron.Position.X, squadron.Position.Y, squadron.Position.Z) + ", " + squadron.Player.ToString() + ", " + WriteFloatLuaTable(squadron.Rotation.X, squadron.Rotation.Y, squadron.Rotation.Z) + ", " + squadron.SquadronSize.ToString() + ", " + inHyperspace.ToString() + ")");
                 }
                 sb.AppendLine("");
             }
@@ -371,9 +385,27 @@ namespace PDMapEditor
             //STUB
         }
 
-        public static void AddSquadron(string name, string type, LuaTable position, int player, LuaTable rotation, int shipCount, bool inHyperspace)
+        public static void AddSquadron(string name, string type, LuaTable position, int player, LuaTable rotation, int shipCount, int inHyperspace)
         {
-            //STUB
+            //Log.WriteLine("Adding squadron \"" + name + "\".");
+
+            Vector3 pos = LuaTableToVector3(position);
+            Vector3 rot = LuaTableToVector3(rotation);
+
+            string newType = type.ToLower();
+            ShipType shipType = ShipType.GetTypeFromName(newType);
+
+            bool inHS = false;
+            if (inHyperspace != 0)
+                inHS = true;
+
+            if (shipType == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Ship type \"" + newType + "\" not found. Skipping squadron \"" + name + "\".");
+                return;
+            }
+
+            new Squadron(name, pos, rot, shipType, player, shipCount, inHS);
         }
 
         public static void AddCloud(string name, string type, LuaTable position, LuaTable color, float unknown, float size)

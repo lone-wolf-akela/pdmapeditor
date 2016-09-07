@@ -136,6 +136,16 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
+            this.groupSquadron = new System.Windows.Forms.GroupBox();
+            this.labelSquadronSize = new System.Windows.Forms.Label();
+            this.numericSquadronSize = new System.Windows.Forms.NumericUpDown();
+            this.labelSquadronName = new System.Windows.Forms.Label();
+            this.boxSquadronName = new System.Windows.Forms.TextBox();
+            this.labelSquadronType = new System.Windows.Forms.Label();
+            this.comboSquadronType = new System.Windows.Forms.ComboBox();
+            this.labelSquadronPlayer = new System.Windows.Forms.Label();
+            this.comboSquadronPlayer = new System.Windows.Forms.ComboBox();
+            this.checkSquadronInHyperspace = new System.Windows.Forms.CheckBox();
             this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
@@ -179,6 +189,8 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
+            this.groupSquadron.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1020,6 +1032,7 @@
             // 
             // tabSelection
             // 
+            this.tabSelection.Controls.Add(this.groupSquadron);
             this.tabSelection.Controls.Add(this.groupPebble);
             this.tabSelection.Controls.Add(this.groupPoint);
             this.tabSelection.Controls.Add(this.groupDustCloud);
@@ -1665,6 +1678,131 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
+            // groupSquadron
+            // 
+            this.groupSquadron.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSquadron.Controls.Add(this.checkSquadronInHyperspace);
+            this.groupSquadron.Controls.Add(this.labelSquadronPlayer);
+            this.groupSquadron.Controls.Add(this.comboSquadronPlayer);
+            this.groupSquadron.Controls.Add(this.labelSquadronSize);
+            this.groupSquadron.Controls.Add(this.numericSquadronSize);
+            this.groupSquadron.Controls.Add(this.labelSquadronName);
+            this.groupSquadron.Controls.Add(this.boxSquadronName);
+            this.groupSquadron.Controls.Add(this.labelSquadronType);
+            this.groupSquadron.Controls.Add(this.comboSquadronType);
+            this.groupSquadron.Location = new System.Drawing.Point(3, 215);
+            this.groupSquadron.Name = "groupSquadron";
+            this.groupSquadron.Size = new System.Drawing.Size(214, 149);
+            this.groupSquadron.TabIndex = 31;
+            this.groupSquadron.TabStop = false;
+            this.groupSquadron.Text = "Squadron";
+            // 
+            // labelSquadronSize
+            // 
+            this.labelSquadronSize.AutoSize = true;
+            this.labelSquadronSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronSize.Location = new System.Drawing.Point(6, 101);
+            this.labelSquadronSize.Name = "labelSquadronSize";
+            this.labelSquadronSize.Size = new System.Drawing.Size(30, 13);
+            this.labelSquadronSize.TabIndex = 28;
+            this.labelSquadronSize.Text = "Size:";
+            // 
+            // numericSquadronSize
+            // 
+            this.numericSquadronSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSquadronSize.Location = new System.Drawing.Point(51, 99);
+            this.numericSquadronSize.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericSquadronSize.Name = "numericSquadronSize";
+            this.numericSquadronSize.Size = new System.Drawing.Size(157, 20);
+            this.numericSquadronSize.TabIndex = 27;
+            // 
+            // labelSquadronName
+            // 
+            this.labelSquadronName.AutoSize = true;
+            this.labelSquadronName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronName.Location = new System.Drawing.Point(6, 22);
+            this.labelSquadronName.Name = "labelSquadronName";
+            this.labelSquadronName.Size = new System.Drawing.Size(38, 13);
+            this.labelSquadronName.TabIndex = 24;
+            this.labelSquadronName.Text = "Name:";
+            // 
+            // boxSquadronName
+            // 
+            this.boxSquadronName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxSquadronName.Location = new System.Drawing.Point(51, 19);
+            this.boxSquadronName.Name = "boxSquadronName";
+            this.boxSquadronName.Size = new System.Drawing.Size(157, 20);
+            this.boxSquadronName.TabIndex = 23;
+            // 
+            // labelSquadronType
+            // 
+            this.labelSquadronType.AutoSize = true;
+            this.labelSquadronType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronType.Location = new System.Drawing.Point(6, 48);
+            this.labelSquadronType.Name = "labelSquadronType";
+            this.labelSquadronType.Size = new System.Drawing.Size(34, 13);
+            this.labelSquadronType.TabIndex = 18;
+            this.labelSquadronType.Text = "Type:";
+            // 
+            // comboSquadronType
+            // 
+            this.comboSquadronType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboSquadronType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSquadronType.FormattingEnabled = true;
+            this.comboSquadronType.Location = new System.Drawing.Point(51, 45);
+            this.comboSquadronType.Name = "comboSquadronType";
+            this.comboSquadronType.Size = new System.Drawing.Size(157, 21);
+            this.comboSquadronType.TabIndex = 17;
+            // 
+            // labelSquadronPlayer
+            // 
+            this.labelSquadronPlayer.AutoSize = true;
+            this.labelSquadronPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSquadronPlayer.Location = new System.Drawing.Point(6, 75);
+            this.labelSquadronPlayer.Name = "labelSquadronPlayer";
+            this.labelSquadronPlayer.Size = new System.Drawing.Size(41, 13);
+            this.labelSquadronPlayer.TabIndex = 30;
+            this.labelSquadronPlayer.Text = "Owner:";
+            // 
+            // comboSquadronPlayer
+            // 
+            this.comboSquadronPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboSquadronPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSquadronPlayer.FormattingEnabled = true;
+            this.comboSquadronPlayer.Items.AddRange(new object[] {
+            "-1",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.comboSquadronPlayer.Location = new System.Drawing.Point(51, 72);
+            this.comboSquadronPlayer.Name = "comboSquadronPlayer";
+            this.comboSquadronPlayer.Size = new System.Drawing.Size(157, 21);
+            this.comboSquadronPlayer.TabIndex = 29;
+            // 
+            // checkSquadronInHyperspace
+            // 
+            this.checkSquadronInHyperspace.AutoSize = true;
+            this.checkSquadronInHyperspace.Location = new System.Drawing.Point(9, 125);
+            this.checkSquadronInHyperspace.Name = "checkSquadronInHyperspace";
+            this.checkSquadronInHyperspace.Size = new System.Drawing.Size(93, 17);
+            this.checkSquadronInHyperspace.TabIndex = 31;
+            this.checkSquadronInHyperspace.Text = "In hyperspace";
+            this.checkSquadronInHyperspace.UseVisualStyleBackColor = true;
+            // 
             // numericAsteroidResourceMultiplier
             // 
             this.numericAsteroidResourceMultiplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1750,6 +1888,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
+            this.groupSquadron.ResumeLayout(false);
+            this.groupSquadron.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1862,6 +2003,16 @@
         public System.Windows.Forms.GroupBox groupPebble;
         private System.Windows.Forms.Label labelPebbleType;
         public System.Windows.Forms.ComboBox comboPebbleType;
+        public System.Windows.Forms.GroupBox groupSquadron;
+        private System.Windows.Forms.Label labelSquadronPlayer;
+        public System.Windows.Forms.ComboBox comboSquadronPlayer;
+        private System.Windows.Forms.Label labelSquadronSize;
+        public System.Windows.Forms.NumericUpDown numericSquadronSize;
+        private System.Windows.Forms.Label labelSquadronName;
+        public System.Windows.Forms.TextBox boxSquadronName;
+        private System.Windows.Forms.Label labelSquadronType;
+        public System.Windows.Forms.ComboBox comboSquadronType;
+        public System.Windows.Forms.CheckBox checkSquadronInHyperspace;
     }
 }
 

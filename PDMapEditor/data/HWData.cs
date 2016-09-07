@@ -66,7 +66,7 @@ namespace PDMapEditor
                     string[] files = Directory.GetFiles(pebbleTypesPath, "*.pebble", SearchOption.AllDirectories);
                     foreach (string file in files)
                     {
-                        HWData.ParsePebbleType(file);
+                        ParsePebbleType(file);
                     }
                 }
 
@@ -79,7 +79,7 @@ namespace PDMapEditor
                     string[] files = Directory.GetFiles(asteroidTypesPath, "*.resource", SearchOption.AllDirectories);
                     foreach (string file in files)
                     {
-                        HWData.ParseAsteroidType(file);
+                        ParseAsteroidType(file);
                     }
                 }
 
@@ -92,7 +92,7 @@ namespace PDMapEditor
                     string[] files = Directory.GetFiles(dustCloudTypesPath, "*.resource", SearchOption.AllDirectories);
                     foreach (string file in files)
                     {
-                        HWData.ParseDustCloudType(file);
+                        ParseDustCloudType(file);
                     }
                 }
 
@@ -123,7 +123,7 @@ namespace PDMapEditor
                     string[] files = Directory.GetFiles(shipTypesPath, "*.ship", SearchOption.AllDirectories);
                     foreach (string file in files)
                     {
-                        HWData.ParseShipType(file);
+                        ParseShipType(file);
                     }
                 }
             }
@@ -275,7 +275,25 @@ namespace PDMapEditor
 
         private static void ParseShipType(string path)
         {
+            string name = Path.GetFileNameWithoutExtension(path).ToLower();
+
+            ShipType existingType = ShipType.GetTypeFromName(name);
+
+            //Check if a type with that name already exists (because of multiple data paths)
+            if (existingType == null)
+                new ShipType(name);
+            else
+            {
+                //Overwrite existing style
+                existingType.Name = name;
+            }
+        }
+
+        /*private static void ParseShipType(string path)
+        {
             lua = new Lua();
+            string file = File.ReadAllText(path);
+
             Type type = typeof(HWData);
 
             lua.RegisterFunction("StartShipConfig", null, type.GetMethod("StartShipConfig"));
@@ -291,14 +309,24 @@ namespace PDMapEditor
             lua.RegisterFunction("LoadSharedModel", null, type.GetMethod("LoadSharedModel"));
             lua.RegisterFunction("addShield", null, type.GetMethod("AddShield"));
             lua.RegisterFunction("AddShipAbility", null, type.GetMethod("AddShipAbility"));
-            //lua.RegisterFunction("addAbility", null, type.GetMethod("AddAbility"));
+            lua.RegisterFunction("setConcurrentBuildLimit", null, type.GetMethod("SetConcurrentBuildLimit"));
+            lua.RegisterFunction("setCollisionDamageToModifier", null, type.GetMethod("SetCollisionDamageToModifier"));
+            lua.RegisterFunction("setCollisionDamageFromModifier", null, type.GetMethod("SetCollisionDamageFromModifier"));
+            lua.RegisterFunction("setSpecialDieTime", null, type.GetMethod("SetSpecialDieTime"));
+            lua.RegisterFunction("addMagneticField", null, type.GetMethod("AddMagneticField"));
 
-            lua.DoString("luanet.load_assembly('mscorlib')");
-            lua.DoString("luanet.load_assembly('PDMapEditor')");
-            lua.DoString("HWData=luanet.import_type('PDMapEditor.HWData')");
-            lua.DoString("data=HWData");
+            file = DisableLuaFunctionInString(file, "addAbility");
+            file = DisableLuaFunctionInString(file, "addCustomCode");
+            file = DisableLuaFunctionInString(file, "SpawnSalvageOnDeath");
+            file = DisableLuaFunctionInString(file, "SpawnDustCloudOnDeath");
+            file = DisableLuaFunctionInString(file, "loadShipPatchList");
+            file = DisableLuaFunctionInString(file, "loadLatchPointList");
+            file = DisableLuaFunctionInString(file, "AddShipMultiplier");
+            file = DisableLuaFunctionInString(file, "setTacticsMults");
+            file = DisableLuaFunctionInString(file, "setSpeedvsAccuracyApplied");
+            file = DisableLuaFunctionInString(file, "StartShipHardPointConfig");
 
-            lua.DoFile(path);
+            lua.DoString(file);
 
             string name = Path.GetFileNameWithoutExtension(path).ToLower();
             AvoidanceFamily avoidanceFamily = AvoidanceFamily.None;
@@ -325,7 +353,7 @@ namespace PDMapEditor
                 existingType.Name = name;
                 existingType.AvoidanceFamily = avoidanceFamily;
             }
-        }
+        }*/
 
         private static string DisableLuaFunctionInString(string text, string function)
         {
@@ -335,11 +363,11 @@ namespace PDMapEditor
             bool inFunction = false;
             bool inString = false;
 
-            while(index <= text.Length)
+            while(index <= newText.Length)
             {
-                if (index < text.Length)
+                if (index < newText.Length)
                 {
-                    if (text[index] == '\"') //String start/end found
+                    if (newText[index] == '\"' || newText[index] == '\'') //String start/end found
                     {
                         inString = !inString;
                     }
@@ -347,7 +375,7 @@ namespace PDMapEditor
 
                 if (!inFunction)
                 {
-                    if (text.Length >= index + function.Length)
+                    if (newText.Length >= index + function.Length)
                     {
                         if (newText.Substring(index, function.Length) == function) //Function occurence found
                         {
@@ -434,14 +462,16 @@ namespace PDMapEditor
             //Unused
         }
 
-        public static void GetShipNum(LuaTable ship, string property, float parameter)
+        public static float GetShipNum(LuaTable ship, string property, float parameter)
         {
             //Unused
+            return 0;
         }
 
-        public static void GetShipStr(LuaTable ship, string property, string parameter)
+        public static string GetShipStr(LuaTable ship, string property, string parameter)
         {
             //Unused
+            return "";
         }
 
         public static void SetSupplyValue(LuaTable ship, string family, float parameter)
@@ -494,17 +524,17 @@ namespace PDMapEditor
             //Unused
         }
 
-        public static void addAbility(LuaTable entity, string ability, float unknown1, float unknown2)
+        public static void SetConcurrentBuildLimit(LuaTable ship, int min, int max)
         {
             //Unused
         }
 
-        public static void addAbility(LuaTable entity, string ability)
+        public static void SetSpecialDieTime(LuaTable ship, string killer, float time)
         {
             //Unused
         }
 
-        public static void addAbility(LuaTable entity, string ability, float unknown1, float unknown2, float unknown3, float unknown4, float unknown5, float unknown6)
+        public static void AddMagneticField(LuaTable entity, string type, float unknown1, float unknown2, string mesh, float unknown3, string mesh2, float unknown4, string hit, string effect)
         {
             //Unused
         }
