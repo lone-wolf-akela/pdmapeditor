@@ -16,8 +16,6 @@ namespace PDMapEditor
 
         public static GLControl GLControl;
         public static Camera Camera = new Camera();
-        public static LuaMap Map = new LuaMap();
-        public static HWData HWData = new HWData();
         public static Settings Settings;
 
         //Frame-independence

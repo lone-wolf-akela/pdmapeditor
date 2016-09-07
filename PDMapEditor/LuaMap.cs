@@ -10,57 +10,59 @@ using System.IO;
 
 namespace PDMapEditor
 {
-    public class LuaMap
+    public static class LuaMap
     {
         static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
 
-        public void LoadMap(string path)
+        public static void LoadMap(string path)
         {
             Lua lua = new Lua();
-            lua.RegisterFunction("addAsteroid", this, GetType().GetMethod("AddAsteroid"));
-            lua.RegisterFunction("addPoint", this, GetType().GetMethod("AddPoint"));
-            lua.RegisterFunction("addPebble", this, GetType().GetMethod("AddPebble"));
-            lua.RegisterFunction("addDustCloud", this, GetType().GetMethod("AddDustCloud"));
-            lua.RegisterFunction("addDustCloudWithResources", this, GetType().GetMethod("AddDustCloudWithResources"));
-            lua.RegisterFunction("setWorldBoundsInner", this, GetType().GetMethod("SetWorldBoundsInner"));
-            lua.RegisterFunction("setWorldBoundsOuter", this, GetType().GetMethod("SetWorldBoundsOuter"));
-            lua.RegisterFunction("addSquadron", this, GetType().GetMethod("AddSquadron"));
-            lua.RegisterFunction("addCloud", this, GetType().GetMethod("AddCloud"));
-            lua.RegisterFunction("addNebula", this, GetType().GetMethod("AddNebula"));
-            lua.RegisterFunction("addNebulaWithResources", this, GetType().GetMethod("AddNebulaWithResources"));
-            lua.RegisterFunction("addSphere", this, GetType().GetMethod("AddSphere"));
-            lua.RegisterFunction("addCamera", this, GetType().GetMethod("AddCamera"));
-            lua.RegisterFunction("addSalvage", this, GetType().GetMethod("AddSalvage"));
-            lua.RegisterFunction("createSOBGroup", this, GetType().GetMethod("CreateSOBGroup"));
-            lua.RegisterFunction("addToSOBGroup", this, GetType().GetMethod("AddToSOBGroup"));
-            lua.RegisterFunction("addPath", this, GetType().GetMethod("AddPath"));
-            lua.RegisterFunction("setObjectAttributes", this, GetType().GetMethod("SetObjectAttributes"));
-            lua.RegisterFunction("addReactiveFleetSlot", this, GetType().GetMethod("AddReactiveFleetSlot"));
-            lua.RegisterFunction("addReactiveFleetResourceSlot", this, GetType().GetMethod("AddReactiveFleetResourceSlot"));
-            lua.RegisterFunction("addAxisAlignBox", this, GetType().GetMethod("AddAxisAlignBox"));
-            lua.RegisterFunction("addReactiveFleetResourceSlotDustCloud", this, GetType().GetMethod("AddReactiveFleetResourceSlotDustCloud"));
-            lua.RegisterFunction("addTendrils", this, GetType().GetMethod("AddTendrils"));
-            lua.RegisterFunction("addSensorsPlane", this, GetType().GetMethod("AddSensorsPlane"));
+            Type type = typeof(LuaMap);
 
-            lua.RegisterFunction("fogSetActive", this, GetType().GetMethod("FogSetActive"));
-            lua.RegisterFunction("fogSetStart", this, GetType().GetMethod("FogSetStart"));
-            lua.RegisterFunction("fogSetEnd", this, GetType().GetMethod("FogSetEnd"));
-            lua.RegisterFunction("fogSetColour", this, GetType().GetMethod("FogSetColour"));
-            lua.RegisterFunction("fogSetType", this, GetType().GetMethod("FogSetType"));
-            lua.RegisterFunction("fogSetDensity", this, GetType().GetMethod("FogSetDensity"));
-            lua.RegisterFunction("fogAddInterpolator", this, GetType().GetMethod("FogAddInterpolator"));
+            lua.RegisterFunction("addAsteroid", null, type.GetMethod("AddAsteroid"));
+            lua.RegisterFunction("addPoint", null, type.GetMethod("AddPoint"));
+            lua.RegisterFunction("addPebble", null, type.GetMethod("AddPebble"));
+            lua.RegisterFunction("addDustCloud", null, type.GetMethod("AddDustCloud"));
+            lua.RegisterFunction("addDustCloudWithResources", null, type.GetMethod("AddDustCloudWithResources"));
+            lua.RegisterFunction("setWorldBoundsInner", null, type.GetMethod("SetWorldBoundsInner"));
+            lua.RegisterFunction("setWorldBoundsOuter", null, type.GetMethod("SetWorldBoundsOuter"));
+            lua.RegisterFunction("addSquadron", null, type.GetMethod("AddSquadron"));
+            lua.RegisterFunction("addCloud", null, type.GetMethod("AddCloud"));
+            lua.RegisterFunction("addNebula", null, type.GetMethod("AddNebula"));
+            lua.RegisterFunction("addNebulaWithResources", null, type.GetMethod("AddNebulaWithResources"));
+            lua.RegisterFunction("addSphere", null, type.GetMethod("AddSphere"));
+            lua.RegisterFunction("addCamera", null, type.GetMethod("AddCamera"));
+            lua.RegisterFunction("addSalvage", null, type.GetMethod("AddSalvage"));
+            lua.RegisterFunction("createSOBGroup", null, type.GetMethod("CreateSOBGroup"));
+            lua.RegisterFunction("addToSOBGroup", null, type.GetMethod("AddToSOBGroup"));
+            lua.RegisterFunction("addPath", null, type.GetMethod("AddPath"));
+            lua.RegisterFunction("setObjectAttributes", null, type.GetMethod("SetObjectAttributes"));
+            lua.RegisterFunction("addReactiveFleetSlot", null, type.GetMethod("AddReactiveFleetSlot"));
+            lua.RegisterFunction("addReactiveFleetResourceSlot", null, type.GetMethod("AddReactiveFleetResourceSlot"));
+            lua.RegisterFunction("addAxisAlignBox", null, type.GetMethod("AddAxisAlignBox"));
+            lua.RegisterFunction("addReactiveFleetResourceSlotDustCloud", null, type.GetMethod("AddReactiveFleetResourceSlotDustCloud"));
+            lua.RegisterFunction("addTendrils", null, type.GetMethod("AddTendrils"));
+            lua.RegisterFunction("addSensorsPlane", null, type.GetMethod("AddSensorsPlane"));
 
-            lua.RegisterFunction("loadBackground", this, GetType().GetMethod("LoadBackground"));
-            lua.RegisterFunction("setSensorsManagerCameraDistances", this, GetType().GetMethod("SetSensorsManagerCameraDistances"));
-            lua.RegisterFunction("setDefaultMusic", this, GetType().GetMethod("SetDefaultMusic"));
-            lua.RegisterFunction("setBattleMusic", this, GetType().GetMethod("SetBattleMusic"));
-            lua.RegisterFunction("setGlareIntensity", this, GetType().GetMethod("SetGlareIntensity"));
-            lua.RegisterFunction("setLevelShadowColour", this, GetType().GetMethod("SetLevelShadowColour"));
-            lua.RegisterFunction("setDustCloudAmbient", this, GetType().GetMethod("SetDustCloudAmbient"));
-            lua.RegisterFunction("setNebulaAmbient", this, GetType().GetMethod("SetNebulaAmbient"));
+            lua.RegisterFunction("fogSetActive", null, type.GetMethod("FogSetActive"));
+            lua.RegisterFunction("fogSetStart", null, type.GetMethod("FogSetStart"));
+            lua.RegisterFunction("fogSetEnd", null, type.GetMethod("FogSetEnd"));
+            lua.RegisterFunction("fogSetColour", null, type.GetMethod("FogSetColour"));
+            lua.RegisterFunction("fogSetType", null, type.GetMethod("FogSetType"));
+            lua.RegisterFunction("fogSetDensity", null, type.GetMethod("FogSetDensity"));
+            lua.RegisterFunction("fogAddInterpolator", null, type.GetMethod("FogAddInterpolator"));
 
-            lua.RegisterFunction("min", this, GetType().GetMethod("Min"));
-            lua.RegisterFunction("max", this, GetType().GetMethod("Max"));
+            lua.RegisterFunction("loadBackground", null, type.GetMethod("LoadBackground"));
+            lua.RegisterFunction("setSensorsManagerCameraDistances", null, type.GetMethod("SetSensorsManagerCameraDistances"));
+            lua.RegisterFunction("setDefaultMusic", null, type.GetMethod("SetDefaultMusic"));
+            lua.RegisterFunction("setBattleMusic", null, type.GetMethod("SetBattleMusic"));
+            lua.RegisterFunction("setGlareIntensity", null, type.GetMethod("SetGlareIntensity"));
+            lua.RegisterFunction("setLevelShadowColour", null, type.GetMethod("SetLevelShadowColour"));
+            lua.RegisterFunction("setDustCloudAmbient", null, type.GetMethod("SetDustCloudAmbient"));
+            lua.RegisterFunction("setNebulaAmbient", null, type.GetMethod("SetNebulaAmbient"));
+
+            lua.RegisterFunction("min", null, type.GetMethod("Min"));
+            lua.RegisterFunction("max", null, type.GetMethod("Max"));
 
             try
             { lua.DoFile(path); }
@@ -91,7 +93,7 @@ namespace PDMapEditor
             Map.MaxPlayers = maxPlayers;
         }
 
-        public void SaveMap(string path)
+        public static void SaveMap(string path)
         {
             string name = Path.GetFileName(path);
 
@@ -282,7 +284,7 @@ namespace PDMapEditor
         }
 
         #region Lua functions
-        public void AddAsteroid(string type, LuaTable position, float multiplier, float rotX, float rotY, float rotZ, float rotSpeed)
+        public static void AddAsteroid(string type, LuaTable position, float multiplier, float rotX, float rotY, float rotZ, float rotSpeed)
         {
             //Log.WriteLine("Adding asteroid \"" + type + "\".");
 
@@ -305,7 +307,7 @@ namespace PDMapEditor
             new Asteroid(asteroidType, pos, rot, multiplier, rotSpeed);
         }
 
-        public void AddPoint(string name, LuaTable position, LuaTable rotation)
+        public static void AddPoint(string name, LuaTable position, LuaTable rotation)
         {
             //Log.WriteLine("Adding starting point \"" + name + "\".");
 
@@ -315,7 +317,7 @@ namespace PDMapEditor
             new Point(name, pos, rot);
         }
 
-        public void AddPebble(string type, LuaTable position, float rotX, float rotY, float rotZ)
+        public static void AddPebble(string type, LuaTable position, float rotX, float rotY, float rotZ)
         {
             //Log.WriteLine("Adding pebble of type \"" + type + "\".");
 
@@ -334,7 +336,7 @@ namespace PDMapEditor
             new Pebble(pebbleType, pos, rot);
         }
 
-        public void AddDustCloud(string name, string type, LuaTable position, LuaTable color, float unknown1, float size)
+        public static void AddDustCloud(string name, string type, LuaTable position, LuaTable color, float unknown1, float size)
         {
             //Log.WriteLine("Adding dust cloud \"" + name + "\".");
 
@@ -353,108 +355,108 @@ namespace PDMapEditor
             new DustCloud(name, dustCloudType, pos, col, unknown1, size);
         }
 
-        public void AddDustCloudWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float unknown, float size, float unknown2)
+        public static void AddDustCloudWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float unknown, float size, float unknown2)
         {
             //Console.WriteLine("Adding dust cloud \"" + name + "\".");
         }
 
-        public void SetWorldBoundsInner(LuaTable center, LuaTable dimensions)
+        public static void SetWorldBoundsInner(LuaTable center, LuaTable dimensions)
         {
             Vector3 dim = LuaTableToVector3(dimensions);
             Map.MapDimensions = dim;
         }
 
-        public void SetWorldBoundsOuter(LuaTable center, LuaTable dimensions)
+        public static void SetWorldBoundsOuter(LuaTable center, LuaTable dimensions)
         {
             //STUB
         }
 
-        public void AddSquadron(string name, string type, LuaTable position, float unknown, LuaTable rotation, float unknown2, float unknown3)
+        public static void AddSquadron(string name, string type, LuaTable position, int player, LuaTable rotation, int shipCount, bool inHyperspace)
         {
             //STUB
         }
 
-        public void AddCloud(string name, string type, LuaTable position, LuaTable color, float unknown, float size)
+        public static void AddCloud(string name, string type, LuaTable position, LuaTable color, float unknown, float size)
         {
             //STUB
         }
 
-        public void AddNebula(string name, string type, LuaTable position, LuaTable color, float size, float size2)
+        public static void AddNebula(string name, string type, LuaTable position, LuaTable color, float size, float size2)
         {
             //STUB
         }
 
-        public void AddNebulaWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float unknown, float size, float unknown2)
+        public static void AddNebulaWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float unknown, float size, float unknown2)
         {
             //STUB
         }
 
-        public void AddSphere(string name, LuaTable position, float size)
+        public static void AddSphere(string name, LuaTable position, float size)
         {
             //STUB
         }
 
-        public void AddCamera(string name, LuaTable position, LuaTable focusPosition)
+        public static void AddCamera(string name, LuaTable position, LuaTable focusPosition)
         {
             //STUB
         }
 
-        public void AddSalvage(string type, LuaTable position, float resources, float rotX, float rotY, float rotZ, float unknown)
+        public static void AddSalvage(string type, LuaTable position, float resources, float rotX, float rotY, float rotZ, float unknown)
         {
             //STUB
         }
 
-        public void CreateSOBGroup(string name)
+        public static void CreateSOBGroup(string name)
         {
             //STUB
         }
 
-        public void AddToSOBGroup(string type, string sobGroup)
+        public static void AddToSOBGroup(string type, string sobGroup)
         {
             //STUB
         }
 
-        public void AddPath(string name, params string[] points)
+        public static void AddPath(string name, params string[] points)
         {
             //STUB
         }
 
-        public void SetObjectAttributes(float unknown, float unknown2)
+        public static void SetObjectAttributes(float unknown, float unknown2)
         {
             //STUB
         }
 
-        public void AddReactiveFleetSlot(string sobGroup, int player, float unknown, LuaTable position, float rotX, float rotY, float rotZ, string shipType)
+        public static void AddReactiveFleetSlot(string sobGroup, int player, float unknown, LuaTable position, float rotX, float rotY, float rotZ, string shipType)
         {
             //STUB
         }
 
-        public void AddReactiveFleetResourceSlotDustCloud(string name, string type, LuaTable position, float red, float green, float blue)
+        public static void AddReactiveFleetResourceSlotDustCloud(string name, string type, LuaTable position, float red, float green, float blue)
         {
             //STUB
         }
 
-        public void AddReactiveFleetResourceSlot(string type, LuaTable position, float rotX, float rotY, float rotZ)
+        public static void AddReactiveFleetResourceSlot(string type, LuaTable position, float rotX, float rotY, float rotZ)
         {
             //STUB
         }
 
-        public void AddAxisAlignBox(string name, LuaTable position, float size)
+        public static void AddAxisAlignBox(string name, LuaTable position, float size)
         {
             //STUB
         }
 
-        public void AddTendrils()
+        public static void AddTendrils()
         {
             //STUB
         }
 
-        public void AddSensorsPlane(float distance, float factor, LuaTable color)
+        public static void AddSensorsPlane(float distance, float factor, LuaTable color)
         {
             //STUB
         }
 
-        public void FogSetActive(int active)
+        public static void FogSetActive(int active)
         {
             if (active == 1)
                 Map.FogActive = true;
@@ -462,35 +464,35 @@ namespace PDMapEditor
                 Map.FogActive = false;
         }
 
-        public void FogSetStart(float start)
+        public static void FogSetStart(float start)
         {
             Map.FogStart = start;
         }
 
-        public void FogSetEnd(float end)
+        public static void FogSetEnd(float end)
         {
             Map.FogEnd = end;
         }
 
-        public void FogSetColour(float red, float green, float blue, float alpha)
+        public static void FogSetColour(float red, float green, float blue, float alpha)
         {
             Map.FogColor = new Vector4(red, green, blue, alpha);
         }
-        public void FogSetType(string type)
+        public static void FogSetType(string type)
         {
             Map.FogType = type;
         }
-        public void FogSetDensity(float density)
+        public static void FogSetDensity(float density)
         {
             Map.FogDensity = density;
         }
 
-        public void FogAddInterpolator(string buffer, float duration, float target)
+        public static void FogAddInterpolator(string buffer, float duration, float target)
         {
             //STUB
         }
 
-        public void LoadBackground(string name)
+        public static void LoadBackground(string name)
         {
             Background background = Background.GetBackgroundFromName(name);
             if (background == null)
@@ -502,13 +504,13 @@ namespace PDMapEditor
             Map.Background = background;
         }
 
-        public void SetSensorsManagerCameraDistances(float min, float max)
+        public static void SetSensorsManagerCameraDistances(float min, float max)
         {
             Map.SensorsManagerCameraMin = min;
             Map.SensorsManagerCameraMax = max;
         }
 
-        public void SetDefaultMusic(string path)
+        public static void SetDefaultMusic(string path)
         {
             string music = path.ToLower();
             music = music.Replace("data:", "");
@@ -516,7 +518,7 @@ namespace PDMapEditor
             Map.MusicDefault = music;
         }
 
-        public void SetBattleMusic(string path)
+        public static void SetBattleMusic(string path)
         {
             string music = path.ToLower();
             music = music.Replace("data:", "");
@@ -524,33 +526,33 @@ namespace PDMapEditor
             Map.MusicBattle = music;
         }
 
-        public void SetGlareIntensity(float intensity)
+        public static void SetGlareIntensity(float intensity)
         {
             Map.GlareIntensity = intensity;
         }
 
-        public void SetLevelShadowColour(float red, float green, float blue, float alpha)
+        public static void SetLevelShadowColour(float red, float green, float blue, float alpha)
         {
             Map.ShadowColor = new Vector4(red, green, blue, alpha);
         }
 
-        public void SetDustCloudAmbient(LuaTable color)
+        public static void SetDustCloudAmbient(LuaTable color)
         {
             //STUB
         }
 
-        public void SetNebulaAmbient(LuaTable color)
+        public static void SetNebulaAmbient(LuaTable color)
         {
             //STUB
         }
 
-        //Misceallenous
-        public float Min(float valueA, float valueB)
+        //Miscellanous
+        public static float Min(float valueA, float valueB)
         {
             return Math.Min(valueA, valueB);
         }
 
-        public float Max(float valueA, float valueB)
+        public static float Max(float valueA, float valueB)
         {
             return Math.Max(valueA, valueB);
         }

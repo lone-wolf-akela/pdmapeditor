@@ -161,7 +161,7 @@ namespace PDMapEditor
             if (result == DialogResult.OK)
             {
                 Map.Clear();
-                Program.Map.LoadMap(openMapDialog.FileName);
+                LuaMap.LoadMap(openMapDialog.FileName);
                 this.Text = "PayDay's Homeworld Remastered Map Editor - " + openMapDialog.FileName;
 
                 Program.Camera.ResetCamera();
@@ -177,7 +177,7 @@ namespace PDMapEditor
             DialogResult result = saveMapDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                Program.Map.SaveMap(saveMapDialog.FileName);
+                LuaMap.SaveMap(saveMapDialog.FileName);
             }
         }
 
