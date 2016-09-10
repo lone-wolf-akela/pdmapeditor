@@ -18,7 +18,6 @@ namespace PDMapEditor
         static LuaTable pebbleConfig;
         static LuaTable asteroidConfig;
         static LuaTable dustCloudConfig;
-        static LuaTable nebulaConfig;
         static LuaTable shipConfig;
 
         static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;

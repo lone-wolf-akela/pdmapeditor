@@ -93,8 +93,7 @@ namespace PDMapEditor
 
             Vector3 screen = new Vector3(x, y, z);
 
-            Matrix4 ViewProjectionInverted = Renderer.ViewProjection.Inverted();
-            Vector3 world = Vector3.TransformPerspective(screen, ViewProjectionInverted);
+            Vector3 world = Vector3.TransformPerspective(screen, Renderer.ViewProjectionInverted);
 
             return world;
         }

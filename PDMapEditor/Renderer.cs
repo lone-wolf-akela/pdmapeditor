@@ -14,6 +14,7 @@ namespace PDMapEditor
         public static Matrix4 View = Matrix4.Identity;
         public static Matrix4 Projection = Matrix4.Identity;
         public static Matrix4 ViewProjection = Matrix4.Identity;
+        public static Matrix4 ViewProjectionInverted = Matrix4.Identity;
 
         private static Shader shader;
         private static Shader shader2D;
@@ -312,6 +313,7 @@ namespace PDMapEditor
                 Projection = Matrix4.CreateOrthographic(aspectRatioWidthOrtho, aspectRatioHeightOrtho, Program.Camera.NearClipDistance, Program.Camera.ClipDistance);
 
             ViewProjection = View * Projection;
+            ViewProjectionInverted = ViewProjection.Inverted();
 
             // Update model view matrices
             foreach (Drawable drawable in Drawable.Drawables)
