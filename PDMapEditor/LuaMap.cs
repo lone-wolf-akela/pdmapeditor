@@ -41,7 +41,7 @@ namespace PDMapEditor
             lua.RegisterFunction("addReactiveFleetResourceSlot", null, type.GetMethod("AddReactiveFleetResourceSlot"));
             lua.RegisterFunction("addAxisAlignBox", null, type.GetMethod("AddAxisAlignBox"));
             lua.RegisterFunction("addReactiveFleetResourceSlotDustCloud", null, type.GetMethod("AddReactiveFleetResourceSlotDustCloud"));
-            lua.RegisterFunction("addTendrils", null, type.GetMethod("AddTendrils"));
+            //lua.RegisterFunction("addTendrils", null, type.GetMethod("AddTendrils"));
             lua.RegisterFunction("addSensorsPlane", null, type.GetMethod("AddSensorsPlane"));
 
             lua.RegisterFunction("fogSetActive", null, type.GetMethod("FogSetActive"));

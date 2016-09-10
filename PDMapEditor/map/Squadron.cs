@@ -19,6 +19,21 @@ namespace PDMapEditor
         
         public bool AllowRotation { get; set; }
 
+        public Squadron() : base (Vector3.Zero, Vector3.Zero)
+        {
+            Name = "Squadron" + Squadrons.Count;
+            Type = ShipType.ShipTypes[0];
+            Player = -1;
+            SquadronSize = 0;
+            InHyperspace = false;
+
+            Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Cube);
+            Mesh.Material.DiffuseColor = new Vector3(1, 1, 1);
+            Mesh.Scale = new Vector3(100);
+            Squadrons.Add(this);
+
+            AllowRotation = true;
+        }
         public Squadron(string name, Vector3 position, Vector3 rotation, ShipType type, int player, int squadronSize, bool inHyperspace) : base (position, rotation)
         {
             Name = name;
@@ -33,6 +48,13 @@ namespace PDMapEditor
             Squadrons.Add(this);
 
             AllowRotation = true;
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Squadrons.Remove(this);
         }
     }
 }

@@ -41,6 +41,8 @@ namespace PDMapEditor
         public Vector3 Rotation = Vector3.Zero;
         public Vector3 Scale = Vector3.One;
 
+        public Vector3 LastScale = Vector3.One;
+
         public bool Wireframe = false;
         public bool VertexColored = true;
         public bool Persistent = false;

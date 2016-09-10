@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -92,6 +92,17 @@
             this.labelMapDimensionsX = new System.Windows.Forms.Label();
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
             this.tabSelection = new System.Windows.Forms.TabPage();
+            this.groupNebula = new System.Windows.Forms.GroupBox();
+            this.labelNebulaAlpha = new System.Windows.Forms.Label();
+            this.sliderNebulaAlpha = new System.Windows.Forms.TrackBar();
+            this.labelNebulaSize = new System.Windows.Forms.Label();
+            this.numericNebulaSize = new System.Windows.Forms.NumericUpDown();
+            this.labelNebulaColor = new System.Windows.Forms.Label();
+            this.buttonNebulaColor = new System.Windows.Forms.Button();
+            this.labelNebulaName = new System.Windows.Forms.Label();
+            this.boxNebulaName = new System.Windows.Forms.TextBox();
+            this.labelNebulaType = new System.Windows.Forms.Label();
+            this.comboNebulaType = new System.Windows.Forms.ComboBox();
             this.groupSquadron = new System.Windows.Forms.GroupBox();
             this.checkSquadronInHyperspace = new System.Windows.Forms.CheckBox();
             this.labelSquadronPlayer = new System.Windows.Forms.Label();
@@ -138,6 +149,9 @@
             this.numericSelectionPositionY = new System.Windows.Forms.NumericUpDown();
             this.labelSelectionPositionX = new System.Windows.Forms.Label();
             this.numericSelectionPositionX = new System.Windows.Forms.NumericUpDown();
+            this.tabCreate = new System.Windows.Forms.TabPage();
+            this.labelCreationType = new System.Windows.Forms.Label();
+            this.comboCreationType = new System.Windows.Forms.ComboBox();
             this.splitViewportAndProblems = new System.Windows.Forms.SplitContainer();
             this.gridProblems = new System.Windows.Forms.DataGridView();
             this.columnProblems = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -147,17 +161,7 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
-            this.groupNebula = new System.Windows.Forms.GroupBox();
-            this.labelNebulaAlpha = new System.Windows.Forms.Label();
-            this.sliderNebulaAlpha = new System.Windows.Forms.TrackBar();
-            this.labelNebulaSize = new System.Windows.Forms.Label();
-            this.numericNebulaSize = new System.Windows.Forms.NumericUpDown();
-            this.labelNebulaColor = new System.Windows.Forms.Label();
-            this.buttonNebulaColor = new System.Windows.Forms.Button();
-            this.labelNebulaName = new System.Windows.Forms.Label();
-            this.boxNebulaName = new System.Windows.Forms.TextBox();
-            this.labelNebulaType = new System.Windows.Forms.Label();
-            this.comboNebulaType = new System.Windows.Forms.ComboBox();
+            this.labelDebug1 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -182,6 +186,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
             this.tabSelection.SuspendLayout();
+            this.groupNebula.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).BeginInit();
             this.groupSquadron.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).BeginInit();
             this.groupPebble.SuspendLayout();
@@ -199,13 +206,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).BeginInit();
+            this.tabCreate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).BeginInit();
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
-            this.groupNebula.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -306,6 +311,7 @@
             // 
             this.tabControlLeft.Controls.Add(this.tabMap);
             this.tabControlLeft.Controls.Add(this.tabSelection);
+            this.tabControlLeft.Controls.Add(this.tabCreate);
             this.tabControlLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlLeft.HotTrack = true;
             this.tabControlLeft.Location = new System.Drawing.Point(0, 0);
@@ -1061,6 +1067,143 @@
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
             // 
+            // groupNebula
+            // 
+            this.groupNebula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupNebula.Controls.Add(this.labelNebulaAlpha);
+            this.groupNebula.Controls.Add(this.sliderNebulaAlpha);
+            this.groupNebula.Controls.Add(this.labelNebulaSize);
+            this.groupNebula.Controls.Add(this.numericNebulaSize);
+            this.groupNebula.Controls.Add(this.labelNebulaColor);
+            this.groupNebula.Controls.Add(this.buttonNebulaColor);
+            this.groupNebula.Controls.Add(this.labelNebulaName);
+            this.groupNebula.Controls.Add(this.boxNebulaName);
+            this.groupNebula.Controls.Add(this.labelNebulaType);
+            this.groupNebula.Controls.Add(this.comboNebulaType);
+            this.groupNebula.Location = new System.Drawing.Point(3, 215);
+            this.groupNebula.Name = "groupNebula";
+            this.groupNebula.Size = new System.Drawing.Size(214, 156);
+            this.groupNebula.TabIndex = 31;
+            this.groupNebula.TabStop = false;
+            this.groupNebula.Text = "Nebula";
+            // 
+            // labelNebulaAlpha
+            // 
+            this.labelNebulaAlpha.AutoSize = true;
+            this.labelNebulaAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaAlpha.Location = new System.Drawing.Point(6, 102);
+            this.labelNebulaAlpha.Name = "labelNebulaAlpha";
+            this.labelNebulaAlpha.Size = new System.Drawing.Size(37, 13);
+            this.labelNebulaAlpha.TabIndex = 30;
+            this.labelNebulaAlpha.Text = "Alpha:";
+            // 
+            // sliderNebulaAlpha
+            // 
+            this.sliderNebulaAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderNebulaAlpha.AutoSize = false;
+            this.sliderNebulaAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderNebulaAlpha.Location = new System.Drawing.Point(51, 98);
+            this.sliderNebulaAlpha.Maximum = 100;
+            this.sliderNebulaAlpha.Name = "sliderNebulaAlpha";
+            this.sliderNebulaAlpha.Size = new System.Drawing.Size(157, 23);
+            this.sliderNebulaAlpha.TabIndex = 29;
+            this.sliderNebulaAlpha.TickFrequency = 5;
+            this.sliderNebulaAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+            // 
+            // labelNebulaSize
+            // 
+            this.labelNebulaSize.AutoSize = true;
+            this.labelNebulaSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaSize.Location = new System.Drawing.Point(6, 129);
+            this.labelNebulaSize.Name = "labelNebulaSize";
+            this.labelNebulaSize.Size = new System.Drawing.Size(30, 13);
+            this.labelNebulaSize.TabIndex = 28;
+            this.labelNebulaSize.Text = "Size:";
+            // 
+            // numericNebulaSize
+            // 
+            this.numericNebulaSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericNebulaSize.DecimalPlaces = 1;
+            this.numericNebulaSize.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericNebulaSize.Location = new System.Drawing.Point(51, 127);
+            this.numericNebulaSize.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericNebulaSize.Name = "numericNebulaSize";
+            this.numericNebulaSize.Size = new System.Drawing.Size(157, 20);
+            this.numericNebulaSize.TabIndex = 27;
+            this.numericNebulaSize.ThousandsSeparator = true;
+            // 
+            // labelNebulaColor
+            // 
+            this.labelNebulaColor.AutoSize = true;
+            this.labelNebulaColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaColor.Location = new System.Drawing.Point(6, 76);
+            this.labelNebulaColor.Name = "labelNebulaColor";
+            this.labelNebulaColor.Size = new System.Drawing.Size(34, 13);
+            this.labelNebulaColor.TabIndex = 26;
+            this.labelNebulaColor.Text = "Color:";
+            // 
+            // buttonNebulaColor
+            // 
+            this.buttonNebulaColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNebulaColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNebulaColor.Location = new System.Drawing.Point(51, 72);
+            this.buttonNebulaColor.Name = "buttonNebulaColor";
+            this.buttonNebulaColor.Size = new System.Drawing.Size(157, 20);
+            this.buttonNebulaColor.TabIndex = 25;
+            this.buttonNebulaColor.UseVisualStyleBackColor = true;
+            // 
+            // labelNebulaName
+            // 
+            this.labelNebulaName.AutoSize = true;
+            this.labelNebulaName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaName.Location = new System.Drawing.Point(6, 22);
+            this.labelNebulaName.Name = "labelNebulaName";
+            this.labelNebulaName.Size = new System.Drawing.Size(38, 13);
+            this.labelNebulaName.TabIndex = 24;
+            this.labelNebulaName.Text = "Name:";
+            // 
+            // boxNebulaName
+            // 
+            this.boxNebulaName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxNebulaName.Location = new System.Drawing.Point(51, 19);
+            this.boxNebulaName.Name = "boxNebulaName";
+            this.boxNebulaName.Size = new System.Drawing.Size(157, 20);
+            this.boxNebulaName.TabIndex = 23;
+            // 
+            // labelNebulaType
+            // 
+            this.labelNebulaType.AutoSize = true;
+            this.labelNebulaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaType.Location = new System.Drawing.Point(6, 48);
+            this.labelNebulaType.Name = "labelNebulaType";
+            this.labelNebulaType.Size = new System.Drawing.Size(34, 13);
+            this.labelNebulaType.TabIndex = 18;
+            this.labelNebulaType.Text = "Type:";
+            // 
+            // comboNebulaType
+            // 
+            this.comboNebulaType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboNebulaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboNebulaType.FormattingEnabled = true;
+            this.comboNebulaType.Location = new System.Drawing.Point(51, 45);
+            this.comboNebulaType.Name = "comboNebulaType";
+            this.comboNebulaType.Size = new System.Drawing.Size(157, 21);
+            this.comboNebulaType.TabIndex = 17;
+            // 
             // groupSquadron
             // 
             this.groupSquadron.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1701,6 +1844,38 @@
             this.numericSelectionPositionX.TabIndex = 0;
             this.numericSelectionPositionX.ThousandsSeparator = true;
             // 
+            // tabCreate
+            // 
+            this.tabCreate.Controls.Add(this.labelCreationType);
+            this.tabCreate.Controls.Add(this.comboCreationType);
+            this.tabCreate.Location = new System.Drawing.Point(4, 22);
+            this.tabCreate.Name = "tabCreate";
+            this.tabCreate.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCreate.Size = new System.Drawing.Size(220, 695);
+            this.tabCreate.TabIndex = 2;
+            this.tabCreate.Text = "Create";
+            this.tabCreate.UseVisualStyleBackColor = true;
+            // 
+            // labelCreationType
+            // 
+            this.labelCreationType.AutoSize = true;
+            this.labelCreationType.Location = new System.Drawing.Point(8, 9);
+            this.labelCreationType.Name = "labelCreationType";
+            this.labelCreationType.Size = new System.Drawing.Size(41, 13);
+            this.labelCreationType.TabIndex = 19;
+            this.labelCreationType.Text = "Object:";
+            // 
+            // comboCreationType
+            // 
+            this.comboCreationType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboCreationType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCreationType.FormattingEnabled = true;
+            this.comboCreationType.Location = new System.Drawing.Point(55, 6);
+            this.comboCreationType.Name = "comboCreationType";
+            this.comboCreationType.Size = new System.Drawing.Size(159, 21);
+            this.comboCreationType.TabIndex = 18;
+            // 
             // splitViewportAndProblems
             // 
             this.splitViewportAndProblems.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1721,9 +1896,9 @@
             this.gridProblems.AllowUserToDeleteRows = false;
             this.gridProblems.AllowUserToResizeColumns = false;
             this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -1731,14 +1906,14 @@
             this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnProblems});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridProblems.Location = new System.Drawing.Point(0, 0);
@@ -1747,9 +1922,9 @@
             this.gridProblems.ReadOnly = true;
             this.gridProblems.RowHeadersVisible = false;
             this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridProblems.RowTemplate.Height = 500;
@@ -1762,9 +1937,9 @@
             // columnProblems
             // 
             this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnProblems.HeaderText = "Problems";
             this.columnProblems.Name = "columnProblems";
             this.columnProblems.ReadOnly = true;
@@ -1834,148 +2009,21 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
-            // groupNebula
+            // labelDebug1
             // 
-            this.groupNebula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupNebula.Controls.Add(this.labelNebulaAlpha);
-            this.groupNebula.Controls.Add(this.sliderNebulaAlpha);
-            this.groupNebula.Controls.Add(this.labelNebulaSize);
-            this.groupNebula.Controls.Add(this.numericNebulaSize);
-            this.groupNebula.Controls.Add(this.labelNebulaColor);
-            this.groupNebula.Controls.Add(this.buttonNebulaColor);
-            this.groupNebula.Controls.Add(this.labelNebulaName);
-            this.groupNebula.Controls.Add(this.boxNebulaName);
-            this.groupNebula.Controls.Add(this.labelNebulaType);
-            this.groupNebula.Controls.Add(this.comboNebulaType);
-            this.groupNebula.Location = new System.Drawing.Point(3, 215);
-            this.groupNebula.Name = "groupNebula";
-            this.groupNebula.Size = new System.Drawing.Size(214, 156);
-            this.groupNebula.TabIndex = 31;
-            this.groupNebula.TabStop = false;
-            this.groupNebula.Text = "Nebula";
-            // 
-            // labelNebulaAlpha
-            // 
-            this.labelNebulaAlpha.AutoSize = true;
-            this.labelNebulaAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNebulaAlpha.Location = new System.Drawing.Point(6, 102);
-            this.labelNebulaAlpha.Name = "labelNebulaAlpha";
-            this.labelNebulaAlpha.Size = new System.Drawing.Size(37, 13);
-            this.labelNebulaAlpha.TabIndex = 30;
-            this.labelNebulaAlpha.Text = "Alpha:";
-            // 
-            // sliderNebulaAlpha
-            // 
-            this.sliderNebulaAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sliderNebulaAlpha.AutoSize = false;
-            this.sliderNebulaAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.sliderNebulaAlpha.Location = new System.Drawing.Point(51, 98);
-            this.sliderNebulaAlpha.Maximum = 100;
-            this.sliderNebulaAlpha.Name = "sliderNebulaAlpha";
-            this.sliderNebulaAlpha.Size = new System.Drawing.Size(157, 23);
-            this.sliderNebulaAlpha.TabIndex = 29;
-            this.sliderNebulaAlpha.TickFrequency = 5;
-            this.sliderNebulaAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // labelNebulaSize
-            // 
-            this.labelNebulaSize.AutoSize = true;
-            this.labelNebulaSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNebulaSize.Location = new System.Drawing.Point(6, 129);
-            this.labelNebulaSize.Name = "labelNebulaSize";
-            this.labelNebulaSize.Size = new System.Drawing.Size(30, 13);
-            this.labelNebulaSize.TabIndex = 28;
-            this.labelNebulaSize.Text = "Size:";
-            // 
-            // numericNebulaSize
-            // 
-            this.numericNebulaSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericNebulaSize.DecimalPlaces = 1;
-            this.numericNebulaSize.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericNebulaSize.Location = new System.Drawing.Point(51, 127);
-            this.numericNebulaSize.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericNebulaSize.Name = "numericNebulaSize";
-            this.numericNebulaSize.Size = new System.Drawing.Size(157, 20);
-            this.numericNebulaSize.TabIndex = 27;
-            this.numericNebulaSize.ThousandsSeparator = true;
-            // 
-            // labelNebulaColor
-            // 
-            this.labelNebulaColor.AutoSize = true;
-            this.labelNebulaColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNebulaColor.Location = new System.Drawing.Point(6, 76);
-            this.labelNebulaColor.Name = "labelNebulaColor";
-            this.labelNebulaColor.Size = new System.Drawing.Size(34, 13);
-            this.labelNebulaColor.TabIndex = 26;
-            this.labelNebulaColor.Text = "Color:";
-            // 
-            // buttonNebulaColor
-            // 
-            this.buttonNebulaColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonNebulaColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNebulaColor.Location = new System.Drawing.Point(51, 72);
-            this.buttonNebulaColor.Name = "buttonNebulaColor";
-            this.buttonNebulaColor.Size = new System.Drawing.Size(157, 20);
-            this.buttonNebulaColor.TabIndex = 25;
-            this.buttonNebulaColor.UseVisualStyleBackColor = true;
-            // 
-            // labelNebulaName
-            // 
-            this.labelNebulaName.AutoSize = true;
-            this.labelNebulaName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNebulaName.Location = new System.Drawing.Point(6, 22);
-            this.labelNebulaName.Name = "labelNebulaName";
-            this.labelNebulaName.Size = new System.Drawing.Size(38, 13);
-            this.labelNebulaName.TabIndex = 24;
-            this.labelNebulaName.Text = "Name:";
-            // 
-            // boxNebulaName
-            // 
-            this.boxNebulaName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxNebulaName.Location = new System.Drawing.Point(51, 19);
-            this.boxNebulaName.Name = "boxNebulaName";
-            this.boxNebulaName.Size = new System.Drawing.Size(157, 20);
-            this.boxNebulaName.TabIndex = 23;
-            // 
-            // labelNebulaType
-            // 
-            this.labelNebulaType.AutoSize = true;
-            this.labelNebulaType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNebulaType.Location = new System.Drawing.Point(6, 48);
-            this.labelNebulaType.Name = "labelNebulaType";
-            this.labelNebulaType.Size = new System.Drawing.Size(34, 13);
-            this.labelNebulaType.TabIndex = 18;
-            this.labelNebulaType.Text = "Type:";
-            // 
-            // comboNebulaType
-            // 
-            this.comboNebulaType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboNebulaType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboNebulaType.FormattingEnabled = true;
-            this.comboNebulaType.Location = new System.Drawing.Point(51, 45);
-            this.comboNebulaType.Name = "comboNebulaType";
-            this.comboNebulaType.Size = new System.Drawing.Size(157, 21);
-            this.comboNebulaType.TabIndex = 17;
+            this.labelDebug1.AutoSize = true;
+            this.labelDebug1.Location = new System.Drawing.Point(436, 7);
+            this.labelDebug1.Name = "labelDebug1";
+            this.labelDebug1.Size = new System.Drawing.Size(35, 13);
+            this.labelDebug1.TabIndex = 13;
+            this.labelDebug1.Text = "label2";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1102, 746);
+            this.Controls.Add(this.labelDebug1);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);
@@ -2016,6 +2064,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
             this.tabSelection.ResumeLayout(false);
+            this.groupNebula.ResumeLayout(false);
+            this.groupNebula.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).EndInit();
             this.groupSquadron.ResumeLayout(false);
             this.groupSquadron.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).EndInit();
@@ -2040,14 +2092,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSelectionPositionX)).EndInit();
+            this.tabCreate.ResumeLayout(false);
+            this.tabCreate.PerformLayout();
             this.splitViewportAndProblems.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
-            this.groupNebula.ResumeLayout(false);
-            this.groupNebula.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2180,6 +2230,10 @@
         public System.Windows.Forms.TextBox boxNebulaName;
         private System.Windows.Forms.Label labelNebulaType;
         public System.Windows.Forms.ComboBox comboNebulaType;
+        private System.Windows.Forms.Label labelCreationType;
+        public System.Windows.Forms.ComboBox comboCreationType;
+        public System.Windows.Forms.TabPage tabCreate;
+        public System.Windows.Forms.Label labelDebug1;
     }
 }
 

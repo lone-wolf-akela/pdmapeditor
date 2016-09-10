@@ -40,6 +40,7 @@ namespace PDMapEditor
             Importer.Init();
             Renderer.Init();
             Selection.Init();
+            Creation.Init();
 
             HWData.ParseDataPaths();
 
@@ -114,8 +115,13 @@ namespace PDMapEditor
 
         public void glControl_MouseMove(object sender, MouseEventArgs e)
         {
-            Selection.UpdateDragging(e.X, Program.GLControl.ClientSize.Height - e.Y);
-            Selection.UpdateRectangleSelection(e.X, Program.GLControl.ClientSize.Height - e.Y);
+            int x = e.X;
+            int y = Program.GLControl.ClientSize.Height - e.Y;
+
+            Selection.UpdateDragging(x, y);
+            Selection.UpdateRectangleSelection(x, y);
+
+            Creation.UpdateObjectAtCursor(x, y);
         }
 
         public void glControl_MouseDown(object sender, MouseEventArgs e)
@@ -131,9 +137,15 @@ namespace PDMapEditor
         {
             Program.Camera.MouseUp(e);
 
-            //Selecting
+            int x = e.X;
+            int y = Program.GLControl.ClientSize.Height - e.Y;
+
             if (e.Button == MouseButtons.Left)
-                Selection.LeftMouseUp(e.X, Program.GLControl.ClientSize.Height - e.Y);
+            {
+                Selection.LeftMouseUp(x, y);
+                Creation.LeftMouseUp(x, y);
+
+            }
         }
 
         public void glControl_KeyDown(object sender, PreviewKeyDownEventArgs e)

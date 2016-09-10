@@ -19,6 +19,19 @@ namespace PDMapEditor
 
         public bool AllowRotation { get; set; }
 
+        public Asteroid() : base(Vector3.Zero, Vector3.Zero)
+        {
+            type = AsteroidType.AsteroidTypes[0];
+
+            Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Asteroid);
+            Mesh.Material.DiffuseColor = new Vector3(type.PixelColor);
+
+            Type = type;
+
+            Asteroids.Add(this);
+            AllowRotation = true;
+        }
+
         public Asteroid(AsteroidType type, Vector3 position, Vector3 rotation, float multiplier, float rotSpeed) : base (position, rotation)
         {
             Mesh = new Mesh(position, rotation, Mesh.Asteroid);
@@ -39,6 +52,13 @@ namespace PDMapEditor
             float scale = Type.ResourceValue / 140;
             scale = Math.Max(scale, 35);
             Mesh.Scale = new Vector3(scale);
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Asteroids.Remove(this);
         }
     }
 }

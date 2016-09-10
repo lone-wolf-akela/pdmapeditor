@@ -176,6 +176,11 @@ namespace PDMapEditor
             mouseClickX = x;
             mouseClickY = y;
 
+            if (Creation.CreatedDrawable != null)
+            {
+                return; //Don't select when the user is creating an object
+            }
+
             ISelectable objectAtMouse = GetObjectAtPixel(x, y);
 
             if (objectAtMouse == gizmoPosX)
@@ -289,6 +294,11 @@ namespace PDMapEditor
 
         public static void LeftMouseUp(int x, int y)
         {
+            if (Creation.CreatedDrawable != null)
+            {
+                return; //Don't select when the user is creating an object
+            }
+
             if (draggingState == DraggingState.NONE)
             {
                 if (rectangleSelecting) //Rectangle selection
@@ -308,21 +318,23 @@ namespace PDMapEditor
 
                     if (objects.Count > 0)
                     {
-                        Selected.Clear();
+                        if (!ActionKey.IsDown(Action.SELECTION_ADD)) //Clear previous selection if the user does not want to add to selection
+                            Selected.Clear();
+
                         foreach (ISelectable obj in objects)
                         {
-                            Selected.Add(obj);
+                            if (obj != gizmoPosX && obj != gizmoPosY && obj != gizmoPosZ && obj != gizmoRotX && obj != gizmoRotY && obj != gizmoRotZ)
+                                Selected.Add(obj);
                         }
                     }
                 }
                 else //Single selection
                 {
                     ISelectable objectAtMouse = GetObjectAtPixel(x, y);
-                    Drawable drawable = objectAtMouse as Drawable;
 
-                    if (drawable != null)
+                    if (objectAtMouse != null)
                     {
-                        if (drawable != gizmoPosX && drawable != gizmoPosY && drawable != gizmoPosZ && drawable != gizmoRotX && drawable != gizmoRotY && drawable != gizmoRotZ)
+                        if (objectAtMouse != gizmoPosX && objectAtMouse != gizmoPosY && objectAtMouse != gizmoPosZ && objectAtMouse != gizmoRotX && objectAtMouse != gizmoRotY && objectAtMouse != gizmoRotZ)
                             if (ActionKey.IsDown(Action.SELECTION_ADD))
                                 Selected.Add(objectAtMouse);
                             else
@@ -373,7 +385,7 @@ namespace PDMapEditor
             }
 
             if(!Program.main.tabControlLeft.TabPages.Contains(Program.main.tabSelection))
-                Program.main.tabControlLeft.TabPages.Add(Program.main.tabSelection);
+                Program.main.tabControlLeft.TabPages.Insert(1, Program.main.tabSelection);
 
             Program.main.tabControlLeft.SelectedIndex = 1;
 

@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="ActionKey.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Creation.cs" />
     <Compile Include="data\NebulaType.cs" />
     <Compile Include="data\FamilyList.cs" />
     <Compile Include="data\ShipType.cs" />
@@ -242,7 +243,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

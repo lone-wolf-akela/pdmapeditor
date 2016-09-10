@@ -316,11 +316,16 @@ namespace PDMapEditor
             // Update model view matrices
             foreach (Drawable drawable in Drawable.Drawables)
             {
-                if (drawable.Visible)
+                if (drawable.Visible && (drawable.lastPosition != drawable.Position || drawable.lastRotation != drawable.Rotation || drawable.Mesh.Scale != drawable.Mesh.LastScale))
                 {
                     drawable.Mesh.CalculateModelMatrix();
-                    drawable.Mesh.ModelViewProjectionMatrix = drawable.Mesh.ModelMatrix * ViewProjection;
+
+                    drawable.lastPosition = drawable.Position;
+                    drawable.lastRotation = drawable.Rotation;
+                    drawable.Mesh.LastScale = drawable.Mesh.Scale;
                 }
+
+                drawable.Mesh.ModelViewProjectionMatrix = drawable.Mesh.ModelMatrix * ViewProjection;
             }
         }
 

@@ -15,6 +15,14 @@ namespace PDMapEditor
 
         public bool AllowRotation { get; set; }
 
+        public Pebble() : base (Vector3.Zero)
+        {
+            Type = PebbleType.PebbleTypes[0];
+
+            Mesh = new MeshDot(Vector3.Zero, new Vector3(Type.PixelColor), Type.PixelSize); //TODO: Use alpha value of pebble type
+            Pebbles.Add(this);
+            AllowRotation = false;
+        }
         public Pebble(PebbleType type, Vector3 position, Vector3 rotation) : base (position)
         {
             Type = type;
@@ -23,6 +31,13 @@ namespace PDMapEditor
             Mesh = new MeshDot(position, new Vector3(type.PixelColor), type.PixelSize); //TODO: Use alpha value of pebble type
             Pebbles.Add(this);
             AllowRotation = false;
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Pebbles.Remove(this);
         }
     }
 }

@@ -25,12 +25,29 @@ namespace PDMapEditor
 
         public bool AllowRotation { get; set; }
 
+        public Nebula() : base(Vector3.Zero)
+        {
+            Name = "nebula" + (Nebulas.Count + 1);
+
+            Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One);
+            Mesh.Material.Translucent = true;
+
+            Size = 7000;
+            Mesh.Scale = new Vector3(Size);
+            Nebulas.Add(this);
+
+            Type = NebulaType.NebulaTypes[0];
+            
+            Color = Vector4.One;
+
+            AllowRotation = false;
+        }
         public Nebula(string name, NebulaType type, Vector3 position, Vector4 color, float unknown, float size) : base (position)
         {
             Name = name;
             Unknown = unknown;
 
-            Mesh = new MeshIcosphere(position, Vector3.One, false);
+            Mesh = new MeshIcosphere(position, Vector3.One);
             Mesh.Material.Translucent = true;
             Mesh.Scale = new Vector3(size);
 
@@ -52,6 +69,13 @@ namespace PDMapEditor
         {
             Mesh.Material.DiffuseColor = new Vector3(Color);
             Mesh.Material.Opacity = Color.W * 0.1f;
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Nebulas.Remove(this);
         }
     }
 }

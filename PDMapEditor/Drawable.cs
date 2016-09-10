@@ -17,6 +17,9 @@ namespace PDMapEditor
         private Vector3 rotation;
         public override Vector3 Rotation { get { return rotation; } set { rotation = value; if (Mesh != null) Mesh.Rotation = value; } }
 
+        public Vector3 lastPosition;
+        public Vector3 lastRotation;
+
         public Mesh Mesh;
         public bool Visible = true;
 
@@ -48,6 +51,12 @@ namespace PDMapEditor
             Mesh = new Mesh(position, rotation, assMesh);
 
             Drawables.Add(this);
+        }
+
+        public virtual void Destroy()
+        {
+            Drawables.Remove(this);
+            Mesh.Remove();
         }
     }
 }

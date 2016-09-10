@@ -16,7 +16,7 @@ namespace PDMapEditor
         private DustCloudType type;
         public DustCloudType Type { get { return type; } set { type = value; UpdateColor(); } }
 
-        private Vector4 color;
+        private Vector4 color = Vector4.One;
         public Vector4 Color { get { return color; } set { color = value; UpdateColor(); } }
 
         public float Unknown1;
@@ -26,6 +26,20 @@ namespace PDMapEditor
 
         public bool AllowRotation { get; set; }
 
+        public DustCloud() : base (Vector3.Zero)
+        {
+            Name = "dustCloud" + (DustClouds.Count + 1);
+
+            Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One, true);
+            Mesh.Material.Translucent = true;
+
+            Size = 2000;
+            Mesh.Scale = new Vector3(Size);
+            Type = DustCloudType.DustCloudTypes[0];
+            Color = Vector4.One;
+            DustClouds.Add(this);
+            AllowRotation = false;
+        }
         public DustCloud(string name, DustCloudType type, Vector3 position, Vector4 color, float unknown1, float size) : base (position)
         {
             Name = name;
@@ -53,6 +67,13 @@ namespace PDMapEditor
         {
             Mesh.Material.DiffuseColor = Vector3.Multiply(new Vector3(Color), new Vector3(Type.PixelColor));
             Mesh.Material.Opacity = Color.W * Type.PixelColor.W * 0.1f;
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            DustClouds.Remove(this);
         }
     }
 }
