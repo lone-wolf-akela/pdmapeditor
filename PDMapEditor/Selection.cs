@@ -61,6 +61,7 @@ namespace PDMapEditor
         //public static ISelectable Selected { get { return selected; } set { selected = value; UpdateSelectionGUI(); UpdateSelectionGizmos(); } }
 
         public static ObservableCollection<ISelectable> Selected = new ObservableCollection<ISelectable>();
+        public static List<ISelectable> Copied = new List<ISelectable>();
 
         public static void Init()
         {
@@ -324,7 +325,8 @@ namespace PDMapEditor
                         foreach (ISelectable obj in objects)
                         {
                             if (obj != gizmoPosX && obj != gizmoPosY && obj != gizmoPosZ && obj != gizmoRotX && obj != gizmoRotY && obj != gizmoRotZ)
-                                Selected.Add(obj);
+                                if(!Selected.Contains(obj))
+                                    Selected.Add(obj);
                         }
                     }
                 }
@@ -849,6 +851,36 @@ namespace PDMapEditor
                 else
                     SystemSounds.Beep.Play();
             }
+            if (ActionKey.IsDown(Action.SELECTION_DELETE))
+            {
+                foreach (ISelectable selectable in Selected)
+                {
+                    selectable.Destroy();
+                }
+
+                Selected.Clear();
+
+                Renderer.UpdateMeshData();
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
+            if (ActionKey.IsDown(Action.SELECTION_COPY))
+            {
+                Copied = Selected.ToList();
+            }
+            else if (ActionKey.IsDown(Action.SELECTION_PASTE))
+            {
+                Selected.Clear();
+
+                foreach(ISelectable obj in Copied)
+                {
+                    Selected.Add(obj.Copy());
+                }
+
+                Renderer.UpdateMeshData();
+                Renderer.UpdateView();
+                Program.GLControl.Invalidate();
+            }
         }
 
         public static void UpdateDragging(int mouseX, int mouseY)
@@ -1113,7 +1145,7 @@ namespace PDMapEditor
 
             Mesh mesh = drawable.Mesh;
 
-            GL.PointSize(mesh.DotSize * 2); //Render larger dots for easier selection of pebbles
+            GL.PointSize(mesh.DotSize * 3); //Render larger dots for easier selection of pebbles
             GL.LineWidth(mesh.LineWidth);
 
             Matrix4 model = mesh.ModelMatrix;

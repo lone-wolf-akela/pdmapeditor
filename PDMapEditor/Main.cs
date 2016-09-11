@@ -82,6 +82,12 @@ namespace PDMapEditor
 
             Program.Camera.Update();
             Program.Camera.UpdatePanning();
+
+            labelDebug1.Text = "";
+            foreach(Keys key in ActionKey.pressedKeys)
+            {
+                labelDebug1.Text += ", " + key.ToString();
+            }
         }
 
         public void glControl_Render(object sender, PaintEventArgs e)
@@ -111,6 +117,12 @@ namespace PDMapEditor
         public void glControl_MouseLeave(object sender, EventArgs e)
         {
             this.Focus();
+            ActionKey.LostFocus();
+        }
+
+        public void glControl_LostFocus(object sender, EventArgs e)
+        {
+            ActionKey.LostFocus();
         }
 
         public void glControl_MouseMove(object sender, MouseEventArgs e)

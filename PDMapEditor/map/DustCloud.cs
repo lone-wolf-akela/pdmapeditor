@@ -75,5 +75,10 @@ namespace PDMapEditor
 
             DustClouds.Remove(this);
         }
+
+        public ISelectable Copy()
+        {
+            return new DustCloud(Name, Type, Position, Color, Unknown1, Size);
+        }
     }
 }

@@ -41,6 +41,11 @@ namespace PDMapEditor
 
             new ActionKey("Focus selection", Action.CAM_FOCUS_SELECTION, Keys.F);
             new ActionKey("Add to selection", Action.SELECTION_ADD, Keys.ControlKey, true);
+
+            new ActionKey("Delete selection", Action.SELECTION_DELETE, Keys.Delete);
+
+            new ActionKey("Copy selection", Action.SELECTION_COPY, Keys.C, true);
+            new ActionKey("Paste copied", Action.SELECTION_PASTE, Keys.V, true);
         }
 
         public static void KeyDown(PreviewKeyDownEventArgs e)
@@ -63,6 +68,13 @@ namespace PDMapEditor
 
             if (e.KeyCode == Keys.ControlKey)
                 controlActive = false;
+        }
+
+        public static void LostFocus()
+        {
+            pressedKeys.Clear();
+            controlActive = false;
+            altActive = false;
         }
 
         public static bool IsDown(Action action)
@@ -107,7 +119,6 @@ namespace PDMapEditor
         }
     }
 
-    [Flags]
     public enum Action
     {
         TOGGLE_ORTHOGRAPHIC,
@@ -128,5 +139,8 @@ namespace PDMapEditor
         MODE_ROTATION,
         CAM_FOCUS_SELECTION,
         SELECTION_ADD,
+        SELECTION_DELETE,
+        SELECTION_COPY,
+        SELECTION_PASTE,
     }
 }

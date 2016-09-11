@@ -18,5 +18,10 @@ namespace PDMapEditor
 
             AllowRotation = true;
         }
+
+        public ISelectable Copy()
+        {
+            return null;
+        }
     }
 }

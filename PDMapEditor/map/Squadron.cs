@@ -56,5 +56,10 @@ namespace PDMapEditor
 
             Squadrons.Remove(this);
         }
+
+        public ISelectable Copy()
+        {
+            return new Squadron(Name, Position, Rotation, Type, Player, SquadronSize, InHyperspace);
+        }
     }
 }

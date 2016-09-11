@@ -57,6 +57,8 @@ namespace PDMapEditor
             {
                 CreatedDrawable.Destroy();
                 Renderer.UpdateMeshData();
+
+                CreatedDrawable = null;
             }
         }
 
@@ -82,6 +84,7 @@ namespace PDMapEditor
             if (CreatedDrawable != null)
             {
                 CreatedDrawable = null;
+                CreateObjectAtCursor();
             }
         }
 

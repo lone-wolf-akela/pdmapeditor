@@ -13,5 +13,8 @@ namespace PDMapEditor
         Vector3 Rotation { get; set; }
 
         bool AllowRotation { get; }
+
+        void Destroy();
+        ISelectable Copy();
     }
 }

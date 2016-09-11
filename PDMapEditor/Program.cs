@@ -65,6 +65,7 @@ namespace PDMapEditor
             GLControl.MouseMove += new System.Windows.Forms.MouseEventHandler(main.glControl_MouseMove);
             GLControl.MouseUp += new System.Windows.Forms.MouseEventHandler(main.glControl_MouseUp);
             GLControl.Resize += new System.EventHandler(main.glControl_Resize);
+            GLControl.LostFocus += new EventHandler(main.glControl_LostFocus);
 
             main.splitViewportAndProblems.Panel1.Controls.Add(GLControl);
         }

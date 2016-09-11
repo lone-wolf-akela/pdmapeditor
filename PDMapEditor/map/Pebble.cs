@@ -39,5 +39,10 @@ namespace PDMapEditor
 
             Pebbles.Remove(this);
         }
+
+        public ISelectable Copy()
+        {
+            return new Pebble(Type, Position, Rotation);
+        }
     }
 }

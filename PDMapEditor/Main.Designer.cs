@@ -162,6 +162,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
             this.labelDebug1 = new System.Windows.Forms.Label();
+            this.labelDebug2 = new System.Windows.Forms.Label();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -2012,17 +2013,27 @@
             // labelDebug1
             // 
             this.labelDebug1.AutoSize = true;
-            this.labelDebug1.Location = new System.Drawing.Point(436, 7);
+            this.labelDebug1.Location = new System.Drawing.Point(363, 5);
             this.labelDebug1.Name = "labelDebug1";
             this.labelDebug1.Size = new System.Drawing.Size(35, 13);
             this.labelDebug1.TabIndex = 13;
             this.labelDebug1.Text = "label2";
+            // 
+            // labelDebug2
+            // 
+            this.labelDebug2.AutoSize = true;
+            this.labelDebug2.Location = new System.Drawing.Point(476, 5);
+            this.labelDebug2.Name = "labelDebug2";
+            this.labelDebug2.Size = new System.Drawing.Size(35, 13);
+            this.labelDebug2.TabIndex = 14;
+            this.labelDebug2.Text = "label2";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1102, 746);
+            this.Controls.Add(this.labelDebug2);
             this.Controls.Add(this.labelDebug1);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
@@ -2234,6 +2245,7 @@
         public System.Windows.Forms.ComboBox comboCreationType;
         public System.Windows.Forms.TabPage tabCreate;
         public System.Windows.Forms.Label labelDebug1;
+        public System.Windows.Forms.Label labelDebug2;
     }
 }
 

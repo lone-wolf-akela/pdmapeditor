@@ -43,5 +43,10 @@ namespace PDMapEditor
 
             Points.Remove(this);
         }
+
+        public ISelectable Copy()
+        {
+            return new Point(Name, Position, Rotation);
+        }
     }
 }

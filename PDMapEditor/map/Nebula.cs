@@ -77,5 +77,10 @@ namespace PDMapEditor
 
             Nebulas.Remove(this);
         }
+
+        public ISelectable Copy()
+        {
+            return new Nebula(Name, Type, Position, Color, Unknown, Size);
+        }
     }
 }

@@ -60,5 +60,10 @@ namespace PDMapEditor
 
             Asteroids.Remove(this);
         }
+
+        public ISelectable Copy()
+        {
+            return new Asteroid(Type, Position, Rotation, Multiplier, RotSpeed);
+        }
     }
 }
