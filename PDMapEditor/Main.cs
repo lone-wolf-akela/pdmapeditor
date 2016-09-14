@@ -89,6 +89,8 @@ namespace PDMapEditor
             {
                 labelDebug1.Text += ", " + key.ToString();
             }
+
+            Creation.UpdateObjectAtCursor();
         }
 
         public void glControl_Render(object sender, PaintEventArgs e)
@@ -133,8 +135,6 @@ namespace PDMapEditor
 
             Selection.UpdateDragging(x, y);
             Selection.UpdateRectangleSelection(x, y);
-
-            Creation.UpdateObjectAtCursor(x, y);
         }
 
         public void glControl_MouseDown(object sender, MouseEventArgs e)

@@ -2,6 +2,7 @@
 using OpenTK.Graphics.OpenGL;
 using System.Collections.Generic;
 using OpenTK;
+using System.Windows.Forms;
 
 namespace PDMapEditor
 {
@@ -187,10 +188,14 @@ namespace PDMapEditor
             Renderer.UpdateMeshData();
         }
 
-        public static void UpdateObjectAtCursor(int x, int y)
+        public static void UpdateObjectAtCursor()
         {
             if (CreatedDrawable != null)
             {
+                System.Drawing.Point pressPos = Program.GLControl.PointToClient(Cursor.Position);
+                int x = pressPos.X;
+                int y = Program.GLControl.ClientSize.Height - pressPos.Y;
+
                 CreatedDrawable.Position = ScreenToWorldCoord(x, y);
             }
         }
