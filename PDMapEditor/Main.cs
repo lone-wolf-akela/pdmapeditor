@@ -39,10 +39,11 @@ namespace PDMapEditor
 
             Importer.Init();
             Renderer.Init();
-            Selection.Init();
-            Creation.Init();
 
             HWData.ParseDataPaths();
+
+            Creation.Init();
+            Selection.Init();
 
             Application.Idle += glControl_Update;
             Program.DeltaCounter.Start();

@@ -21,11 +21,11 @@ namespace PDMapEditor
 
         public Squadron() : base (Vector3.Zero, Vector3.Zero)
         {
-            Name = "Squadron" + Squadrons.Count;
-            Type = ShipType.ShipTypes[0];
-            Player = -1;
-            SquadronSize = 0;
-            InHyperspace = false;
+            Name = Program.main.boxSquadronName.Text;
+            Type = ShipType.GetTypeFromComboIndex(Program.main.comboSquadronType.SelectedIndex);
+            Player = Program.main.comboSquadronPlayer.SelectedIndex - 1;
+            SquadronSize = (int)Program.main.numericSquadronSize.Value;
+            InHyperspace = Program.main.checkSquadronInHyperspace.Checked;
 
             Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Cube);
             Mesh.Material.DiffuseColor = new Vector3(1, 1, 1);

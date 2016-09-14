@@ -220,7 +220,7 @@ namespace PDMapEditor
             DustCloud.DustClouds.Clear();
 
             Problem.Problems.Clear();
-
+            
             Map.MapDimensions = new Vector3(20000, 20000, 20000);
             Map.FogActive = false;
             Map.FogStart = 100;

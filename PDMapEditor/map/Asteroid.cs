@@ -21,12 +21,13 @@ namespace PDMapEditor
 
         public Asteroid() : base(Vector3.Zero, Vector3.Zero)
         {
-            type = AsteroidType.AsteroidTypes[0];
+            type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
 
             Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Asteroid);
             Mesh.Material.DiffuseColor = new Vector3(type.PixelColor);
 
             Type = type;
+            Multiplier = (float)Program.main.numericAsteroidResourceMultiplier.Value;
 
             Asteroids.Add(this);
             AllowRotation = true;

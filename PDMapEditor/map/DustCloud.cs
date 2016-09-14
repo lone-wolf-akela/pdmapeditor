@@ -1,6 +1,7 @@
 ﻿using OpenTK;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,15 +29,17 @@ namespace PDMapEditor
 
         public DustCloud() : base (Vector3.Zero)
         {
-            Name = "dustCloud" + (DustClouds.Count + 1);
+            Name = Program.main.boxDustCloudName.Text;
 
             Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One, true);
             Mesh.Material.Translucent = true;
 
-            Size = 2000;
+            Size = (float)Program.main.numericDustCloudSize.Value;
             Mesh.Scale = new Vector3(Size);
-            Type = DustCloudType.DustCloudTypes[0];
-            Color = Vector4.One;
+            Type = DustCloudType.GetTypeFromComboIndex(Program.main.comboDustCloudType.SelectedIndex);
+
+            Color buttonColor = Program.main.buttonDustCloudColor.BackColor;
+            Color = new Vector4((float)buttonColor.R / 255, (float)buttonColor.G / 255, (float)buttonColor.B / 255, (float)Program.main.sliderDustCloudAlpha.Value / 100);
             DustClouds.Add(this);
             AllowRotation = false;
         }

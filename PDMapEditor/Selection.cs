@@ -368,7 +368,7 @@ namespace PDMapEditor
             Program.GLControl.Invalidate();
         }
 
-        private static void UpdateSelectionGUI()
+        public static void UpdateSelectionGUI()
         {
             Program.main.groupSelectionRotation.Visible = false;
 
@@ -485,11 +485,23 @@ namespace PDMapEditor
         #region Asteroid
         private static void AsteroidResourceMultiplierChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Asteroid selectedAsteroid = Selected[0] as Asteroid;
             selectedAsteroid.Multiplier = (float)Program.main.numericAsteroidResourceMultiplier.Value;
         }
         private static void AsteroidTypeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Asteroid selectedAsteroid = Selected[0] as Asteroid;
             selectedAsteroid.Type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
 
@@ -501,17 +513,35 @@ namespace PDMapEditor
         #region Dust cloud
         private static void DustCloudNameChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Name = Program.main.boxDustCloudName.Text;
         }
         private static void DustCloudTypeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Type = DustCloudType.GetTypeFromComboIndex(Program.main.comboDustCloudType.SelectedIndex);
             Program.GLControl.Invalidate();
         }
         private static void DustCloudColorClicked(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Program.main.colorDialog.Color = Program.main.buttonDustCloudColor.BackColor;
             DialogResult result = Program.main.colorDialog.ShowDialog();
             if (result == DialogResult.OK)
@@ -526,6 +556,12 @@ namespace PDMapEditor
         }
         private static void DustCloudAlphaChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Color = new Vector4(selectedDustCloud.Color.X, selectedDustCloud.Color.Y, selectedDustCloud.Color.Z, (float)Program.main.sliderDustCloudAlpha.Value / 100);
             Program.GLControl.Invalidate();
@@ -533,6 +569,12 @@ namespace PDMapEditor
 
         private static void DustCloudSizeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
             selectedDustCloud.Size = (float)Program.main.numericDustCloudSize.Value;
 
@@ -544,17 +586,35 @@ namespace PDMapEditor
         #region Nebula
         private static void NebulaNameChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Nebula selected = Selected[0] as Nebula;
             selected.Name = Program.main.boxNebulaName.Text;
         }
         private static void NebulaTypeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Nebula selected = Selected[0] as Nebula;
             selected.Type = NebulaType.GetTypeFromComboIndex(Program.main.comboNebulaType.SelectedIndex);
             Program.GLControl.Invalidate();
         }
         private static void NebulaColorClicked(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Program.main.colorDialog.Color = Program.main.buttonNebulaColor.BackColor;
             DialogResult result = Program.main.colorDialog.ShowDialog();
             if (result == DialogResult.OK)
@@ -569,6 +629,12 @@ namespace PDMapEditor
         }
         private static void NebulaAlphaChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Nebula selected = Selected[0] as Nebula;
             selected.Color = new Vector4(selected.Color.X, selected.Color.Y, selected.Color.Z, (float)Program.main.sliderNebulaAlpha.Value / 100);
             Program.GLControl.Invalidate();
@@ -576,6 +642,12 @@ namespace PDMapEditor
 
         private static void NebulaSizeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Nebula selected = Selected[0] as Nebula;
             selected.Size = (float)Program.main.numericNebulaSize.Value;
 
@@ -587,6 +659,12 @@ namespace PDMapEditor
         #region Point
         private static void PointNameChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Point selectedPoint = Selected[0] as Point;
             selectedPoint.Name = Program.main.boxPointName.Text;
         }
@@ -595,6 +673,12 @@ namespace PDMapEditor
         #region Pebble
         private static void PebbleTypeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Pebble selectedPebble = Selected[0] as Pebble;
             selectedPebble.Type = PebbleType.GetTypeFromComboIndex(selectedPebble.Type.ComboIndex);
             Program.GLControl.Invalidate();
@@ -604,27 +688,57 @@ namespace PDMapEditor
         #region Squadron
         private static void SquadronNameChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Squadron selected = Selected[0] as Squadron;
             selected.Name = Program.main.boxSquadronName.Text;
         }
         private static void SquadronTypeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Squadron selected = Selected[0] as Squadron;
             selected.Type = ShipType.GetTypeFromComboIndex(Program.main.comboSquadronType.SelectedIndex);
         }
         private static void SquadronPlayerChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Squadron selected = Selected[0] as Squadron;
             selected.Player = Program.main.comboSquadronPlayer.SelectedIndex - 1;
         }
         private static void SquadronSizeChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Squadron selected = Selected[0] as Squadron;
             selected.SquadronSize = (int)Program.main.numericSquadronSize.Value;
         }
 
         private static void SquadronInHyperspaceChanged(object sender, EventArgs e)
         {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
             Squadron selected = Selected[0] as Squadron;
             selected.InHyperspace = Program.main.checkSquadronInHyperspace.Checked;
         }
@@ -808,6 +922,14 @@ namespace PDMapEditor
                     gizmoPosZ.Mesh.Material.Opacity = opacity;
                 }
             }
+        }
+
+        private static bool IsSelectionTabActive()
+        {
+            if (Program.main.tabControlLeft.SelectedTab == Program.main.tabSelection)
+                return true;
+            else
+                return false;
         }
 
         public static void KeyDown()

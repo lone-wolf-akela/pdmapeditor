@@ -33,6 +33,23 @@ namespace PDMapEditor
             //Register events
             Program.main.tabControlLeft.SelectedIndexChanged += new EventHandler(SelectedTabChanged);
             Program.main.comboCreationType.SelectedIndexChanged += new EventHandler(TypeToCreateChanged);
+
+            //Set default object settings
+            Program.main.comboAsteroidType.SelectedIndex = 0;
+            Program.main.numericAsteroidResourceMultiplier.Value = 100;
+
+            Program.main.comboPebbleType.SelectedIndex = 0;
+
+            Program.main.comboDustCloudType.SelectedIndex = 0;
+            Program.main.numericDustCloudSize.Value = 2000;
+            Program.main.sliderDustCloudAlpha.Value = 100;
+
+            Program.main.comboSquadronType.SelectedIndex = 0;
+            Program.main.comboSquadronPlayer.SelectedIndex = 0;
+
+            Program.main.comboNebulaType.SelectedIndex = 0;
+            Program.main.numericNebulaSize.Value = 5000;
+            Program.main.sliderNebulaAlpha.Value = 100;
         }
 
         static void TypeToCreateChanged(object sender, EventArgs e)
@@ -40,15 +57,113 @@ namespace PDMapEditor
             typeToCreate = objectTypes[Program.main.comboCreationType.SelectedIndex];
 
             if (Program.main.tabControlLeft.SelectedTab == Program.main.tabCreate)
+            {
                 CreateObjectAtCursor();
+                UpdateGroupType();
+            }
         }
 
         static void SelectedTabChanged(object sender, EventArgs e)
         {
             if (Program.main.tabControlLeft.SelectedTab == Program.main.tabCreate)
+            {
                 CreateObjectAtCursor();
-            else
+                UpdateGroupType();
+            }
+            else if(Program.main.tabControlLeft.SelectedTab == Program.main.tabSelection)
+            {
                 DestroyObjectAtCursor();
+                ResetGroupType();
+                Selection.UpdateSelectionGUI();
+            }
+            else
+            {
+                DestroyObjectAtCursor();
+                ResetGroupType();
+            }
+        }
+
+        static void UpdateGroupType()
+        {
+            Program.main.groupAsteroid.Visible = false;
+            Program.main.groupPebble.Visible = false;
+            Program.main.groupPoint.Visible = false;
+            Program.main.groupDustCloud.Visible = false;
+            Program.main.groupSquadron.Visible = false;
+            Program.main.groupNebula.Visible = false;
+
+            if (typeToCreate == typeof(Asteroid))
+            {
+                Program.main.tabCreate.Controls.Add(Program.main.groupAsteroid);
+                Program.main.groupAsteroid.Location = new System.Drawing.Point(3, 33);
+                Program.main.groupAsteroid.Visible = true;
+            }
+            else if (typeToCreate == typeof(Pebble))
+            {
+                Program.main.tabCreate.Controls.Add(Program.main.groupPebble);
+                Program.main.groupPebble.Location = new System.Drawing.Point(3, 33);
+                Program.main.groupPebble.Visible = true;
+            }
+            else if (typeToCreate == typeof(Point))
+            {
+                Program.main.boxPointName.Text = "Point" + (Point.Points.Count);
+
+                Program.main.tabCreate.Controls.Add(Program.main.groupPoint);
+                Program.main.groupPoint.Location = new System.Drawing.Point(3, 33);
+                Program.main.groupPoint.Visible = true;
+            }
+            else if (typeToCreate == typeof(DustCloud))
+            {
+                Program.main.boxDustCloudName.Text = "dustCloud" + (DustCloud.DustClouds.Count + 1);
+
+                Program.main.tabCreate.Controls.Add(Program.main.groupDustCloud);
+                Program.main.groupDustCloud.Location = new System.Drawing.Point(3, 33);
+                Program.main.groupDustCloud.Visible = true;
+            }
+            else if (typeToCreate == typeof(Squadron))
+            {
+                Program.main.boxSquadronName.Text = "Squadron" + Squadron.Squadrons.Count;
+
+                Program.main.tabCreate.Controls.Add(Program.main.groupSquadron);
+                Program.main.groupSquadron.Location = new System.Drawing.Point(3, 33);
+                Program.main.groupSquadron.Visible = true;
+            }
+            else if (typeToCreate == typeof(Nebula))
+            {
+                Program.main.boxNebulaName.Text = "nebula" + (Nebula.Nebulas.Count + 1);
+
+                Program.main.tabCreate.Controls.Add(Program.main.groupNebula);
+                Program.main.groupNebula.Location = new System.Drawing.Point(3, 33);
+                Program.main.groupNebula.Visible = true;
+            }
+        }
+        
+        static void ResetGroupType()
+        {
+            Program.main.groupAsteroid.Visible = false;
+            Program.main.groupPebble.Visible = false;
+            Program.main.groupPoint.Visible = false;
+            Program.main.groupDustCloud.Visible = false;
+            Program.main.groupSquadron.Visible = false;
+            Program.main.groupNebula.Visible = false;
+
+            Program.main.tabSelection.Controls.Add(Program.main.groupAsteroid);
+            Program.main.groupAsteroid.Location = new System.Drawing.Point(3, 215);
+
+            Program.main.tabSelection.Controls.Add(Program.main.groupPebble);
+            Program.main.groupPebble.Location = new System.Drawing.Point(3, 215);
+
+            Program.main.tabSelection.Controls.Add(Program.main.groupPoint);
+            Program.main.groupPoint.Location = new System.Drawing.Point(3, 215);
+
+            Program.main.tabSelection.Controls.Add(Program.main.groupDustCloud);
+            Program.main.groupDustCloud.Location = new System.Drawing.Point(3, 215);
+
+            Program.main.tabSelection.Controls.Add(Program.main.groupSquadron);
+            Program.main.groupSquadron.Location = new System.Drawing.Point(3, 215);
+
+            Program.main.tabSelection.Controls.Add(Program.main.groupNebula);
+            Program.main.groupNebula.Location = new System.Drawing.Point(3, 215);
         }
 
         static void DestroyObjectAtCursor()
@@ -62,11 +177,12 @@ namespace PDMapEditor
             }
         }
 
-        static void CreateObjectAtCursor()
+        public static void CreateObjectAtCursor()
         {
             DestroyObjectAtCursor();
 
             CreatedDrawable = (Drawable)Activator.CreateInstance(typeToCreate);
+            UpdateGroupType();
 
             Renderer.UpdateMeshData();
         }

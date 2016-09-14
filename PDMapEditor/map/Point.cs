@@ -16,7 +16,7 @@ namespace PDMapEditor
 
         public Point() : base (Vector3.Zero, Vector3.Zero)
         {
-            Name = "Point" + (Points.Count);
+            Name = Program.main.boxPointName.Text;
 
             Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Point);
             Mesh.Material.DiffuseColor = new Vector3(1, 0, 0);

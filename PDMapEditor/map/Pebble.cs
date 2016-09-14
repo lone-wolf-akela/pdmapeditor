@@ -17,7 +17,7 @@ namespace PDMapEditor
 
         public Pebble() : base (Vector3.Zero)
         {
-            Type = PebbleType.PebbleTypes[0];
+            Type = PebbleType.GetTypeFromComboIndex(Program.main.comboPebbleType.SelectedIndex);
 
             Mesh = new MeshDot(Vector3.Zero, new Vector3(Type.PixelColor), Type.PixelSize); //TODO: Use alpha value of pebble type
             Pebbles.Add(this);

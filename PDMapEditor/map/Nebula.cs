@@ -1,6 +1,7 @@
 ﻿using OpenTK;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,18 +28,19 @@ namespace PDMapEditor
 
         public Nebula() : base(Vector3.Zero)
         {
-            Name = "nebula" + (Nebulas.Count + 1);
+            Name = Program.main.boxNebulaName.Text;
 
             Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One);
             Mesh.Material.Translucent = true;
 
-            Size = 7000;
+            Size = (float)Program.main.numericNebulaSize.Value;
             Mesh.Scale = new Vector3(Size);
             Nebulas.Add(this);
 
-            Type = NebulaType.NebulaTypes[0];
-            
-            Color = Vector4.One;
+            Type = NebulaType.GetTypeFromComboIndex(Program.main.comboNebulaType.SelectedIndex);
+
+            Color buttonColor = Program.main.buttonNebulaColor.BackColor;
+            Color = new Vector4((float)buttonColor.R / 255, (float)buttonColor.G / 255, (float)buttonColor.B / 255, (float)Program.main.sliderNebulaAlpha.Value / 100);
 
             AllowRotation = false;
         }
