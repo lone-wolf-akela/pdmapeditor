@@ -175,6 +175,10 @@ namespace PDMapEditor
                 Renderer.UpdateMeshData();
 
                 CreatedDrawable = null;
+
+                Selection.gizmoLineX.Visible = false;
+                Selection.gizmoLineY.Visible = false;
+                Selection.gizmoLineZ.Visible = false;
             }
         }
 
@@ -186,6 +190,10 @@ namespace PDMapEditor
             UpdateGroupType();
 
             Renderer.UpdateMeshData();
+
+            Selection.gizmoLineX.Visible = true;
+            Selection.gizmoLineY.Visible = true;
+            Selection.gizmoLineZ.Visible = true;
         }
 
         public static void UpdateObjectAtCursor()
@@ -196,7 +204,12 @@ namespace PDMapEditor
                 int x = pressPos.X;
                 int y = Program.GLControl.ClientSize.Height - pressPos.Y;
 
-                CreatedDrawable.Position = ScreenToWorldCoord(x, y);
+                Vector3 position = ScreenToWorldCoord(x, y);
+                CreatedDrawable.Position = position;
+
+                Selection.gizmoLineX.Position = position;
+                Selection.gizmoLineY.Position = position;
+                Selection.gizmoLineZ.Position = position;
             }
         }
 

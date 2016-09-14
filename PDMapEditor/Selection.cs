@@ -21,9 +21,9 @@ namespace PDMapEditor
         private static Drawable gizmoPosY;
         private static Drawable gizmoPosZ;
 
-        private static Line gizmoLineX;
-        private static Line gizmoLineY;
-        private static Line gizmoLineZ;
+        public static Line gizmoLineX;
+        public static Line gizmoLineY;
+        public static Line gizmoLineZ;
 
         private static Drawable gizmoRotX;
         private static Drawable gizmoRotY;
