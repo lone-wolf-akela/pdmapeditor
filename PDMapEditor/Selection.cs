@@ -338,7 +338,12 @@ namespace PDMapEditor
                     {
                         if (objectAtMouse != gizmoPosX && objectAtMouse != gizmoPosY && objectAtMouse != gizmoPosZ && objectAtMouse != gizmoRotX && objectAtMouse != gizmoRotY && objectAtMouse != gizmoRotZ)
                             if (ActionKey.IsDown(Action.SELECTION_ADD))
-                                Selected.Add(objectAtMouse);
+                            {
+                                if (!Selected.Contains(objectAtMouse))
+                                {
+                                    Selected.Add(objectAtMouse);
+                                }
+                            }
                             else
                             {
                                 Selected.Clear();

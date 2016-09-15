@@ -45,8 +45,8 @@ namespace PDMapEditor
         private static string description = "";
         public static string Description { get { return description; } set { description = value; Program.main.boxDescription.Text = value; } }
 
-        private static bool fogActive = false;
-        public static bool FogActive //Disabled for now
+        private static bool fogActive = true;
+        public static bool FogActive
         {
             get { return fogActive; }
             set
@@ -222,7 +222,7 @@ namespace PDMapEditor
             Problem.Problems.Clear();
             
             Map.MapDimensions = new Vector3(20000, 20000, 20000);
-            Map.FogActive = false;
+            Map.FogActive = true;
             Map.FogStart = 100;
             Map.FogEnd = 20000;
             Map.FogColor = new Vector4(0.38f, 0.21f, 0.06f, 1);
