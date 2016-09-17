@@ -20,10 +20,12 @@ namespace PDMapEditor
         private Vector4 color = Vector4.One;
         public Vector4 Color { get { return color; } set { color = value; UpdateColor(); } }
 
-        public float Unknown1;
+        public float Resources;
+        public float Spin;
+        public bool Refill;
 
-        private float size;
-        public float Size { get { return size; } set { size = value; UpdateScale(); } }
+        private float radius;
+        public float Radius { get { return radius; } set { radius = value; UpdateScale(); } }
 
         public bool AllowRotation { get; set; }
 
@@ -34,28 +36,48 @@ namespace PDMapEditor
             Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One, true);
             Mesh.Material.Translucent = true;
 
-            Size = (float)Program.main.numericDustCloudSize.Value;
-            Mesh.Scale = new Vector3(Size);
+            Radius = (float)Program.main.numericDustCloudSize.Value;
+            Mesh.Scale = new Vector3(Radius);
             Type = DustCloudType.GetTypeFromComboIndex(Program.main.comboDustCloudType.SelectedIndex);
+            Resources = (float)Program.main.numericDustCloudResources.Value;
 
             Color buttonColor = Program.main.buttonDustCloudColor.BackColor;
             Color = new Vector4((float)buttonColor.R / 255, (float)buttonColor.G / 255, (float)buttonColor.B / 255, (float)Program.main.sliderDustCloudAlpha.Value / 100);
             DustClouds.Add(this);
             AllowRotation = false;
         }
-        public DustCloud(string name, DustCloudType type, Vector3 position, Vector4 color, float unknown1, float size) : base (position)
+        public DustCloud(string name, DustCloudType type, Vector3 position, Vector4 color, float spin, float radius) : base (position)
         {
             Name = name;
-            Unknown1 = unknown1;
+            Spin = spin;
 
             Mesh = new MeshIcosphere(position, Vector3.One, true);
             Mesh.Material.Translucent = true;
-            Mesh.Scale = new Vector3(size);
+            Mesh.Scale = new Vector3(radius);
 
             DustClouds.Add(this);
 
             Type = type;
-            Size = size;
+            Radius = radius;
+            Color = color;
+
+            AllowRotation = false;
+        }
+        public DustCloud(string name, DustCloudType type, Vector3 position, float resources, Vector4 color, float spin, float radius, bool refill) : base(position)
+        {
+            Name = name;
+            Spin = spin;
+            Resources = resources;
+            Refill = refill;
+
+            Mesh = new MeshIcosphere(position, Vector3.One, true);
+            Mesh.Material.Translucent = true;
+            Mesh.Scale = new Vector3(radius);
+
+            DustClouds.Add(this);
+
+            Type = type;
+            Radius = radius;
             Color = color;
 
             AllowRotation = false;
@@ -63,7 +85,7 @@ namespace PDMapEditor
 
         private void UpdateScale()
         {
-            Mesh.Scale = new Vector3(Size);
+            Mesh.Scale = new Vector3(Radius);
         }
 
         private void UpdateColor()
@@ -81,7 +103,7 @@ namespace PDMapEditor
 
         public ISelectable Copy()
         {
-            return new DustCloud(Name, Type, Position, Color, Unknown1, Size);
+            return new DustCloud(Name, Type, Position, Resources, Color, Spin, Radius, Refill);
         }
     }
 }

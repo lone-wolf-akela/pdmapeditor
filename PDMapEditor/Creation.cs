@@ -22,6 +22,7 @@ namespace PDMapEditor
             objectTypes.Add(typeof(DustCloud));
             objectTypes.Add(typeof(Squadron));
             objectTypes.Add(typeof(Nebula));
+            objectTypes.Add(typeof(Sphere));
 
             //Add possible object types to creation type combo
             foreach (Type type in objectTypes)
@@ -44,6 +45,7 @@ namespace PDMapEditor
             Program.main.comboDustCloudType.SelectedIndex = 0;
             Program.main.numericDustCloudSize.Value = 2000;
             Program.main.sliderDustCloudAlpha.Value = 100;
+            Program.main.numericDustCloudResources.Value = 0;
 
             Program.main.comboSquadronType.SelectedIndex = 0;
             Program.main.comboSquadronPlayer.SelectedIndex = 0;
@@ -51,6 +53,9 @@ namespace PDMapEditor
             Program.main.comboNebulaType.SelectedIndex = 0;
             Program.main.numericNebulaSize.Value = 5000;
             Program.main.sliderNebulaAlpha.Value = 100;
+            Program.main.numericNebulaResources.Value = 0;
+
+            Program.main.numericSphereRadius.Value = 5000;
         }
 
         static void TypeToCreateChanged(object sender, EventArgs e)
@@ -92,6 +97,7 @@ namespace PDMapEditor
             Program.main.groupDustCloud.Visible = false;
             Program.main.groupSquadron.Visible = false;
             Program.main.groupNebula.Visible = false;
+            Program.main.groupSphere.Visible = false;
 
             if (typeToCreate == typeof(Asteroid))
             {
@@ -137,6 +143,14 @@ namespace PDMapEditor
                 Program.main.groupNebula.Location = new System.Drawing.Point(3, 33);
                 Program.main.groupNebula.Visible = true;
             }
+            else if (typeToCreate == typeof(Sphere))
+            {
+                Program.main.boxSphereName.Text = "Sphere" + Sphere.Spheres.Count;
+
+                Program.main.tabCreate.Controls.Add(Program.main.groupSphere);
+                Program.main.groupSphere.Location = new System.Drawing.Point(3, 33);
+                Program.main.groupSphere.Visible = true;
+            }
         }
         
         static void ResetGroupType()
@@ -147,6 +161,7 @@ namespace PDMapEditor
             Program.main.groupDustCloud.Visible = false;
             Program.main.groupSquadron.Visible = false;
             Program.main.groupNebula.Visible = false;
+            Program.main.groupSphere.Visible = false;
 
             Program.main.tabSelection.Controls.Add(Program.main.groupAsteroid);
             Program.main.groupAsteroid.Location = new System.Drawing.Point(3, 215);
@@ -165,6 +180,9 @@ namespace PDMapEditor
 
             Program.main.tabSelection.Controls.Add(Program.main.groupNebula);
             Program.main.groupNebula.Location = new System.Drawing.Point(3, 215);
+
+            Program.main.tabSelection.Controls.Add(Program.main.groupSphere);
+            Program.main.groupSphere.Location = new System.Drawing.Point(3, 215);
         }
 
         static void DestroyObjectAtCursor()

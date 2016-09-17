@@ -93,6 +93,8 @@
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
             this.tabSelection = new System.Windows.Forms.TabPage();
             this.groupNebula = new System.Windows.Forms.GroupBox();
+            this.labelNebulaResources = new System.Windows.Forms.Label();
+            this.numericNebulaResources = new System.Windows.Forms.NumericUpDown();
             this.labelNebulaAlpha = new System.Windows.Forms.Label();
             this.sliderNebulaAlpha = new System.Windows.Forms.TrackBar();
             this.labelNebulaSize = new System.Windows.Forms.Label();
@@ -120,6 +122,8 @@
             this.labelPointName = new System.Windows.Forms.Label();
             this.boxPointName = new System.Windows.Forms.TextBox();
             this.groupDustCloud = new System.Windows.Forms.GroupBox();
+            this.labelDustCloudResources = new System.Windows.Forms.Label();
+            this.numericDustCloudResources = new System.Windows.Forms.NumericUpDown();
             this.labelDustCloudAlpha = new System.Windows.Forms.Label();
             this.sliderDustCloudAlpha = new System.Windows.Forms.TrackBar();
             this.labelDustCloudSize = new System.Windows.Forms.Label();
@@ -163,6 +167,11 @@
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
             this.labelDebug1 = new System.Windows.Forms.Label();
             this.labelDebug2 = new System.Windows.Forms.Label();
+            this.groupSphere = new System.Windows.Forms.GroupBox();
+            this.labelSphereName = new System.Windows.Forms.Label();
+            this.boxSphereName = new System.Windows.Forms.TextBox();
+            this.labelSphereRadius = new System.Windows.Forms.Label();
+            this.numericSphereRadius = new System.Windows.Forms.NumericUpDown();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -188,6 +197,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
             this.tabSelection.SuspendLayout();
             this.groupNebula.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaResources)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).BeginInit();
             this.groupSquadron.SuspendLayout();
@@ -195,6 +205,7 @@
             this.groupPebble.SuspendLayout();
             this.groupPoint.SuspendLayout();
             this.groupDustCloud.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudResources)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
             this.groupAsteroid.SuspendLayout();
@@ -212,6 +223,8 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
+            this.groupSphere.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSphereRadius)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -1053,11 +1066,11 @@
             // 
             // tabSelection
             // 
+            this.tabSelection.Controls.Add(this.groupSphere);
             this.tabSelection.Controls.Add(this.groupNebula);
             this.tabSelection.Controls.Add(this.groupSquadron);
             this.tabSelection.Controls.Add(this.groupPebble);
             this.tabSelection.Controls.Add(this.groupPoint);
-            this.tabSelection.Controls.Add(this.groupDustCloud);
             this.tabSelection.Controls.Add(this.groupAsteroid);
             this.tabSelection.Controls.Add(this.groupSelectionRotation);
             this.tabSelection.Controls.Add(this.groupSelectionPosition);
@@ -1072,8 +1085,11 @@
             // 
             this.groupNebula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupNebula.Controls.Add(this.labelNebulaResources);
+            this.groupNebula.Controls.Add(this.numericNebulaResources);
             this.groupNebula.Controls.Add(this.labelNebulaAlpha);
             this.groupNebula.Controls.Add(this.sliderNebulaAlpha);
+            this.groupNebula.Controls.Add(this.groupDustCloud);
             this.groupNebula.Controls.Add(this.labelNebulaSize);
             this.groupNebula.Controls.Add(this.numericNebulaSize);
             this.groupNebula.Controls.Add(this.labelNebulaColor);
@@ -1082,12 +1098,43 @@
             this.groupNebula.Controls.Add(this.boxNebulaName);
             this.groupNebula.Controls.Add(this.labelNebulaType);
             this.groupNebula.Controls.Add(this.comboNebulaType);
-            this.groupNebula.Location = new System.Drawing.Point(3, 215);
+            this.groupNebula.Location = new System.Drawing.Point(3, 510);
             this.groupNebula.Name = "groupNebula";
-            this.groupNebula.Size = new System.Drawing.Size(214, 156);
+            this.groupNebula.Size = new System.Drawing.Size(214, 182);
             this.groupNebula.TabIndex = 31;
             this.groupNebula.TabStop = false;
             this.groupNebula.Text = "Nebula";
+            // 
+            // labelNebulaResources
+            // 
+            this.labelNebulaResources.AutoSize = true;
+            this.labelNebulaResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNebulaResources.Location = new System.Drawing.Point(6, 155);
+            this.labelNebulaResources.Name = "labelNebulaResources";
+            this.labelNebulaResources.Size = new System.Drawing.Size(31, 13);
+            this.labelNebulaResources.TabIndex = 32;
+            this.labelNebulaResources.Text = "RUs:";
+            // 
+            // numericNebulaResources
+            // 
+            this.numericNebulaResources.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericNebulaResources.DecimalPlaces = 1;
+            this.numericNebulaResources.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericNebulaResources.Location = new System.Drawing.Point(51, 153);
+            this.numericNebulaResources.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericNebulaResources.Name = "numericNebulaResources";
+            this.numericNebulaResources.Size = new System.Drawing.Size(157, 20);
+            this.numericNebulaResources.TabIndex = 31;
+            this.numericNebulaResources.ThousandsSeparator = true;
             // 
             // labelNebulaAlpha
             // 
@@ -1218,7 +1265,7 @@
             this.groupSquadron.Controls.Add(this.boxSquadronName);
             this.groupSquadron.Controls.Add(this.labelSquadronType);
             this.groupSquadron.Controls.Add(this.comboSquadronType);
-            this.groupSquadron.Location = new System.Drawing.Point(3, 215);
+            this.groupSquadron.Location = new System.Drawing.Point(3, 510);
             this.groupSquadron.Name = "groupSquadron";
             this.groupSquadron.Size = new System.Drawing.Size(214, 149);
             this.groupSquadron.TabIndex = 31;
@@ -1336,7 +1383,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupPebble.Controls.Add(this.labelPebbleType);
             this.groupPebble.Controls.Add(this.comboPebbleType);
-            this.groupPebble.Location = new System.Drawing.Point(3, 215);
+            this.groupPebble.Location = new System.Drawing.Point(3, 510);
             this.groupPebble.Name = "groupPebble";
             this.groupPebble.Size = new System.Drawing.Size(214, 47);
             this.groupPebble.TabIndex = 10;
@@ -1370,7 +1417,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupPoint.Controls.Add(this.labelPointName);
             this.groupPoint.Controls.Add(this.boxPointName);
-            this.groupPoint.Location = new System.Drawing.Point(3, 215);
+            this.groupPoint.Location = new System.Drawing.Point(3, 510);
             this.groupPoint.Name = "groupPoint";
             this.groupPoint.Size = new System.Drawing.Size(214, 47);
             this.groupPoint.TabIndex = 9;
@@ -1400,6 +1447,8 @@
             // 
             this.groupDustCloud.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupDustCloud.Controls.Add(this.labelDustCloudResources);
+            this.groupDustCloud.Controls.Add(this.numericDustCloudResources);
             this.groupDustCloud.Controls.Add(this.labelDustCloudAlpha);
             this.groupDustCloud.Controls.Add(this.sliderDustCloudAlpha);
             this.groupDustCloud.Controls.Add(this.labelDustCloudSize);
@@ -1410,12 +1459,43 @@
             this.groupDustCloud.Controls.Add(this.boxDustCloudName);
             this.groupDustCloud.Controls.Add(this.labelDustCloudType);
             this.groupDustCloud.Controls.Add(this.comboDustCloudType);
-            this.groupDustCloud.Location = new System.Drawing.Point(3, 215);
+            this.groupDustCloud.Location = new System.Drawing.Point(0, 1);
             this.groupDustCloud.Name = "groupDustCloud";
-            this.groupDustCloud.Size = new System.Drawing.Size(214, 156);
+            this.groupDustCloud.Size = new System.Drawing.Size(214, 188);
             this.groupDustCloud.TabIndex = 8;
             this.groupDustCloud.TabStop = false;
             this.groupDustCloud.Text = "Dust cloud";
+            // 
+            // labelDustCloudResources
+            // 
+            this.labelDustCloudResources.AutoSize = true;
+            this.labelDustCloudResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudResources.Location = new System.Drawing.Point(6, 155);
+            this.labelDustCloudResources.Name = "labelDustCloudResources";
+            this.labelDustCloudResources.Size = new System.Drawing.Size(31, 13);
+            this.labelDustCloudResources.TabIndex = 34;
+            this.labelDustCloudResources.Text = "RUs:";
+            // 
+            // numericDustCloudResources
+            // 
+            this.numericDustCloudResources.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericDustCloudResources.DecimalPlaces = 1;
+            this.numericDustCloudResources.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDustCloudResources.Location = new System.Drawing.Point(51, 153);
+            this.numericDustCloudResources.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericDustCloudResources.Name = "numericDustCloudResources";
+            this.numericDustCloudResources.Size = new System.Drawing.Size(157, 20);
+            this.numericDustCloudResources.TabIndex = 33;
+            this.numericDustCloudResources.ThousandsSeparator = true;
             // 
             // labelDustCloudAlpha
             // 
@@ -1541,7 +1621,7 @@
             this.groupAsteroid.Controls.Add(this.numericAsteroidResourceMultiplier);
             this.groupAsteroid.Controls.Add(this.labelAsteroidType);
             this.groupAsteroid.Controls.Add(this.comboAsteroidType);
-            this.groupAsteroid.Location = new System.Drawing.Point(3, 215);
+            this.groupAsteroid.Location = new System.Drawing.Point(3, 511);
             this.groupAsteroid.Name = "groupAsteroid";
             this.groupAsteroid.Size = new System.Drawing.Size(214, 75);
             this.groupAsteroid.TabIndex = 7;
@@ -2028,6 +2108,71 @@
             this.labelDebug2.TabIndex = 14;
             this.labelDebug2.Text = "label2";
             // 
+            // groupSphere
+            // 
+            this.groupSphere.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSphere.Controls.Add(this.labelSphereRadius);
+            this.groupSphere.Controls.Add(this.numericSphereRadius);
+            this.groupSphere.Controls.Add(this.labelSphereName);
+            this.groupSphere.Controls.Add(this.boxSphereName);
+            this.groupSphere.Location = new System.Drawing.Point(3, 215);
+            this.groupSphere.Name = "groupSphere";
+            this.groupSphere.Size = new System.Drawing.Size(214, 73);
+            this.groupSphere.TabIndex = 32;
+            this.groupSphere.TabStop = false;
+            this.groupSphere.Text = "Sphere";
+            // 
+            // labelSphereName
+            // 
+            this.labelSphereName.AutoSize = true;
+            this.labelSphereName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSphereName.Location = new System.Drawing.Point(6, 22);
+            this.labelSphereName.Name = "labelSphereName";
+            this.labelSphereName.Size = new System.Drawing.Size(38, 13);
+            this.labelSphereName.TabIndex = 24;
+            this.labelSphereName.Text = "Name:";
+            // 
+            // boxSphereName
+            // 
+            this.boxSphereName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxSphereName.Location = new System.Drawing.Point(51, 19);
+            this.boxSphereName.Name = "boxSphereName";
+            this.boxSphereName.Size = new System.Drawing.Size(157, 20);
+            this.boxSphereName.TabIndex = 23;
+            // 
+            // labelSphereRadius
+            // 
+            this.labelSphereRadius.AutoSize = true;
+            this.labelSphereRadius.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSphereRadius.Location = new System.Drawing.Point(6, 47);
+            this.labelSphereRadius.Name = "labelSphereRadius";
+            this.labelSphereRadius.Size = new System.Drawing.Size(43, 13);
+            this.labelSphereRadius.TabIndex = 30;
+            this.labelSphereRadius.Text = "Radius:";
+            // 
+            // numericSphereRadius
+            // 
+            this.numericSphereRadius.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSphereRadius.DecimalPlaces = 1;
+            this.numericSphereRadius.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSphereRadius.Location = new System.Drawing.Point(51, 45);
+            this.numericSphereRadius.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSphereRadius.Name = "numericSphereRadius";
+            this.numericSphereRadius.Size = new System.Drawing.Size(157, 20);
+            this.numericSphereRadius.TabIndex = 29;
+            this.numericSphereRadius.ThousandsSeparator = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2077,6 +2222,7 @@
             this.tabSelection.ResumeLayout(false);
             this.groupNebula.ResumeLayout(false);
             this.groupNebula.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNebulaResources)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).EndInit();
             this.groupSquadron.ResumeLayout(false);
@@ -2088,6 +2234,7 @@
             this.groupPoint.PerformLayout();
             this.groupDustCloud.ResumeLayout(false);
             this.groupDustCloud.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudResources)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
             this.groupAsteroid.ResumeLayout(false);
@@ -2109,6 +2256,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
+            this.groupSphere.ResumeLayout(false);
+            this.groupSphere.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSphereRadius)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2246,6 +2396,15 @@
         public System.Windows.Forms.TabPage tabCreate;
         public System.Windows.Forms.Label labelDebug1;
         public System.Windows.Forms.Label labelDebug2;
+        private System.Windows.Forms.Label labelNebulaResources;
+        public System.Windows.Forms.NumericUpDown numericNebulaResources;
+        private System.Windows.Forms.Label labelDustCloudResources;
+        public System.Windows.Forms.NumericUpDown numericDustCloudResources;
+        public System.Windows.Forms.GroupBox groupSphere;
+        private System.Windows.Forms.Label labelSphereRadius;
+        public System.Windows.Forms.NumericUpDown numericSphereRadius;
+        private System.Windows.Forms.Label labelSphereName;
+        public System.Windows.Forms.TextBox boxSphereName;
     }
 }
 

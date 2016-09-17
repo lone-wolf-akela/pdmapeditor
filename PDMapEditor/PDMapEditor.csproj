@@ -105,6 +105,7 @@
     <Compile Include="Map.cs" />
     <Compile Include="map\Nebula.cs" />
     <Compile Include="map\DustCloud.cs" />
+    <Compile Include="map\Sphere.cs" />
     <Compile Include="map\Squadron.cs" />
     <Compile Include="map\Point.cs" />
     <Compile Include="map\Pebble.cs" />
@@ -243,7 +244,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

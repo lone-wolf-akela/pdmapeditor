@@ -150,7 +150,16 @@ namespace PDMapEditor
                 sb.AppendLine("\t-- Dust clouds");
                 foreach (DustCloud dustCloud in DustCloud.DustClouds)
                 {
-                    sb.AppendLine("\taddDustCloud(\"" + dustCloud.Name + "\", \"" + dustCloud.Type.Name + "\", " + WriteFloatLuaTable(dustCloud.Position.X, dustCloud.Position.Y, dustCloud.Position.Z) + ", " + WriteFloatLuaTable(dustCloud.Color.X, dustCloud.Color.Y, dustCloud.Color.Z, dustCloud.Color.W) + ", " + dustCloud.Unknown1.ToString(InvariantCulture) + ", " + dustCloud.Size.ToString(InvariantCulture) + ")");
+                    if (dustCloud.Resources <= 0)
+                        sb.AppendLine("\taddDustCloud(\"" + dustCloud.Name + "\", \"" + dustCloud.Type.Name + "\", " + WriteFloatLuaTable(dustCloud.Position.X, dustCloud.Position.Y, dustCloud.Position.Z) + ", " + WriteFloatLuaTable(dustCloud.Color.X, dustCloud.Color.Y, dustCloud.Color.Z, dustCloud.Color.W) + ", " + dustCloud.Spin.ToString(InvariantCulture) + ", " + dustCloud.Radius.ToString(InvariantCulture) + ")");
+                    else
+                    {
+                        string refill = "0";
+                        if (dustCloud.Refill)
+                            refill = "1";
+
+                        sb.AppendLine("\taddDustCloudWithResources(\"" + dustCloud.Name + "\", \"" + dustCloud.Type.Name + "\", " + WriteFloatLuaTable(dustCloud.Position.X, dustCloud.Position.Y, dustCloud.Position.Z) + ", " + dustCloud.Resources.ToString(InvariantCulture) + ", " + WriteFloatLuaTable(dustCloud.Color.X, dustCloud.Color.Y, dustCloud.Color.Z, dustCloud.Color.W) + ", " + dustCloud.Spin.ToString(InvariantCulture) + ", " + dustCloud.Radius.ToString(InvariantCulture) + ", " + refill.ToString(InvariantCulture) + ")");
+                    }
                 }
                 sb.AppendLine("");
             }
@@ -160,7 +169,27 @@ namespace PDMapEditor
                 sb.AppendLine("\t-- Nebulas");
                 foreach (Nebula nebula in Nebula.Nebulas)
                 {
-                    sb.AppendLine("\taddNebula(\"" + nebula.Name + "\", \"" + nebula.Type.Name + "\", " + WriteFloatLuaTable(nebula.Position.X, nebula.Position.Y, nebula.Position.Z) + ", " + WriteFloatLuaTable(nebula.Color.X, nebula.Color.Y, nebula.Color.Z, nebula.Color.W) + ", " + nebula.Unknown.ToString(InvariantCulture) + ", " + nebula.Size.ToString(InvariantCulture) + ")");
+
+                    if (nebula.Resources <= 0)
+                        sb.AppendLine("\taddNebula(\"" + nebula.Name + "\", \"" + nebula.Type.Name + "\", " + WriteFloatLuaTable(nebula.Position.X, nebula.Position.Y, nebula.Position.Z) + ", " + WriteFloatLuaTable(nebula.Color.X, nebula.Color.Y, nebula.Color.Z, nebula.Color.W) + ", " + nebula.Spin.ToString(InvariantCulture) + ", " + nebula.Radius.ToString(InvariantCulture) + ")");
+                    else
+                    {
+                        string refill = "0";
+                        if (nebula.Refill)
+                            refill = "1";
+
+                        sb.AppendLine("\taddNebulaWithResources(\"" + nebula.Name + "\", \"" + nebula.Type.Name + "\", " + WriteFloatLuaTable(nebula.Position.X, nebula.Position.Y, nebula.Position.Z) + ", " + nebula.Resources.ToString(InvariantCulture) + ", " + WriteFloatLuaTable(nebula.Color.X, nebula.Color.Y, nebula.Color.Z, nebula.Color.W) + ", " + nebula.Spin.ToString(InvariantCulture) + ", " + nebula.Radius.ToString(InvariantCulture) + ", " + refill.ToString(InvariantCulture) + ")");
+                    }
+                }
+                sb.AppendLine("");
+            }
+
+            if (Sphere.Spheres.Count > 0)
+            {
+                sb.AppendLine("\t-- Spheres");
+                foreach (Sphere sphere in Sphere.Spheres)
+                {
+                     sb.AppendLine("\taddSphere(\"" + sphere.Name + "\", " + WriteFloatLuaTable(sphere.Position.X, sphere.Position.Y, sphere.Position.Z) + ", " + sphere.Radius.ToString(InvariantCulture) + ")");
                 }
                 sb.AppendLine("");
             }
@@ -361,7 +390,7 @@ namespace PDMapEditor
             new Pebble(pebbleType, pos, rot);
         }
 
-        public static void AddDustCloud(string name, string type, LuaTable position, LuaTable color, float unknown1, float size)
+        public static void AddDustCloud(string name, string type, LuaTable position, LuaTable color, float spin, float radius)
         {
             //Log.WriteLine("Adding dust cloud \"" + name + "\".");
 
@@ -377,12 +406,30 @@ namespace PDMapEditor
                 return;
             }
 
-            new DustCloud(name, dustCloudType, pos, col, unknown1, size);
+            new DustCloud(name, dustCloudType, pos, col, spin, radius);
         }
 
-        public static void AddDustCloudWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float unknown, float size, float unknown2)
+        public static void AddDustCloudWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float spin, float radius, int refill)
         {
-            //Console.WriteLine("Adding dust cloud \"" + name + "\".");
+            //Log.WriteLine("Adding dust cloud \"" + name + "\".");
+
+            Vector3 pos = LuaTableToVector3(position);
+            Vector4 col = LuaTableToVector4(color);
+
+            string newType = type.ToLower();
+            DustCloudType dustCloudType = DustCloudType.GetTypeFromName(newType);
+
+            bool bRefill = false;
+            if (refill != 0)
+                bRefill = true;
+
+            if (dustCloudType == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Dust cloud type \"" + newType + "\" not found. Skipping dust cloud \"" + name + "\".");
+                return;
+            }
+
+            new DustCloud(name, dustCloudType, pos, resources, col, spin, radius, bRefill);
         }
 
         public static void SetWorldBoundsInner(LuaTable center, LuaTable dimensions)
@@ -424,7 +471,7 @@ namespace PDMapEditor
             //STUB
         }
 
-        public static void AddNebula(string name, string type, LuaTable position, LuaTable color, float unknown, float size)
+        public static void AddNebula(string name, string type, LuaTable position, LuaTable color, float spin, float radius)
         {
             //Log.WriteLine("Adding nebula \"" + name + "\".");
 
@@ -440,17 +487,37 @@ namespace PDMapEditor
                 return;
             }
 
-            new Nebula(name, nebulaType, pos, col, unknown, size);
+            new Nebula(name, nebulaType, pos, col, spin, radius);
         }
 
-        public static void AddNebulaWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float unknown, float size, float unknown2)
+        public static void AddNebulaWithResources(string name, string type, LuaTable position, float resources, LuaTable color, float spin, float radius, int refill)
         {
-            //STUB
+            //Log.WriteLine("Adding nebula \"" + name + "\".");
+
+            Vector3 pos = LuaTableToVector3(position);
+            Vector4 col = LuaTableToVector4(color);
+
+            string newType = type.ToLower();
+            NebulaType nebulaType = NebulaType.GetTypeFromName(newType);
+
+            bool bRefill = false;
+            if (refill != 0)
+                bRefill = true;
+
+            if (nebulaType == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Nebula type \"" + newType + "\" not found. Skipping nebula \"" + name + "\".");
+                return;
+            }
+
+            new Nebula(name, nebulaType, pos, resources, col, spin, radius, bRefill);
         }
 
-        public static void AddSphere(string name, LuaTable position, float size)
+        public static void AddSphere(string name, LuaTable position, float radius)
         {
-            //STUB
+            Vector3 pos = LuaTableToVector3(position);
+
+            new Sphere(name, pos, radius);
         }
 
         public static void AddCamera(string name, LuaTable position, LuaTable focusPosition)

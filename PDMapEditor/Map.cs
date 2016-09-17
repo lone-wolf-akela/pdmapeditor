@@ -218,6 +218,7 @@ namespace PDMapEditor
             Pebble.Pebbles.Clear();
             Point.Points.Clear();
             DustCloud.DustClouds.Clear();
+            Sphere.Spheres.Clear();
 
             Problem.Problems.Clear();
             

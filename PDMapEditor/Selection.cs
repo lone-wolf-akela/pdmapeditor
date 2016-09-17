@@ -96,6 +96,7 @@ namespace PDMapEditor
             Program.main.buttonDustCloudColor.Click+= new EventHandler(DustCloudColorClicked);
             Program.main.sliderDustCloudAlpha.Scroll += new EventHandler(DustCloudAlphaChanged);
             Program.main.numericDustCloudSize.ValueChanged += new EventHandler(DustCloudSizeChanged);
+            Program.main.numericDustCloudResources.ValueChanged += new EventHandler(DustCloudResourcesChanged);
 
             //Nebula
             Program.main.boxNebulaName.TextChanged += new EventHandler(NebulaNameChanged);
@@ -103,6 +104,7 @@ namespace PDMapEditor
             Program.main.buttonNebulaColor.Click += new EventHandler(NebulaColorClicked);
             Program.main.sliderNebulaAlpha.Scroll += new EventHandler(NebulaAlphaChanged);
             Program.main.numericNebulaSize.ValueChanged += new EventHandler(NebulaSizeChanged);
+            Program.main.numericNebulaResources.ValueChanged += new EventHandler(NebulaResourcesChanged);
 
             //Point
             Program.main.boxPointName.TextChanged += new EventHandler(PointNameChanged);
@@ -116,6 +118,10 @@ namespace PDMapEditor
             Program.main.comboSquadronPlayer.SelectedIndexChanged += new EventHandler(SquadronPlayerChanged);
             Program.main.numericSquadronSize.ValueChanged += new EventHandler(SquadronSizeChanged);
             Program.main.checkSquadronInHyperspace.CheckedChanged += new EventHandler(SquadronInHyperspaceChanged);
+
+            //Sphere
+            Program.main.boxSphereName.TextChanged += new EventHandler(SphereNameChanged);
+            Program.main.numericSphereRadius.ValueChanged += new EventHandler(SphereRadiusChanged);
         }
 
         private static void SelectedChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -383,6 +389,7 @@ namespace PDMapEditor
             Program.main.groupPoint.Visible = false;
             Program.main.groupPebble.Visible = false;
             Program.main.groupSquadron.Visible = false;
+            Program.main.groupSphere.Visible = false;
 
             if (Selected.Count == 0)
             {
@@ -444,7 +451,8 @@ namespace PDMapEditor
                     Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(Math.Min(selectedDustCloud.Color.X * 255, 255)), (int)Math.Round(Math.Min(selectedDustCloud.Color.Y * 255, 255)), (int)Math.Round(Math.Min(selectedDustCloud.Color.Z * 255, 255)));
                     Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(Math.Min(selectedDustCloud.Color.W * 100, 100));
 
-                    Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Size;
+                    Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Radius;
+                    Program.main.numericDustCloudResources.Value = (decimal)selectedDustCloud.Resources;
                 }
 
                 Nebula selectedNebula = Selected[0] as Nebula;
@@ -455,7 +463,8 @@ namespace PDMapEditor
                     Program.main.comboNebulaType.SelectedIndex = selectedNebula.Type.ComboIndex;
                     Program.main.buttonNebulaColor.BackColor = Color.FromArgb(255, (int)Math.Round(Math.Min(selectedNebula.Color.X * 255, 255)), (int)Math.Round(Math.Min(selectedNebula.Color.Y * 255, 255)), (int)Math.Round(Math.Min(selectedNebula.Color.Z * 255, 255)));
                     Program.main.sliderNebulaAlpha.Value = (int)Math.Round(Math.Min(selectedNebula.Color.W * 100, 100));
-                    Program.main.numericNebulaSize.Value = (decimal)selectedNebula.Size;
+                    Program.main.numericNebulaSize.Value = (decimal)selectedNebula.Radius;
+                    Program.main.numericNebulaResources.Value = (decimal)selectedNebula.Resources;
                 }
 
                 Point selectedPoint = Selected[0] as Point;
@@ -481,6 +490,14 @@ namespace PDMapEditor
                     Program.main.comboSquadronPlayer.SelectedIndex = selectedSquadron.Player + 1;
                     Program.main.numericSquadronSize.Value = selectedSquadron.SquadronSize;
                     Program.main.checkSquadronInHyperspace.Checked = selectedSquadron.InHyperspace;
+                }
+
+                Sphere selectedSphere = Selected[0] as Sphere;
+                if (selectedSphere != null)
+                {
+                    Program.main.groupSphere.Visible = true;
+                    Program.main.boxSphereName.Text = selectedSphere.Name;
+                    Program.main.numericSphereRadius.Value = (decimal)selectedSphere.Radius;
                 }
             }
 
@@ -581,7 +598,22 @@ namespace PDMapEditor
             }
 
             DustCloud selectedDustCloud = Selected[0] as DustCloud;
-            selectedDustCloud.Size = (float)Program.main.numericDustCloudSize.Value;
+            selectedDustCloud.Radius = (float)Program.main.numericDustCloudSize.Value;
+
+            Renderer.UpdateView();
+            Program.GLControl.Invalidate();
+        }
+
+        private static void DustCloudResourcesChanged(object sender, EventArgs e)
+        {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
+            DustCloud selectedDustCloud = Selected[0] as DustCloud;
+            selectedDustCloud.Resources = (float)Program.main.numericDustCloudResources.Value;
 
             Renderer.UpdateView();
             Program.GLControl.Invalidate();
@@ -654,7 +686,22 @@ namespace PDMapEditor
             }
 
             Nebula selected = Selected[0] as Nebula;
-            selected.Size = (float)Program.main.numericNebulaSize.Value;
+            selected.Radius = (float)Program.main.numericNebulaSize.Value;
+
+            Renderer.UpdateView();
+            Program.GLControl.Invalidate();
+        }
+
+        private static void NebulaResourcesChanged(object sender, EventArgs e)
+        {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
+            Nebula selected = Selected[0] as Nebula;
+            selected.Resources = (float)Program.main.numericNebulaResources.Value;
 
             Renderer.UpdateView();
             Program.GLControl.Invalidate();
@@ -746,6 +793,34 @@ namespace PDMapEditor
 
             Squadron selected = Selected[0] as Squadron;
             selected.InHyperspace = Program.main.checkSquadronInHyperspace.Checked;
+        }
+        #endregion
+
+        #region Sphere
+        private static void SphereNameChanged(object sender, EventArgs e)
+        {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
+            Sphere selected = Selected[0] as Sphere;
+            selected.Name = Program.main.boxSphereName.Text;
+        }
+        private static void SphereRadiusChanged(object sender, EventArgs e)
+        {
+            if (!IsSelectionTabActive())
+            {
+                Creation.CreateObjectAtCursor();
+                return;
+            }
+
+            Sphere selected = Selected[0] as Sphere;
+            selected.Radius = (float)Program.main.numericSphereRadius.Value;
+
+            Renderer.UpdateView();
+            Program.GLControl.Invalidate();
         }
         #endregion
 
