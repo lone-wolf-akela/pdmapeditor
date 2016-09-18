@@ -520,7 +520,7 @@ namespace PDMapEditor
             new Sphere(name, pos, radius);
         }
 
-        public static void AddCamera(string name, LuaTable position, LuaTable focusPosition)
+        public static void AddCamera(string name, LuaTable target, LuaTable position)
         {
             //STUB
         }
