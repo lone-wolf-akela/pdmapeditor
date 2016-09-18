@@ -204,12 +204,12 @@ namespace PDMapEditor
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            if (Program.Settings != null)
-                return;
-
-            Program.Settings = new Settings();
-            Program.Settings.Visible = true;
-            Program.Settings.Init();
+            if (Program.Settings == null || Program.Settings.IsDisposed)
+            {
+                Program.Settings = new Settings();
+                Program.Settings.Init();
+                Program.Settings.Visible = true;
+            }
         }
 
         private void buttonHotkeys_Click(object sender, EventArgs e)
