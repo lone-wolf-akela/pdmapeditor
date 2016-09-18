@@ -92,11 +92,29 @@
             this.labelMapDimensionsX = new System.Windows.Forms.Label();
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
             this.tabSelection = new System.Windows.Forms.TabPage();
+            this.groupSphere = new System.Windows.Forms.GroupBox();
+            this.labelSphereRadius = new System.Windows.Forms.Label();
+            this.numericSphereRadius = new System.Windows.Forms.NumericUpDown();
+            this.labelSphereName = new System.Windows.Forms.Label();
+            this.boxSphereName = new System.Windows.Forms.TextBox();
             this.groupNebula = new System.Windows.Forms.GroupBox();
             this.labelNebulaResources = new System.Windows.Forms.Label();
             this.numericNebulaResources = new System.Windows.Forms.NumericUpDown();
             this.labelNebulaAlpha = new System.Windows.Forms.Label();
             this.sliderNebulaAlpha = new System.Windows.Forms.TrackBar();
+            this.groupDustCloud = new System.Windows.Forms.GroupBox();
+            this.labelDustCloudResources = new System.Windows.Forms.Label();
+            this.numericDustCloudResources = new System.Windows.Forms.NumericUpDown();
+            this.labelDustCloudAlpha = new System.Windows.Forms.Label();
+            this.sliderDustCloudAlpha = new System.Windows.Forms.TrackBar();
+            this.labelDustCloudSize = new System.Windows.Forms.Label();
+            this.numericDustCloudSize = new System.Windows.Forms.NumericUpDown();
+            this.labelDustCloudColor = new System.Windows.Forms.Label();
+            this.buttonDustCloudColor = new System.Windows.Forms.Button();
+            this.labelDustCloudName = new System.Windows.Forms.Label();
+            this.boxDustCloudName = new System.Windows.Forms.TextBox();
+            this.labelDustCloudType = new System.Windows.Forms.Label();
+            this.comboDustCloudType = new System.Windows.Forms.ComboBox();
             this.labelNebulaSize = new System.Windows.Forms.Label();
             this.numericNebulaSize = new System.Windows.Forms.NumericUpDown();
             this.labelNebulaColor = new System.Windows.Forms.Label();
@@ -121,19 +139,6 @@
             this.groupPoint = new System.Windows.Forms.GroupBox();
             this.labelPointName = new System.Windows.Forms.Label();
             this.boxPointName = new System.Windows.Forms.TextBox();
-            this.groupDustCloud = new System.Windows.Forms.GroupBox();
-            this.labelDustCloudResources = new System.Windows.Forms.Label();
-            this.numericDustCloudResources = new System.Windows.Forms.NumericUpDown();
-            this.labelDustCloudAlpha = new System.Windows.Forms.Label();
-            this.sliderDustCloudAlpha = new System.Windows.Forms.TrackBar();
-            this.labelDustCloudSize = new System.Windows.Forms.Label();
-            this.numericDustCloudSize = new System.Windows.Forms.NumericUpDown();
-            this.labelDustCloudColor = new System.Windows.Forms.Label();
-            this.buttonDustCloudColor = new System.Windows.Forms.Button();
-            this.labelDustCloudName = new System.Windows.Forms.Label();
-            this.boxDustCloudName = new System.Windows.Forms.TextBox();
-            this.labelDustCloudType = new System.Windows.Forms.Label();
-            this.comboDustCloudType = new System.Windows.Forms.ComboBox();
             this.groupAsteroid = new System.Windows.Forms.GroupBox();
             this.labelAsteroidResourceMultiplier = new System.Windows.Forms.Label();
             this.numericAsteroidResourceMultiplier = new NumericUpDownEx();
@@ -165,13 +170,6 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
-            this.labelDebug1 = new System.Windows.Forms.Label();
-            this.labelDebug2 = new System.Windows.Forms.Label();
-            this.groupSphere = new System.Windows.Forms.GroupBox();
-            this.labelSphereName = new System.Windows.Forms.Label();
-            this.boxSphereName = new System.Windows.Forms.TextBox();
-            this.labelSphereRadius = new System.Windows.Forms.Label();
-            this.numericSphereRadius = new System.Windows.Forms.NumericUpDown();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -196,18 +194,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
             this.tabSelection.SuspendLayout();
+            this.groupSphere.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSphereRadius)).BeginInit();
             this.groupNebula.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericNebulaResources)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).BeginInit();
+            this.groupDustCloud.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudResources)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).BeginInit();
             this.groupSquadron.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericSquadronSize)).BeginInit();
             this.groupPebble.SuspendLayout();
             this.groupPoint.SuspendLayout();
-            this.groupDustCloud.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudResources)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).BeginInit();
             this.groupAsteroid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).BeginInit();
             this.groupSelectionRotation.SuspendLayout();
@@ -223,8 +223,6 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
-            this.groupSphere.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSphereRadius)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -1081,6 +1079,71 @@
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
             // 
+            // groupSphere
+            // 
+            this.groupSphere.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSphere.Controls.Add(this.labelSphereRadius);
+            this.groupSphere.Controls.Add(this.numericSphereRadius);
+            this.groupSphere.Controls.Add(this.labelSphereName);
+            this.groupSphere.Controls.Add(this.boxSphereName);
+            this.groupSphere.Location = new System.Drawing.Point(3, 215);
+            this.groupSphere.Name = "groupSphere";
+            this.groupSphere.Size = new System.Drawing.Size(214, 73);
+            this.groupSphere.TabIndex = 32;
+            this.groupSphere.TabStop = false;
+            this.groupSphere.Text = "Sphere";
+            // 
+            // labelSphereRadius
+            // 
+            this.labelSphereRadius.AutoSize = true;
+            this.labelSphereRadius.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSphereRadius.Location = new System.Drawing.Point(6, 47);
+            this.labelSphereRadius.Name = "labelSphereRadius";
+            this.labelSphereRadius.Size = new System.Drawing.Size(43, 13);
+            this.labelSphereRadius.TabIndex = 30;
+            this.labelSphereRadius.Text = "Radius:";
+            // 
+            // numericSphereRadius
+            // 
+            this.numericSphereRadius.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericSphereRadius.DecimalPlaces = 1;
+            this.numericSphereRadius.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericSphereRadius.Location = new System.Drawing.Point(51, 45);
+            this.numericSphereRadius.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericSphereRadius.Name = "numericSphereRadius";
+            this.numericSphereRadius.Size = new System.Drawing.Size(157, 20);
+            this.numericSphereRadius.TabIndex = 29;
+            this.numericSphereRadius.ThousandsSeparator = true;
+            // 
+            // labelSphereName
+            // 
+            this.labelSphereName.AutoSize = true;
+            this.labelSphereName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSphereName.Location = new System.Drawing.Point(6, 22);
+            this.labelSphereName.Name = "labelSphereName";
+            this.labelSphereName.Size = new System.Drawing.Size(38, 13);
+            this.labelSphereName.TabIndex = 24;
+            this.labelSphereName.Text = "Name:";
+            // 
+            // boxSphereName
+            // 
+            this.boxSphereName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxSphereName.Location = new System.Drawing.Point(51, 19);
+            this.boxSphereName.Name = "boxSphereName";
+            this.boxSphereName.Size = new System.Drawing.Size(157, 20);
+            this.boxSphereName.TabIndex = 23;
+            // 
             // groupNebula
             // 
             this.groupNebula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1159,6 +1222,176 @@
             this.sliderNebulaAlpha.TabIndex = 29;
             this.sliderNebulaAlpha.TickFrequency = 5;
             this.sliderNebulaAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+            // 
+            // groupDustCloud
+            // 
+            this.groupDustCloud.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupDustCloud.Controls.Add(this.labelDustCloudResources);
+            this.groupDustCloud.Controls.Add(this.numericDustCloudResources);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudAlpha);
+            this.groupDustCloud.Controls.Add(this.sliderDustCloudAlpha);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudSize);
+            this.groupDustCloud.Controls.Add(this.numericDustCloudSize);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudColor);
+            this.groupDustCloud.Controls.Add(this.buttonDustCloudColor);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudName);
+            this.groupDustCloud.Controls.Add(this.boxDustCloudName);
+            this.groupDustCloud.Controls.Add(this.labelDustCloudType);
+            this.groupDustCloud.Controls.Add(this.comboDustCloudType);
+            this.groupDustCloud.Location = new System.Drawing.Point(0, 1);
+            this.groupDustCloud.Name = "groupDustCloud";
+            this.groupDustCloud.Size = new System.Drawing.Size(214, 188);
+            this.groupDustCloud.TabIndex = 8;
+            this.groupDustCloud.TabStop = false;
+            this.groupDustCloud.Text = "Dust cloud";
+            // 
+            // labelDustCloudResources
+            // 
+            this.labelDustCloudResources.AutoSize = true;
+            this.labelDustCloudResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudResources.Location = new System.Drawing.Point(6, 155);
+            this.labelDustCloudResources.Name = "labelDustCloudResources";
+            this.labelDustCloudResources.Size = new System.Drawing.Size(31, 13);
+            this.labelDustCloudResources.TabIndex = 34;
+            this.labelDustCloudResources.Text = "RUs:";
+            // 
+            // numericDustCloudResources
+            // 
+            this.numericDustCloudResources.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericDustCloudResources.DecimalPlaces = 1;
+            this.numericDustCloudResources.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDustCloudResources.Location = new System.Drawing.Point(51, 153);
+            this.numericDustCloudResources.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericDustCloudResources.Name = "numericDustCloudResources";
+            this.numericDustCloudResources.Size = new System.Drawing.Size(157, 20);
+            this.numericDustCloudResources.TabIndex = 33;
+            this.numericDustCloudResources.ThousandsSeparator = true;
+            // 
+            // labelDustCloudAlpha
+            // 
+            this.labelDustCloudAlpha.AutoSize = true;
+            this.labelDustCloudAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudAlpha.Location = new System.Drawing.Point(6, 102);
+            this.labelDustCloudAlpha.Name = "labelDustCloudAlpha";
+            this.labelDustCloudAlpha.Size = new System.Drawing.Size(37, 13);
+            this.labelDustCloudAlpha.TabIndex = 30;
+            this.labelDustCloudAlpha.Text = "Alpha:";
+            // 
+            // sliderDustCloudAlpha
+            // 
+            this.sliderDustCloudAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.sliderDustCloudAlpha.AutoSize = false;
+            this.sliderDustCloudAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.sliderDustCloudAlpha.Location = new System.Drawing.Point(51, 98);
+            this.sliderDustCloudAlpha.Maximum = 100;
+            this.sliderDustCloudAlpha.Name = "sliderDustCloudAlpha";
+            this.sliderDustCloudAlpha.Size = new System.Drawing.Size(157, 23);
+            this.sliderDustCloudAlpha.TabIndex = 29;
+            this.sliderDustCloudAlpha.TickFrequency = 5;
+            this.sliderDustCloudAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
+            // 
+            // labelDustCloudSize
+            // 
+            this.labelDustCloudSize.AutoSize = true;
+            this.labelDustCloudSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudSize.Location = new System.Drawing.Point(6, 129);
+            this.labelDustCloudSize.Name = "labelDustCloudSize";
+            this.labelDustCloudSize.Size = new System.Drawing.Size(30, 13);
+            this.labelDustCloudSize.TabIndex = 28;
+            this.labelDustCloudSize.Text = "Size:";
+            // 
+            // numericDustCloudSize
+            // 
+            this.numericDustCloudSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericDustCloudSize.DecimalPlaces = 1;
+            this.numericDustCloudSize.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericDustCloudSize.Location = new System.Drawing.Point(51, 127);
+            this.numericDustCloudSize.Maximum = new decimal(new int[] {
+            500000,
+            0,
+            0,
+            0});
+            this.numericDustCloudSize.Name = "numericDustCloudSize";
+            this.numericDustCloudSize.Size = new System.Drawing.Size(157, 20);
+            this.numericDustCloudSize.TabIndex = 27;
+            this.numericDustCloudSize.ThousandsSeparator = true;
+            // 
+            // labelDustCloudColor
+            // 
+            this.labelDustCloudColor.AutoSize = true;
+            this.labelDustCloudColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudColor.Location = new System.Drawing.Point(6, 76);
+            this.labelDustCloudColor.Name = "labelDustCloudColor";
+            this.labelDustCloudColor.Size = new System.Drawing.Size(34, 13);
+            this.labelDustCloudColor.TabIndex = 26;
+            this.labelDustCloudColor.Text = "Color:";
+            // 
+            // buttonDustCloudColor
+            // 
+            this.buttonDustCloudColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDustCloudColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDustCloudColor.Location = new System.Drawing.Point(51, 72);
+            this.buttonDustCloudColor.Name = "buttonDustCloudColor";
+            this.buttonDustCloudColor.Size = new System.Drawing.Size(157, 20);
+            this.buttonDustCloudColor.TabIndex = 25;
+            this.buttonDustCloudColor.UseVisualStyleBackColor = true;
+            // 
+            // labelDustCloudName
+            // 
+            this.labelDustCloudName.AutoSize = true;
+            this.labelDustCloudName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudName.Location = new System.Drawing.Point(6, 22);
+            this.labelDustCloudName.Name = "labelDustCloudName";
+            this.labelDustCloudName.Size = new System.Drawing.Size(38, 13);
+            this.labelDustCloudName.TabIndex = 24;
+            this.labelDustCloudName.Text = "Name:";
+            // 
+            // boxDustCloudName
+            // 
+            this.boxDustCloudName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxDustCloudName.Location = new System.Drawing.Point(51, 19);
+            this.boxDustCloudName.Name = "boxDustCloudName";
+            this.boxDustCloudName.Size = new System.Drawing.Size(157, 20);
+            this.boxDustCloudName.TabIndex = 23;
+            // 
+            // labelDustCloudType
+            // 
+            this.labelDustCloudType.AutoSize = true;
+            this.labelDustCloudType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDustCloudType.Location = new System.Drawing.Point(6, 48);
+            this.labelDustCloudType.Name = "labelDustCloudType";
+            this.labelDustCloudType.Size = new System.Drawing.Size(34, 13);
+            this.labelDustCloudType.TabIndex = 18;
+            this.labelDustCloudType.Text = "Type:";
+            // 
+            // comboDustCloudType
+            // 
+            this.comboDustCloudType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboDustCloudType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDustCloudType.FormattingEnabled = true;
+            this.comboDustCloudType.Location = new System.Drawing.Point(51, 45);
+            this.comboDustCloudType.Name = "comboDustCloudType";
+            this.comboDustCloudType.Size = new System.Drawing.Size(157, 21);
+            this.comboDustCloudType.TabIndex = 17;
             // 
             // labelNebulaSize
             // 
@@ -1442,176 +1675,6 @@
             this.boxPointName.Name = "boxPointName";
             this.boxPointName.Size = new System.Drawing.Size(157, 20);
             this.boxPointName.TabIndex = 23;
-            // 
-            // groupDustCloud
-            // 
-            this.groupDustCloud.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupDustCloud.Controls.Add(this.labelDustCloudResources);
-            this.groupDustCloud.Controls.Add(this.numericDustCloudResources);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudAlpha);
-            this.groupDustCloud.Controls.Add(this.sliderDustCloudAlpha);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudSize);
-            this.groupDustCloud.Controls.Add(this.numericDustCloudSize);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudColor);
-            this.groupDustCloud.Controls.Add(this.buttonDustCloudColor);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudName);
-            this.groupDustCloud.Controls.Add(this.boxDustCloudName);
-            this.groupDustCloud.Controls.Add(this.labelDustCloudType);
-            this.groupDustCloud.Controls.Add(this.comboDustCloudType);
-            this.groupDustCloud.Location = new System.Drawing.Point(0, 1);
-            this.groupDustCloud.Name = "groupDustCloud";
-            this.groupDustCloud.Size = new System.Drawing.Size(214, 188);
-            this.groupDustCloud.TabIndex = 8;
-            this.groupDustCloud.TabStop = false;
-            this.groupDustCloud.Text = "Dust cloud";
-            // 
-            // labelDustCloudResources
-            // 
-            this.labelDustCloudResources.AutoSize = true;
-            this.labelDustCloudResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudResources.Location = new System.Drawing.Point(6, 155);
-            this.labelDustCloudResources.Name = "labelDustCloudResources";
-            this.labelDustCloudResources.Size = new System.Drawing.Size(31, 13);
-            this.labelDustCloudResources.TabIndex = 34;
-            this.labelDustCloudResources.Text = "RUs:";
-            // 
-            // numericDustCloudResources
-            // 
-            this.numericDustCloudResources.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericDustCloudResources.DecimalPlaces = 1;
-            this.numericDustCloudResources.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericDustCloudResources.Location = new System.Drawing.Point(51, 153);
-            this.numericDustCloudResources.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericDustCloudResources.Name = "numericDustCloudResources";
-            this.numericDustCloudResources.Size = new System.Drawing.Size(157, 20);
-            this.numericDustCloudResources.TabIndex = 33;
-            this.numericDustCloudResources.ThousandsSeparator = true;
-            // 
-            // labelDustCloudAlpha
-            // 
-            this.labelDustCloudAlpha.AutoSize = true;
-            this.labelDustCloudAlpha.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudAlpha.Location = new System.Drawing.Point(6, 102);
-            this.labelDustCloudAlpha.Name = "labelDustCloudAlpha";
-            this.labelDustCloudAlpha.Size = new System.Drawing.Size(37, 13);
-            this.labelDustCloudAlpha.TabIndex = 30;
-            this.labelDustCloudAlpha.Text = "Alpha:";
-            // 
-            // sliderDustCloudAlpha
-            // 
-            this.sliderDustCloudAlpha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.sliderDustCloudAlpha.AutoSize = false;
-            this.sliderDustCloudAlpha.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.sliderDustCloudAlpha.Location = new System.Drawing.Point(51, 98);
-            this.sliderDustCloudAlpha.Maximum = 100;
-            this.sliderDustCloudAlpha.Name = "sliderDustCloudAlpha";
-            this.sliderDustCloudAlpha.Size = new System.Drawing.Size(157, 23);
-            this.sliderDustCloudAlpha.TabIndex = 29;
-            this.sliderDustCloudAlpha.TickFrequency = 5;
-            this.sliderDustCloudAlpha.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // labelDustCloudSize
-            // 
-            this.labelDustCloudSize.AutoSize = true;
-            this.labelDustCloudSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudSize.Location = new System.Drawing.Point(6, 129);
-            this.labelDustCloudSize.Name = "labelDustCloudSize";
-            this.labelDustCloudSize.Size = new System.Drawing.Size(30, 13);
-            this.labelDustCloudSize.TabIndex = 28;
-            this.labelDustCloudSize.Text = "Size:";
-            // 
-            // numericDustCloudSize
-            // 
-            this.numericDustCloudSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericDustCloudSize.DecimalPlaces = 1;
-            this.numericDustCloudSize.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericDustCloudSize.Location = new System.Drawing.Point(51, 127);
-            this.numericDustCloudSize.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericDustCloudSize.Name = "numericDustCloudSize";
-            this.numericDustCloudSize.Size = new System.Drawing.Size(157, 20);
-            this.numericDustCloudSize.TabIndex = 27;
-            this.numericDustCloudSize.ThousandsSeparator = true;
-            // 
-            // labelDustCloudColor
-            // 
-            this.labelDustCloudColor.AutoSize = true;
-            this.labelDustCloudColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudColor.Location = new System.Drawing.Point(6, 76);
-            this.labelDustCloudColor.Name = "labelDustCloudColor";
-            this.labelDustCloudColor.Size = new System.Drawing.Size(34, 13);
-            this.labelDustCloudColor.TabIndex = 26;
-            this.labelDustCloudColor.Text = "Color:";
-            // 
-            // buttonDustCloudColor
-            // 
-            this.buttonDustCloudColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDustCloudColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDustCloudColor.Location = new System.Drawing.Point(51, 72);
-            this.buttonDustCloudColor.Name = "buttonDustCloudColor";
-            this.buttonDustCloudColor.Size = new System.Drawing.Size(157, 20);
-            this.buttonDustCloudColor.TabIndex = 25;
-            this.buttonDustCloudColor.UseVisualStyleBackColor = true;
-            // 
-            // labelDustCloudName
-            // 
-            this.labelDustCloudName.AutoSize = true;
-            this.labelDustCloudName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudName.Location = new System.Drawing.Point(6, 22);
-            this.labelDustCloudName.Name = "labelDustCloudName";
-            this.labelDustCloudName.Size = new System.Drawing.Size(38, 13);
-            this.labelDustCloudName.TabIndex = 24;
-            this.labelDustCloudName.Text = "Name:";
-            // 
-            // boxDustCloudName
-            // 
-            this.boxDustCloudName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxDustCloudName.Location = new System.Drawing.Point(51, 19);
-            this.boxDustCloudName.Name = "boxDustCloudName";
-            this.boxDustCloudName.Size = new System.Drawing.Size(157, 20);
-            this.boxDustCloudName.TabIndex = 23;
-            // 
-            // labelDustCloudType
-            // 
-            this.labelDustCloudType.AutoSize = true;
-            this.labelDustCloudType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDustCloudType.Location = new System.Drawing.Point(6, 48);
-            this.labelDustCloudType.Name = "labelDustCloudType";
-            this.labelDustCloudType.Size = new System.Drawing.Size(34, 13);
-            this.labelDustCloudType.TabIndex = 18;
-            this.labelDustCloudType.Text = "Type:";
-            // 
-            // comboDustCloudType
-            // 
-            this.comboDustCloudType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboDustCloudType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDustCloudType.FormattingEnabled = true;
-            this.comboDustCloudType.Location = new System.Drawing.Point(51, 45);
-            this.comboDustCloudType.Name = "comboDustCloudType";
-            this.comboDustCloudType.Size = new System.Drawing.Size(157, 21);
-            this.comboDustCloudType.TabIndex = 17;
             // 
             // groupAsteroid
             // 
@@ -2090,96 +2153,11 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
-            // labelDebug1
-            // 
-            this.labelDebug1.AutoSize = true;
-            this.labelDebug1.Location = new System.Drawing.Point(363, 5);
-            this.labelDebug1.Name = "labelDebug1";
-            this.labelDebug1.Size = new System.Drawing.Size(35, 13);
-            this.labelDebug1.TabIndex = 13;
-            this.labelDebug1.Text = "label2";
-            // 
-            // labelDebug2
-            // 
-            this.labelDebug2.AutoSize = true;
-            this.labelDebug2.Location = new System.Drawing.Point(476, 5);
-            this.labelDebug2.Name = "labelDebug2";
-            this.labelDebug2.Size = new System.Drawing.Size(35, 13);
-            this.labelDebug2.TabIndex = 14;
-            this.labelDebug2.Text = "label2";
-            // 
-            // groupSphere
-            // 
-            this.groupSphere.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupSphere.Controls.Add(this.labelSphereRadius);
-            this.groupSphere.Controls.Add(this.numericSphereRadius);
-            this.groupSphere.Controls.Add(this.labelSphereName);
-            this.groupSphere.Controls.Add(this.boxSphereName);
-            this.groupSphere.Location = new System.Drawing.Point(3, 215);
-            this.groupSphere.Name = "groupSphere";
-            this.groupSphere.Size = new System.Drawing.Size(214, 73);
-            this.groupSphere.TabIndex = 32;
-            this.groupSphere.TabStop = false;
-            this.groupSphere.Text = "Sphere";
-            // 
-            // labelSphereName
-            // 
-            this.labelSphereName.AutoSize = true;
-            this.labelSphereName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSphereName.Location = new System.Drawing.Point(6, 22);
-            this.labelSphereName.Name = "labelSphereName";
-            this.labelSphereName.Size = new System.Drawing.Size(38, 13);
-            this.labelSphereName.TabIndex = 24;
-            this.labelSphereName.Text = "Name:";
-            // 
-            // boxSphereName
-            // 
-            this.boxSphereName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boxSphereName.Location = new System.Drawing.Point(51, 19);
-            this.boxSphereName.Name = "boxSphereName";
-            this.boxSphereName.Size = new System.Drawing.Size(157, 20);
-            this.boxSphereName.TabIndex = 23;
-            // 
-            // labelSphereRadius
-            // 
-            this.labelSphereRadius.AutoSize = true;
-            this.labelSphereRadius.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSphereRadius.Location = new System.Drawing.Point(6, 47);
-            this.labelSphereRadius.Name = "labelSphereRadius";
-            this.labelSphereRadius.Size = new System.Drawing.Size(43, 13);
-            this.labelSphereRadius.TabIndex = 30;
-            this.labelSphereRadius.Text = "Radius:";
-            // 
-            // numericSphereRadius
-            // 
-            this.numericSphereRadius.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericSphereRadius.DecimalPlaces = 1;
-            this.numericSphereRadius.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericSphereRadius.Location = new System.Drawing.Point(51, 45);
-            this.numericSphereRadius.Maximum = new decimal(new int[] {
-            500000,
-            0,
-            0,
-            0});
-            this.numericSphereRadius.Name = "numericSphereRadius";
-            this.numericSphereRadius.Size = new System.Drawing.Size(157, 20);
-            this.numericSphereRadius.TabIndex = 29;
-            this.numericSphereRadius.ThousandsSeparator = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1102, 746);
-            this.Controls.Add(this.labelDebug2);
-            this.Controls.Add(this.labelDebug1);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);
@@ -2220,10 +2198,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
             this.tabSelection.ResumeLayout(false);
+            this.groupSphere.ResumeLayout(false);
+            this.groupSphere.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSphereRadius)).EndInit();
             this.groupNebula.ResumeLayout(false);
             this.groupNebula.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericNebulaResources)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderNebulaAlpha)).EndInit();
+            this.groupDustCloud.ResumeLayout(false);
+            this.groupDustCloud.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudResources)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNebulaSize)).EndInit();
             this.groupSquadron.ResumeLayout(false);
             this.groupSquadron.PerformLayout();
@@ -2232,11 +2218,6 @@
             this.groupPebble.PerformLayout();
             this.groupPoint.ResumeLayout(false);
             this.groupPoint.PerformLayout();
-            this.groupDustCloud.ResumeLayout(false);
-            this.groupDustCloud.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudResources)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderDustCloudAlpha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericDustCloudSize)).EndInit();
             this.groupAsteroid.ResumeLayout(false);
             this.groupAsteroid.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericAsteroidResourceMultiplier)).EndInit();
@@ -2256,9 +2237,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
-            this.groupSphere.ResumeLayout(false);
-            this.groupSphere.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSphereRadius)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2394,8 +2372,6 @@
         private System.Windows.Forms.Label labelCreationType;
         public System.Windows.Forms.ComboBox comboCreationType;
         public System.Windows.Forms.TabPage tabCreate;
-        public System.Windows.Forms.Label labelDebug1;
-        public System.Windows.Forms.Label labelDebug2;
         private System.Windows.Forms.Label labelNebulaResources;
         public System.Windows.Forms.NumericUpDown numericNebulaResources;
         private System.Windows.Forms.Label labelDustCloudResources;

@@ -84,12 +84,6 @@ namespace PDMapEditor
             Program.Camera.Update();
             Program.Camera.UpdatePanning();
 
-            labelDebug1.Text = "";
-            foreach(Keys key in ActionKey.pressedKeys)
-            {
-                labelDebug1.Text += ", " + key.ToString();
-            }
-
             Creation.UpdateObjectAtCursor();
         }
 
