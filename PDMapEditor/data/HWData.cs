@@ -28,7 +28,6 @@ namespace PDMapEditor
             if (DataPaths.Count <= 0)
             {
                 MessageBox.Show("You did not specify any data paths yet!\nThis is needed for parsing of pebble types etc.\nDefine them in the settings window.", "No data paths specified", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
             }
 
             //Check if the data paths are still valid
@@ -140,6 +139,22 @@ namespace PDMapEditor
                     }
                 }
             }
+
+            //Create default types if there are none in the data paths
+            if(PebbleType.PebbleTypes.Count <= 0)
+                new PebbleType("null", 2, Vector4.One);
+
+            if (AsteroidType.AsteroidTypes.Count <= 0)
+                new AsteroidType("null", Vector4.One, 0);
+
+            if (DustCloudType.DustCloudTypes.Count <= 0)
+                new DustCloudType("null", Vector4.One);
+
+            if (NebulaType.NebulaTypes.Count <= 0)
+                new NebulaType("null");
+
+            if (ShipType.ShipTypes.Count <= 0)
+                new ShipType("null");
         }
 
         private static void ParsePebbleType(string path)

@@ -37,20 +37,25 @@ namespace PDMapEditor
             Program.main.comboCreationType.SelectedIndexChanged += new EventHandler(TypeToCreateChanged);
 
             //Set default object settings
-            Program.main.comboAsteroidType.SelectedIndex = 0;
+            if(AsteroidType.AsteroidTypes.Count > 0)
+                Program.main.comboAsteroidType.SelectedIndex = 0;
             Program.main.numericAsteroidResourceMultiplier.Value = 100;
 
-            Program.main.comboPebbleType.SelectedIndex = 0;
+            if (PebbleType.PebbleTypes.Count > 0)
+                Program.main.comboPebbleType.SelectedIndex = 0;
 
-            Program.main.comboDustCloudType.SelectedIndex = 0;
+            if (DustCloudType.DustCloudTypes.Count > 0)
+                Program.main.comboDustCloudType.SelectedIndex = 0;
             Program.main.numericDustCloudSize.Value = 2000;
             Program.main.sliderDustCloudAlpha.Value = 100;
             Program.main.numericDustCloudResources.Value = 0;
 
-            Program.main.comboSquadronType.SelectedIndex = 0;
+            if (ShipType.ShipTypes.Count > 0)
+                Program.main.comboSquadronType.SelectedIndex = 0;
             Program.main.comboSquadronPlayer.SelectedIndex = 0;
 
-            Program.main.comboNebulaType.SelectedIndex = 0;
+            if(NebulaType.NebulaTypes.Count > 0)
+                Program.main.comboNebulaType.SelectedIndex = 0;
             Program.main.numericNebulaSize.Value = 5000;
             Program.main.sliderNebulaAlpha.Value = 100;
             Program.main.numericNebulaResources.Value = 0;

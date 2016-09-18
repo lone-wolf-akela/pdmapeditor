@@ -24,6 +24,7 @@ namespace PDMapEditor
             type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
 
             Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Asteroid);
+
             Mesh.Material.DiffuseColor = new Vector3(type.PixelColor);
 
             Type = type;

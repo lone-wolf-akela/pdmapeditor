@@ -15,6 +15,9 @@ namespace PDMapEditor
         //Contants
         const int CIRCLE_SEGMENTS = 100;
 
+        private static string path;
+        public static string Path { get { return path; } set { path = value; Program.main.Text = "PayDay's Homeworld Remastered Map Editor"; if (value.Length > 0) Program.main.Text += " - " + value; } }
+
         private static Vector3 mapDimensions = new Vector3(40000);
         public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.UpdateMeshData(); Renderer.UpdateView(); Program.GLControl.Invalidate(); Program.main.UpdateMapDimensions(); } }
 
@@ -221,7 +224,9 @@ namespace PDMapEditor
             Sphere.Spheres.Clear();
 
             Problem.Problems.Clear();
-            
+
+            Path = "";
+
             Map.MapDimensions = new Vector3(20000, 20000, 20000);
             Map.FogActive = true;
             Map.FogStart = 100;
