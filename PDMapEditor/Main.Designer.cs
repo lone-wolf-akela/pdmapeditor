@@ -315,7 +315,7 @@
             // splitPropertiesAndViewportProblems.Panel2
             // 
             this.splitPropertiesAndViewportProblems.Panel2.Controls.Add(this.splitViewportAndProblems);
-            this.splitPropertiesAndViewportProblems.Size = new System.Drawing.Size(1102, 721);
+            this.splitPropertiesAndViewportProblems.Size = new System.Drawing.Size(1102, 708);
             this.splitPropertiesAndViewportProblems.SplitterDistance = 228;
             this.splitPropertiesAndViewportProblems.TabIndex = 1;
             // 
@@ -329,7 +329,7 @@
             this.tabControlLeft.Location = new System.Drawing.Point(0, 0);
             this.tabControlLeft.Name = "tabControlLeft";
             this.tabControlLeft.SelectedIndex = 0;
-            this.tabControlLeft.Size = new System.Drawing.Size(228, 721);
+            this.tabControlLeft.Size = new System.Drawing.Size(228, 708);
             this.tabControlLeft.TabIndex = 0;
             // 
             // tabMap
@@ -342,7 +342,7 @@
             this.tabMap.Location = new System.Drawing.Point(4, 22);
             this.tabMap.Name = "tabMap";
             this.tabMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMap.Size = new System.Drawing.Size(220, 695);
+            this.tabMap.Size = new System.Drawing.Size(220, 682);
             this.tabMap.TabIndex = 0;
             this.tabMap.Text = "Map";
             this.tabMap.ToolTipText = "You can set general map settings here.";
@@ -2030,7 +2030,7 @@
             // splitViewportAndProblems.Panel2
             // 
             this.splitViewportAndProblems.Panel2.Controls.Add(this.gridProblems);
-            this.splitViewportAndProblems.Size = new System.Drawing.Size(870, 721);
+            this.splitViewportAndProblems.Size = new System.Drawing.Size(870, 708);
             this.splitViewportAndProblems.SplitterDistance = 659;
             this.splitViewportAndProblems.TabIndex = 0;
             // 
@@ -2074,7 +2074,7 @@
             this.gridProblems.RowTemplate.Height = 500;
             this.gridProblems.RowTemplate.ReadOnly = true;
             this.gridProblems.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridProblems.Size = new System.Drawing.Size(207, 721);
+            this.gridProblems.Size = new System.Drawing.Size(207, 708);
             this.gridProblems.TabIndex = 1;
             this.gridProblems.SelectionChanged += new System.EventHandler(this.gridProblems_SelectionChanged);
             // 
@@ -2157,7 +2157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1102, 746);
+            this.ClientSize = new System.Drawing.Size(1102, 733);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);

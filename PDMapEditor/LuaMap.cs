@@ -14,10 +14,16 @@ namespace PDMapEditor
     {
         static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
 
+        private static Lua lua;
+
         public static void LoadMap(string path)
         {
-            Lua lua = new Lua();
+            lua = new Lua();
             Type type = typeof(LuaMap);
+
+            LoadMathLib();
+            
+            lua.RegisterFunction("dofilepath", type.GetMethod("DoFilePath"));
 
             lua.RegisterFunction("addAsteroid", null, type.GetMethod("AddAsteroid"));
             lua.RegisterFunction("addPoint", null, type.GetMethod("AddPoint"));
@@ -59,19 +65,17 @@ namespace PDMapEditor
             lua.RegisterFunction("setGlareIntensity", null, type.GetMethod("SetGlareIntensity"));
             lua.RegisterFunction("setLevelShadowColour", null, type.GetMethod("SetLevelShadowColour"));
             lua.RegisterFunction("setDustCloudAmbient", null, type.GetMethod("SetDustCloudAmbient"));
+            lua.RegisterFunction("setDustCloudColour", null, type.GetMethod("SetDustCloudColour"));
             lua.RegisterFunction("setNebulaAmbient", null, type.GetMethod("SetNebulaAmbient"));
-
-            lua.RegisterFunction("min", null, type.GetMethod("Min"));
-            lua.RegisterFunction("max", null, type.GetMethod("Max"));
 
             try
             { lua.DoFile(path); }
             catch (NLua.Exceptions.LuaScriptException e) { new Problem(ProblemTypes.ERROR, e.Message); }
 
-            try { lua.DoString("DetermChunk()"); }
+            try { lua.DoString("NonDetermChunk()"); }
             catch (NLua.Exceptions.LuaScriptException e) { new Problem(ProblemTypes.ERROR, e.Message); }
 
-            try { lua.DoString("NonDetermChunk()"); }
+            try { lua.DoString("DetermChunk()"); }
             catch (NLua.Exceptions.LuaScriptException e) { new Problem(ProblemTypes.ERROR, e.Message); }
 
             string description = "";
@@ -91,6 +95,51 @@ namespace PDMapEditor
             }
 
             Map.MaxPlayers = maxPlayers;
+        }
+
+        private static void LoadMathLib()
+        {
+            Type math = typeof(Math);
+            Type[] args = new Type[] { typeof(double) };
+            lua.RegisterFunction("abs", math.GetMethod("Abs", args));
+            lua.RegisterFunction("sin", math.GetMethod("Sin"));
+            lua.RegisterFunction("cos", math.GetMethod("Cos"));
+            lua.RegisterFunction("tan", math.GetMethod("Tan"));
+            lua.RegisterFunction("asin", math.GetMethod("Asin"));
+            lua.RegisterFunction("acos", math.GetMethod("Acos"));
+            lua.RegisterFunction("acos", math.GetMethod("Acos"));
+            lua.RegisterFunction("atan", math.GetMethod("Atan"));
+            lua.RegisterFunction("atan2", math.GetMethod("Atan2"));
+            lua.RegisterFunction("ceil", math.GetMethod("Ceiling", args));
+            lua.RegisterFunction("floor", math.GetMethod("Floor", args));
+            lua.RegisterFunction("mod", math.GetMethod("IEEERemainder"));
+            lua.RegisterFunction("sqrt", math.GetMethod("Sqrt"));
+            lua.RegisterFunction("pow", math.GetMethod("Pow"));
+            lua.RegisterFunction("log", math.GetMethod("Log", args));
+            lua.RegisterFunction("log10", math.GetMethod("Log10"));
+            lua.RegisterFunction("exp", math.GetMethod("Exp"));
+            lua.RegisterFunction("deg", typeof(LuaMap).GetMethod("ToDegrees"));
+            lua.RegisterFunction("rad", typeof(LuaMap).GetMethod("ToRadians"));
+            lua.RegisterFunction("min", math.GetMethod("Min", new Type[] { typeof(double), typeof(double) }));
+            lua.RegisterFunction("max", math.GetMethod("Max", new Type[] { typeof(double), typeof(double) }));
+            
+            lua.RegisterFunction("PDME_random0", typeof(LuaMap).GetMethod("Random0"));
+            lua.RegisterFunction("PDME_random1", typeof(LuaMap).GetMethod("Random1"));
+            lua.RegisterFunction("PDME_random2", typeof(LuaMap).GetMethod("Random2"));
+            lua.RegisterFunction("randomseed", typeof(LuaMap).GetMethod("RandomSeed"));
+
+            lua.DoString(@"
+function random(a, b)
+    if (b) then
+        return PDME_random2(a, b)
+    else
+        if (a) then
+            return PDME_random1(a)
+        else
+            return PDME_random0()
+        end
+    end
+end");
         }
 
         public static void SaveMap(string path)
@@ -338,6 +387,21 @@ namespace PDMapEditor
         }
 
         #region Lua functions
+        public static object[] DoFilePath(string path)
+        {
+            string file = path.Substring(path.IndexOf(':') + 1);
+            foreach (string dataPath in HWData.DataPaths)
+            {
+                string filepath = Path.Combine(dataPath, file);
+                if (File.Exists(filepath))
+                {
+                    object[] ret = lua.DoFile(filepath);
+                    return ret;
+                }
+            }
+            return null;
+        }
+
         public static void AddAsteroid(string type, LuaTable position, float multiplier, float rotX, float rotY, float rotZ, float rotSpeed)
         {
             //Log.WriteLine("Adding asteroid \"" + type + "\".");
@@ -665,20 +729,47 @@ namespace PDMapEditor
             //STUB
         }
 
+        public static void SetDustCloudColour(LuaTable color)
+        {
+            //STUB
+        }
+
         public static void SetNebulaAmbient(LuaTable color)
         {
             //STUB
         }
 
-        //Miscellanous
-        public static float Min(float valueA, float valueB)
+        //MathLib
+        public static double ToRadians(double value)
         {
-            return Math.Min(valueA, valueB);
+            return value * 180.0 / Math.PI;
         }
 
-        public static float Max(float valueA, float valueB)
+        public static double ToDegrees(double value)
         {
-            return Math.Max(valueA, valueB);
+            return value * Math.PI / 180.0;
+        }
+
+        private static Random rng = new Random();
+        
+        public static double Random0()
+        {
+            return rng.NextDouble();
+        }
+
+        public static int Random1(double u)
+        {
+            return (int)(rng.NextDouble() * u + 1);
+        }
+
+        public static int Random2(double l, double u)
+        {
+            return (int)(rng.NextDouble() * (u - l + 1) + 1);
+        }
+
+        public static void RandomSeed(int seed)
+        {
+            rng = new Random(seed);
         }
         #endregion
     }

@@ -13,14 +13,13 @@ namespace PDMapEditor
     public static class HWData
     {
         public static List<string> DataPaths = new List<string>();
+        static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
 
-        static Lua lua = new Lua();
+        static Lua lua;
         static LuaTable pebbleConfig;
         static LuaTable asteroidConfig;
         static LuaTable dustCloudConfig;
         static LuaTable shipConfig;
-
-        static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
 
         public static void ParseDataPaths()
         {
