@@ -67,25 +67,34 @@ namespace PDMapEditor
             int editor_vertcount = 0;
 
             List<Drawable> newList = new List<Drawable>();
+
+            foreach (Drawable drawable in Drawable.Drawables)
+                if (drawable.Mesh.DrawInBack)
+                    newList.Add(drawable);
+
             foreach (Drawable drawable in Drawable.Drawables)
                 if(!drawable.Mesh.DrawInFront)
                     if (!drawable.Mesh.Material.Translucent)
-                        newList.Add(drawable);
+                        if (!drawable.Mesh.DrawInBack)
+                            newList.Add(drawable);
 
             foreach (Drawable drawable in Drawable.Drawables)
                 if (!drawable.Mesh.DrawInFront)
                     if (drawable.Mesh.Material.Translucent)
-                        newList.Add(drawable);
+                        if (!drawable.Mesh.DrawInBack)
+                            newList.Add(drawable);
 
             foreach (Drawable drawable in Drawable.Drawables)
                 if (drawable.Mesh.DrawInFront)
                     if (!drawable.Mesh.Material.Translucent)
-                        newList.Add(drawable);
+                        if (!drawable.Mesh.DrawInBack)
+                            newList.Add(drawable);
 
             foreach (Drawable drawable in Drawable.Drawables)
                 if (drawable.Mesh.DrawInFront)
                     if (drawable.Mesh.Material.Translucent)
-                        newList.Add(drawable);
+                        if (!drawable.Mesh.DrawInBack)
+                            newList.Add(drawable);
 
             Drawable.Drawables = newList;
 
@@ -153,7 +162,8 @@ namespace PDMapEditor
 
         public static void Render()
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            //GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.Clear(ClearBufferMask.DepthBufferBit); //No need to clear the color buffer, because now we have a skybox
 
             GL.UseProgram(shader.ProgramID);
             shader.LinkAttrib3(pos_buffer, "inPos", false);
@@ -189,11 +199,21 @@ namespace PDMapEditor
                 GL.Uniform1(shader.GetUniform("fogParams.active"), 0);
 
             int indiceat = 0;
+            //Draw in back
+            GL.DepthMask(false);
+            foreach (Drawable drawable in Drawable.Drawables)
+            {
+                if (drawable.Mesh.DrawInBack)
+                    indiceat += DrawDrawable(drawable, indiceat);
+            }
+            GL.DepthMask(true);
+
             foreach (Drawable drawable in Drawable.Drawables)
             {
                 if(!drawable.Mesh.DrawInFront)
                     if(!drawable.Mesh.Material.Translucent)
-                        indiceat += DrawDrawable(drawable, indiceat);
+                        if (!drawable.Mesh.DrawInBack)
+                            indiceat += DrawDrawable(drawable, indiceat);
             }
 
             GL.DepthMask(false);
@@ -201,7 +221,8 @@ namespace PDMapEditor
             {
                 if (!drawable.Mesh.DrawInFront)
                     if (drawable.Mesh.Material.Translucent)
-                        indiceat += DrawDrawable(drawable, indiceat);
+                        if (!drawable.Mesh.DrawInBack)
+                            indiceat += DrawDrawable(drawable, indiceat);
             }
             GL.DepthMask(true);
 
@@ -281,6 +302,11 @@ namespace PDMapEditor
                 {
                     GL.Uniform4(shader.GetUniform("matDiffuse"), 1f, 1f, 1f, 1f);
                 }
+
+                if(drawable.Mesh.VertexColored)
+                    GL.Uniform1(shader.GetUniform("vertexColored"), 1);
+                else
+                    GL.Uniform1(shader.GetUniform("vertexColored"), 0);
 
                 if (texture != null)
                 {

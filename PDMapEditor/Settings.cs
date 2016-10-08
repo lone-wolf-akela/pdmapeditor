@@ -23,13 +23,16 @@ namespace PDMapEditor
         {
             listDataPaths.Items.Clear();
             listDataPaths.Items.AddRange(HWData.DataPaths.ToArray());
+
+            checkDisplayCubemaps.Checked = Background.DisplayCubemaps;
         }
 
         //------------------------------------------ SETTINGS SAVING ----------------------------------------//
         public static void SaveSettings()
         {
             XElement settings =
-                new XElement("settings");
+                new XElement("settings",
+                new XElement("displayCubemaps", Background.DisplayCubemaps));
 
             foreach (string dataPath in HWData.DataPaths)
             {
@@ -56,6 +59,11 @@ namespace PDMapEditor
                 {
                     switch (element.Name.LocalName)
                     {
+                        case "displayCubemaps":
+                            bool value = true;
+                            bool.TryParse(element.Value, out value);
+                            Background.DisplayCubemaps = value;
+                            break;
                         case "dataPath":
                             HWData.DataPaths.Add(element.Value);
                             break;
@@ -96,6 +104,13 @@ namespace PDMapEditor
                 HWData.DataPaths.Remove(path);
                 listDataPaths.Items.Remove(path);
             }
+        }
+
+        //------------------------------------------ VIEW GROUP ----------------------------------------//
+        private void checkDisplayCubemaps_CheckedChanged(object sender, EventArgs e)
+        {
+            Background.DisplayCubemaps = checkDisplayCubemaps.Checked;
+            Program.GLControl.Invalidate();
         }
     }
 }

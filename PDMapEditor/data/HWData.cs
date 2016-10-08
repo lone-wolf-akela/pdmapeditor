@@ -119,9 +119,10 @@ namespace PDMapEditor
                         string name = Path.GetDirectoryName(directory + "/meh.txt");
                         string[] split = name.Split(Path.DirectorySeparatorChar);
                         name = split[split.Length - 1];
+                        string path = Path.Combine(directory, name);
 
                         if (Background.GetBackgroundFromName(name) == null) //Don't create duplicate backgrounds (because of multiple data paths)
-                            new Background(name);
+                            new Background(name, path);
                     }
                 }
 

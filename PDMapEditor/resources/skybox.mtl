@@ -1,0 +1,68 @@
+# Blender MTL File: 'skybox.blend'
+# Material Count: 6
+
+newmtl Back
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd D:\\Development Tools\\XUnpack\\Data\\background\\ez01\\ez01_hq_negz.dds
+
+newmtl Bottom
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd D:\\Development Tools\\XUnpack\\Data\\background\\ez01\\ez01_hq_negy.dds
+
+newmtl Front
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd D:\\Development Tools\\XUnpack\\Data\\background\\ez01\\ez01_hq_posz.dds
+
+newmtl Left
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd D:\\Development Tools\\XUnpack\\Data\\background\\ez01\\ez01_hq_posx.dds
+
+newmtl Right
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd D:\\Development Tools\\XUnpack\\Data\\background\\ez01\\ez01_hq_negx.dds
+
+newmtl Top
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 0
+map_Kd D:\\Development Tools\\XUnpack\\Data\\background\\ez01\\ez01_hq_posy.dds

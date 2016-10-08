@@ -31,6 +31,8 @@ namespace PDMapEditor
         {
             Log.WriteLine("Initializing...");
 
+            Texture.Init();
+
             Importer.Init();
             Renderer.Init();
 
@@ -61,6 +63,7 @@ namespace PDMapEditor
         {
             Application.Idle -= glControl_Update;
             GraphicsContext.CurrentContext.Dispose();
+            Texture.Close();
             Settings.SaveSettings();
             Hotkeys.SaveHotkeys();
             Log.Close();

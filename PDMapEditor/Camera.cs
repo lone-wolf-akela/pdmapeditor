@@ -297,6 +297,7 @@ namespace PDMapEditor
             LookAt.Z = Math.Min(LookAt.Z, Map.MapDimensions.Z);
             LookAt.Z = Math.Max(LookAt.Z, -Map.MapDimensions.Z);
 
+            Background.SetSkyboxPosition(Position);
             Selection.UpdateGizmoFading();
             Selection.UpdateSelectionGizmoScale();
         }

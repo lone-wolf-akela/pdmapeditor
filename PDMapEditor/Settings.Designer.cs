@@ -34,7 +34,10 @@
             this.buttonAddDataPath = new System.Windows.Forms.Button();
             this.listDataPaths = new System.Windows.Forms.ListBox();
             this.addDataPathDialog = new System.Windows.Forms.OpenFileDialog();
+            this.groupView = new System.Windows.Forms.GroupBox();
+            this.checkDisplayCubemaps = new System.Windows.Forms.CheckBox();
             this.groupDataPaths.SuspendLayout();
+            this.groupView.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupDataPaths
@@ -45,7 +48,7 @@
             this.groupDataPaths.Controls.Add(this.buttonRemoveDataPath);
             this.groupDataPaths.Controls.Add(this.buttonAddDataPath);
             this.groupDataPaths.Controls.Add(this.listDataPaths);
-            this.groupDataPaths.Location = new System.Drawing.Point(12, 12);
+            this.groupDataPaths.Location = new System.Drawing.Point(12, 63);
             this.groupDataPaths.Name = "groupDataPaths";
             this.groupDataPaths.Size = new System.Drawing.Size(329, 188);
             this.groupDataPaths.TabIndex = 20;
@@ -96,6 +99,28 @@
             this.addDataPathDialog.Filter = "Data roots|keeper.txt";
             this.addDataPathDialog.Title = "Select keeper.txt in data root folder";
             // 
+            // groupView
+            // 
+            this.groupView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupView.Controls.Add(this.checkDisplayCubemaps);
+            this.groupView.Location = new System.Drawing.Point(12, 12);
+            this.groupView.Name = "groupView";
+            this.groupView.Size = new System.Drawing.Size(329, 45);
+            this.groupView.TabIndex = 21;
+            this.groupView.TabStop = false;
+            this.groupView.Text = "View";
+            // 
+            // checkDisplayCubemaps
+            // 
+            this.checkDisplayCubemaps.AutoSize = true;
+            this.checkDisplayCubemaps.Location = new System.Drawing.Point(6, 19);
+            this.checkDisplayCubemaps.Name = "checkDisplayCubemaps";
+            this.checkDisplayCubemaps.Size = new System.Drawing.Size(112, 17);
+            this.checkDisplayCubemaps.TabIndex = 0;
+            this.checkDisplayCubemaps.Text = "Display cubemaps";
+            this.checkDisplayCubemaps.UseVisualStyleBackColor = true;
+            this.checkDisplayCubemaps.CheckedChanged += new System.EventHandler(this.checkDisplayCubemaps_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -103,12 +128,15 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(446, 447);
+            this.Controls.Add(this.groupView);
             this.Controls.Add(this.groupDataPaths);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Settings";
             this.Text = "Settings";
             this.TopMost = true;
             this.groupDataPaths.ResumeLayout(false);
+            this.groupView.ResumeLayout(false);
+            this.groupView.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +150,7 @@
         private System.Windows.Forms.Button buttonAddDataPath;
         private System.Windows.Forms.ListBox listDataPaths;
         private System.Windows.Forms.OpenFileDialog addDataPathDialog;
+        private System.Windows.Forms.GroupBox groupView;
+        private System.Windows.Forms.CheckBox checkDisplayCubemaps;
     }
 }

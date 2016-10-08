@@ -20,6 +20,13 @@ namespace PDMapEditor
         public static Assimp.Mesh Point;
         public static Assimp.Mesh Cube;
 
+        public static Assimp.Mesh SkyboxFront;
+        public static Assimp.Mesh SkyboxBack;
+        public static Assimp.Mesh SkyboxRight;
+        public static Assimp.Mesh SkyboxLeft;
+        public static Assimp.Mesh SkyboxTop;
+        public static Assimp.Mesh SkyboxBottom;
+
         public static Assimp.Mesh Text000;
         public static Assimp.Mesh Text090;
         public static Assimp.Mesh Text180;
@@ -47,6 +54,7 @@ namespace PDMapEditor
         public bool VertexColored = true;
         public bool Persistent = false;
         public bool DrawInFront = false;
+        public bool DrawInBack = false;
 
         public BeginMode BeginMode = BeginMode.Triangles;
 

@@ -57,7 +57,9 @@ void main()
 		vec4 texColor = texture(inTexMat, outUV0);
 		
 		vec3 color = matDiffuse.xyz * texColor.xyz;
-		finalColor = vec4(color, texColor.w * matDiffuse.w);
+		//vec3 color = texColor.xyz;
+		finalColor = vec4(color, 1);
+		//finalColor = vec4(texColor.xyz, 1);
 		
 		//For navlights (the in-game sprite)
 		if(blackIsTransparent)
@@ -65,7 +67,7 @@ void main()
 			float alpha = (finalColor.x + finalColor.y + finalColor.z) / 3.0;
 		}
 	}
-	else
+	else if(vertexColored)
 	{
 		finalColor = vec4(outColor * matDiffuse.xyz, matDiffuse.w);
 	}
