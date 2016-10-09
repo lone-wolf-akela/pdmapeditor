@@ -297,6 +297,7 @@ namespace PDMapEditor
                     Vector4 diffuse = new Vector4(drawable.Mesh.Material.DiffuseColor, drawable.Mesh.Material.Opacity);
 
                     GL.Uniform4(shader.GetUniform("matDiffuse"), ref diffuse);
+                    GL.Uniform1(shader.GetUniform("textureFactor"), drawable.Mesh.Material.TextureFactor);
                 }
                 else
                 {

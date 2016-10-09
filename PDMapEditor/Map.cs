@@ -22,7 +22,7 @@ namespace PDMapEditor
         public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.UpdateMeshData(); Renderer.UpdateView(); Program.GLControl.Invalidate(); Program.main.UpdateMapDimensions(); } }
 
         private static Background background;
-        public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboIndex; Background.SetSkyboxTexture(value.Path); Program.GLControl.Invalidate(); } }
+        public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboIndex; Background.SetSkyboxTexture(value); Program.Settings.Open(); Program.GLControl.Invalidate(); } }
 
         private static float glareIntensity = 0;
         public static float GlareIntensity { get { return glareIntensity; } set { glareIntensity = value; Program.main.sliderGlareIntensity.Value = (int)Math.Round(value * 100); } }
@@ -116,7 +116,7 @@ namespace PDMapEditor
             }
         }
 
-        public static Vector3 GridColor = new Vector3(0.02f);
+        public static Vector3 GridColor = new Vector3(0.1f);
         public static Vector3 CircleColor = new Vector3(1, 0.65f, 0.16f);
 
         private static List<Line> gridLines = new List<Line>();

@@ -38,6 +38,8 @@ namespace PDMapEditor
 
             HWData.ParseDataPaths();
 
+            Background.LoadBackgroundFades();
+
             Creation.Init();
             Selection.Init();
 
@@ -66,6 +68,7 @@ namespace PDMapEditor
             Texture.Close();
             Settings.SaveSettings();
             Hotkeys.SaveHotkeys();
+            Background.SaveBackgroundFades();
             Log.Close();
         }
 
@@ -206,7 +209,7 @@ namespace PDMapEditor
             if (Program.Settings == null || Program.Settings.IsDisposed)
             {
                 Program.Settings = new Settings();
-                Program.Settings.Init();
+                Program.Settings.Open();
                 Program.Settings.Visible = true;
             }
         }

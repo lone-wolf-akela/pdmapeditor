@@ -3,47 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using OpenTK.Graphics.OpenGL;
+using System;
+using System.Xml.Linq;
+using System.Globalization;
 
 namespace PDMapEditor
 {
     public class Background
     {
+        //---------------------------- STATIC -----------------------------//
         public static List<Background> Backgrounds = new List<Background>();
 
         public static Drawable[] Skybox = new Drawable[6];
         public static Texture[] SkyboxTextures = new Texture[6];
-
-        private static bool displayCubemaps = true;
-        public static bool DisplayCubemaps
-        {
-            get { return displayCubemaps; }
-            set
-            {
-                displayCubemaps = value;
-                if (value)
-                {
-                    if (Map.Background != null)
-                        SetSkyboxTexture(Map.Background.Path);
-                }
-                else
-                    RemoveSkyboxTexture();
-            }
-        }
-
-        public string Name;
-        public string Path;
-        public int ComboIndex;
-
-        public Background(string name, string path)
-        {
-            Name = name;
-            Path = path;
-
-            Backgrounds.Add(this);
-
-            Program.main.comboBackground.Items.Add(name);
-            ComboIndex = Program.main.comboBackground.Items.Count - 1;
-        }
 
         public static void CreateSkybox()
         {
@@ -61,9 +33,10 @@ namespace PDMapEditor
                 face.Mesh.Scale = new Vector3(100);
                 face.Mesh.DrawInBack = true;
                 face.Mesh.VertexColored = false;
+                face.Mesh.Material.DiffuseColor = Renderer.BackgroundColor * 0.05f;
             }
 
-            SetSkyboxColor(Renderer.BackgroundColor * 0.05f);
+            SetSkyboxFade(0.5f);
         }
 
         public static void SetSkyboxPosition(Vector3 pos)
@@ -73,11 +46,14 @@ namespace PDMapEditor
                     face.Position = pos;
         }
 
-        public static void SetSkyboxColor(Vector3 Color)
+        public static void SetSkyboxFade(float fade)
         {
             foreach (Drawable face in Skybox)
                 if (face != null)
-                    face.Mesh.Material.DiffuseColor = Color;
+                    face.Mesh.Material.TextureFactor = fade;
+
+            if(Program.GLControl != null)
+                Program.GLControl.Invalidate();
         }
 
         private static void RemoveSkyboxTexture()
@@ -91,14 +67,14 @@ namespace PDMapEditor
                     face.Mesh.Material.DiffuseTexture = null;
 
             SkyboxTextures = new Texture[6];
-            SetSkyboxColor(Renderer.BackgroundColor * 0.05f);
+            SetSkyboxFade(0.5f);
         }
 
-        public static void SetSkyboxTexture(string path)
+        public static void SetSkyboxTexture(Background bg)
         {
             RemoveSkyboxTexture();
 
-            if (!DisplayCubemaps)
+            if (Map.Background.Fade <= 0)
                 return;
 
             string[] faces =
@@ -113,7 +89,7 @@ namespace PDMapEditor
 
             for (int i = 0; i < faces.Length; i++)
             {
-                string file = path + "_hq_" + faces[i];
+                string file = bg.Path + "_hq_" + faces[i];
 
                 string newFile = file + ".dds";
                 if (File.Exists(newFile))
@@ -130,7 +106,7 @@ namespace PDMapEditor
                 {
                     if (SkyboxTextures[i].ID == 0)
                     {
-                        file = path + "_" + faces[i];
+                        file = bg.Path + "_" + faces[i];
 
                         newFile = file + ".dds";
                         if (File.Exists(newFile))
@@ -146,12 +122,52 @@ namespace PDMapEditor
                 }
 
                 Skybox[i].Mesh.Material.DiffuseTexture = SkyboxTextures[i];
-
-                if(SkyboxTextures[i] != null)
-                    Skybox[i].Mesh.Material.DiffuseColor = Vector3.One;
-                else
-                    Skybox[i].Mesh.Material.DiffuseColor = Renderer.BackgroundColor * 0.05f;
+                Skybox[i].Mesh.Material.DiffuseColor = Renderer.BackgroundColor * 0.05f;
+                SetSkyboxFade(bg.Fade);
             }
+        }
+
+        //SAVING/LOADING
+        public static void LoadBackgroundFades()
+        {
+            if (!File.Exists(System.IO.Path.Combine(Program.EXECUTABLE_PATH, "backgrounds.xml")))
+            {
+                Log.WriteLine("No backgrounds.xml found, using default values.");
+                return;
+            }
+
+            try
+            {
+                string file = File.ReadAllText(System.IO.Path.Combine(Program.EXECUTABLE_PATH, "backgrounds.xml"));
+                XElement backgrounds = XElement.Parse(file);
+
+                foreach (XElement element in backgrounds.Elements())
+                {
+                    Background bg = GetBackgroundFromName(element.Name.LocalName);
+                    if (bg == null)
+                        continue;
+
+                    float value = 0.5f;
+                    float.TryParse(element.Value, NumberStyles.Float, CultureInfo.InvariantCulture, out value);
+                    bg.Fade = value;
+                }
+            }
+            catch
+            {
+                Log.WriteLine("Failed to load \"" + System.IO.Path.Combine(Program.EXECUTABLE_PATH, "backgrounds.xml") + "\".");
+            }
+        }
+        public static void SaveBackgroundFades()
+        {
+            XElement backgroundFades =
+                new XElement("backgroundFades");
+
+            foreach (Background bg in Backgrounds)
+            {
+                backgroundFades.Add(new XElement(bg.Name, bg.Fade));
+            }
+
+            File.WriteAllText(System.IO.Path.Combine(Program.EXECUTABLE_PATH, "backgrounds.xml"), backgroundFades.ToString());
         }
 
         public static Background GetBackgroundFromName(string name)
@@ -163,6 +179,34 @@ namespace PDMapEditor
             }
 
             return null;
+        }
+
+        //---------------------------- INSTANCE -----------------------------//
+        public string Name;
+        public string Path;
+        public int ComboIndex;
+        private float fade = 0.5f;
+        public float Fade
+        {
+            get { return fade; }
+            set
+            {
+                fade = value;
+
+                if(Map.Background == this)
+                    SetSkyboxFade(value);
+            }
+        }
+
+        public Background(string name, string path)
+        {
+            Name = name;
+            Path = path;
+
+            Backgrounds.Add(this);
+
+            Program.main.comboBackground.Items.Add(name);
+            ComboIndex = Program.main.comboBackground.Items.Count - 1;
         }
     }
 }

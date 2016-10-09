@@ -174,7 +174,7 @@ namespace PDMapEditor
             GL.LinkProgram(programID);
 
             int program_ok;
-            GL.GetProgram(programID,  ProgramParameter.LinkStatus, out program_ok);
+            GL.GetProgram(programID,  GetProgramParameterName.LinkStatus, out program_ok);
             if (program_ok == 0)
             {
                 Console.WriteLine("Failed to link shader program:");
@@ -262,8 +262,8 @@ namespace PDMapEditor
             Uniforms.Clear();
             Buffers.Clear();
 
-            GL.GetProgram(ProgramID, ProgramParameter.ActiveAttributes, out AttributeCount);
-            GL.GetProgram(ProgramID, ProgramParameter.ActiveUniforms, out UniformCount);
+            GL.GetProgram(ProgramID, GetProgramParameterName.ActiveAttributes, out AttributeCount);
+            GL.GetProgram(ProgramID, GetProgramParameterName.ActiveUniforms, out UniformCount);
 
             for (int i = 0; i < AttributeCount; i++)
             {

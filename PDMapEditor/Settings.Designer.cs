@@ -35,9 +35,11 @@
             this.listDataPaths = new System.Windows.Forms.ListBox();
             this.addDataPathDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupView = new System.Windows.Forms.GroupBox();
-            this.checkDisplayCubemaps = new System.Windows.Forms.CheckBox();
+            this.labelFadeBackground = new System.Windows.Forms.Label();
+            this.sliderFadeBackground = new System.Windows.Forms.TrackBar();
             this.groupDataPaths.SuspendLayout();
             this.groupView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderFadeBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // groupDataPaths
@@ -102,7 +104,8 @@
             // groupView
             // 
             this.groupView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupView.Controls.Add(this.checkDisplayCubemaps);
+            this.groupView.Controls.Add(this.sliderFadeBackground);
+            this.groupView.Controls.Add(this.labelFadeBackground);
             this.groupView.Location = new System.Drawing.Point(12, 12);
             this.groupView.Name = "groupView";
             this.groupView.Size = new System.Drawing.Size(329, 45);
@@ -110,16 +113,26 @@
             this.groupView.TabStop = false;
             this.groupView.Text = "View";
             // 
-            // checkDisplayCubemaps
+            // labelFadeBackground
             // 
-            this.checkDisplayCubemaps.AutoSize = true;
-            this.checkDisplayCubemaps.Location = new System.Drawing.Point(6, 19);
-            this.checkDisplayCubemaps.Name = "checkDisplayCubemaps";
-            this.checkDisplayCubemaps.Size = new System.Drawing.Size(112, 17);
-            this.checkDisplayCubemaps.TabIndex = 0;
-            this.checkDisplayCubemaps.Text = "Display cubemaps";
-            this.checkDisplayCubemaps.UseVisualStyleBackColor = true;
-            this.checkDisplayCubemaps.CheckedChanged += new System.EventHandler(this.checkDisplayCubemaps_CheckedChanged);
+            this.labelFadeBackground.AutoSize = true;
+            this.labelFadeBackground.Location = new System.Drawing.Point(6, 16);
+            this.labelFadeBackground.Name = "labelFadeBackground";
+            this.labelFadeBackground.Size = new System.Drawing.Size(91, 13);
+            this.labelFadeBackground.TabIndex = 0;
+            this.labelFadeBackground.Text = "Fade background";
+            // 
+            // sliderFadeBackground
+            // 
+            this.sliderFadeBackground.AutoSize = false;
+            this.sliderFadeBackground.Location = new System.Drawing.Point(103, 13);
+            this.sliderFadeBackground.Maximum = 100;
+            this.sliderFadeBackground.Name = "sliderFadeBackground";
+            this.sliderFadeBackground.Size = new System.Drawing.Size(220, 23);
+            this.sliderFadeBackground.TabIndex = 1;
+            this.sliderFadeBackground.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.sliderFadeBackground.Value = 50;
+            this.sliderFadeBackground.Scroll += new System.EventHandler(this.sliderFadeBackground_Scroll);
             // 
             // Settings
             // 
@@ -137,6 +150,7 @@
             this.groupDataPaths.ResumeLayout(false);
             this.groupView.ResumeLayout(false);
             this.groupView.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderFadeBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,6 +165,7 @@
         private System.Windows.Forms.ListBox listDataPaths;
         private System.Windows.Forms.OpenFileDialog addDataPathDialog;
         private System.Windows.Forms.GroupBox groupView;
-        private System.Windows.Forms.CheckBox checkDisplayCubemaps;
+        private System.Windows.Forms.Label labelFadeBackground;
+        private System.Windows.Forms.TrackBar sliderFadeBackground;
     }
 }

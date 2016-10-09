@@ -20,6 +20,8 @@ namespace PDMapEditor
         public float SpecularExponent = 0.3f;
         public float Opacity = 1.0f;
 
+        public float TextureFactor = 1;
+
         public string DiffuseMap = "";
         public string SpecularMap = "";
         public string OpacityMap = "";

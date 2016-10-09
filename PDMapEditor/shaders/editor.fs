@@ -20,6 +20,7 @@ uniform bool isTextured;
 uniform bool shaded;
 uniform bool vertexColored;
 uniform bool blackIsTransparent;
+uniform float textureFactor;
 
 uniform struct FogParameters 
 { 
@@ -56,7 +57,9 @@ void main()
 	{
 		vec4 texColor = texture(inTexMat, outUV0);
 		
-		vec3 color = matDiffuse.xyz * texColor.xyz;
+		
+		vec3 color = mix(matDiffuse.xyz, texColor.xyz, textureFactor);
+
 		//vec3 color = texColor.xyz;
 		finalColor = vec4(color, 1);
 		//finalColor = vec4(texColor.xyz, 1);

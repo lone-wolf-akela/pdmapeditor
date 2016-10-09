@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,20 +20,22 @@ namespace PDMapEditor
             InitializeComponent();
         }
 
-        public void Init()
+        public void Open()
         {
             listDataPaths.Items.Clear();
             listDataPaths.Items.AddRange(HWData.DataPaths.ToArray());
 
-            checkDisplayCubemaps.Checked = Background.DisplayCubemaps;
+            if(Map.Background != null)
+                sliderFadeBackground.Value = (int)Math.Round(Map.Background.Fade * 100);
+            else
+                sliderFadeBackground.Value = 50;
         }
 
         //------------------------------------------ SETTINGS SAVING ----------------------------------------//
         public static void SaveSettings()
         {
             XElement settings =
-                new XElement("settings",
-                new XElement("displayCubemaps", Background.DisplayCubemaps));
+                new XElement("settings");
 
             foreach (string dataPath in HWData.DataPaths)
             {
@@ -59,11 +62,6 @@ namespace PDMapEditor
                 {
                     switch (element.Name.LocalName)
                     {
-                        case "displayCubemaps":
-                            bool value = true;
-                            bool.TryParse(element.Value, out value);
-                            Background.DisplayCubemaps = value;
-                            break;
                         case "dataPath":
                             HWData.DataPaths.Add(element.Value);
                             break;
@@ -106,11 +104,12 @@ namespace PDMapEditor
             }
         }
 
-        //------------------------------------------ VIEW GROUP ----------------------------------------//
-        private void checkDisplayCubemaps_CheckedChanged(object sender, EventArgs e)
+
+        //------------------------ VIEW ------------------------//
+        private void sliderFadeBackground_Scroll(object sender, EventArgs e)
         {
-            Background.DisplayCubemaps = checkDisplayCubemaps.Checked;
-            Program.GLControl.Invalidate();
+            if(Map.Background != null)
+                Map.Background.Fade = (float)sliderFadeBackground.Value / 100;
         }
     }
 }
