@@ -11,6 +11,8 @@ namespace PDMapEditor
     public partial class Main : Form
     {
         public bool Loaded = false;
+        public bool FormActive = false;
+
         private bool problemsVisible;
 
         private bool ignoreMapDimensionChange;
@@ -108,7 +110,8 @@ namespace PDMapEditor
 
         public void glControl_MouseEnter(object sender, EventArgs e)
         {
-            Program.GLControl.Focus();
+            if(FormActive)
+                Program.GLControl.Focus();
         }
 
         public void glControl_MouseLeave(object sender, EventArgs e)
@@ -579,5 +582,16 @@ namespace PDMapEditor
         {
             Map.Description = boxDescription.Text;
         }
+
+        #region Proper focus check
+        private void Main_Activated(object sender, EventArgs e)
+        {
+            FormActive = true;
+        }
+        private void Main_Deactivate(object sender, EventArgs e)
+        {
+            FormActive = false;
+        }
+        #endregion
     }
 }

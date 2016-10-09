@@ -30,7 +30,7 @@ namespace PDMapEditor
 
             foreach (Drawable face in Skybox)
             {
-                face.Mesh.Scale = new Vector3(100);
+                face.Mesh.Scale = new Vector3(1000);
                 face.Mesh.DrawInBack = true;
                 face.Mesh.VertexColored = false;
                 face.Mesh.Material.DiffuseColor = Renderer.BackgroundColor * 0.05f;

@@ -228,7 +228,7 @@ namespace PDMapEditor
             MouseState mouse = Mouse.GetState();
             System.Drawing.Point position = Cursor.Position;
 
-            if (Program.GLControl.Focused || forceUpdate)
+            if (Program.GLControl.Focused && Program.main.FormActive)
             {
                 float zoomDelta = mouse.WheelPrecise - lastWheelPrecise;
 
