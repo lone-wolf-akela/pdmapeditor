@@ -35,11 +35,15 @@
             this.listDataPaths = new System.Windows.Forms.ListBox();
             this.addDataPathDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupView = new System.Windows.Forms.GroupBox();
-            this.labelFadeBackground = new System.Windows.Forms.Label();
             this.sliderFadeBackground = new System.Windows.Forms.TrackBar();
+            this.labelFadeBackground = new System.Windows.Forms.Label();
+            this.groupGrid = new System.Windows.Forms.GroupBox();
+            this.radioRectangularGrid = new System.Windows.Forms.RadioButton();
+            this.radioPolarGrid = new System.Windows.Forms.RadioButton();
             this.groupDataPaths.SuspendLayout();
             this.groupView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderFadeBackground)).BeginInit();
+            this.groupGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupDataPaths
@@ -50,7 +54,7 @@
             this.groupDataPaths.Controls.Add(this.buttonRemoveDataPath);
             this.groupDataPaths.Controls.Add(this.buttonAddDataPath);
             this.groupDataPaths.Controls.Add(this.listDataPaths);
-            this.groupDataPaths.Location = new System.Drawing.Point(12, 63);
+            this.groupDataPaths.Location = new System.Drawing.Point(12, 132);
             this.groupDataPaths.Name = "groupDataPaths";
             this.groupDataPaths.Size = new System.Drawing.Size(329, 188);
             this.groupDataPaths.TabIndex = 20;
@@ -108,19 +112,10 @@
             this.groupView.Controls.Add(this.labelFadeBackground);
             this.groupView.Location = new System.Drawing.Point(12, 12);
             this.groupView.Name = "groupView";
-            this.groupView.Size = new System.Drawing.Size(329, 45);
+            this.groupView.Size = new System.Drawing.Size(329, 41);
             this.groupView.TabIndex = 21;
             this.groupView.TabStop = false;
             this.groupView.Text = "View";
-            // 
-            // labelFadeBackground
-            // 
-            this.labelFadeBackground.AutoSize = true;
-            this.labelFadeBackground.Location = new System.Drawing.Point(6, 16);
-            this.labelFadeBackground.Name = "labelFadeBackground";
-            this.labelFadeBackground.Size = new System.Drawing.Size(91, 13);
-            this.labelFadeBackground.TabIndex = 0;
-            this.labelFadeBackground.Text = "Fade background";
             // 
             // sliderFadeBackground
             // 
@@ -134,6 +129,51 @@
             this.sliderFadeBackground.Value = 50;
             this.sliderFadeBackground.Scroll += new System.EventHandler(this.sliderFadeBackground_Scroll);
             // 
+            // labelFadeBackground
+            // 
+            this.labelFadeBackground.AutoSize = true;
+            this.labelFadeBackground.Location = new System.Drawing.Point(6, 16);
+            this.labelFadeBackground.Name = "labelFadeBackground";
+            this.labelFadeBackground.Size = new System.Drawing.Size(91, 13);
+            this.labelFadeBackground.TabIndex = 0;
+            this.labelFadeBackground.Text = "Fade background";
+            // 
+            // groupGrid
+            // 
+            this.groupGrid.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupGrid.Controls.Add(this.radioPolarGrid);
+            this.groupGrid.Controls.Add(this.radioRectangularGrid);
+            this.groupGrid.Location = new System.Drawing.Point(12, 59);
+            this.groupGrid.Name = "groupGrid";
+            this.groupGrid.Size = new System.Drawing.Size(329, 67);
+            this.groupGrid.TabIndex = 22;
+            this.groupGrid.TabStop = false;
+            this.groupGrid.Text = "Grid";
+            // 
+            // radioRectangularGrid
+            // 
+            this.radioRectangularGrid.AutoSize = true;
+            this.radioRectangularGrid.Checked = true;
+            this.radioRectangularGrid.Location = new System.Drawing.Point(6, 19);
+            this.radioRectangularGrid.Name = "radioRectangularGrid";
+            this.radioRectangularGrid.Size = new System.Drawing.Size(83, 17);
+            this.radioRectangularGrid.TabIndex = 0;
+            this.radioRectangularGrid.TabStop = true;
+            this.radioRectangularGrid.Text = "Rectangular";
+            this.radioRectangularGrid.UseVisualStyleBackColor = true;
+            this.radioRectangularGrid.CheckedChanged += new System.EventHandler(this.radioRectangularGrid_CheckedChanged);
+            // 
+            // radioPolarGrid
+            // 
+            this.radioPolarGrid.AutoSize = true;
+            this.radioPolarGrid.Location = new System.Drawing.Point(6, 42);
+            this.radioPolarGrid.Name = "radioPolarGrid";
+            this.radioPolarGrid.Size = new System.Drawing.Size(49, 17);
+            this.radioPolarGrid.TabIndex = 1;
+            this.radioPolarGrid.Text = "Polar";
+            this.radioPolarGrid.UseVisualStyleBackColor = true;
+            this.radioPolarGrid.CheckedChanged += new System.EventHandler(this.radioPolarGrid_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,6 +181,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(446, 447);
+            this.Controls.Add(this.groupGrid);
             this.Controls.Add(this.groupView);
             this.Controls.Add(this.groupDataPaths);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -151,6 +192,8 @@
             this.groupView.ResumeLayout(false);
             this.groupView.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderFadeBackground)).EndInit();
+            this.groupGrid.ResumeLayout(false);
+            this.groupGrid.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +210,8 @@
         private System.Windows.Forms.GroupBox groupView;
         private System.Windows.Forms.Label labelFadeBackground;
         private System.Windows.Forms.TrackBar sliderFadeBackground;
+        private System.Windows.Forms.GroupBox groupGrid;
+        private System.Windows.Forms.RadioButton radioPolarGrid;
+        private System.Windows.Forms.RadioButton radioRectangularGrid;
     }
 }

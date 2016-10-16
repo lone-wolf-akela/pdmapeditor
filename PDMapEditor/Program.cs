@@ -54,7 +54,7 @@ namespace PDMapEditor
             GLControl.Name = "glControl";
             GLControl.Size = new System.Drawing.Size(865, 758);
             GLControl.TabIndex = 0;
-            GLControl.VSync = true;
+            GLControl.VSync = false;
             GLControl.Load += new System.EventHandler(main.glControl_Load);
             GLControl.Paint += new System.Windows.Forms.PaintEventHandler(main.glControl_Render);
             GLControl.MouseEnter += new System.EventHandler(main.glControl_MouseEnter);

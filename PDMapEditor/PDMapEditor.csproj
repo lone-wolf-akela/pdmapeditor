@@ -87,6 +87,7 @@
     <Compile Include="editor\Gizmo.cs" />
     <Compile Include="editor\Icosphere.cs" />
     <Compile Include="editor\Dot.cs" />
+    <Compile Include="editor\LineLoop.cs" />
     <Compile Include="editor\Line.cs" />
     <Compile Include="EnumerationExtensions.cs" />
     <Compile Include="forms\CustomGLControl.cs">
@@ -126,6 +127,7 @@
     <Compile Include="Mesh.cs" />
     <Compile Include="meshes2D\Mesh2D.cs" />
     <Compile Include="meshes\MeshDot.cs" />
+    <Compile Include="meshes\MeshLineLoop.cs" />
     <Compile Include="meshes\MeshLine.cs" />
     <Compile Include="meshes\MeshIcosphere.cs" />
     <Compile Include="Selection.cs" />

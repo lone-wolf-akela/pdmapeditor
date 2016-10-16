@@ -29,13 +29,16 @@ namespace PDMapEditor
                 sliderFadeBackground.Value = (int)Math.Round(Map.Background.Fade * 100);
             else
                 sliderFadeBackground.Value = 50;
+
+            radioRectangularGrid.Checked = !Map.PolarGrid;
+            radioPolarGrid.Checked = Map.PolarGrid;
         }
 
         //------------------------------------------ SETTINGS SAVING ----------------------------------------//
         public static void SaveSettings()
         {
-            XElement settings =
-                new XElement("settings");
+            XElement settings = new XElement("settings");
+            settings.Add(new XElement("polarGrid", Map.PolarGrid));
 
             foreach (string dataPath in HWData.DataPaths)
             {
@@ -62,6 +65,11 @@ namespace PDMapEditor
                 {
                     switch (element.Name.LocalName)
                     {
+                        case "polarGrid":
+                            bool value = false;
+                            bool.TryParse(element.Value, out value);
+                            Map.PolarGrid = value;
+                            break;
                         case "dataPath":
                             HWData.DataPaths.Add(element.Value);
                             break;
@@ -110,6 +118,16 @@ namespace PDMapEditor
         {
             if(Map.Background != null)
                 Map.Background.Fade = (float)sliderFadeBackground.Value / 100;
+        }
+
+        //------------------------ GRID ------------------------//
+        private void radioRectangularGrid_CheckedChanged(object sender, EventArgs e)
+        {
+            Map.PolarGrid = false;
+        }
+        private void radioPolarGrid_CheckedChanged(object sender, EventArgs e)
+        {
+            Map.PolarGrid = true;
         }
     }
 }

@@ -11,6 +11,8 @@ namespace PDMapEditor
 {
     static class Renderer
     {
+        public static bool Initialized = false;
+
         public static Matrix4 View = Matrix4.Identity;
         public static Matrix4 Projection = Matrix4.Identity;
         public static Matrix4 ViewProjection = Matrix4.Identity;
@@ -35,11 +37,9 @@ namespace PDMapEditor
 
         public static void Init()
         {
-            BackgroundColor = new Vector3(0.05f, 0.05f, 0.05f);
-
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.Blend);
-            GL.Enable(EnableCap.AlphaTest);
+            //GL.Enable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
             // Gen buffers
@@ -55,7 +55,10 @@ namespace PDMapEditor
             shader = new Shader("editor.vs", "editor.fs", true);
             shader2D = new Shader("2d.vs", "2d.fs", true);
 
+            BackgroundColor = new Vector3(0.05f, 0.05f, 0.05f);
+
             Log.WriteLine("Renderer initialized.");
+            Initialized = true;
         }
 
         public static void UpdateMeshData()

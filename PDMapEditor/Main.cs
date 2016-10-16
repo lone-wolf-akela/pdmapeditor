@@ -34,7 +34,6 @@ namespace PDMapEditor
             Log.WriteLine("Initializing...");
 
             Texture.Init();
-
             Importer.Init();
             Renderer.Init();
 

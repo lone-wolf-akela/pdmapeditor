@@ -14,12 +14,17 @@ namespace PDMapEditor
     {
         //Contants
         const int CIRCLE_SEGMENTS = 100;
+        const int POLAR_LINES = 20;
+        const int POLAR_CIRCLES = 11;
+        const int POLAR_CIRCLE_SEGMENTS = 100;
+        public static Vector3 COLOR_GRID = new Vector3(0.1f);
+        public static Vector3 COLOR_CIRCLE = new Vector3(1, 0.65f, 0.16f);
 
         private static string path;
         public static string Path { get { return path; } set { path = value; Program.main.Text = "PayDay's Homeworld Remastered Map Editor"; if (value.Length > 0) Program.main.Text += " - " + value; } }
 
         private static Vector3 mapDimensions = new Vector3(40000);
-        public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.UpdateMeshData(); Renderer.UpdateView(); Program.GLControl.Invalidate(); Program.main.UpdateMapDimensions(); } }
+        public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(PolarGrid); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.UpdateMeshData(); Renderer.UpdateView(); Program.GLControl.Invalidate(); Program.main.UpdateMapDimensions(); } }
 
         private static Background background;
         public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboIndex; Background.SetSkyboxTexture(value); if(Program.Settings != null) Program.Settings.Open(); Program.GLControl.Invalidate(); } }
@@ -116,59 +121,110 @@ namespace PDMapEditor
             }
         }
 
-        public static Vector3 GridColor = new Vector3(0.1f);
-        public static Vector3 CircleColor = new Vector3(1, 0.65f, 0.16f);
-
-        private static List<Line> gridLines = new List<Line>();
-        private static List<Line> circleLines = new List<Line>();
+        private static List<Drawable> gridLines = new List<Drawable>();
+        private static LineLoop circleLine;
         private static List<Drawable> degreeTexts = new List<Drawable>();
 
-        private static void CreateGrid()
+        private static bool polarGrid;
+        public static bool PolarGrid { get { return polarGrid; } set { polarGrid = value; CreateGrid(value); if (Renderer.Initialized) { Renderer.UpdateMeshData(); Renderer.UpdateView(); Program.GLControl.Invalidate(); } } }
+
+        private static void CreateGrid(bool polar = false)
         {
             Drawable.Drawables = Drawable.Drawables.Except(gridLines).ToList();
             gridLines.Clear();
 
-            for(float x = -MapDimensions.X; x <= MapDimensions.X; x += MapDimensions.X / 20)
+            if (!polar)
             {
-                Vector3 start = new Vector3(x, 0, -MapDimensions.Z);
-                Vector3 end = new Vector3(x, 0, MapDimensions.Z);
-                Line line = new Line(start, end, GridColor);
-                gridLines.Add(line);
-            }
+                for (float x = -MapDimensions.X; x <= MapDimensions.X; x += MapDimensions.X / 20)
+                {
+                    Vector3 start = new Vector3(x, 0, -MapDimensions.Z);
+                    Vector3 end = new Vector3(x, 0, MapDimensions.Z);
+                    Line line = new Line(start, end, COLOR_GRID);
+                    gridLines.Add(line);
+                }
 
-            for (float z = -MapDimensions.Z; z <= MapDimensions.Z; z += MapDimensions.Z / 20)
+                for (float z = -MapDimensions.Z; z <= MapDimensions.Z; z += MapDimensions.Z / 20)
+                {
+                    Vector3 start = new Vector3(-MapDimensions.X, 0, z);
+                    Vector3 end = new Vector3(MapDimensions.X, 0, z);
+                    Line line = new Line(start, end, COLOR_GRID);
+                    gridLines.Add(line);
+                }
+            }
+            else
             {
-                Vector3 start = new Vector3(-MapDimensions.X, 0, z);
-                Vector3 end = new Vector3(MapDimensions.X, 0, z);
-                Line line = new Line(start, end, GridColor);
-                gridLines.Add(line);
+                float radius = Math.Max(MapDimensions.X, MapDimensions.Z);
+
+                //Lines
+                double angleDelta = Math.PI / POLAR_LINES;
+                double angle = 0;
+                float width = 1;
+                for (int i = 0; i < POLAR_LINES; i++)
+                {
+                    float startX = (float)Math.Cos(angle) * radius;
+                    float startZ = (float)Math.Sin(angle) * radius;
+                    Vector3 start = new Vector3(startX, 0, startZ);
+
+                    float endX = (float)Math.Cos(angle + Math.PI) * radius;
+                    float endZ = (float)Math.Sin(angle + Math.PI) * radius;
+                    Vector3 end = new Vector3(endX, 0, endZ);
+
+                    if (i == 0 || i == POLAR_LINES / 2)
+                        width = 1.6f;
+                    else
+                        width = 1;
+
+                    Line line = new Line(start, end, COLOR_GRID, width);
+                    gridLines.Add(line);
+
+                    angle += angleDelta;
+                }
+
+                //Circles
+                float circleRadius = 0;
+                float circleRadiusDelta = radius / POLAR_CIRCLES;
+                for (int n = 0; n < POLAR_CIRCLES; n++)
+                {
+                    double theta = 0;
+                    Vector3[] polygons = new Vector3[POLAR_CIRCLE_SEGMENTS];
+
+                    for (int i = 0; i < POLAR_CIRCLE_SEGMENTS; i++)
+                    {
+                        theta = 2.0f * Math.PI * i / POLAR_CIRCLE_SEGMENTS;
+
+                        float x = circleRadius * (float)Math.Cos(theta);
+                        float z = circleRadius * (float)Math.Sin(theta);
+
+                        polygons[i] = new Vector3(x, 0, z);
+                    }
+
+                    LineLoop line = new LineLoop(polygons, COLOR_GRID);
+                    gridLines.Add(line);
+
+                    circleRadius += circleRadiusDelta;
+                }
             }
         }
 
         private static void CreateCircle()
         {
-            Drawable.Drawables = Drawable.Drawables.Except(circleLines).ToList();
-            circleLines.Clear();
+            Drawable.Drawables.Remove(circleLine);
 
             float radius = Math.Max(MapDimensions.X, MapDimensions.Z);
-
             double theta = 2.0f * Math.PI * 0 / CIRCLE_SEGMENTS;
-            double nextTheta;
-            
+            Vector3[] polygons = new Vector3[CIRCLE_SEGMENTS];
+
             for (int i = 0; i < CIRCLE_SEGMENTS; i++)
             {
+                theta = 2.0f * Math.PI * i / CIRCLE_SEGMENTS;
+
                 float x = radius * (float)Math.Cos(theta);
-                float z = radius * (float)Math.Sin(theta);
+                float z = radius * (float)Math.Sin(theta); 
 
-                nextTheta = 2.0f * Math.PI * (i + 1) / CIRCLE_SEGMENTS;
-                float nextX = radius * (float)Math.Cos(nextTheta);
-                float nextZ = radius * (float)Math.Sin(nextTheta);
-
-                Line line = new Line(new Vector3(x, 0, z), new Vector3(nextX, 0, nextZ), CircleColor, 2);
-                circleLines.Add(line);
-
-                theta = nextTheta;
+                polygons[i] = new Vector3(x, 0, z);
             }
+
+            circleLine = new LineLoop(polygons, COLOR_CIRCLE, 2);
         }
 
         private static void CreateDegreeTexts()
@@ -182,22 +238,22 @@ namespace PDMapEditor
 
             Drawable text = new Drawable(new Vector3(0, 0, -radius - textOffset), Vector3.Zero, Mesh.Text000);
             text.Mesh.Scale = new Vector3(textScale);
-            text.Mesh.Material.DiffuseColor = CircleColor;
+            text.Mesh.Material.DiffuseColor = COLOR_CIRCLE;
             degreeTexts.Add(text);
 
             text = new Drawable(new Vector3(radius + textOffset, 0, 0), new Vector3(0, -90, 0), Mesh.Text090);
             text.Mesh.Scale = new Vector3(textScale);
-            text.Mesh.Material.DiffuseColor = CircleColor;
+            text.Mesh.Material.DiffuseColor = COLOR_CIRCLE;
             degreeTexts.Add(text);
 
             text = new Drawable(new Vector3(0, 0, radius + textOffset), new Vector3(0, 180, 0), Mesh.Text180);
             text.Mesh.Scale = new Vector3(textScale);
-            text.Mesh.Material.DiffuseColor = CircleColor;
+            text.Mesh.Material.DiffuseColor = COLOR_CIRCLE;
             degreeTexts.Add(text);
 
             text = new Drawable(new Vector3(-radius - textOffset, 0, 0), new Vector3(0, 90, 0), Mesh.Text270);
             text.Mesh.Scale = new Vector3(textScale);
-            text.Mesh.Material.DiffuseColor = CircleColor;
+            text.Mesh.Material.DiffuseColor = COLOR_CIRCLE;
             degreeTexts.Add(text);
         }
 
