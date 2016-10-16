@@ -37,6 +37,7 @@ namespace PDMapEditor
             Importer.Init();
             Renderer.Init();
 
+            Settings.LoadSettings();
             HWData.ParseDataPaths();
 
             Background.LoadBackgroundFades();

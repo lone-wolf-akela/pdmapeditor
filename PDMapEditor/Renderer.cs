@@ -39,7 +39,7 @@ namespace PDMapEditor
         {
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.Blend);
-            //GL.Enable(EnableCap.AlphaTest);
+            GL.Disable(EnableCap.AlphaTest);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
             // Gen buffers
@@ -301,10 +301,14 @@ namespace PDMapEditor
 
                     GL.Uniform4(shader.GetUniform("matDiffuse"), ref diffuse);
                     GL.Uniform1(shader.GetUniform("textureFactor"), drawable.Mesh.Material.TextureFactor);
+
+                    if (drawable.Mesh.Material.Opacity < 1)
+                        GL.Enable(EnableCap.Blend);
                 }
                 else
                 {
                     GL.Uniform4(shader.GetUniform("matDiffuse"), 1f, 1f, 1f, 1f);
+                    GL.Disable(EnableCap.Blend);
                 }
 
                 if(drawable.Mesh.VertexColored)

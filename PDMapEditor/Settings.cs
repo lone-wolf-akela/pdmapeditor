@@ -123,11 +123,11 @@ namespace PDMapEditor
         //------------------------ GRID ------------------------//
         private void radioRectangularGrid_CheckedChanged(object sender, EventArgs e)
         {
-            Map.PolarGrid = false;
+            Map.PolarGrid = !radioRectangularGrid.Checked;
         }
         private void radioPolarGrid_CheckedChanged(object sender, EventArgs e)
         {
-            Map.PolarGrid = true;
+            Map.PolarGrid = radioPolarGrid.Checked;
         }
     }
 }

@@ -125,7 +125,7 @@ namespace PDMapEditor
         private static LineLoop circleLine;
         private static List<Drawable> degreeTexts = new List<Drawable>();
 
-        private static bool polarGrid;
+        private static bool polarGrid = false;
         public static bool PolarGrid { get { return polarGrid; } set { polarGrid = value; CreateGrid(value); if (Renderer.Initialized) { Renderer.UpdateMeshData(); Renderer.UpdateView(); Program.GLControl.Invalidate(); } } }
 
         private static void CreateGrid(bool polar = false)
