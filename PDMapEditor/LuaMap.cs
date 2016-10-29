@@ -7,6 +7,7 @@ using NLua;
 using OpenTK;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace PDMapEditor
 {
@@ -68,8 +69,11 @@ namespace PDMapEditor
             lua.RegisterFunction("setDustCloudColour", null, type.GetMethod("SetDustCloudColour"));
             lua.RegisterFunction("setNebulaAmbient", null, type.GetMethod("SetNebulaAmbient"));
 
+            string code = File.ReadAllText(path);
+            code = ConvertForLoopSyntax(code);
+
             try
-            { lua.DoFile(path); }
+            { lua.DoString(code); }
             catch (NLua.Exceptions.LuaScriptException e) { new Problem(ProblemTypes.ERROR, e.Message); }
 
             try { lua.DoString("NonDetermChunk()"); }
@@ -95,6 +99,23 @@ namespace PDMapEditor
             }
 
             Map.MaxPlayers = maxPlayers;
+        }
+
+        private static string ConvertForLoopSyntax(string code)
+        {
+            string pattern = @"for(?<=for)(.*)(?=,),(?<=,)(.*)(?=in)in(?<=in)(.*)(?=do)do";
+            int indexOffset = 0;
+            MatchCollection matches = Regex.Matches(code, pattern);
+
+            foreach(Match match in matches)
+            {
+                code = code.Insert(match.Groups[3].Index + match.Groups[3].Length + indexOffset, ") ");
+                code = code.Insert(match.Groups[3].Index + indexOffset, " pairs(");
+
+                indexOffset += 9;
+            }
+
+            return code;
         }
 
         private static void LoadMathLib()
@@ -395,7 +416,9 @@ end");
                 string filepath = Path.Combine(dataPath, file);
                 if (File.Exists(filepath))
                 {
-                    object[] ret = lua.DoFile(filepath);
+                    string code = File.ReadAllText(filepath);
+                    code = ConvertForLoopSyntax(code);
+                    object[] ret = lua.DoString(code);
                     return ret;
                 }
             }
