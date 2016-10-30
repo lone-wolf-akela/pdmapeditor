@@ -1,23 +1,28 @@
 ﻿using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace PDMapEditor
 {
     public class Pebble : Drawable, ISelectable
     {
         public static List<Pebble> Pebbles = new List<Pebble>();
+        private static PebbleType lastType;
 
-        public PebbleType Type;
+        private PebbleType type;
+        [CustomSortedCategory("Pebble", 2, 2)]
+        [Description("The type of the pebble. From data/pebble/.")]
+        public PebbleType Type { get { return type; } set { type = value; lastType = value; } }
 
+        [Browsable(false)]
         public bool AllowRotation { get; set; }
 
         public Pebble() : base (Vector3.Zero)
         {
-            Type = PebbleType.GetTypeFromComboIndex(Program.main.comboPebbleType.SelectedIndex);
+            if (lastType != null)
+                Type = lastType;
+            else
+                Type = PebbleType.PebbleTypes[0];
 
             Mesh = new MeshDot(Vector3.Zero, new Vector3(Type.PixelColor), Type.PixelSize); //TODO: Use alpha value of pebble type
             Pebbles.Add(this);

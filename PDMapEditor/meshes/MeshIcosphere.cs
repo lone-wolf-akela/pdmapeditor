@@ -1,8 +1,6 @@
 ﻿using Assimp;
 using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace PDMapEditor
 {

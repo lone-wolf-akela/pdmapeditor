@@ -59,8 +59,8 @@ namespace PDMapEditor
 
             Program.main.UpdateProblems();
             Renderer.UpdateMeshData();
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
+            Renderer.InvalidateView();
+            Renderer.Invalidate();
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,6 +87,7 @@ namespace PDMapEditor
             Program.Camera.UpdatePanning();
 
             Creation.UpdateObjectAtCursor();
+            Selection.Update();
         }
 
         public void glControl_Render(object sender, PaintEventArgs e)
@@ -105,7 +106,7 @@ namespace PDMapEditor
                 return;
 
             Renderer.Resize();
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
 
         public void glControl_MouseEnter(object sender, EventArgs e)
@@ -192,8 +193,8 @@ namespace PDMapEditor
                 Program.Camera.ResetCamera();
                 Program.main.UpdateProblems();
                 Renderer.UpdateMeshData();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
         }
 
@@ -350,13 +351,13 @@ namespace PDMapEditor
             sliderFogAlpha.Enabled = checkFogActive.Checked;
             comboFogType.Enabled = checkFogActive.Checked;
             sliderFogDensity.Enabled = checkFogActive.Checked;
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
 
         private void checkFogDisplay_CheckedChanged(object sender, EventArgs e)
         {
             Renderer.DisplayFog = checkFogDisplay.Checked;
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
 
         public void UpdateFogStart()
@@ -366,7 +367,7 @@ namespace PDMapEditor
         private void numericFogStart_ValueChanged(object sender, EventArgs e)
         {
             Map.FogStart = (float)numericFogStart.Value;
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
 
         public void UpdateFogEnd()
@@ -376,7 +377,7 @@ namespace PDMapEditor
         private void numericFogEnd_ValueChanged(object sender, EventArgs e)
         {
             Map.FogEnd = (float)numericFogEnd.Value;
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
 
         public void UpdateFogColor()
@@ -394,7 +395,7 @@ namespace PDMapEditor
             {
                 buttonFogColor.BackColor = colorDialog.Color;
                 Map.FogColor = new Vector4((float)colorDialog.Color.R / 255, (float)colorDialog.Color.G / 255, (float)colorDialog.Color.B / 255, Map.FogColor.W);
-                Program.GLControl.Invalidate();
+                Renderer.Invalidate();
             }
         }
         private void sliderFogAlpha_Scroll(object sender, EventArgs e)
@@ -402,7 +403,7 @@ namespace PDMapEditor
             ignoreFogAlphaChange = true;
             Map.FogColor = new Vector4(Map.FogColor.X, Map.FogColor.Y, Map.FogColor.Z, (float)sliderFogAlpha.Value / 100);
             ignoreFogAlphaChange = false;
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
 
         public void UpdateFogType()
@@ -438,7 +439,7 @@ namespace PDMapEditor
                     break;
             }
             Map.FogType = type;
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
 
         public void UpdateFogDensity()
@@ -451,7 +452,7 @@ namespace PDMapEditor
             ignoreFogDensityChange = true;
             Map.FogDensity = (float)sliderFogDensity.Value / 100;
             ignoreFogDensityChange = false;
-            Program.GLControl.Invalidate();
+            Renderer.Invalidate();
         }
         #endregion
 

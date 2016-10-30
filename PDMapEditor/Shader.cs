@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
 namespace PDMapEditor

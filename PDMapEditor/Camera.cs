@@ -1,7 +1,6 @@
 ﻿using OpenTK;
 using OpenTK.Input;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace PDMapEditor
@@ -90,8 +89,8 @@ namespace PDMapEditor
                     this.Zoom = perspectiveZoom;
 
                 Program.main.UpdatePerspectiveOrthoCombo();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.VIEW_FRONT))
             {
@@ -99,8 +98,8 @@ namespace PDMapEditor
                 Angles.Y = (float)Math.PI;
 
                 UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.VIEW_BACK))
             {
@@ -108,8 +107,8 @@ namespace PDMapEditor
                 Angles.Y = 0;
 
                 UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.VIEW_LEFT))
             {
@@ -117,8 +116,8 @@ namespace PDMapEditor
                 Angles.Y = (float)Math.PI * 1.5f;
 
                 UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.VIEW_RIGHT))
             {
@@ -126,8 +125,8 @@ namespace PDMapEditor
                 Angles.Y = (float)Math.PI / 2;
 
                 UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.VIEW_TOP))
             {
@@ -137,8 +136,8 @@ namespace PDMapEditor
                 Angles.X = (float)Utilities.Clamp(Angles.X, Math.PI / 2, Math.PI * 1.5f - 0.01f);
 
                 UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.VIEW_BOTTOM))
             {
@@ -148,8 +147,8 @@ namespace PDMapEditor
                 Angles.X = (float)Utilities.Clamp(Angles.X, Math.PI / 2, Math.PI * 1.5f - 0.01f);
 
                 UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.CAM_RESET))
             {
@@ -174,8 +173,8 @@ namespace PDMapEditor
             this.orthographicSize = 0.009f;
 
             UpdatePosition();
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
+            Renderer.InvalidateView();
+            Renderer.Invalidate();
             Program.main.UpdatePerspectiveOrthoCombo();
         }
 
@@ -215,8 +214,8 @@ namespace PDMapEditor
                 panDelta = Vector3.Zero;
 
                 UpdatePosition();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
         }
 
@@ -247,8 +246,8 @@ namespace PDMapEditor
                     if (Angles.Y < 0)
                         Angles.Y = (float)Math.PI * 2;
 
-                    Renderer.UpdateView();
-                    Program.GLControl.Invalidate();
+                    Renderer.InvalidateView();
+                    Renderer.Invalidate();
                 }
 
                 if (!this.Orthographic)
@@ -267,14 +266,14 @@ namespace PDMapEditor
 
             if (lastZoom != zoom)
             {
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
 
             if (lastOrthographicSize != orthographicSize)
             {
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
 
             lastPos = position;

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
 namespace PDMapEditor
@@ -12,6 +9,7 @@ namespace PDMapEditor
     static class Renderer
     {
         public static bool Initialized = false;
+        public static bool ViewInvalid = false;
 
         public static Matrix4 View = Matrix4.Identity;
         public static Matrix4 Projection = Matrix4.Identity;
@@ -165,6 +163,9 @@ namespace PDMapEditor
 
         public static void Render()
         {
+            if (ViewInvalid)
+                UpdateView();
+
             //GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Clear(ClearBufferMask.DepthBufferBit); //No need to clear the color buffer, because now we have a skybox
 
@@ -363,12 +364,24 @@ namespace PDMapEditor
 
                 drawable.Mesh.ModelViewProjectionMatrix = drawable.Mesh.ModelMatrix * ViewProjection;
             }
+
+            ViewInvalid = false;
         }
 
         public static void Resize()
         {
             GL.Viewport(Program.GLControl.ClientRectangle.X, Program.GLControl.ClientRectangle.Y, Program.GLControl.ClientRectangle.Width, Program.GLControl.ClientRectangle.Height);
-            UpdateView();
+            InvalidateView();
+        }
+
+        public static void Invalidate()
+        {
+            Program.GLControl.Invalidate();
+        }
+
+        public static void InvalidateView()
+        {
+            ViewInvalid = true;
         }
     }
 }

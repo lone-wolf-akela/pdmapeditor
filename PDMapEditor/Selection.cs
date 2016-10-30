@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 using OpenTK;
 using System.Media;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -16,6 +12,9 @@ namespace PDMapEditor
     public static class Selection
     {
         private static Shader shader;
+        private static bool AveragePositionInvalid;
+        private static bool SelectionGUIInvalid;
+        private static bool SelectionGizmosInvalid;
 
         private static Drawable gizmoPosX;
         private static Drawable gizmoPosY;
@@ -32,7 +31,7 @@ namespace PDMapEditor
         private static DraggingState draggingState = DraggingState.NONE;
 
         private static GizmoMode gizmoMode = GizmoMode.TRANSLATION;
-        public static GizmoMode GizmoMode { get { return gizmoMode; } set { gizmoMode = value; UpdateSelectionGizmos(); } }
+        public static GizmoMode GizmoMode { get { return gizmoMode; } set { gizmoMode = value; InvalidateSelectionGizmos(); } }
 
         private static float lastMouseX, lastMouseY;
 
@@ -40,9 +39,12 @@ namespace PDMapEditor
 
         private static Vector3 rotationAtStart = Vector3.Zero;
 
-        private static Vector3 averagePosition = Vector3.Zero;
+        public static Vector3 AveragePosition = Vector3.Zero;
+
         public static bool rectangleSelecting;
         private static bool clickingLeft;
+
+        private static DateTime lastSingleSelectTime = DateTime.MinValue;
 
         //Selection lines
         static Mesh2D selectionLineA = new Mesh2D();
@@ -51,14 +53,11 @@ namespace PDMapEditor
         static Mesh2D selectionLineD = new Mesh2D();
 
         //GUI
-        private static bool ignorePositionChange;
-        private static bool ignoreRotationChange;
-
         private static bool ignoreGizmoModeChange;
         private static object comboGizmoModeRotationItem;
 
         //private static ISelectable selected;
-        //public static ISelectable Selected { get { return selected; } set { selected = value; UpdateSelectionGUI(); UpdateSelectionGizmos(); } }
+        //public static ISelectable Selected { get { return selected; } set { selected = value; InvalidateSelectionGUI(); InvalidateSelectionGizmos(); } }
 
         public static ObservableCollection<ISelectable> Selected = new ObservableCollection<ISelectable>();
         public static List<ISelectable> Copied = new List<ISelectable>();
@@ -77,68 +76,56 @@ namespace PDMapEditor
             Program.main.comboGizmoMode.SelectedIndexChanged += new EventHandler(comboGizmoMode_SelectedIndexChanged);
 
             Program.main.tabControlLeft.TabPages.Remove(Program.main.tabSelection);
-
-            Program.main.numericSelectionPositionX.ValueChanged += new EventHandler(PositionChanged);
-            Program.main.numericSelectionPositionY.ValueChanged += new EventHandler(PositionChanged);
-            Program.main.numericSelectionPositionZ.ValueChanged += new EventHandler(PositionChanged);
-
-            Program.main.numericSelectionRotationX.ValueChanged += new EventHandler(RotationChanged);
-            Program.main.numericSelectionRotationY.ValueChanged += new EventHandler(RotationChanged);
-            Program.main.numericSelectionRotationZ.ValueChanged += new EventHandler(RotationChanged);
-
-            //Asteroid
-            Program.main.comboAsteroidType.SelectedIndexChanged += new EventHandler(AsteroidTypeChanged);
-            Program.main.numericAsteroidResourceMultiplier.ValueChanged += new EventHandler(AsteroidResourceMultiplierChanged);
-
-            //Dust cloud
-            Program.main.boxDustCloudName.TextChanged += new EventHandler(DustCloudNameChanged);
-            Program.main.comboDustCloudType.SelectedIndexChanged += new EventHandler(DustCloudTypeChanged);
-            Program.main.buttonDustCloudColor.Click+= new EventHandler(DustCloudColorClicked);
-            Program.main.sliderDustCloudAlpha.Scroll += new EventHandler(DustCloudAlphaChanged);
-            Program.main.numericDustCloudSize.ValueChanged += new EventHandler(DustCloudSizeChanged);
-            Program.main.numericDustCloudResources.ValueChanged += new EventHandler(DustCloudResourcesChanged);
-
-            //Nebula
-            Program.main.boxNebulaName.TextChanged += new EventHandler(NebulaNameChanged);
-            Program.main.comboNebulaType.SelectedIndexChanged += new EventHandler(NebulaTypeChanged);
-            Program.main.buttonNebulaColor.Click += new EventHandler(NebulaColorClicked);
-            Program.main.sliderNebulaAlpha.Scroll += new EventHandler(NebulaAlphaChanged);
-            Program.main.numericNebulaSize.ValueChanged += new EventHandler(NebulaSizeChanged);
-            Program.main.numericNebulaResources.ValueChanged += new EventHandler(NebulaResourcesChanged);
-
-            //Point
-            Program.main.boxPointName.TextChanged += new EventHandler(PointNameChanged);
-
-            //Pebble
-            Program.main.comboPebbleType.SelectedIndexChanged += new EventHandler(PebbleTypeChanged);
-
-            //Squadron
-            Program.main.boxSquadronName.TextChanged += new EventHandler(SquadronNameChanged);
-            Program.main.comboSquadronType.SelectedIndexChanged += new EventHandler(SquadronTypeChanged);
-            Program.main.comboSquadronPlayer.SelectedIndexChanged += new EventHandler(SquadronPlayerChanged);
-            Program.main.numericSquadronSize.ValueChanged += new EventHandler(SquadronSizeChanged);
-            Program.main.checkSquadronInHyperspace.CheckedChanged += new EventHandler(SquadronInHyperspaceChanged);
-
-            //Sphere
-            Program.main.boxSphereName.TextChanged += new EventHandler(SphereNameChanged);
-            Program.main.numericSphereRadius.ValueChanged += new EventHandler(SphereRadiusChanged);
         }
 
         private static void SelectedChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            UpdateAveragePosition();
-            UpdateSelectionGUI();
-            UpdateSelectionGizmos();
+            InvalidateAveragePosition();
+            InvalidateSelectionGUI();
+            InvalidateSelectionGizmos();
         }
 
-        private static void UpdateAveragePosition()
+        public static void Update()
         {
-            averagePosition = Vector3.Zero;
+            if (AveragePositionInvalid)
+                UpdateAveragePosition();
+
+            if (SelectionGUIInvalid)
+                UpdateSelectionGUI();
+
+            if (SelectionGizmosInvalid)
+                UpdateSelectionGizmos();
+
+            AveragePositionInvalid = false;
+            SelectionGUIInvalid = false;
+            SelectionGizmosInvalid = false;
+        }
+
+        public static void UpdateAveragePosition()
+        {
+            AveragePosition = Vector3.Zero;
             foreach(ISelectable selectable in Selected)
             {
-                averagePosition = Vector3.Add(averagePosition, selectable.Position);
+                AveragePosition = Vector3.Add(AveragePosition, selectable.Position);
             }
-            averagePosition = Vector3.Divide(averagePosition, Selected.Count);
+            AveragePosition = Vector3.Divide(AveragePosition, Selected.Count);
+
+            InvalidateSelectionGizmos();
+        }
+
+        public static void InvalidateAveragePosition()
+        {
+            AveragePositionInvalid = true;
+        }
+
+        public static void InvalidateSelectionGUI()
+        {
+            SelectionGUIInvalid = true;
+        }
+
+        public static void InvalidateSelectionGizmos()
+        {
+            SelectionGizmosInvalid = true;
         }
 
         public static void CreateGizmos()
@@ -196,8 +183,8 @@ namespace PDMapEditor
                 gizmoLineX.Position = gizmoPosX.Position;
                 draggingState = DraggingState.MOVING_X;
 
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (objectAtMouse == gizmoPosY)
             {
@@ -205,8 +192,8 @@ namespace PDMapEditor
                 gizmoLineY.Position = gizmoPosY.Position;
                 draggingState = DraggingState.MOVING_Y;
 
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (objectAtMouse == gizmoPosZ)
             {
@@ -214,8 +201,8 @@ namespace PDMapEditor
                 gizmoLineZ.Position = gizmoPosZ.Position;
                 draggingState = DraggingState.MOVING_Z;
 
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (objectAtMouse == gizmoRotX)
             {
@@ -225,8 +212,8 @@ namespace PDMapEditor
 
                 rotationAtStart = Selected[0].Rotation;
 
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (objectAtMouse == gizmoRotY)
             {
@@ -236,8 +223,8 @@ namespace PDMapEditor
 
                 rotationAtStart = Selected[0].Rotation;
 
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (objectAtMouse == gizmoRotZ)
             {
@@ -247,8 +234,8 @@ namespace PDMapEditor
 
                 rotationAtStart = Selected[0].Rotation;
 
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else
                 clickingLeft = true;
@@ -294,7 +281,7 @@ namespace PDMapEditor
                     selectionLineD.End = new Vector2(clickXRel, clickYRel);
 
                     Renderer.Update2DMeshData();
-                    Program.GLControl.Invalidate();
+                    Renderer.Invalidate();
                 }
             }
         }
@@ -326,7 +313,9 @@ namespace PDMapEditor
                     if (objects.Count > 0)
                     {
                         if (!ActionKey.IsDown(Action.SELECTION_ADD)) //Clear previous selection if the user does not want to add to selection
+                        {
                             Selected.Clear();
+                        }
 
                         foreach (ISelectable obj in objects)
                         {
@@ -343,6 +332,7 @@ namespace PDMapEditor
                     if (objectAtMouse != null)
                     {
                         if (objectAtMouse != gizmoPosX && objectAtMouse != gizmoPosY && objectAtMouse != gizmoPosZ && objectAtMouse != gizmoRotX && objectAtMouse != gizmoRotY && objectAtMouse != gizmoRotZ)
+                        {
                             if (ActionKey.IsDown(Action.SELECTION_ADD))
                             {
                                 if (!Selected.Contains(objectAtMouse))
@@ -352,9 +342,36 @@ namespace PDMapEditor
                             }
                             else
                             {
-                                Selected.Clear();
-                                Selected.Add(objectAtMouse);
+                                TimeSpan timeSinceLastClick = DateTime.Now.Subtract(lastSingleSelectTime);
+                                if (timeSinceLastClick.Milliseconds > 400)
+                                {
+                                    Selected.Clear();
+                                    Selected.Add(objectAtMouse);
+                                }
+                                else
+                                {
+                                    if (Selected.Count == 1)
+                                    {
+                                        if (Selected[0] == objectAtMouse)
+                                        {
+                                            foreach (Drawable drawable in Drawable.Drawables)
+                                            {
+                                                ISelectable selectable = drawable as ISelectable;
+                                                if (selectable == null)
+                                                    continue;
+
+                                                if (selectable.GetType() == Selected[0].GetType())
+                                                    if (selectable != Selected[0])
+                                                        Selected.Add(selectable);
+                                            }
+                                        }
+                                    }
+                                }
                             }
+
+                            lastSingleSelectTime = DateTime.Now;
+                        }
+
                     }
                     else
                         if (!ActionKey.IsDown(Action.SELECTION_ADD))
@@ -363,6 +380,8 @@ namespace PDMapEditor
 
                 rectangleSelecting = false;
             }
+            else
+                Program.main.propertySelection.Refresh();
 
             draggingState = DraggingState.NONE;
             gizmoLineX.Visible = false;
@@ -374,23 +393,12 @@ namespace PDMapEditor
             gizmoRotZ.Rotation = Vector3.Zero;
 
             clickingLeft = false;
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
+            Renderer.InvalidateView();
+            Renderer.Invalidate();
         }
 
         public static void UpdateSelectionGUI()
         {
-            Program.main.groupSelectionRotation.Visible = false;
-
-            Program.main.groupAsteroid.Visible = false;
-            Program.main.groupDustCloud.Visible = false;
-            Program.main.groupNebula.Visible = false;
-            Program.main.groupPoint.Visible = false;
-            Program.main.groupPebble.Visible = false;
-            Program.main.groupSquadron.Visible = false;
-            Program.main.groupSphere.Visible = false;
-
             if (Selected.Count == 0)
             {
                 Program.main.tabControlLeft.SelectedIndex = 0;
@@ -398,450 +406,13 @@ namespace PDMapEditor
                 return;
             }
 
-            if(!Program.main.tabControlLeft.TabPages.Contains(Program.main.tabSelection))
+            if (!Program.main.tabControlLeft.TabPages.Contains(Program.main.tabSelection))
                 Program.main.tabControlLeft.TabPages.Insert(1, Program.main.tabSelection);
 
             Program.main.tabControlLeft.SelectedIndex = 1;
 
-            UpdatePositionGUI();
-
-            bool allowRotation = true;
-            foreach(ISelectable selectable in Selected)
-            {
-                if (!selectable.AllowRotation)
-                {
-                    allowRotation = false;
-                    break;
-                }
-            }
-            if (allowRotation) //Don't allow rotation changes if one of the objects cannot be rotated
-            {
-                UpdateRotationGUI();
-                Program.main.groupSelectionRotation.Visible = true;
-
-                if(!Program.main.comboGizmoMode.Items.Contains(comboGizmoModeRotationItem))
-                    Program.main.comboGizmoMode.Items.Add(comboGizmoModeRotationItem);
-            }
-            else
-            {
-                GizmoMode = GizmoMode.TRANSLATION;
-                Program.main.comboGizmoMode.Items.Remove(comboGizmoModeRotationItem);
-            }
-
-            if (Selected.Count == 1)
-            {
-                //Show individual groups for the properties
-                Asteroid selectedAsteroid = Selected[0] as Asteroid;
-                if (selectedAsteroid != null)
-                {
-                    Program.main.groupAsteroid.Visible = true;
-                    Program.main.comboAsteroidType.SelectedIndex = selectedAsteroid.Type.ComboIndex;
-                    Program.main.numericAsteroidResourceMultiplier.Value = (decimal)selectedAsteroid.Multiplier;
-                }
-
-                DustCloud selectedDustCloud = Selected[0] as DustCloud;
-                if (selectedDustCloud != null)
-                {
-                    Program.main.groupDustCloud.Visible = true;
-                    Program.main.boxDustCloudName.Text = selectedDustCloud.Name;
-                    Program.main.comboDustCloudType.SelectedIndex = selectedDustCloud.Type.ComboIndex;
-
-                    //This is BAD, dust clouds can have color values above 1
-                    //TODO: Replace color dialog and slider for better controls
-                    Program.main.buttonDustCloudColor.BackColor = Color.FromArgb(255, (int)Math.Round(Math.Min(selectedDustCloud.Color.X * 255, 255)), (int)Math.Round(Math.Min(selectedDustCloud.Color.Y * 255, 255)), (int)Math.Round(Math.Min(selectedDustCloud.Color.Z * 255, 255)));
-                    Program.main.sliderDustCloudAlpha.Value = (int)Math.Round(Math.Min(selectedDustCloud.Color.W * 100, 100));
-
-                    Program.main.numericDustCloudSize.Value = (decimal)selectedDustCloud.Radius;
-                    Program.main.numericDustCloudResources.Value = (decimal)selectedDustCloud.Resources;
-                }
-
-                Nebula selectedNebula = Selected[0] as Nebula;
-                if (selectedNebula != null)
-                {
-                    Program.main.groupNebula.Visible = true;
-                    Program.main.boxNebulaName.Text = selectedNebula.Name;
-                    Program.main.comboNebulaType.SelectedIndex = selectedNebula.Type.ComboIndex;
-                    Program.main.buttonNebulaColor.BackColor = Color.FromArgb(255, (int)Math.Round(Math.Min(selectedNebula.Color.X * 255, 255)), (int)Math.Round(Math.Min(selectedNebula.Color.Y * 255, 255)), (int)Math.Round(Math.Min(selectedNebula.Color.Z * 255, 255)));
-                    Program.main.sliderNebulaAlpha.Value = (int)Math.Round(Math.Min(selectedNebula.Color.W * 100, 100));
-                    Program.main.numericNebulaSize.Value = (decimal)selectedNebula.Radius;
-                    Program.main.numericNebulaResources.Value = (decimal)selectedNebula.Resources;
-                }
-
-                Point selectedPoint = Selected[0] as Point;
-                if (selectedPoint != null)
-                {
-                    Program.main.groupPoint.Visible = true;
-                    Program.main.boxPointName.Text = selectedPoint.Name;
-                }
-
-                Pebble selectedPebble = Selected[0] as Pebble;
-                if (selectedPebble != null)
-                {
-                    Program.main.groupPebble.Visible = true;
-                    Program.main.comboPebbleType.SelectedIndex = selectedPebble.Type.ComboIndex;
-                }
-
-                Squadron selectedSquadron = Selected[0] as Squadron;
-                if (selectedSquadron != null)
-                {
-                    Program.main.groupSquadron.Visible = true;
-                    Program.main.boxSquadronName.Text = selectedSquadron.Name;
-                    Program.main.comboSquadronType.SelectedIndex = selectedSquadron.Type.ComboIndex;
-                    Program.main.comboSquadronPlayer.SelectedIndex = selectedSquadron.Player + 1;
-                    Program.main.numericSquadronSize.Value = selectedSquadron.SquadronSize;
-                    Program.main.checkSquadronInHyperspace.Checked = selectedSquadron.InHyperspace;
-                }
-
-                Sphere selectedSphere = Selected[0] as Sphere;
-                if (selectedSphere != null)
-                {
-                    Program.main.groupSphere.Visible = true;
-                    Program.main.boxSphereName.Text = selectedSphere.Name;
-                    Program.main.numericSphereRadius.Value = (decimal)selectedSphere.Radius;
-                }
-            }
-
+            Program.main.propertySelection.SelectedObjects = Selected.ToArray();
             Program.GLControl.Focus();
-        }
-
-        #region Asteroid
-        private static void AsteroidResourceMultiplierChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Asteroid selectedAsteroid = Selected[0] as Asteroid;
-            selectedAsteroid.Multiplier = (float)Program.main.numericAsteroidResourceMultiplier.Value;
-        }
-        private static void AsteroidTypeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Asteroid selectedAsteroid = Selected[0] as Asteroid;
-            selectedAsteroid.Type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
-        }
-        #endregion
-
-        #region Dust cloud
-        private static void DustCloudNameChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            DustCloud selectedDustCloud = Selected[0] as DustCloud;
-            selectedDustCloud.Name = Program.main.boxDustCloudName.Text;
-        }
-        private static void DustCloudTypeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            DustCloud selectedDustCloud = Selected[0] as DustCloud;
-            selectedDustCloud.Type = DustCloudType.GetTypeFromComboIndex(Program.main.comboDustCloudType.SelectedIndex);
-            Program.GLControl.Invalidate();
-        }
-        private static void DustCloudColorClicked(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Program.main.colorDialog.Color = Program.main.buttonDustCloudColor.BackColor;
-            DialogResult result = Program.main.colorDialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                Color color = Program.main.colorDialog.Color;
-                Program.main.buttonDustCloudColor.BackColor = color;
-
-                DustCloud selectedDustCloud = Selected[0] as DustCloud;
-                selectedDustCloud.Color = new Vector4((float)color.R / 255, (float)color.G / 255, (float)color.B / 255, selectedDustCloud.Color.W);
-                Program.GLControl.Invalidate();
-            }
-        }
-        private static void DustCloudAlphaChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            DustCloud selectedDustCloud = Selected[0] as DustCloud;
-            selectedDustCloud.Color = new Vector4(selectedDustCloud.Color.X, selectedDustCloud.Color.Y, selectedDustCloud.Color.Z, (float)Program.main.sliderDustCloudAlpha.Value / 100);
-            Program.GLControl.Invalidate();
-        }
-
-        private static void DustCloudSizeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            DustCloud selectedDustCloud = Selected[0] as DustCloud;
-            selectedDustCloud.Radius = (float)Program.main.numericDustCloudSize.Value;
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
-        }
-
-        private static void DustCloudResourcesChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            DustCloud selectedDustCloud = Selected[0] as DustCloud;
-            selectedDustCloud.Resources = (float)Program.main.numericDustCloudResources.Value;
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
-        }
-        #endregion
-
-        #region Nebula
-        private static void NebulaNameChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Nebula selected = Selected[0] as Nebula;
-            selected.Name = Program.main.boxNebulaName.Text;
-        }
-        private static void NebulaTypeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Nebula selected = Selected[0] as Nebula;
-            selected.Type = NebulaType.GetTypeFromComboIndex(Program.main.comboNebulaType.SelectedIndex);
-            Program.GLControl.Invalidate();
-        }
-        private static void NebulaColorClicked(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Program.main.colorDialog.Color = Program.main.buttonNebulaColor.BackColor;
-            DialogResult result = Program.main.colorDialog.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                Color color = Program.main.colorDialog.Color;
-                Program.main.buttonNebulaColor.BackColor = color;
-
-                Nebula selected = Selected[0] as Nebula;
-                selected.Color = new Vector4((float)color.R / 255, (float)color.G / 255, (float)color.B / 255, selected.Color.W);
-                Program.GLControl.Invalidate();
-            }
-        }
-        private static void NebulaAlphaChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Nebula selected = Selected[0] as Nebula;
-            selected.Color = new Vector4(selected.Color.X, selected.Color.Y, selected.Color.Z, (float)Program.main.sliderNebulaAlpha.Value / 100);
-            Program.GLControl.Invalidate();
-        }
-
-        private static void NebulaSizeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Nebula selected = Selected[0] as Nebula;
-            selected.Radius = (float)Program.main.numericNebulaSize.Value;
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
-        }
-
-        private static void NebulaResourcesChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Nebula selected = Selected[0] as Nebula;
-            selected.Resources = (float)Program.main.numericNebulaResources.Value;
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
-        }
-        #endregion
-
-        #region Point
-        private static void PointNameChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Point selectedPoint = Selected[0] as Point;
-            selectedPoint.Name = Program.main.boxPointName.Text;
-        }
-        #endregion
-
-        #region Pebble
-        private static void PebbleTypeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Pebble selectedPebble = Selected[0] as Pebble;
-            selectedPebble.Type = PebbleType.GetTypeFromComboIndex(selectedPebble.Type.ComboIndex);
-            Program.GLControl.Invalidate();
-        }
-        #endregion
-
-        #region Squadron
-        private static void SquadronNameChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Squadron selected = Selected[0] as Squadron;
-            selected.Name = Program.main.boxSquadronName.Text;
-        }
-        private static void SquadronTypeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Squadron selected = Selected[0] as Squadron;
-            selected.Type = ShipType.GetTypeFromComboIndex(Program.main.comboSquadronType.SelectedIndex);
-        }
-        private static void SquadronPlayerChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Squadron selected = Selected[0] as Squadron;
-            selected.Player = Program.main.comboSquadronPlayer.SelectedIndex - 1;
-        }
-        private static void SquadronSizeChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Squadron selected = Selected[0] as Squadron;
-            selected.SquadronSize = (int)Program.main.numericSquadronSize.Value;
-        }
-
-        private static void SquadronInHyperspaceChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Squadron selected = Selected[0] as Squadron;
-            selected.InHyperspace = Program.main.checkSquadronInHyperspace.Checked;
-        }
-        #endregion
-
-        #region Sphere
-        private static void SphereNameChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Sphere selected = Selected[0] as Sphere;
-            selected.Name = Program.main.boxSphereName.Text;
-        }
-        private static void SphereRadiusChanged(object sender, EventArgs e)
-        {
-            if (!IsSelectionTabActive())
-            {
-                Creation.CreateObjectAtCursor();
-                return;
-            }
-
-            Sphere selected = Selected[0] as Sphere;
-            selected.Radius = (float)Program.main.numericSphereRadius.Value;
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
-        }
-        #endregion
-
-        private static void UpdatePositionGUI()
-        {
-            ignorePositionChange = true;
-            Program.main.numericSelectionPositionX.Value = (decimal)averagePosition.X;
-            Program.main.numericSelectionPositionY.Value = (decimal)averagePosition.Y;
-            Program.main.numericSelectionPositionZ.Value = (decimal)averagePosition.Z;
-            ignorePositionChange = false;
-        }
-        private static void UpdateRotationGUI()
-        {
-            if (Selected.Count == 1)
-            {
-                ignoreRotationChange = true;
-                Program.main.numericSelectionRotationX.Value = (decimal)Selected[0].Rotation.X;
-                Program.main.numericSelectionRotationY.Value = (decimal)Selected[0].Rotation.Y;
-                Program.main.numericSelectionRotationZ.Value = (decimal)Selected[0].Rotation.Z;
-                ignoreRotationChange = false;
-            }
         }
 
         private static void UpdateSelectionGizmos()
@@ -865,13 +436,13 @@ namespace PDMapEditor
                 return;
 
             //Gizmos
-            gizmoPosX.Position = averagePosition;
-            gizmoPosY.Position = averagePosition;
-            gizmoPosZ.Position = averagePosition;
+            gizmoPosX.Position = AveragePosition;
+            gizmoPosY.Position = AveragePosition;
+            gizmoPosZ.Position = AveragePosition;
 
-            gizmoRotX.Position = averagePosition;
-            gizmoRotY.Position = averagePosition;
-            gizmoRotZ.Position = averagePosition;
+            gizmoRotX.Position = AveragePosition;
+            gizmoRotY.Position = AveragePosition;
+            gizmoRotZ.Position = AveragePosition;
 
             ignoreGizmoModeChange = true;
             if (GizmoMode == GizmoMode.TRANSLATION)
@@ -901,14 +472,14 @@ namespace PDMapEditor
             if(Program.main.comboGizmoMode.SelectedIndex == 0) //Translation
             {
                 GizmoMode = GizmoMode.TRANSLATION;
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (Program.main.comboGizmoMode.SelectedIndex == 1) //Rotation
             {
                 GizmoMode = GizmoMode.ROTATION;
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
         }
 
@@ -920,7 +491,7 @@ namespace PDMapEditor
             Vector3 scale = Vector3.One;
             if (!Program.Camera.Orthographic)
             {
-                float cameraDistanceApprox = (Program.Camera.Position - averagePosition).LengthFast;
+                float cameraDistanceApprox = (Program.Camera.Position - AveragePosition).LengthFast;
                 scale = new Vector3(cameraDistanceApprox / 700);
             }
             else
@@ -1017,8 +588,8 @@ namespace PDMapEditor
             if (ActionKey.IsDown(Action.MODE_TRANSLATION))
             {
                 GizmoMode = GizmoMode.TRANSLATION;
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             else if (ActionKey.IsDown(Action.MODE_ROTATION))
             {
@@ -1035,8 +606,8 @@ namespace PDMapEditor
                 if (allowRotation) //Don't allow rotation changes if the object cannot be rotated
                 {
                     GizmoMode = GizmoMode.ROTATION;
-                    Renderer.UpdateView();
-                    Program.GLControl.Invalidate();
+                    Renderer.InvalidateView();
+                    Renderer.Invalidate();
                 }
                 else
                     SystemSounds.Beep.Play();
@@ -1046,9 +617,9 @@ namespace PDMapEditor
             {
                 if (Selected.Count > 0)
                 {
-                    Program.Camera.LookAt = averagePosition;
-                    Renderer.UpdateView();
-                    Program.GLControl.Invalidate();
+                    Program.Camera.LookAt = AveragePosition;
+                    Renderer.InvalidateView();
+                    Renderer.Invalidate();
                 }
                 else
                     SystemSounds.Beep.Play();
@@ -1063,8 +634,8 @@ namespace PDMapEditor
                 Selected.Clear();
 
                 Renderer.UpdateMeshData();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
             if (ActionKey.IsDown(Action.SELECTION_COPY))
             {
@@ -1080,8 +651,8 @@ namespace PDMapEditor
                 }
 
                 Renderer.UpdateMeshData();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
         }
 
@@ -1091,11 +662,11 @@ namespace PDMapEditor
             {
                 float mouseXDelta = mouseX - lastMouseX;
                 float mouseYDelta = mouseY - lastMouseY;
-                float cameraDistanceApprox = (Program.Camera.Position - averagePosition).LengthFast;
+                float cameraDistanceApprox = (Program.Camera.Position - AveragePosition).LengthFast;
 
-                float posX = averagePosition.X;
-                float posY = averagePosition.Y;
-                float posZ = averagePosition.Z;
+                float posX = AveragePosition.X;
+                float posY = AveragePosition.Y;
+                float posZ = AveragePosition.Z;
 
                 //float rotX = selectedDrawable.Rotation.X;
                 //float rotY = selectedDrawable.Rotation.Y;
@@ -1115,24 +686,24 @@ namespace PDMapEditor
                 {
                     //Position
                     case DraggingState.MOVING_X:
-                        if(Program.Camera.Position.Z > averagePosition.Z) //To fix the user experience
-                            posX = averagePosition.X + mouseXDelta * speedMultiplier;
+                        if(Program.Camera.Position.Z > AveragePosition.Z) //To fix the user experience
+                            posX = AveragePosition.X + mouseXDelta * speedMultiplier;
                         else
-                            posX = averagePosition.X - mouseXDelta * speedMultiplier;
+                            posX = AveragePosition.X - mouseXDelta * speedMultiplier;
                         break;
                     case DraggingState.MOVING_Y:
-                        posY = averagePosition.Y + mouseYDelta * speedMultiplier;
+                        posY = AveragePosition.Y + mouseYDelta * speedMultiplier;
                         break;
                     case DraggingState.MOVING_Z:
-                        if (Program.Camera.Position.X > averagePosition.X) //To fix the user experience
-                            posZ = averagePosition.Z - mouseXDelta * speedMultiplier;
+                        if (Program.Camera.Position.X > AveragePosition.X) //To fix the user experience
+                            posZ = AveragePosition.Z - mouseXDelta * speedMultiplier;
                         else
-                            posZ = averagePosition.Z + mouseXDelta * speedMultiplier;
+                            posZ = AveragePosition.Z + mouseXDelta * speedMultiplier;
                         break;
 
                     //Rotation
                     case DraggingState.ROTATING_X:
-                        if (Program.Camera.Position.X > averagePosition.X) //To fix the user experience
+                        if (Program.Camera.Position.X > AveragePosition.X) //To fix the user experience
                             //rotX = selectedDrawable.Rotation.X - mouseXDelta;
                             rotX = -mouseXDelta;
                         else
@@ -1144,7 +715,7 @@ namespace PDMapEditor
                         rotY = mouseXDelta;
                         break;
                     case DraggingState.ROTATING_Z:
-                        if (Program.Camera.Position.Z > averagePosition.Z) //To fix the user experience
+                        if (Program.Camera.Position.Z > AveragePosition.Z) //To fix the user experience
                             //rotZ = selectedDrawable.Rotation.Z - mouseXDelta;
                             rotZ = -mouseXDelta;
                         else
@@ -1158,60 +729,24 @@ namespace PDMapEditor
 
                 foreach(ISelectable selectable in Selected)
                 {
-                    selectable.Position -= averagePosition - deltaPos;
+                    selectable.Position -= AveragePosition - deltaPos;
                     selectable.Rotation += deltaRot;
                 }
 
-                averagePosition = deltaPos;
+                AveragePosition = deltaPos;
 
                 gizmoRotX.Rotation += deltaRot;
                 gizmoRotY.Rotation += deltaRot;
                 gizmoRotZ.Rotation += deltaRot;
 
-                UpdatePositionGUI();
-                UpdateRotationGUI();
                 UpdateSelectionGizmos();
                 UpdateSelectionGizmoScale();
-                Renderer.UpdateView();
-                Program.GLControl.Invalidate();
+                Renderer.InvalidateView();
+                Renderer.Invalidate();
             }
 
             lastMouseX = mouseX;
             lastMouseY = mouseY;
-        }
-
-        private static void PositionChanged(object sender, EventArgs e)
-        {
-            if (ignorePositionChange)
-                return;
-
-            Vector3 newPosition = new Vector3((float)Program.main.numericSelectionPositionX.Value, (float)Program.main.numericSelectionPositionY.Value, (float)Program.main.numericSelectionPositionZ.Value);
-
-            foreach (ISelectable selectable in Selected)
-            {
-                selectable.Position -= averagePosition - newPosition;
-            }
-
-            averagePosition = newPosition;
-
-            UpdateSelectionGizmos();
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
-        }
-
-        private static void RotationChanged(object sender, EventArgs e)
-        {
-            if (Selected == null || ignoreRotationChange)
-                return;
-
-            foreach(ISelectable selectable in Selected)
-            {
-                selectable.Rotation = new Vector3((float)Program.main.numericSelectionRotationX.Value, (float)Program.main.numericSelectionRotationY.Value, (float)Program.main.numericSelectionRotationZ.Value);
-            }
-            //selectedDrawable.Rotation = new Vector3((float)Program.main.numericSelectionRotationX.Value, (float)Program.main.numericSelectionRotationY.Value, (float)Program.main.numericSelectionRotationZ.Value);
-
-            Renderer.UpdateView();
-            Program.GLControl.Invalidate();
         }
 
         public static void DrawSelectionScene()

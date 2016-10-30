@@ -1,28 +1,20 @@
-﻿using OpenTK;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace PDMapEditor
 {
+    [TypeConverter(typeof(ShipTypeConverter))]
     public class ShipType
     {
         public static List<ShipType> ShipTypes = new List<ShipType>();
 
         public string Name;
 
-        public int ComboIndex = -1;
-
         public ShipType(string name)
         {
             Name = name;
 
             ShipTypes.Add(this);
-
-            Program.main.comboSquadronType.Items.Add(Name);
-            ComboIndex = Program.main.comboSquadronType.Items.Count - 1;
         }
 
         public static ShipType GetTypeFromName(string name)
@@ -30,17 +22,6 @@ namespace PDMapEditor
             foreach(ShipType type in ShipTypes)
             {
                 if (type.Name == name)
-                    return type;
-            }
-
-            return null;
-        }
-
-        public static ShipType GetTypeFromComboIndex(int index)
-        {
-            foreach(ShipType type in ShipTypes)
-            {
-                if (type.ComboIndex == index)
                     return type;
             }
 

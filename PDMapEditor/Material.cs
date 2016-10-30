@@ -1,9 +1,5 @@
 ﻿using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
 
 namespace PDMapEditor
 {
@@ -15,7 +11,9 @@ namespace PDMapEditor
 
         public bool Translucent = false;
 
-        public Vector3 DiffuseColor = new Vector3(1, 1, 1);
+        private Vector3 diffuseColor = Vector3.One;
+        public Vector3 DiffuseColor { get { return diffuseColor; } set { diffuseColor = value; Renderer.Invalidate(); } }
+
         public Vector3 SpecularColor = new Vector3(0.1f, 0.1f, 0.1f);
         public float SpecularExponent = 0.3f;
         public float Opacity = 1.0f;

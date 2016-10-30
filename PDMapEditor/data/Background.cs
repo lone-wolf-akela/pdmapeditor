@@ -1,9 +1,7 @@
 ﻿using OpenTK;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using OpenTK.Graphics.OpenGL;
-using System;
 using System.Xml.Linq;
 using System.Globalization;
 
@@ -53,7 +51,7 @@ namespace PDMapEditor
                     face.Mesh.Material.TextureFactor = fade;
 
             if(Program.GLControl != null)
-                Program.GLControl.Invalidate();
+                Renderer.Invalidate();
         }
 
         private static void RemoveSkyboxTexture()

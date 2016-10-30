@@ -1,10 +1,7 @@
 ﻿using OpenTK;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PDMapEditor
@@ -31,6 +28,8 @@ namespace PDMapEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            SetupTypeConverters();
 
             main = new Main();
 
@@ -67,6 +66,10 @@ namespace PDMapEditor
             GLControl.LostFocus += new EventHandler(main.glControl_LostFocus);
 
             main.splitViewportAndProblems.Panel1.Controls.Add(GLControl);
+        }
+
+        private static void SetupTypeConverters()
+        {
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Extensions
 {
-
     /// <summary>
     /// Extension methods to make working with Enum values easier
     /// </summary>

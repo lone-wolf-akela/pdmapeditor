@@ -76,6 +76,14 @@
     <Compile Include="ActionKey.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Creation.cs" />
+    <Compile Include="property display\NebulaTypeConverter.cs" />
+    <Compile Include="property display\ShipTypeConverter.cs" />
+    <Compile Include="property display\PebbleTypeConverter.cs" />
+    <Compile Include="property display\DustCloudTypeConverter.cs" />
+    <Compile Include="property display\DegreesConverter.cs" />
+    <Compile Include="property display\ResourcesConverter.cs" />
+    <Compile Include="property display\PercentConverter.cs" />
+    <Compile Include="property display\CustomSortedAttributeCategory.cs" />
     <Compile Include="data\NebulaType.cs" />
     <Compile Include="data\FamilyList.cs" />
     <Compile Include="data\ShipType.cs" />
@@ -130,6 +138,7 @@
     <Compile Include="meshes\MeshLineLoop.cs" />
     <Compile Include="meshes\MeshLine.cs" />
     <Compile Include="meshes\MeshIcosphere.cs" />
+    <Compile Include="DrawableRotated.cs" />
     <Compile Include="Selection.cs" />
     <Compile Include="Problem.cs" />
     <Compile Include="Program.cs" />
@@ -143,6 +152,7 @@
     </Compile>
     <Compile Include="Shader.cs" />
     <Compile Include="Texture.cs" />
+    <Compile Include="property display\AsteroidTypeConverter.cs" />
     <Compile Include="Utilites.cs" />
     <EmbeddedResource Include="Hotkeys.resx">
       <DependentUpon>Hotkeys.cs</DependentUpon>

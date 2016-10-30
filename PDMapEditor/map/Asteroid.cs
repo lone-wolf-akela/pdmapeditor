@@ -1,34 +1,50 @@
 ﻿using OpenTK;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace PDMapEditor
 {
-    public class Asteroid : Drawable, ISelectable
+    public class Asteroid : DrawableRotated, ISelectable
     {
         public static List<Asteroid> Asteroids = new List<Asteroid>();
+        private static AsteroidType lastType;
+        private static float lastMultiplier = 100;
+        private static float lastRotSpeed = 0;
 
         private AsteroidType type;
-        public AsteroidType Type { get { return type; } set { type = value; UpdateScale(); } }
+        [CustomSortedCategory("Asteroid", 2, 2)]
+        [Description("The type of the asteroid. From data/resource/asteroid/.")]
+        public AsteroidType Type { get { return type; } set { type = value; UpdateScale(); UpdateColor(); lastType = value; Renderer.Invalidate(); Renderer.InvalidateView(); } }
 
-        public float Multiplier;
-        public float RotSpeed;
+        private float multiplier;
+        [CustomSortedCategory("Asteroid", 2, 2)]
+        [DisplayName("RU Multiplier")]
+        [Description("Resource multiplier in percent.")]
+        [TypeConverter(typeof(PercentConverter))]
+        public float Multiplier { get { return multiplier; } set { multiplier = value; lastMultiplier = value; } }
 
+        private float rotSpeed;
+        [CustomSortedCategory("Asteroid", 2, 2)]
+        [DisplayName("Rotation speed")]
+        [Description("Rotation speed of the asteroid.")]
+        public float RotSpeed { get { return rotSpeed; } set { rotSpeed = value; lastRotSpeed = value; } }
+
+        [Browsable(false)]
         public bool AllowRotation { get; set; }
 
         public Asteroid() : base(Vector3.Zero, Vector3.Zero)
         {
-            type = AsteroidType.GetTypeFromComboIndex(Program.main.comboAsteroidType.SelectedIndex);
+            if (lastType != null)
+                type = lastType;
+            else
+                type = AsteroidType.AsteroidTypes[0];
 
             Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Asteroid);
 
-            Mesh.Material.DiffuseColor = new Vector3(type.PixelColor);
-
             Type = type;
-            Multiplier = (float)Program.main.numericAsteroidResourceMultiplier.Value;
+            Multiplier = lastMultiplier;
+            RotSpeed = lastRotSpeed;
 
             Asteroids.Add(this);
             AllowRotation = true;
@@ -37,8 +53,7 @@ namespace PDMapEditor
         public Asteroid(AsteroidType type, Vector3 position, Vector3 rotation, float multiplier, float rotSpeed) : base (position, rotation)
         {
             Mesh = new Mesh(position, rotation, Mesh.Asteroid);
-            Mesh.Material.DiffuseColor = new Vector3(type.PixelColor);
-
+            
             Multiplier = multiplier;
             RotSpeed = rotSpeed;
 
@@ -54,6 +69,11 @@ namespace PDMapEditor
             float scale = Type.ResourceValue / 140;
             scale = Math.Max(scale, 35);
             Mesh.Scale = new Vector3(scale);
+        }
+
+        private void UpdateColor()
+        {
+            Mesh.Material.DiffuseColor = new Vector3(Type.PixelColor);
         }
 
         public override void Destroy()

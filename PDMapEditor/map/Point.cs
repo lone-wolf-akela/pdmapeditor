@@ -1,22 +1,28 @@
 ﻿using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace PDMapEditor
 {
-    public class Point : Drawable, ISelectable
+    public class Point : DrawableRotated, ISelectable
     {
         public static List<Point> Points = new List<Point>();
+        private static string lastName = string.Empty;
 
-        public string Name;
+        private string name;
+        [CustomSortedCategory("Point", 2, 2)]
+        [Description("The name of the point. It can be used to refer to this point with scripts.")]
+        public string Name { get { return name; } set { name = value; lastName = value; } }
+
+        [Browsable(false)]
         public bool AllowRotation { get; set; }
 
         public Point() : base (Vector3.Zero, Vector3.Zero)
         {
-            Name = Program.main.boxPointName.Text;
+            if (lastName.Length > 0)
+                Name = lastName;
+            else
+                Name = "Point" + Points.Count;
 
             Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Point);
             Mesh.Material.DiffuseColor = new Vector3(1, 0, 0);

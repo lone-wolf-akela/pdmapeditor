@@ -1,31 +1,40 @@
 ﻿using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace PDMapEditor
 {
     public class Sphere : Drawable, ISelectable
     {
         public static List<Sphere> Spheres = new List<Sphere>();
+        private static string lastName = string.Empty;
+        private static float lastRadius;
 
-        public string Name;
+        private string name;
+        [CustomSortedCategory("Sphere", 2, 2)]
+        [Description("The name of the sphere. It can be used to refer to this sphere with scripts.")]
+        public string Name { get { return name; } set { name = value; lastName = value; } }
+
         private float radius;
-        public float Radius { get { return radius; } set { radius = value; UpdateScale(); } }
+        [CustomSortedCategory("Sphere", 2, 2)]
+        [Description("The radius (size) of the sphere.")]
+        public float Radius { get { return radius; } set { radius = value; UpdateScale(); lastRadius = value; } }
 
+        [Browsable(false)]
         public bool AllowRotation { get; set; }
 
         public Sphere() : base (Vector3.Zero)
         {
-            Name = Program.main.boxSphereName.Text;
+            if (lastName.Length > 0)
+                Name = lastName;
+            else
+                Name = "sphere" + Spheres.Count;
 
             Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One);
             Mesh.Wireframe = true;
             Mesh.Material.Translucent = true;
 
-            Radius = (float)Program.main.numericSphereRadius.Value;
+            Radius = lastRadius;
             Mesh.Scale = new Vector3(Radius);
 
             Spheres.Add(this);

@@ -1,10 +1,6 @@
 ﻿using Assimp;
 using OpenTK;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL;
 
 namespace PDMapEditor
@@ -46,7 +42,9 @@ namespace PDMapEditor
 
         public Vector3 Position = Vector3.Zero;
         public Vector3 Rotation = Vector3.Zero;
-        public Vector3 Scale = Vector3.One;
+
+        private Vector3 scale = Vector3.One;
+        public Vector3 Scale { get { return scale; } set { scale = value; Renderer.Invalidate(); Renderer.InvalidateView(); } }
 
         public Vector3 LastScale = Vector3.One;
 
