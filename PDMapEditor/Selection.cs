@@ -83,6 +83,7 @@ namespace PDMapEditor
             InvalidateAveragePosition();
             InvalidateSelectionGUI();
             InvalidateSelectionGizmos();
+            UpdateSelectionStatus();
         }
 
         public static void Update()
@@ -99,6 +100,22 @@ namespace PDMapEditor
             AveragePositionInvalid = false;
             SelectionGUIInvalid = false;
             SelectionGizmosInvalid = false;
+        }
+
+        private static void UpdateSelectionStatus()
+        {
+            string text = "No elements selected.";
+            string elementWord = "elements";
+
+            if (Selected.Count > 0)
+            {
+                if (Selected.Count == 1)
+                    elementWord = "element";
+
+                text = Selected.Count + " " + elementWord + " selected.";
+            }
+
+            Program.main.labelSelectedStatus.Text = text;
         }
 
         public static void UpdateAveragePosition()

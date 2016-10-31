@@ -106,6 +106,8 @@
             this.saveMapDialog = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.labelSelectedStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -135,6 +137,7 @@
             this.splitViewportAndProblems.Panel2.SuspendLayout();
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -215,7 +218,9 @@
             // 
             // splitPropertiesAndViewportProblems
             // 
-            this.splitPropertiesAndViewportProblems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitPropertiesAndViewportProblems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitPropertiesAndViewportProblems.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitPropertiesAndViewportProblems.Location = new System.Drawing.Point(0, 25);
             this.splitPropertiesAndViewportProblems.Name = "splitPropertiesAndViewportProblems";
@@ -227,7 +232,7 @@
             // splitPropertiesAndViewportProblems.Panel2
             // 
             this.splitPropertiesAndViewportProblems.Panel2.Controls.Add(this.splitViewportAndProblems);
-            this.splitPropertiesAndViewportProblems.Size = new System.Drawing.Size(1102, 708);
+            this.splitPropertiesAndViewportProblems.Size = new System.Drawing.Size(1102, 719);
             this.splitPropertiesAndViewportProblems.SplitterDistance = 262;
             this.splitPropertiesAndViewportProblems.TabIndex = 1;
             // 
@@ -241,7 +246,7 @@
             this.tabControlLeft.Location = new System.Drawing.Point(0, 0);
             this.tabControlLeft.Name = "tabControlLeft";
             this.tabControlLeft.SelectedIndex = 0;
-            this.tabControlLeft.Size = new System.Drawing.Size(262, 708);
+            this.tabControlLeft.Size = new System.Drawing.Size(262, 719);
             this.tabControlLeft.TabIndex = 0;
             // 
             // tabMap
@@ -254,7 +259,7 @@
             this.tabMap.Location = new System.Drawing.Point(4, 22);
             this.tabMap.Name = "tabMap";
             this.tabMap.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMap.Size = new System.Drawing.Size(254, 682);
+            this.tabMap.Size = new System.Drawing.Size(254, 693);
             this.tabMap.TabIndex = 0;
             this.tabMap.Text = "Map";
             this.tabMap.ToolTipText = "You can set general map settings here.";
@@ -1054,7 +1059,7 @@
             // splitViewportAndProblems.Panel2
             // 
             this.splitViewportAndProblems.Panel2.Controls.Add(this.gridProblems);
-            this.splitViewportAndProblems.Size = new System.Drawing.Size(836, 708);
+            this.splitViewportAndProblems.Size = new System.Drawing.Size(836, 719);
             this.splitViewportAndProblems.SplitterDistance = 625;
             this.splitViewportAndProblems.TabIndex = 0;
             // 
@@ -1098,7 +1103,7 @@
             this.gridProblems.RowTemplate.Height = 500;
             this.gridProblems.RowTemplate.ReadOnly = true;
             this.gridProblems.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridProblems.Size = new System.Drawing.Size(207, 708);
+            this.gridProblems.Size = new System.Drawing.Size(207, 719);
             this.gridProblems.TabIndex = 1;
             this.gridProblems.SelectionChanged += new System.EventHandler(this.gridProblems_SelectionChanged);
             // 
@@ -1177,11 +1182,29 @@
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
             this.comboGizmoMode.TabIndex = 12;
             // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.labelSelectedStatus});
+            this.statusStrip.Location = new System.Drawing.Point(0, 740);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1102, 22);
+            this.statusStrip.TabIndex = 13;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // labelSelectedStatus
+            // 
+            this.labelSelectedStatus.Name = "labelSelectedStatus";
+            this.labelSelectedStatus.Size = new System.Drawing.Size(113, 17);
+            this.labelSelectedStatus.Text = "No objects selected.";
+            this.labelSelectedStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1102, 733);
+            this.ClientSize = new System.Drawing.Size(1102, 762);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.comboGizmoMode);
             this.Controls.Add(this.labelFPS);
             this.Controls.Add(this.comboPerspectiveOrtho);
@@ -1230,6 +1253,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).EndInit();
             this.splitViewportAndProblems.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1310,6 +1335,8 @@
         public System.Windows.Forms.TabPage tabCreate;
         public System.Windows.Forms.PropertyGrid propertyCreate;
         public System.Windows.Forms.PropertyGrid propertySelection;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        public System.Windows.Forms.ToolStripStatusLabel labelSelectedStatus;
     }
 }
 
