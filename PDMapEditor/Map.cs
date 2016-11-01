@@ -20,7 +20,7 @@ namespace PDMapEditor
         public static string Path { get { return path; } set { path = value; Program.main.Text = "PayDay's Homeworld Remastered Map Editor"; if (value.Length > 0) Program.main.Text += " - " + value; } }
 
         private static Vector3 mapDimensions = new Vector3(40000);
-        public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(PolarGrid); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.UpdateMeshData(); Renderer.InvalidateView(); Renderer.Invalidate(); Program.main.UpdateMapDimensions(); } }
+        public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(PolarGrid); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.InvalidateMeshData(); Renderer.InvalidateView(); Renderer.Invalidate(); Program.main.UpdateMapDimensions(); } }
 
         private static Background background;
         public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboIndex; Background.SetSkyboxTexture(value); if(Program.Settings != null) Program.Settings.Open(); Renderer.Invalidate(); } }
@@ -122,7 +122,7 @@ namespace PDMapEditor
         private static List<Drawable> degreeTexts = new List<Drawable>();
 
         private static bool polarGrid = false;
-        public static bool PolarGrid { get { return polarGrid; } set { polarGrid = value; CreateGrid(value); if (Renderer.Initialized) { Renderer.UpdateMeshData(); Renderer.InvalidateView(); Renderer.Invalidate(); } } }
+        public static bool PolarGrid { get { return polarGrid; } set { polarGrid = value; CreateGrid(value); if (Renderer.Initialized) { Renderer.InvalidateMeshData(); Renderer.InvalidateView(); Renderer.Invalidate(); } } }
 
         private static void CreateGrid(bool polar = false)
         {
@@ -276,6 +276,8 @@ namespace PDMapEditor
             Sphere.Spheres.Clear();
 
             Problem.Problems.Clear();
+            SavedAction.ClearHistory();
+
 
             Path = "";
 
@@ -306,7 +308,7 @@ namespace PDMapEditor
 
             Background.CreateSkybox();
 
-            Renderer.UpdateMeshData();
+            Renderer.InvalidateMeshData();
         }
     }
 }

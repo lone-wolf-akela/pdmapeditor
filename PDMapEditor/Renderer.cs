@@ -10,6 +10,7 @@ namespace PDMapEditor
     {
         public static bool Initialized = false;
         public static bool ViewInvalid = false;
+        public static bool MeshDataInvalid = false;
 
         public static Matrix4 View = Matrix4.Identity;
         public static Matrix4 Projection = Matrix4.Identity;
@@ -61,6 +62,8 @@ namespace PDMapEditor
 
         public static void UpdateMeshData()
         {
+            MeshDataInvalid = false;
+
             List<Vector3> editor_verts = new List<Vector3>();
             List<Vector3> editor_colors = new List<Vector3>();
             List<Vector2> editor_uv0 = new List<Vector2>();
@@ -163,6 +166,9 @@ namespace PDMapEditor
 
         public static void Render()
         {
+            if (MeshDataInvalid)
+                UpdateMeshData();
+
             if (ViewInvalid)
                 UpdateView();
 
@@ -378,10 +384,19 @@ namespace PDMapEditor
         {
             Program.GLControl.Invalidate();
         }
-
         public static void InvalidateView()
         {
             ViewInvalid = true;
+        }
+        public static void InvalidateMeshData()
+        {
+            MeshDataInvalid = true;
+        }
+        public static void InvalidateAll()
+        {
+            Program.GLControl.Invalidate();
+            ViewInvalid = true;
+            MeshDataInvalid = true;
         }
     }
 }

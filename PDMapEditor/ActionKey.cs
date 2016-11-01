@@ -44,6 +44,9 @@ namespace PDMapEditor
 
             new ActionKey("Copy selection", Action.SELECTION_COPY, Keys.C, true);
             new ActionKey("Paste copied", Action.SELECTION_PASTE, Keys.V, true);
+
+            new ActionKey("Undo", Action.UNDO, Keys.Z, true);
+            new ActionKey("Redo", Action.REDO, Keys.Y, true);
         }
 
         public static void KeyDown(PreviewKeyDownEventArgs e)
@@ -140,5 +143,7 @@ namespace PDMapEditor
         SELECTION_DELETE,
         SELECTION_COPY,
         SELECTION_PASTE,
+        UNDO,
+        REDO,
     }
 }

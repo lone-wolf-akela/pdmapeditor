@@ -10,7 +10,7 @@ namespace PDMapEditor
         static List<Type> objectTypes = new List<Type>();
 
         static Type typeToCreate;
-        public static Drawable CreatedDrawable;
+        public static IElement CreatedElement;
 
         public static void Init()
         {
@@ -67,17 +67,17 @@ namespace PDMapEditor
 
         static void UpdateGroupType()
         {
-            Program.main.propertyCreate.SelectedObject = CreatedDrawable;
+            Program.main.propertyCreate.SelectedObject = CreatedElement;
         }
 
         static void DestroyObjectAtCursor()
         {
-            if (CreatedDrawable != null)
+            if (CreatedElement != null)
             {
-                CreatedDrawable.Destroy();
-                Renderer.UpdateMeshData();
+                CreatedElement.Destroy();
+                Renderer.InvalidateMeshData();
 
-                CreatedDrawable = null;
+                CreatedElement = null;
 
                 Selection.gizmoLineX.Visible = false;
                 Selection.gizmoLineY.Visible = false;
@@ -89,10 +89,10 @@ namespace PDMapEditor
         {
             DestroyObjectAtCursor();
 
-            CreatedDrawable = (Drawable)Activator.CreateInstance(typeToCreate);
+            CreatedElement = (IElement)Activator.CreateInstance(typeToCreate);
             UpdateGroupType();
 
-            Renderer.UpdateMeshData();
+            Renderer.InvalidateMeshData();
 
             Selection.gizmoLineX.Visible = true;
             Selection.gizmoLineY.Visible = true;
@@ -101,14 +101,14 @@ namespace PDMapEditor
 
         public static void UpdateObjectAtCursor()
         {
-            if (CreatedDrawable != null)
+            if (CreatedElement != null)
             {
                 System.Drawing.Point pressPos = Program.GLControl.PointToClient(Cursor.Position);
                 int x = pressPos.X;
                 int y = Program.GLControl.ClientSize.Height - pressPos.Y;
 
                 Vector3 position = ScreenToWorldCoord(x, y);
-                CreatedDrawable.Position = position;
+                CreatedElement.Position = position;
 
                 Selection.gizmoLineX.Position = position;
                 Selection.gizmoLineY.Position = position;
@@ -118,9 +118,10 @@ namespace PDMapEditor
 
         public static void LeftMouseUp(int x, int y)
         {
-            if (CreatedDrawable != null)
+            if (CreatedElement != null)
             {
-                CreatedDrawable = null;
+                new ActionCreate(CreatedElement);
+                CreatedElement = null;
                 CreateObjectAtCursor();
             }
         }

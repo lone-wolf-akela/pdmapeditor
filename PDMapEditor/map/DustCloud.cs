@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace PDMapEditor
 {
-    public class DustCloud : Drawable, ISelectable
+    public class DustCloud : Drawable, ISelectable, IElement
     {
         public static List<DustCloud> DustClouds = new List<DustCloud>();
         private static string lastName = string.Empty;
@@ -66,6 +66,8 @@ namespace PDMapEditor
         [CustomSortedCategory("Dust cloud", 2, 2)]
         [Description("Defines if the dust cloud gets refilled.")]
         public bool Refill { get { return refill; } set { refill = value; lastRefill = value; } }
+
+        public string TypeName { get { return "Dust cloud"; } }
 
         [Browsable(false)]
         public bool AllowRotation { get; set; }

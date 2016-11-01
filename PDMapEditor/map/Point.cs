@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace PDMapEditor
 {
-    public class Point : DrawableRotated, ISelectable
+    public class Point : DrawableRotated, ISelectable, IElement
     {
         public static List<Point> Points = new List<Point>();
         private static string lastName = string.Empty;
@@ -13,6 +13,8 @@ namespace PDMapEditor
         [CustomSortedCategory("Point", 2, 2)]
         [Description("The name of the point. It can be used to refer to this point with scripts.")]
         public string Name { get { return name; } set { name = value; lastName = value; } }
+
+        public string TypeName { get { return "Point"; } }
 
         [Browsable(false)]
         public bool AllowRotation { get; set; }

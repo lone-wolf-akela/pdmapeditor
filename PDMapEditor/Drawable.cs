@@ -94,6 +94,7 @@ namespace PDMapEditor
             Position = position;
 
             Drawables.Add(this);
+            Renderer.InvalidateAll();
         }
 
         public Drawable(Vector3 position, Vector3 rotation) : base(position, rotation)
@@ -102,6 +103,7 @@ namespace PDMapEditor
             Rotation = rotation;
 
             Drawables.Add(this);
+            Renderer.InvalidateAll();
         }
         public Drawable(Vector3 position, Assimp.Mesh assMesh) : base(position)
         {
@@ -109,6 +111,7 @@ namespace PDMapEditor
             Mesh = new Mesh(position, Vector3.Zero, assMesh);
 
             Drawables.Add(this);
+            Renderer.InvalidateAll();
         }
         public Drawable(Vector3 position, Vector3 rotation, Assimp.Mesh assMesh) : base(position, rotation)
         {
@@ -117,12 +120,14 @@ namespace PDMapEditor
             Mesh = new Mesh(position, rotation, assMesh);
 
             Drawables.Add(this);
+            Renderer.InvalidateAll();
         }
 
         public virtual void Destroy()
         {
             Drawables.Remove(this);
             Mesh.Remove();
+            Renderer.InvalidateAll();
         }
     }
 }

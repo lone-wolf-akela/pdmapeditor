@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace PDMapEditor
 {
-    public class Sphere : Drawable, ISelectable
+    public class Sphere : Drawable, ISelectable, IElement
     {
         public static List<Sphere> Spheres = new List<Sphere>();
         private static string lastName = string.Empty;
@@ -19,6 +19,8 @@ namespace PDMapEditor
         [CustomSortedCategory("Sphere", 2, 2)]
         [Description("The radius (size) of the sphere.")]
         public float Radius { get { return radius; } set { radius = value; UpdateScale(); lastRadius = value; } }
+
+        public string TypeName { get { return "Sphere"; } }
 
         [Browsable(false)]
         public bool AllowRotation { get; set; }

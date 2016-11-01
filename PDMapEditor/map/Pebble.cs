@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace PDMapEditor
 {
-    public class Pebble : Drawable, ISelectable
+    public class Pebble : Drawable, ISelectable, IElement
     {
         public static List<Pebble> Pebbles = new List<Pebble>();
         private static PebbleType lastType;
@@ -13,6 +13,8 @@ namespace PDMapEditor
         [CustomSortedCategory("Pebble", 2, 2)]
         [Description("The type of the pebble. From data/pebble/.")]
         public PebbleType Type { get { return type; } set { type = value; lastType = value; } }
+
+        public string TypeName { get { return "Pebble"; } }
 
         [Browsable(false)]
         public bool AllowRotation { get; set; }

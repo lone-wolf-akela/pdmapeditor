@@ -58,7 +58,7 @@ namespace PDMapEditor
             Program.Camera.ResetCamera();
 
             Program.main.UpdateProblems();
-            Renderer.UpdateMeshData();
+            Renderer.InvalidateMeshData();
             Renderer.InvalidateView();
             Renderer.Invalidate();
         }
@@ -133,6 +133,8 @@ namespace PDMapEditor
 
             Selection.UpdateDragging(x, y);
             Selection.UpdateRectangleSelection(x, y);
+
+            Program.GLControl.Focus();
         }
 
         public void glControl_MouseDown(object sender, MouseEventArgs e)
@@ -164,6 +166,7 @@ namespace PDMapEditor
             ActionKey.KeyDown(e);
             Program.Camera.KeyDown();
             Selection.KeyDown();
+            SavedAction.KeyDown();
         }
 
         public void glControl_KeyUp(object sender, KeyEventArgs e)
@@ -192,7 +195,7 @@ namespace PDMapEditor
 
                 Program.Camera.ResetCamera();
                 Program.main.UpdateProblems();
-                Renderer.UpdateMeshData();
+                Renderer.InvalidateMeshData();
                 Renderer.InvalidateView();
                 Renderer.Invalidate();
             }

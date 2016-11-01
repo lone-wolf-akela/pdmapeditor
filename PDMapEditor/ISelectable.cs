@@ -10,6 +10,7 @@ namespace PDMapEditor
         bool AllowRotation { get; }
 
         void Destroy();
+
         ISelectable Copy();
     }
 }

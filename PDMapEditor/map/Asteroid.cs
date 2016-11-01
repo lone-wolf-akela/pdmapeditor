@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace PDMapEditor
 {
-    public class Asteroid : DrawableRotated, ISelectable
+    public class Asteroid : DrawableRotated, ISelectable, IElement
     {
         public static List<Asteroid> Asteroids = new List<Asteroid>();
         private static AsteroidType lastType;
@@ -29,6 +29,8 @@ namespace PDMapEditor
         [DisplayName("Rotation speed")]
         [Description("Rotation speed of the asteroid.")]
         public float RotSpeed { get { return rotSpeed; } set { rotSpeed = value; lastRotSpeed = value; } }
+
+        public string TypeName { get { return "Asteroid"; } }
 
         [Browsable(false)]
         public bool AllowRotation { get; set; }

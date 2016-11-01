@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -108,6 +108,7 @@
             this.comboGizmoMode = new System.Windows.Forms.ComboBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.labelSelectedStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.labelActionStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -985,7 +986,7 @@
             this.tabSelection.Controls.Add(this.propertySelection);
             this.tabSelection.Location = new System.Drawing.Point(4, 22);
             this.tabSelection.Name = "tabSelection";
-            this.tabSelection.Size = new System.Drawing.Size(254, 682);
+            this.tabSelection.Size = new System.Drawing.Size(254, 693);
             this.tabSelection.TabIndex = 1;
             this.tabSelection.Text = "Selection";
             this.tabSelection.UseVisualStyleBackColor = true;
@@ -997,7 +998,7 @@
             this.propertySelection.Location = new System.Drawing.Point(0, 0);
             this.propertySelection.Name = "propertySelection";
             this.propertySelection.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.propertySelection.Size = new System.Drawing.Size(254, 682);
+            this.propertySelection.Size = new System.Drawing.Size(254, 693);
             this.propertySelection.TabIndex = 32;
             this.propertySelection.ToolbarVisible = false;
             this.propertySelection.UseCompatibleTextRendering = true;
@@ -1010,7 +1011,7 @@
             this.tabCreate.Location = new System.Drawing.Point(4, 22);
             this.tabCreate.Name = "tabCreate";
             this.tabCreate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCreate.Size = new System.Drawing.Size(254, 682);
+            this.tabCreate.Size = new System.Drawing.Size(254, 693);
             this.tabCreate.TabIndex = 2;
             this.tabCreate.Text = "Create";
             this.tabCreate.UseVisualStyleBackColor = true;
@@ -1024,7 +1025,7 @@
             this.propertyCreate.Location = new System.Drawing.Point(6, 33);
             this.propertyCreate.Name = "propertyCreate";
             this.propertyCreate.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.propertyCreate.Size = new System.Drawing.Size(242, 643);
+            this.propertyCreate.Size = new System.Drawing.Size(242, 654);
             this.propertyCreate.TabIndex = 20;
             this.propertyCreate.ToolbarVisible = false;
             this.propertyCreate.UseCompatibleTextRendering = true;
@@ -1069,9 +1070,9 @@
             this.gridProblems.AllowUserToDeleteRows = false;
             this.gridProblems.AllowUserToResizeColumns = false;
             this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -1079,14 +1080,14 @@
             this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnProblems});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle11;
             this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridProblems.Location = new System.Drawing.Point(0, 0);
@@ -1095,9 +1096,9 @@
             this.gridProblems.ReadOnly = true;
             this.gridProblems.RowHeadersVisible = false;
             this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridProblems.RowTemplate.Height = 500;
@@ -1110,9 +1111,9 @@
             // columnProblems
             // 
             this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle10;
             this.columnProblems.HeaderText = "Problems";
             this.columnProblems.Name = "columnProblems";
             this.columnProblems.ReadOnly = true;
@@ -1185,19 +1186,28 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labelSelectedStatus});
-            this.statusStrip.Location = new System.Drawing.Point(0, 740);
+            this.labelSelectedStatus,
+            this.labelActionStatus});
+            this.statusStrip.Location = new System.Drawing.Point(0, 738);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1102, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1102, 24);
             this.statusStrip.TabIndex = 13;
             this.statusStrip.Text = "statusStrip1";
             // 
             // labelSelectedStatus
             // 
             this.labelSelectedStatus.Name = "labelSelectedStatus";
-            this.labelSelectedStatus.Size = new System.Drawing.Size(113, 17);
+            this.labelSelectedStatus.Size = new System.Drawing.Size(113, 19);
             this.labelSelectedStatus.Text = "No objects selected.";
             this.labelSelectedStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelActionStatus
+            // 
+            this.labelActionStatus.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.labelActionStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelActionStatus.Name = "labelActionStatus";
+            this.labelActionStatus.Size = new System.Drawing.Size(87, 19);
+            this.labelActionStatus.Text = "No last action.";
             // 
             // Main
             // 
@@ -1337,6 +1347,7 @@
         public System.Windows.Forms.PropertyGrid propertySelection;
         private System.Windows.Forms.StatusStrip statusStrip;
         public System.Windows.Forms.ToolStripStatusLabel labelSelectedStatus;
+        public System.Windows.Forms.ToolStripStatusLabel labelActionStatus;
     }
 }
 

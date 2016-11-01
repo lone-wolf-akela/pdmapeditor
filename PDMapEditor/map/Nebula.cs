@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace PDMapEditor
 {
-    public class Nebula : Drawable, ISelectable
+    public class Nebula : Drawable, ISelectable, IElement
     {
         public static List<Nebula> Nebulas = new List<Nebula>();
         private static string lastName = string.Empty;
@@ -66,6 +66,8 @@ namespace PDMapEditor
         [CustomSortedCategory("Nebula", 2, 2)]
         [Description("Defines if the nebula gets refilled.")]
         public bool Refill { get { return refill; } set { refill = value; lastRefill = value; } }
+
+        public string TypeName { get { return "Nebula"; } }
 
         [Browsable(false)]
         public bool AllowRotation { get; set; }

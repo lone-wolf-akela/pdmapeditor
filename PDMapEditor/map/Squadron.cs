@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace PDMapEditor
 {
-    public class Squadron : DrawableRotated, ISelectable
+    public class Squadron : DrawableRotated, ISelectable, IElement
     {
         public static List<Squadron> Squadrons = new List<Squadron>();
         private static string lastName = string.Empty;
@@ -39,6 +39,8 @@ namespace PDMapEditor
         [DisplayName("In hyperspace")]
         [Description("If this is set to true, the squadron will spawn in hyperspace.")]
         public bool InHyperspace { get { return inHyperspace; } set { inHyperspace = value; lastInHyperspace = value; } }
+
+        public string TypeName { get { return "Squadron"; } }
 
         [Browsable(false)]
         public bool AllowRotation { get; set; }

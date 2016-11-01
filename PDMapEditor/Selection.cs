@@ -59,8 +59,8 @@ namespace PDMapEditor
         //private static ISelectable selected;
         //public static ISelectable Selected { get { return selected; } set { selected = value; InvalidateSelectionGUI(); InvalidateSelectionGizmos(); } }
 
-        public static ObservableCollection<ISelectable> Selected = new ObservableCollection<ISelectable>();
-        public static List<ISelectable> Copied = new List<ISelectable>();
+        public static ObservableCollection<IElement> Selected = new ObservableCollection<IElement>();
+        public static List<IElement> Copied = new List<IElement>();
 
         public static void Init()
         {
@@ -100,6 +100,18 @@ namespace PDMapEditor
             AveragePositionInvalid = false;
             SelectionGUIInvalid = false;
             SelectionGizmosInvalid = false;
+        }
+
+        public static void SelectElements(IElement[] elements)
+        {
+            Selected.Clear();
+            foreach (IElement element in elements)
+                Selected.Add(element);
+        }
+
+        public static void ClearSelection()
+        {
+            Selected.Clear();
         }
 
         private static void UpdateSelectionStatus()
@@ -187,7 +199,7 @@ namespace PDMapEditor
             mouseClickX = x;
             mouseClickY = y;
 
-            if (Creation.CreatedDrawable != null)
+            if (Creation.CreatedElement != null)
             {
                 return; //Don't select when the user is creating an object
             }
@@ -305,7 +317,7 @@ namespace PDMapEditor
 
         public static void LeftMouseUp(int x, int y)
         {
-            if (Creation.CreatedDrawable != null)
+            if (Creation.CreatedElement != null)
             {
                 return; //Don't select when the user is creating an object
             }
@@ -334,7 +346,7 @@ namespace PDMapEditor
                             Selected.Clear();
                         }
 
-                        foreach (ISelectable obj in objects)
+                        foreach (IElement obj in objects)
                         {
                             if (obj != gizmoPosX && obj != gizmoPosY && obj != gizmoPosZ && obj != gizmoRotX && obj != gizmoRotY && obj != gizmoRotZ)
                                 if(!Selected.Contains(obj))
@@ -348,13 +360,13 @@ namespace PDMapEditor
 
                     if (objectAtMouse != null)
                     {
-                        if (objectAtMouse != gizmoPosX && objectAtMouse != gizmoPosY && objectAtMouse != gizmoPosZ && objectAtMouse != gizmoRotX && objectAtMouse != gizmoRotY && objectAtMouse != gizmoRotZ)
+                        if (objectAtMouse is IElement)
                         {
                             if (ActionKey.IsDown(Action.SELECTION_ADD))
                             {
                                 if (!Selected.Contains(objectAtMouse))
                                 {
-                                    Selected.Add(objectAtMouse);
+                                    Selected.Add((IElement)objectAtMouse);
                                 }
                             }
                             else
@@ -363,7 +375,7 @@ namespace PDMapEditor
                                 if (timeSinceLastClick.Milliseconds > 400)
                                 {
                                     Selected.Clear();
-                                    Selected.Add(objectAtMouse);
+                                    Selected.Add((IElement)objectAtMouse);
                                 }
                                 else
                                 {
@@ -373,7 +385,7 @@ namespace PDMapEditor
                                         {
                                             foreach (Drawable drawable in Drawable.Drawables)
                                             {
-                                                ISelectable selectable = drawable as ISelectable;
+                                                IElement selectable = drawable as IElement;
                                                 if (selectable == null)
                                                     continue;
 
@@ -643,16 +655,10 @@ namespace PDMapEditor
             }
             if (ActionKey.IsDown(Action.SELECTION_DELETE))
             {
-                foreach (ISelectable selectable in Selected)
-                {
-                    selectable.Destroy();
-                }
-
-                Selected.Clear();
-
-                Renderer.UpdateMeshData();
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
+                if (Selected.Count > 0)
+                    new ActionDelete(Selected.ToArray());
+                else
+                    SystemSounds.Beep.Play();
             }
             if (ActionKey.IsDown(Action.SELECTION_COPY))
             {
@@ -662,14 +668,10 @@ namespace PDMapEditor
             {
                 Selected.Clear();
 
-                foreach(ISelectable obj in Copied)
+                foreach(IElement obj in Copied)
                 {
-                    Selected.Add(obj.Copy());
+                    Selected.Add((IElement)obj.Copy());
                 }
-
-                Renderer.UpdateMeshData();
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
             }
         }
 
