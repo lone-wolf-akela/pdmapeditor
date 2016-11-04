@@ -20,6 +20,7 @@ namespace PDMapEditor
         [Description("The radius (size) of the sphere.")]
         public float Radius { get { return radius; } set { radius = value; UpdateScale(); lastRadius = value; } }
 
+        [Browsable(false)]
         public string TypeName { get { return "Sphere"; } }
 
         [Browsable(false)]

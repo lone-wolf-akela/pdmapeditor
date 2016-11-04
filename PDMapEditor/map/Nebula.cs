@@ -67,6 +67,7 @@ namespace PDMapEditor
         [Description("Defines if the nebula gets refilled.")]
         public bool Refill { get { return refill; } set { refill = value; lastRefill = value; } }
 
+        [Browsable(false)]
         public string TypeName { get { return "Nebula"; } }
 
         [Browsable(false)]

@@ -37,6 +37,7 @@ namespace PDMapEditor
 
         private static int mouseClickX, mouseClickY;
 
+        private static Vector3 positionAtStart = Vector3.Zero;
         private static Vector3 rotationAtStart = Vector3.Zero;
 
         public static Vector3 AveragePosition = Vector3.Zero;
@@ -211,38 +212,28 @@ namespace PDMapEditor
                 gizmoLineX.Visible = true;
                 gizmoLineX.Position = gizmoPosX.Position;
                 draggingState = DraggingState.MOVING_X;
-
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
+                positionAtStart = AveragePosition;
             }
             else if (objectAtMouse == gizmoPosY)
             {
                 gizmoLineY.Visible = true;
                 gizmoLineY.Position = gizmoPosY.Position;
                 draggingState = DraggingState.MOVING_Y;
-
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
+                positionAtStart = AveragePosition;
             }
             else if (objectAtMouse == gizmoPosZ)
             {
                 gizmoLineZ.Visible = true;
                 gizmoLineZ.Position = gizmoPosZ.Position;
                 draggingState = DraggingState.MOVING_Z;
-
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
+                positionAtStart = AveragePosition;
             }
             else if (objectAtMouse == gizmoRotX)
             {
                 gizmoLineX.Visible = true;
                 gizmoLineX.Position = gizmoRotX.Position;
                 draggingState = DraggingState.ROTATING_X;
-
                 rotationAtStart = Selected[0].Rotation;
-
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
             }
             else if (objectAtMouse == gizmoRotY)
             {
@@ -251,9 +242,6 @@ namespace PDMapEditor
                 draggingState = DraggingState.ROTATING_Y;
 
                 rotationAtStart = Selected[0].Rotation;
-
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
             }
             else if (objectAtMouse == gizmoRotZ)
             {
@@ -262,9 +250,6 @@ namespace PDMapEditor
                 draggingState = DraggingState.ROTATING_Z;
 
                 rotationAtStart = Selected[0].Rotation;
-
-                Renderer.InvalidateView();
-                Renderer.Invalidate();
             }
             else
                 clickingLeft = true;
@@ -342,15 +327,13 @@ namespace PDMapEditor
                     if (objects.Count > 0)
                     {
                         if (!ActionKey.IsDown(Action.SELECTION_ADD)) //Clear previous selection if the user does not want to add to selection
-                        {
                             Selected.Clear();
-                        }
 
-                        foreach (IElement obj in objects)
+                        foreach (ISelectable obj in objects)
                         {
-                            if (obj != gizmoPosX && obj != gizmoPosY && obj != gizmoPosZ && obj != gizmoRotX && obj != gizmoRotY && obj != gizmoRotZ)
-                                if(!Selected.Contains(obj))
-                                    Selected.Add(obj);
+                            if (obj is IElement)
+                                if (!Selected.Contains(obj))
+                                    Selected.Add((IElement)obj);
                         }
                     }
                 }
@@ -409,10 +392,18 @@ namespace PDMapEditor
 
                 rectangleSelecting = false;
             }
-            else
+            else if (draggingState == DraggingState.MOVING_X || draggingState == DraggingState.MOVING_Y || draggingState == DraggingState.MOVING_Z)
+            {
+                new ActionMove(Selected.ToArray(), Vector3.Subtract(AveragePosition, positionAtStart));
                 Program.main.propertySelection.Refresh();
+            }
+            else if (draggingState == DraggingState.ROTATING_X || draggingState == DraggingState.ROTATING_Y || draggingState == DraggingState.ROTATING_Z)
+            {
+                new ActionRotate(Selected.ToArray(), Vector3.Subtract(Selected[0].Rotation, rotationAtStart));
+                Program.main.propertySelection.Refresh();
+            }
 
-            draggingState = DraggingState.NONE;
+                draggingState = DraggingState.NONE;
             gizmoLineX.Visible = false;
             gizmoLineY.Visible = false;
             gizmoLineZ.Visible = false;

@@ -87,7 +87,9 @@ namespace PDMapEditor
         public Vector3 lastRotation;
 
         public Mesh Mesh;
-        public bool Visible = true;
+
+        private bool visible = true;
+        public bool Visible { get { return visible; } set { visible = value;  Renderer.Invalidate(); Renderer.InvalidateView(); } }
 
         public Drawable(Vector3 position) : base(position)
         {

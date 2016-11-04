@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IElement.cs" />
+    <Compile Include="saved actions\ActionRotate.cs" />
+    <Compile Include="saved actions\ActionMove.cs" />
     <Compile Include="saved actions\ActionCreate.cs" />
     <Compile Include="saved actions\ActionDelete.cs" />
     <Compile Include="saved actions\SavedAction.cs" />

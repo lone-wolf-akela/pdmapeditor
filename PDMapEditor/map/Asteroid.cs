@@ -30,6 +30,7 @@ namespace PDMapEditor
         [Description("Rotation speed of the asteroid.")]
         public float RotSpeed { get { return rotSpeed; } set { rotSpeed = value; lastRotSpeed = value; } }
 
+        [Browsable(false)]
         public string TypeName { get { return "Asteroid"; } }
 
         [Browsable(false)]

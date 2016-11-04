@@ -14,6 +14,7 @@ namespace PDMapEditor
         [Description("The name of the point. It can be used to refer to this point with scripts.")]
         public string Name { get { return name; } set { name = value; lastName = value; } }
 
+        [Browsable(false)]
         public string TypeName { get { return "Point"; } }
 
         [Browsable(false)]

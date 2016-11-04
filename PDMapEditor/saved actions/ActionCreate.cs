@@ -27,7 +27,8 @@ namespace PDMapEditor
 
         protected override void Undo()
         {
-            createdElement.Destroy();
+            if (createdElement != null)
+                createdElement.Destroy();
 
             Program.main.labelActionStatus.Text = "Undone \"" + description + "\".";
         }

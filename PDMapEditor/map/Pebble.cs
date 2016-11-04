@@ -14,6 +14,7 @@ namespace PDMapEditor
         [Description("The type of the pebble. From data/pebble/.")]
         public PebbleType Type { get { return type; } set { type = value; lastType = value; } }
 
+        [Browsable(false)]
         public string TypeName { get { return "Pebble"; } }
 
         [Browsable(false)]

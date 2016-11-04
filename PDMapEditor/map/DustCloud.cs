@@ -67,6 +67,7 @@ namespace PDMapEditor
         [Description("Defines if the dust cloud gets refilled.")]
         public bool Refill { get { return refill; } set { refill = value; lastRefill = value; } }
 
+        [Browsable(false)]
         public string TypeName { get { return "Dust cloud"; } }
 
         [Browsable(false)]

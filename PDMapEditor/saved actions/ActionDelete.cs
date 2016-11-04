@@ -26,14 +26,16 @@ namespace PDMapEditor
             if (!redo)
             {
                 foreach (IElement element in deletedElements)
-                    element.Destroy();
+                    if (element != null)
+                        element.Destroy();
 
                 Program.main.labelActionStatus.Text = description;
             }
             else
             {
                 foreach (IElement element in recreatedElements)
-                    element.Destroy();
+                    if (element != null)
+                        element.Destroy();
 
                 recreatedElements = new IElement[0];
 

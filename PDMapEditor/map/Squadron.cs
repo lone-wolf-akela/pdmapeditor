@@ -40,6 +40,7 @@ namespace PDMapEditor
         [Description("If this is set to true, the squadron will spawn in hyperspace.")]
         public bool InHyperspace { get { return inHyperspace; } set { inHyperspace = value; lastInHyperspace = value; } }
 
+        [Browsable(false)]
         public string TypeName { get { return "Squadron"; } }
 
         [Browsable(false)]
