@@ -14,6 +14,7 @@ namespace PDMapEditor
         public static GLControl GLControl;
         public static Camera Camera = new Camera();
         public static Settings Settings;
+        public static ExecuteCode ExecuteCode;
 
         //Frame-independence
         public static Stopwatch DeltaCounter = new Stopwatch();

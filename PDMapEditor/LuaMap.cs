@@ -15,13 +15,13 @@ namespace PDMapEditor
 
         private static Lua lua;
 
-        public static void LoadMap(string path)
+        public static void SetupInterpreter()
         {
             lua = new Lua();
             Type type = typeof(LuaMap);
 
             LoadMathLib();
-            
+
             lua.RegisterFunction("dofilepath", type.GetMethod("DoFilePath"));
 
             lua.RegisterFunction("addAsteroid", null, type.GetMethod("AddAsteroid"));
@@ -66,7 +66,10 @@ namespace PDMapEditor
             lua.RegisterFunction("setDustCloudAmbient", null, type.GetMethod("SetDustCloudAmbient"));
             lua.RegisterFunction("setDustCloudColour", null, type.GetMethod("SetDustCloudColour"));
             lua.RegisterFunction("setNebulaAmbient", null, type.GetMethod("SetNebulaAmbient"));
+        }
 
+        public static void LoadMap(string path)
+        {
             string code = File.ReadAllText(path);
             code = ConvertForLoopSyntax(code);
 
@@ -333,6 +336,15 @@ end");
             }
 
             File.WriteAllText(path, sb.ToString());
+        }
+
+        public static string[] ExecuteCode(string code)
+        {
+            List<string> errors = new List<string>();
+
+            try { lua.DoString(code); }
+            catch (NLua.Exceptions.LuaScriptException e) { errors.Add(e.Message); }
+            return errors.ToArray();
         }
 
         public static Vector3 LuaTableToVector3(LuaTable table)

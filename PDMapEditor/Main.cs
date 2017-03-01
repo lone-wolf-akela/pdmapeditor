@@ -45,6 +45,8 @@ namespace PDMapEditor
             Creation.Init();
             Selection.Init();
 
+            LuaMap.SetupInterpreter();
+
             Application.Idle += glControl_Update;
             Program.DeltaCounter.Start();
             FPSCounter.LabelFPS = labelFPS;
@@ -111,13 +113,21 @@ namespace PDMapEditor
 
         public void glControl_MouseEnter(object sender, EventArgs e)
         {
-            if(FormActive)
-                Program.GLControl.Focus();
+            if (FormActive)
+            {
+                if (Program.ExecuteCode != null)
+                {
+                    if (!Program.ExecuteCode.Visible)
+                        Program.GLControl.Focus();
+                }
+                else
+                    Program.GLControl.Focus();
+            }
         }
 
         public void glControl_MouseLeave(object sender, EventArgs e)
         {
-            this.Focus();
+            //this.Focus();
             ActionKey.LostFocus();
         }
 
@@ -134,7 +144,16 @@ namespace PDMapEditor
             Selection.UpdateDragging(x, y);
             Selection.UpdateRectangleSelection(x, y);
 
-            Program.GLControl.Focus();
+            if (FormActive)
+            {
+                if (Program.ExecuteCode != null)
+                {
+                    if (!Program.ExecuteCode.Visible)
+                        Program.GLControl.Focus();
+                }
+                else
+                    Program.GLControl.Focus();
+            }
         }
 
         public void glControl_MouseDown(object sender, MouseEventArgs e)
@@ -157,7 +176,6 @@ namespace PDMapEditor
             {
                 Selection.LeftMouseUp(x, y);
                 Creation.LeftMouseUp(x, y);
-
             }
         }
 
@@ -234,6 +252,16 @@ namespace PDMapEditor
         private void buttonAbout_Click(object sender, EventArgs e)
         {
             MessageBox.Show(this, "PayDay's Homeworld Remastered Map Editor b" + Program.BUILD + "\n\nDeveloped by Christoph (PayDay) Timmermann.\n\nUses\n - OpenTK\n - NLua\n - Assimp\n - Assimp.NET\n - DevIL\n - DevILSharp\n - FSharp", "PayDay's Homeworld Remastered Map Editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void buttonExecuteCode_Click(object sender, EventArgs e)
+        {
+            if (Program.ExecuteCode == null || Program.ExecuteCode.IsDisposed)
+            {
+                Program.ExecuteCode = new ExecuteCode();
+                Program.ExecuteCode.Open();
+                Program.ExecuteCode.Visible = true;
+            }
         }
         #endregion
 

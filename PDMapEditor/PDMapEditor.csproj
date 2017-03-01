@@ -62,6 +62,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\OpenTK.GLControl.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.5.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.5.10\lib\net40\ScintillaNET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -73,6 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExecuteCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExecuteCode.Designer.cs">
+      <DependentUpon>ExecuteCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="IElement.cs" />
     <Compile Include="saved actions\ActionRotate.cs" />
     <Compile Include="saved actions\ActionMove.cs" />
@@ -160,6 +170,9 @@
     <Compile Include="Texture.cs" />
     <Compile Include="property display\AsteroidTypeConverter.cs" />
     <Compile Include="Utilites.cs" />
+    <EmbeddedResource Include="ExecuteCode.resx">
+      <DependentUpon>ExecuteCode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Hotkeys.resx">
       <DependentUpon>Hotkeys.cs</DependentUpon>
     </EmbeddedResource>
