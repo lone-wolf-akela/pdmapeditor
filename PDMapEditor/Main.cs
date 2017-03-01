@@ -251,7 +251,7 @@ namespace PDMapEditor
 
         private void buttonAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "PayDay's Homeworld Remastered Map Editor b" + Program.BUILD + "\n\nDeveloped by Christoph (PayDay) Timmermann.\n\nUses\n - OpenTK\n - NLua\n - Assimp\n - Assimp.NET\n - DevIL\n - DevILSharp\n - FSharp", "PayDay's Homeworld Remastered Map Editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, "PayDay's Homeworld Remastered Map Editor b" + Program.BUILD + "\n\nDeveloped by Christoph (PayDay) Timmermann.\n\nUses\n - OpenTK\n - NLua\n - Assimp\n - Assimp.NET\n - DevIL\n - DevILSharp\n - FSharp\n - Scintilla", "PayDay's Homeworld Remastered Map Editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonExecuteCode_Click(object sender, EventArgs e)

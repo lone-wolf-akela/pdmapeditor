@@ -8,7 +8,7 @@ namespace PDMapEditor
     {
         public static List<Sphere> Spheres = new List<Sphere>();
         private static string lastName = string.Empty;
-        private static float lastRadius;
+        private static float lastRadius = 5000;
 
         private string name;
         [CustomSortedCategory("Sphere", 2, 2)]

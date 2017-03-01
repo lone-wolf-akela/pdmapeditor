@@ -89,6 +89,7 @@ namespace PDMapEditor
         public Mesh Mesh;
 
         private bool visible = true;
+        [Browsable(false)]
         public bool Visible { get { return visible; } set { visible = value;  Renderer.Invalidate(); Renderer.InvalidateView(); } }
 
         public Drawable(Vector3 position) : base(position)
