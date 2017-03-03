@@ -39,6 +39,7 @@ namespace PDMapEditor
 
             new ActionKey("Focus selection", Action.CAM_FOCUS_SELECTION, Keys.F);
             new ActionKey("Add to selection", Action.SELECTION_ADD, Keys.ControlKey, true);
+            new ActionKey("Remove from selection", Action.SELECTION_REMOVE, Keys.Menu, false, true);
 
             new ActionKey("Delete selection", Action.SELECTION_DELETE, Keys.Delete);
 
@@ -140,6 +141,7 @@ namespace PDMapEditor
         MODE_ROTATION,
         CAM_FOCUS_SELECTION,
         SELECTION_ADD,
+        SELECTION_REMOVE,
         SELECTION_DELETE,
         SELECTION_COPY,
         SELECTION_PASTE,

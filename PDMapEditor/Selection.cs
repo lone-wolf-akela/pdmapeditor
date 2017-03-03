@@ -326,14 +326,24 @@ namespace PDMapEditor
 
                     if (objects.Count > 0)
                     {
-                        if (!ActionKey.IsDown(Action.SELECTION_ADD)) //Clear previous selection if the user does not want to add to selection
+                        if (!ActionKey.IsDown(Action.SELECTION_ADD) && !ActionKey.IsDown(Action.SELECTION_REMOVE)) //Clear previous selection if the user does not want to add to selection
                             Selected.Clear();
 
                         foreach (ISelectable obj in objects)
                         {
                             if (obj is IElement)
-                                if (!Selected.Contains(obj))
-                                    Selected.Add((IElement)obj);
+                            {
+                                if (!ActionKey.IsDown(Action.SELECTION_REMOVE))
+                                {
+                                    if (!Selected.Contains(obj))
+                                        Selected.Add((IElement)obj);
+                                }
+                                else
+                                {
+                                    if (Selected.Contains(obj))
+                                        Selected.Remove((IElement)obj);
+                                }
+                            }
                         }
                     }
                 }
@@ -351,14 +361,24 @@ namespace PDMapEditor
                                 {
                                     Selected.Add((IElement)objectAtMouse);
                                 }
+                                else
+                                    if(ActionKey.IsDown(Action.SELECTION_REMOVE))
+                                        if(Selected.Contains((IElement)objectAtMouse))
+                                            Selected.Remove((IElement)objectAtMouse);
                             }
                             else
                             {
                                 TimeSpan timeSinceLastClick = DateTime.Now.Subtract(lastSingleSelectTime);
-                                if (timeSinceLastClick.Milliseconds > 400)
+                                if (timeSinceLastClick.Milliseconds > 200)
                                 {
-                                    Selected.Clear();
-                                    Selected.Add((IElement)objectAtMouse);
+                                    if (!ActionKey.IsDown(Action.SELECTION_REMOVE))
+                                    {
+                                        Selected.Clear();
+                                        Selected.Add((IElement)objectAtMouse);
+                                    }
+                                    else
+                                        if (Selected.Contains((IElement)objectAtMouse))
+                                            Selected.Remove((IElement)objectAtMouse);
                                 }
                                 else
                                 {
@@ -374,7 +394,13 @@ namespace PDMapEditor
 
                                                 if (selectable.GetType() == Selected[0].GetType())
                                                     if (selectable != Selected[0])
-                                                        Selected.Add(selectable);
+                                                    {
+                                                        if (!ActionKey.IsDown(Action.SELECTION_REMOVE))
+                                                            Selected.Add(selectable);
+                                                        else
+                                                            if (Selected.Contains(selectable))
+                                                                Selected.Remove(selectable);
+                                                    }
                                             }
                                         }
                                     }
@@ -386,8 +412,8 @@ namespace PDMapEditor
 
                     }
                     else
-                        if (!ActionKey.IsDown(Action.SELECTION_ADD))
-                        Selected.Clear();
+                        if (!ActionKey.IsDown(Action.SELECTION_ADD) && !ActionKey.IsDown(Action.SELECTION_REMOVE))
+                            Selected.Clear();
                 }
 
                 rectangleSelecting = false;
