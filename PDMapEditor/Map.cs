@@ -23,7 +23,7 @@ namespace PDMapEditor
         public static Vector3 MapDimensions { get { return mapDimensions; } set { mapDimensions = value; CreateGrid(PolarGrid); SetCameraZooming(); CreateCircle(); CreateDegreeTexts(); Renderer.InvalidateMeshData(); Renderer.InvalidateView(); Renderer.Invalidate(); Program.main.UpdateMapDimensions(); } }
 
         private static Background background;
-        public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboIndex; Background.SetSkyboxTexture(value); if(Program.Settings != null) Program.Settings.Open(); Renderer.Invalidate(); } }
+        public static Background Background { get { return background; } set { background = value; Program.main.comboBackground.SelectedIndex = value.ComboIndex; Background.SetSkyboxTexture(value); /*if(Program.Settings != null) Program.Settings.Open();*/ Renderer.Invalidate(); } }
 
         private static float glareIntensity = 0;
         public static float GlareIntensity { get { return glareIntensity; } set { glareIntensity = value; Program.main.sliderGlareIntensity.Value = (int)Math.Round(value * 100); } }

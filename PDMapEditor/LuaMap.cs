@@ -14,6 +14,7 @@ namespace PDMapEditor
         static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
 
         private static Lua lua;
+        private static List<string> output = new List<string>();
 
         public static void SetupInterpreter()
         {
@@ -21,6 +22,7 @@ namespace PDMapEditor
             Type type = typeof(LuaMap);
 
             LoadMathLib();
+            lua.RegisterFunction("print", null, type.GetMethod("Print"));
 
             lua.RegisterFunction("dofilepath", type.GetMethod("DoFilePath"));
 
@@ -340,11 +342,11 @@ end");
 
         public static string[] ExecuteCode(string code)
         {
-            List<string> errors = new List<string>();
+            output.Clear();
 
             try { lua.DoString(code); }
-            catch (NLua.Exceptions.LuaScriptException e) { errors.Add(e.Message); }
-            return errors.ToArray();
+            catch (NLua.Exceptions.LuaScriptException e) { output.Add(e.Message); }
+            return output.ToArray();
         }
 
         public static Vector3 LuaTableToVector3(LuaTable table)
@@ -433,6 +435,11 @@ end");
                 }
             }
             return null;
+        }
+
+        public static void Print(string text)
+        {
+            output.Add(text);
         }
 
         public static void AddAsteroid(string type, LuaTable position, float multiplier, float rotX, float rotY, float rotZ, float rotSpeed)
