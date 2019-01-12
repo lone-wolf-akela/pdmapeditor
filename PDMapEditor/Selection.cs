@@ -77,6 +77,13 @@ namespace PDMapEditor
             Program.main.comboGizmoMode.SelectedIndexChanged += new EventHandler(comboGizmoMode_SelectedIndexChanged);
 
             Program.main.tabControlLeft.TabPages.Remove(Program.main.tabSelection);
+
+            Program.main.propertySelection.PropertyValueChanged += PropertySelection_PropertyValueChanged;
+        }
+
+        private static void PropertySelection_PropertyValueChanged(object s, System.Windows.Forms.PropertyValueChangedEventArgs e)
+        {
+            new ActionPropertyChange(Selected.ToArray(), e.ChangedItem.PropertyDescriptor, e.OldValue, e.ChangedItem.Value);
         }
 
         private static void SelectedChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -165,22 +172,28 @@ namespace PDMapEditor
             gizmoPosX.Mesh.Scale = new Vector3(25);
             gizmoPosX.Visible = false;
             gizmoPosX.Mesh.Material.Translucent = true;
-            gizmoLineX = new Line(Vector3.Zero + new Vector3(-100000, 0, 0), Vector3.Zero + new Vector3(100000, 0, 0), new Vector3(1, 0, 0));
-            gizmoLineX.Visible = false;
+            gizmoLineX = new Line(Vector3.Zero + new Vector3(-100000, 0, 0), Vector3.Zero + new Vector3(100000, 0, 0), new Vector3(1, 0, 0))
+            {
+                Visible = false
+            };
 
             gizmoPosY = new Gizmo(Vector3.Zero, Mesh.GizmoYPos);
             gizmoPosY.Mesh.Scale = new Vector3(25);
             gizmoPosY.Visible = false;
             gizmoPosY.Mesh.Material.Translucent = true;
-            gizmoLineY = new Line(Vector3.Zero + new Vector3(0, -100000, 0), Vector3.Zero + new Vector3(0, 100000, 0), new Vector3(0, 1, 0));
-            gizmoLineY.Visible = false;
+            gizmoLineY = new Line(Vector3.Zero + new Vector3(0, -100000, 0), Vector3.Zero + new Vector3(0, 100000, 0), new Vector3(0, 1, 0))
+            {
+                Visible = false
+            };
 
             gizmoPosZ = new Gizmo(Vector3.Zero, Mesh.GizmoZPos);
             gizmoPosZ.Mesh.Scale = new Vector3(25);
             gizmoPosZ.Visible = false;
             gizmoPosZ.Mesh.Material.Translucent = true;
-            gizmoLineZ = new Line(Vector3.Zero + new Vector3(0, 0, -100000), Vector3.Zero + new Vector3(0, 0, 100000), new Vector3(0, 0, 1));
-            gizmoLineZ.Visible = false;
+            gizmoLineZ = new Line(Vector3.Zero + new Vector3(0, 0, -100000), Vector3.Zero + new Vector3(0, 0, 100000), new Vector3(0, 0, 1))
+            {
+                Visible = false
+            };
 
             gizmoRotX = new Gizmo(Vector3.Zero, Mesh.GizmoXRot);
             gizmoRotX.Mesh.Scale = new Vector3(25);
@@ -388,8 +401,7 @@ namespace PDMapEditor
                                         {
                                             foreach (Drawable drawable in Drawable.Drawables)
                                             {
-                                                IElement selectable = drawable as IElement;
-                                                if (selectable == null)
+                                                if (!(drawable is IElement selectable))
                                                     continue;
 
                                                 if (selectable.GetType() == Selected[0].GetType())

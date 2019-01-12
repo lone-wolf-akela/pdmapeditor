@@ -11,7 +11,7 @@ namespace PDMapEditor
 {
     public static class LuaMap
     {
-        static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
+        static readonly CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
 
         private static Lua lua;
         private static List<string> output = new List<string>();

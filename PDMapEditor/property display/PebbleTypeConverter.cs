@@ -34,8 +34,7 @@ namespace PDMapEditor
         {
             if (destinationType == typeof(string))
             {
-                PebbleType type = value as PebbleType;
-                if (type != null)
+                if (value is PebbleType type)
                     return type.Name;
             }
             return base.ConvertTo(context, culture, value, destinationType);

@@ -34,8 +34,7 @@ namespace PDMapEditor
         {
             if (destinationType == typeof(string))
             {
-                NebulaType type = value as NebulaType;
-                if (type != null)
+                if (value is NebulaType type)
                     return type.Name;
             }
             return base.ConvertTo(context, culture, value, destinationType);

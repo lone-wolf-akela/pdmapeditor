@@ -25,8 +25,10 @@ namespace PDMapEditor
 
             if (id != 0)
             {
-                tex = new Texture();
-                tex.ID = id;
+                tex = new Texture
+                {
+                    ID = id
+                };
             }
 
             return tex;

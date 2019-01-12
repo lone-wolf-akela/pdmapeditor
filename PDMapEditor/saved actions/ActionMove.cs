@@ -5,7 +5,7 @@ namespace PDMapEditor
 {
     public class ActionMove : SavedAction
     {
-        private IElement[] movedElements;
+        private readonly IElement[] movedElements;
         Vector3 diff;
 
         public ActionMove(IElement[] movedElements, Vector3 diff) : base()

@@ -54,10 +54,10 @@ namespace PDMapEditor
         {
             pressedKeys.Add(e.KeyCode);
 
-            if (e.KeyCode == Keys.Menu)
+            if (e.Modifiers == Keys.Menu)
                 altActive = true;
 
-            if (e.KeyCode == Keys.ControlKey)
+            if (e.Modifiers == Keys.Control)
                 controlActive = true;
         }
 
@@ -65,10 +65,10 @@ namespace PDMapEditor
         {
             pressedKeys.Remove(e.KeyCode);
 
-            if (e.KeyCode == Keys.Menu)
+            if (e.Modifiers == Keys.Menu)
                 altActive = false;
 
-            if (e.KeyCode == Keys.ControlKey)
+            if (e.Modifiers == Keys.Control)
                 controlActive = false;
         }
 

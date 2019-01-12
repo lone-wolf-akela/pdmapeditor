@@ -84,6 +84,7 @@
       <DependentUpon>ExecuteCode.cs</DependentUpon>
     </Compile>
     <Compile Include="IElement.cs" />
+    <Compile Include="saved actions\ActionPropertyChange.cs" />
     <Compile Include="saved actions\ActionRotate.cs" />
     <Compile Include="saved actions\ActionMove.cs" />
     <Compile Include="saved actions\ActionCreate.cs" />
@@ -294,7 +295,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

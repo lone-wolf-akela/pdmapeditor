@@ -34,8 +34,7 @@ namespace PDMapEditor
         {
             if (destinationType == typeof(string))
             {
-                ShipType type = value as ShipType;
-                if (type != null)
+                if (value is ShipType type)
                     return type.Name;
             }
             return base.ConvertTo(context, culture, value, destinationType);

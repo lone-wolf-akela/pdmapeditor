@@ -10,7 +10,7 @@ namespace PDMapEditor
         static int frameCount = 0;
         static double accumulator = 0;
         static double fps = 0;
-        static double updateRate = 4.0;
+        static readonly double updateRate = 4.0;
 
 
         public static void Update()

@@ -34,8 +34,7 @@ namespace PDMapEditor
         {
             if (destinationType == typeof(string))
             {
-                AsteroidType type = value as AsteroidType;
-                if (type != null)
+                if (value is AsteroidType type)
                     return type.Name;
             }
             return base.ConvertTo(context, culture, value, destinationType);

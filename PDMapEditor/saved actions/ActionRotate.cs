@@ -5,7 +5,7 @@ namespace PDMapEditor
 {
     public class ActionRotate : SavedAction
     {
-        private IElement[] rotatedElements;
+        private readonly IElement[] rotatedElements;
         Vector3 diff;
 
         public ActionRotate(IElement[] rotatedElements, Vector3 diff) : base()

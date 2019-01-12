@@ -11,7 +11,7 @@ namespace PDMapEditor
     public static class HWData
     {
         public static List<string> DataPaths = new List<string>();
-        static CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
+        static readonly CultureInfo InvariantCulture = CultureInfo.InvariantCulture;
 
         static Lua lua;
         static LuaTable pebbleConfig;

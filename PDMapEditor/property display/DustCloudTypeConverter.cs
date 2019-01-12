@@ -34,8 +34,7 @@ namespace PDMapEditor
         {
             if (destinationType == typeof(string))
             {
-                DustCloudType type = value as DustCloudType;
-                if (type != null)
+                if (value is DustCloudType type)
                     return type.Name;
             }
             return base.ConvertTo(context, culture, value, destinationType);

@@ -33,8 +33,10 @@ namespace PDMapEditor
             else
                 Name = "sphere" + Spheres.Count;
 
-            Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One);
-            Mesh.Wireframe = true;
+            Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One)
+            {
+                Wireframe = true
+            };
             Mesh.Material.Translucent = true;
 
             Radius = lastRadius;
@@ -47,8 +49,10 @@ namespace PDMapEditor
         {
             Name = name;
 
-            Mesh = new MeshIcosphere(position, Vector3.One);
-            Mesh.Wireframe = true;
+            Mesh = new MeshIcosphere(position, Vector3.One)
+            {
+                Wireframe = true
+            };
             Mesh.Material.Translucent = true;
             Mesh.Scale = new Vector3(radius);
 

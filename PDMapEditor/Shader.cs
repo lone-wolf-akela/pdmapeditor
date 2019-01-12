@@ -19,10 +19,10 @@ namespace PDMapEditor
         public Dictionary<string, UniformInfo> Uniforms = new Dictionary<string, UniformInfo>();
         public Dictionary<string, uint> Buffers = new Dictionary<string, uint>();
 
-        private string pshader;
-        private string vshader;
-        private string fshader;
-        private bool fromFile = false;
+        private readonly string pshader;
+        private readonly string vshader;
+        private readonly string fshader;
+        private readonly bool fromFile = false;
         //private string programdir = "";
         //private string programpath = "";
 
