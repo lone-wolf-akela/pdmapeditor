@@ -274,6 +274,7 @@ namespace PDMapEditor
             Point.Points.Clear();
             DustCloud.DustClouds.Clear();
             Sphere.Spheres.Clear();
+            Squadron.Squadrons.Clear();
 
             Problem.Problems.Clear();
             SavedAction.ClearHistory();

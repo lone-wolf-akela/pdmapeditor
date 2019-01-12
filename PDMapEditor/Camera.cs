@@ -284,7 +284,7 @@ namespace PDMapEditor
 
         private void UpdatePosition()
         {
-            Position = LookAt + Vector3.Transform(new Vector3(0, 0, Zoom), Matrix4.CreateRotationX(Angles.X) * Matrix4.CreateRotationY(Angles.Y));
+            Position = LookAt + Vector3.Transform(new Vector3(0, 0, Zoom), Matrix3.CreateRotationX(Angles.X) * Matrix3.CreateRotationY(Angles.Y));
 
             //Limit camera orbit position to map dimensions
             LookAt.X = Math.Min(LookAt.X, Map.MapDimensions.X);

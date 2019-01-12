@@ -16,7 +16,7 @@ namespace PDMapEditor
             if (deletedElements.Length == 1)
                 elementWord = "element";
 
-            description = "Deleted " + deletedElements.Length + " " + elementWord + ".";
+            description = "Deleted " + deletedElements.Length + " " + elementWord;
 
             Do();
         }
@@ -39,7 +39,7 @@ namespace PDMapEditor
 
                 recreatedElements = new IElement[0];
 
-                Program.main.labelActionStatus.Text = "Redone \"" + description + "\".";
+                Program.main.labelActionStatus.Text = "Redone \"" + description + "\"";
             }
 
             Selection.ClearSelection();
@@ -53,7 +53,7 @@ namespace PDMapEditor
                 recreatedElements[i] = (IElement)deletedElements[i].Copy();
 
             Selection.SelectElements(recreatedElements);
-            Program.main.labelActionStatus.Text = "Undone \"" + description + "\".";
+            Program.main.labelActionStatus.Text = "Undone \"" + description + "\"";
         }
     }
 }

@@ -16,7 +16,7 @@ namespace PDMapEditor
             string elementWord = "elements";
             if (rotatedElements.Length == 1)
                 elementWord = "element";
-            description = "Rotated " + rotatedElements.Length + " " + elementWord + ".";
+            description = "Rotated " + rotatedElements.Length + " " + elementWord;
             Program.main.labelActionStatus.Text = description;
         }
 
@@ -28,7 +28,7 @@ namespace PDMapEditor
                     if(element != null)
                         element.Rotation += diff;
 
-                Program.main.labelActionStatus.Text = "Redone \"" + description + "\".";
+                Program.main.labelActionStatus.Text = "Redone \"" + description + "\"";
 
                 Selection.SelectElements(rotatedElements);
             }
@@ -41,7 +41,7 @@ namespace PDMapEditor
                     element.Rotation -= diff;
 
             Selection.SelectElements(rotatedElements);
-            Program.main.labelActionStatus.Text = "Undone \"" + description + "\".";
+            Program.main.labelActionStatus.Text = "Undone \"" + description + "\"";
         }
     }
 }

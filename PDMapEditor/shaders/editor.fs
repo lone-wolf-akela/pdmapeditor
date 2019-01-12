@@ -24,7 +24,7 @@ uniform float textureFactor;
 
 uniform struct FogParameters 
 { 
-	bool active;
+	bool enabled;
 	vec4 color; // Fog color
 	float start; // This is only for linear fog
 	float end; // This is only for linear fog
@@ -80,7 +80,7 @@ void main()
 	finalColor = vec4(pow(finalColor.xyz, gamma), finalColor.a);
 	
 	//Add fog
-	if(fogParams.active)
+	if(fogParams.enabled)
 	{
 		float fogCoord = abs(vEyeSpacePos.z / vEyeSpacePos.w); 
 		finalColor.xyz = mix(finalColor.xyz, fogParams.color.xyz, getFogFactor(fogParams.color, fogParams.start, fogParams.end, fogParams.density, fogParams.equation, fogCoord));

@@ -9,7 +9,7 @@ namespace PDMapEditor
         public ActionCreate(IElement createdElement) : base()
         {
             this.createdElement = createdElement;
-            this.description = "Created 1 " + createdElement.TypeName.ToLower() + " .";
+            this.description = "Created " + createdElement.TypeName.ToLower();
             Program.main.labelActionStatus.Text = description;
         }
 
@@ -19,7 +19,7 @@ namespace PDMapEditor
             {
                 createdElement = (IElement)createdElement.Copy();
 
-                Program.main.labelActionStatus.Text = "Redone \"" + description + "\".";
+                Program.main.labelActionStatus.Text = "Redone \"" + description + "\"";
             }
 
             Selection.ClearSelection();
@@ -30,7 +30,7 @@ namespace PDMapEditor
             if (createdElement != null)
                 createdElement.Destroy();
 
-            Program.main.labelActionStatus.Text = "Undone \"" + description + "\".";
+            Program.main.labelActionStatus.Text = "Undone \"" + description + "\"";
         }
     }
 }

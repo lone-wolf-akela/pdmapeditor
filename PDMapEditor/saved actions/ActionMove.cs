@@ -16,7 +16,7 @@ namespace PDMapEditor
             string elementWord = "elements";
             if (movedElements.Length == 1)
                 elementWord = "element";
-            description = "Moved " + movedElements.Length + " " + elementWord + ".";
+            description = "Moved " + movedElements.Length + " " + elementWord;
             Program.main.labelActionStatus.Text = description;
         }
 
@@ -28,7 +28,7 @@ namespace PDMapEditor
                     if(element != null)
                         element.Position += diff;
 
-                Program.main.labelActionStatus.Text = "Redone \"" + description + "\".";
+                Program.main.labelActionStatus.Text = "Redone \"" + description + "\"";
 
                 Selection.SelectElements(movedElements);
             }
@@ -41,7 +41,7 @@ namespace PDMapEditor
                     element.Position -= diff;
 
             Selection.SelectElements(movedElements);
-            Program.main.labelActionStatus.Text = "Undone \"" + description + "\".";
+            Program.main.labelActionStatus.Text = "Undone \"" + description + "\"";
         }
     }
 }

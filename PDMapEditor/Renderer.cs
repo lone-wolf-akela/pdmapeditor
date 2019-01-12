@@ -39,7 +39,7 @@ namespace PDMapEditor
             GL.Enable(EnableCap.DepthTest);
             GL.Enable(EnableCap.Blend);
             GL.Disable(EnableCap.AlphaTest);
-            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
             // Gen buffers
             GL.GenBuffers(1, out pos_buffer);
@@ -177,15 +177,15 @@ namespace PDMapEditor
 
             GL.UseProgram(shader.ProgramID);
             shader.LinkAttrib3(pos_buffer, "inPos", false);
-            shader.LinkAttrib3(col_buffer, "inColor", false);
-            shader.LinkAttrib2(uv0_buffer, "inUV0", false);
+            shader.LinkAttrib3(col_buffer, "inColor", true);
+            shader.LinkAttrib2(uv0_buffer, "inUV0", true);
 
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, ind_buffer);
 
             //Fog uniforms
             if (Map.FogActive && DisplayFog)
             {
-                GL.Uniform1(shader.GetUniform("fogParams.active"), 1);
+                GL.Uniform1(shader.GetUniform("fogParams.enabled"), 1);
                 GL.Uniform4(shader.GetUniform("fogParams.color"), Map.FogColor);
                 GL.Uniform1(shader.GetUniform("fogParams.start"), Map.FogStart);
                 GL.Uniform1(shader.GetUniform("fogParams.end"), Map.FogEnd);
@@ -206,7 +206,7 @@ namespace PDMapEditor
                 GL.Uniform1(shader.GetUniform("fogParams.equation"), equation);
             }
             else
-                GL.Uniform1(shader.GetUniform("fogParams.active"), 0);
+                GL.Uniform1(shader.GetUniform("fogParams.enabled"), 0);
 
             int indiceat = 0;
             //Draw in back

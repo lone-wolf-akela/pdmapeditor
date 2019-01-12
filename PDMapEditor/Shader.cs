@@ -101,8 +101,8 @@ namespace PDMapEditor
 
             if (shader_ok == 0)
             {
-                Console.WriteLine("Failed to compile shader:");
-                Console.WriteLine(GL.GetShaderInfoLog(shaderID));
+                Log.WriteLine("Failed to compile shader:");
+                Log.WriteLine(GL.GetShaderInfoLog(shaderID));
                 GL.DeleteShader(shaderID);
                 return 0;
             }
@@ -176,8 +176,8 @@ namespace PDMapEditor
             GL.GetProgram(programID,  GetProgramParameterName.LinkStatus, out program_ok);
             if (program_ok == 0)
             {
-                Console.WriteLine("Failed to link shader program:");
-                Console.WriteLine(GL.GetProgramInfoLog(programID));
+                Log.WriteLine("Failed to link shader program:");
+                Log.WriteLine(GL.GetProgramInfoLog(programID));
                 GL.DeleteProgram(programID);
                 return false;
             }
@@ -269,9 +269,9 @@ namespace PDMapEditor
                 AttributeInfo info = new AttributeInfo();
                 int length = 0;
 
-                StringBuilder name = new StringBuilder(32);
+                string name;
 
-                GL.GetActiveAttrib(ProgramID, i, 256, out length, out info.size, out info.type, name);
+                GL.GetActiveAttrib(ProgramID, i, 256, out length, out info.size, out info.type, out name);
 
                 info.name = name.ToString();
                 info.address = GL.GetAttribLocation(ProgramID, info.name);
@@ -283,9 +283,9 @@ namespace PDMapEditor
                 UniformInfo info = new UniformInfo();
                 int length = 0;
 
-                StringBuilder name = new StringBuilder(128);
+                string name;
 
-                GL.GetActiveUniform(ProgramID, i, 256, out length, out info.size, out info.type, name);
+                GL.GetActiveUniform(ProgramID, i, 256, out length, out info.size, out info.type, out name);
 
                 info.name = name.ToString();
                 info.address = GL.GetUniformLocation(ProgramID, info.name);
@@ -348,7 +348,7 @@ namespace PDMapEditor
         {
             ErrorCode code = GL.GetError();
             if (code != ErrorCode.NoError)
-                Console.WriteLine(type + ": " + code);
+                Log.WriteLine(type + ": " + code);
         }
     }
 
