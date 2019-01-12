@@ -75,10 +75,7 @@ namespace PDMapEditor
 
         public Nebula() : base(Vector3.Zero)
         {
-            if (lastName.Length > 0)
-                Name = lastName;
-            else
-                Name = "nebula" + Nebulas.Count;
+            Name = "nebula" + Nebulas.Count;
 
             Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One);
             Mesh.Material.Translucent = true;

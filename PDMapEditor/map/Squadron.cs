@@ -48,10 +48,7 @@ namespace PDMapEditor
 
         public Squadron() : base (Vector3.Zero, Vector3.Zero)
         {
-            if (lastName.Length > 0)
-                Name = lastName;
-            else
-                Name = "Squadron" + Squadrons.Count;
+            Name = "Squadron" + Squadrons.Count;
 
             if (lastType != null)
                 Type = lastType;

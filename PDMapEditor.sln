@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDMapEditor", "PDMapEditor\PDMapEditor.csproj", "{9312D8C4-FE64-475F-9F3F-8062DFE8D754}"
 EndProject
@@ -20,7 +20,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_UseGlobalSettings = True
+		BuildVersion_AssemblyInfoFilename = PDMapEditor\Properties\AssemblyInfo.cs
 		BuildVersion_StartDate = 2000/1/1
+		BuildVersion_UseGlobalSettings = True
+		SolutionGuid = {E0A5FA0E-0D8E-443E-8639-5BFB2C3D741C}
 	EndGlobalSection
 EndGlobal

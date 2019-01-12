@@ -166,7 +166,7 @@ namespace PDMapEditor
             System.Drawing.Point position = Cursor.Position;
             lastPos = position;
 
-            this.Orthographic = false;
+            this.Orthographic = false; 
 
             this.Zoom = CalculatedZoom;
             this.perspectiveZoom = this.Zoom;

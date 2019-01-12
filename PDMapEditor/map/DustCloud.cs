@@ -75,10 +75,7 @@ namespace PDMapEditor
 
         public DustCloud() : base (Vector3.Zero)
         {
-            if (lastName.Length > 0)
-                Name = lastName;
-            else
-                Name = "dustCloud" + DustClouds.Count;
+            Name = "dustCloud" + DustClouds.Count;
 
             Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One, true);
             Mesh.Material.Translucent = true;

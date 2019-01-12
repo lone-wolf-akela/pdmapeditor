@@ -22,10 +22,7 @@ namespace PDMapEditor
 
         public Point() : base (Vector3.Zero, Vector3.Zero)
         {
-            if (lastName.Length > 0)
-                Name = lastName;
-            else
-                Name = "Point" + Points.Count;
+            Name = "Point" + Points.Count;
 
             Mesh = new Mesh(Vector3.Zero, Vector3.Zero, Mesh.Point);
             Mesh.Material.DiffuseColor = new Vector3(1, 0, 0);

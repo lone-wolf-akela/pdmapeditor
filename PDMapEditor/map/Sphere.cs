@@ -28,10 +28,7 @@ namespace PDMapEditor
 
         public Sphere() : base (Vector3.Zero)
         {
-            if (lastName.Length > 0)
-                Name = lastName;
-            else
-                Name = "sphere" + Spheres.Count;
+            Name = "sphere" + Spheres.Count;
 
             Mesh = new MeshIcosphere(Vector3.Zero, Vector3.One)
             {
