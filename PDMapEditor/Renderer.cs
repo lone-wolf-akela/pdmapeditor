@@ -77,6 +77,8 @@ namespace PDMapEditor
 
             BackgroundColor = new Vector3(0.05f, 0.05f, 0.05f);
 
+            EnableVSync = EnableVSync; // Just update after OpenGL init
+
             Log.WriteLine("Renderer initialized.");
             Initialized = true;
         }

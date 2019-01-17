@@ -40,6 +40,7 @@
             this.buttonExecuteCode = new System.Windows.Forms.ToolStripButton();
             this.buttonSettings = new System.Windows.Forms.ToolStripButton();
             this.buttonHotkeys = new System.Windows.Forms.ToolStripButton();
+            this.buttonCheckForUpdates = new System.Windows.Forms.ToolStripButton();
             this.buttonAbout = new System.Windows.Forms.ToolStripButton();
             this.openMapDialog = new System.Windows.Forms.OpenFileDialog();
             this.splitPropertiesAndViewportProblems = new System.Windows.Forms.SplitContainer();
@@ -110,7 +111,6 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.labelSelectedStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelActionStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.buttonCheckForUpdates = new System.Windows.Forms.ToolStripButton();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -214,6 +214,15 @@
             this.buttonHotkeys.Size = new System.Drawing.Size(70, 22);
             this.buttonHotkeys.Text = "Hotkeys";
             this.buttonHotkeys.Click += new System.EventHandler(this.buttonHotkeys_Click);
+            // 
+            // buttonCheckForUpdates
+            // 
+            this.buttonCheckForUpdates.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckForUpdates.Image")));
+            this.buttonCheckForUpdates.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonCheckForUpdates.Name = "buttonCheckForUpdates";
+            this.buttonCheckForUpdates.Size = new System.Drawing.Size(123, 22);
+            this.buttonCheckForUpdates.Text = "Check for updates";
+            this.buttonCheckForUpdates.Click += new System.EventHandler(this.buttonCheckForUpdates_Click);
             // 
             // buttonAbout
             // 
@@ -1187,11 +1196,11 @@
             // 
             // comboGizmoMode
             // 
-            this.comboGizmoMode.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.comboGizmoMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboGizmoMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboGizmoMode.FormattingEnabled = true;
             this.comboGizmoMode.ItemHeight = 13;
-            this.comboGizmoMode.Location = new System.Drawing.Point(580, 2);
+            this.comboGizmoMode.Location = new System.Drawing.Point(755, 3);
             this.comboGizmoMode.MaxDropDownItems = 1;
             this.comboGizmoMode.Name = "comboGizmoMode";
             this.comboGizmoMode.Size = new System.Drawing.Size(105, 21);
@@ -1222,15 +1231,6 @@
             this.labelActionStatus.Name = "labelActionStatus";
             this.labelActionStatus.Size = new System.Drawing.Size(87, 19);
             this.labelActionStatus.Text = "No last action.";
-            // 
-            // buttonCheckForUpdates
-            // 
-            this.buttonCheckForUpdates.Image = ((System.Drawing.Image)(resources.GetObject("buttonCheckForUpdates.Image")));
-            this.buttonCheckForUpdates.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonCheckForUpdates.Name = "buttonCheckForUpdates";
-            this.buttonCheckForUpdates.Size = new System.Drawing.Size(123, 22);
-            this.buttonCheckForUpdates.Text = "Check for updates";
-            this.buttonCheckForUpdates.Click += new System.EventHandler(this.buttonCheckForUpdates_Click);
             // 
             // Main
             // 
