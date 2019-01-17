@@ -21,6 +21,8 @@ namespace PDMapEditor
         public static double ElapsedSeconds;
         public static double ElapsedMilliseconds;
 
+        public static int FSAASamples = 4;
+
         public static string EXECUTABLE_PATH = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
         public static int BUILD = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
 
@@ -30,11 +32,12 @@ namespace PDMapEditor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            Log.Init();
+
             SetupTypeConverters();
 
             main = new Main();
-
-            Log.Init();
+            Settings.LoadSettings();
             ActionKey.Init();
 
             Hotkeys.LoadHotkeys();
@@ -46,7 +49,7 @@ namespace PDMapEditor
 
         public static void CreateGLControl()
         {
-            GLControl = new CustomGLControl(4)
+            GLControl = new CustomGLControl(FSAASamples)
             {
                 BackColor = System.Drawing.Color.Black,
                 Dock = System.Windows.Forms.DockStyle.Fill,
@@ -56,6 +59,7 @@ namespace PDMapEditor
                 TabIndex = 0,
                 VSync = true
             };
+
             GLControl.Load += new System.EventHandler(main.glControl_Load);
             GLControl.Paint += new System.Windows.Forms.PaintEventHandler(main.glControl_Render);
             GLControl.MouseEnter += new System.EventHandler(main.glControl_MouseEnter);

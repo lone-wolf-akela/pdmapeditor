@@ -2,12 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
 namespace PDMapEditor
 {
     static class Renderer
     {
+        private static bool enableVSync = true;
+        public static bool EnableVSync
+        {
+            get
+            {
+                return enableVSync;
+            }
+            set
+            {
+                enableVSync = value;
+                if (GraphicsContext.CurrentContext != null)
+                {
+                    if (value)
+                        GraphicsContext.CurrentContext.SwapInterval = 1;
+                    else
+                        GraphicsContext.CurrentContext.SwapInterval = 0;
+                }
+            }
+        }
+
         public static bool Initialized = false;
         public static bool ViewInvalid = false;
         public static bool MeshDataInvalid = false;
@@ -382,7 +403,8 @@ namespace PDMapEditor
 
         public static void Invalidate()
         {
-            Program.GLControl.Invalidate();
+            if (Program.GLControl != null)
+                Program.GLControl.Invalidate();
         }
         public static void InvalidateView()
         {
@@ -394,7 +416,8 @@ namespace PDMapEditor
         }
         public static void InvalidateAll()
         {
-            Program.GLControl.Invalidate();
+            if(Program.GLControl != null)
+                Program.GLControl.Invalidate();
             ViewInvalid = true;
             MeshDataInvalid = true;
         }

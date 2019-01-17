@@ -345,7 +345,7 @@ end");
             output.Clear();
 
             try { lua.DoString(code); }
-            catch (NLua.Exceptions.LuaScriptException e) { output.Add(e.Message); }
+            catch (NLua.Exceptions.LuaScriptException e) { output.Add(e.Source + ": " + e.Message); }
             return output.ToArray();
         }
 

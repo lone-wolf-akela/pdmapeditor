@@ -73,7 +73,8 @@
             // 
             // boxCode
             // 
-            this.boxCode.CaretLineBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.boxCode.AdditionalCaretForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.boxCode.CaretLineBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.boxCode.CaretLineVisible = true;
             this.boxCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.boxCode.EdgeMode = ScintillaNET.EdgeMode.Line;

@@ -5,11 +5,14 @@ using OpenTK;
 using OpenTK.Graphics;
 using System.Media;
 using System.IO;
+using System.Diagnostics;
 
 namespace PDMapEditor
 {
     public partial class Main : Form
     {
+        public int BUILD = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+
         public bool Loaded = false;
         public bool FormActive = false;
 
@@ -24,6 +27,9 @@ namespace PDMapEditor
 
         SoundPlayer player = new SoundPlayer();
 
+        public string LastOpenLocation;
+        public string LastSaveLocation;
+
         public Main()
         {
             InitializeComponent();
@@ -37,7 +43,6 @@ namespace PDMapEditor
             Importer.Init();
             Renderer.Init();
 
-            Settings.LoadSettings();
             HWData.ParseDataPaths();
 
             Background.LoadBackgroundFades();
@@ -56,8 +61,15 @@ namespace PDMapEditor
             gridProblems.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             gridProblems.Columns[0].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
+            this.WindowState = Settings.LastWindowState;
+            this.Location = Settings.LastWindowLocation;
+            this.Size = Settings.LastWindowSize;
+
             Map.Clear();
             Program.Camera.ResetCamera();
+
+            if (Updater.CheckForUpdatesOnStart)
+                Updater.CheckForUpdates();
 
             Program.main.UpdateProblems();
             Renderer.InvalidateMeshData();
@@ -201,9 +213,14 @@ namespace PDMapEditor
         }
         private void buttonOpenMap_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(LastOpenLocation))
+                openMapDialog.InitialDirectory = LastOpenLocation;
+
             DialogResult result = openMapDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
+                LastOpenLocation = Path.GetDirectoryName(openMapDialog.FileName);
+
                 Map.Clear();
                 gridProblems.Rows.Clear();
                 Problem.Problems.Clear();
@@ -221,9 +238,14 @@ namespace PDMapEditor
 
         private void buttonSaveMap_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(LastSaveLocation))
+                saveMapDialog.InitialDirectory = LastSaveLocation;
+
             DialogResult result = saveMapDialog.ShowDialog();
             if (result == DialogResult.OK)
             {
+                LastSaveLocation = Path.GetDirectoryName(saveMapDialog.FileName);
+
                 LuaMap.SaveMap(saveMapDialog.FileName);
                 Map.Path = saveMapDialog.FileName;
             }
@@ -625,5 +647,12 @@ namespace PDMapEditor
             FormActive = false;
         }
         #endregion
+
+
+        //-------------------- UPDATER -----------------------//
+        private void buttonCheckForUpdates_Click(object sender, EventArgs e)
+        {
+            Updater.CheckForUpdatesManually();
+        }
     }
 }
