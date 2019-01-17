@@ -17,6 +17,7 @@ namespace PDMapEditor
         static LuaTable pebbleConfig;
         static LuaTable asteroidConfig;
         static LuaTable dustCloudConfig;
+        static LuaTable salvageConfig;
         static LuaTable shipConfig;
 
         public static void ParseDataPaths()
@@ -105,6 +106,19 @@ namespace PDMapEditor
                     }
                 }
 
+                //Parse salvage types
+                string salvageTypesPath = Path.Combine(dataPath, "resource/salvage");
+
+                //Check if salvage types folder exists
+                if (Directory.Exists(salvageTypesPath))
+                {
+                    string[] files = Directory.GetFiles(salvageTypesPath, "*.resource", SearchOption.AllDirectories);
+                    foreach (string file in files)
+                    {
+                        ParseSalvageType(file);
+                    }
+                }
+
                 //Parse backgrounds
                 string backgroundsPath = Path.Combine(dataPath, "background");
 
@@ -150,6 +164,9 @@ namespace PDMapEditor
 
             if (NebulaType.NebulaTypes.Count <= 0)
                 new NebulaType("null");
+
+            if (SalvageType.SalvageTypes.Count <= 0)
+                new SalvageType("null", 2, 0, Vector4.One);
 
             if (ShipType.ShipTypes.Count <= 0)
                 new ShipType("null");
@@ -323,6 +340,60 @@ namespace PDMapEditor
             }
         }
 
+        private static void ParseSalvageType(string path)
+        {
+            lua = new Lua();
+            lua.RegisterFunction("StartSalvageConfig", null, typeof(HWData).GetMethod("StartSalvageConfig"));
+            lua.DoFile(path);
+
+            string name = Path.GetFileNameWithoutExtension(path).ToLower();
+
+            float pixelSize = 1;
+            float resourceValue = 0;
+            Vector4 pixelColor = Vector4.Zero;
+            foreach (KeyValuePair<object, object> de in salvageConfig)
+            {
+                switch (de.Key.ToString())
+                {
+                    case "pixelSize":
+                        string text = de.Value.ToString();
+                        text = text.Replace(",", ".");
+                        pixelSize = float.Parse(text, InvariantCulture);
+                        break;
+                    case "resourceValue":
+                        text = de.Value.ToString();
+                        text = text.Replace(",", ".");
+                        resourceValue = float.Parse(text, InvariantCulture);
+                        break;
+                    case "pixelColour":
+                        pixelColor = LuaMap.LuaTableToVector4((LuaTable)de.Value);
+                        break;
+                }
+            }
+
+            SalvageType existingType = null;
+            foreach (SalvageType type in SalvageType.SalvageTypes)
+            {
+                if (type.Name == name)
+                {
+                    existingType = type;
+                    break;
+                }
+            }
+
+            //Check if a type with that name already exists (because of multiple data paths)
+            if (existingType == null)
+                new SalvageType(name, pixelSize, resourceValue, pixelColor);
+            else
+            {
+                //Overwrite existing style
+                existingType.Name = name;
+                existingType.PixelSize = pixelSize;
+                existingType.ResourceValue = resourceValue;
+                existingType.PixelColor = pixelColor;
+            }
+        }
+
         private static void ParseShipType(string path)
         {
             string name = Path.GetFileNameWithoutExtension(path).ToLower();
@@ -483,6 +554,11 @@ namespace PDMapEditor
         {
             dustCloudConfig = (LuaTable)lua.DoString("return {}")[0];
             return dustCloudConfig;
+        }
+        public static LuaTable StartSalvageConfig()
+        {
+            salvageConfig = (LuaTable)lua.DoString("return {}")[0];
+            return salvageConfig;
         }
 
         public static LuaTable StartShipConfig()

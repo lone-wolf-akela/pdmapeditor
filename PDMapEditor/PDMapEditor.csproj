@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data\SalvageType.cs" />
     <Compile Include="ExecuteCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +84,8 @@
       <DependentUpon>ExecuteCode.cs</DependentUpon>
     </Compile>
     <Compile Include="IElement.cs" />
+    <Compile Include="map\Salvage.cs" />
+    <Compile Include="property display\SalvageTypeConverter.cs" />
     <Compile Include="saved actions\ActionPropertyChange.cs" />
     <Compile Include="saved actions\ActionRotate.cs" />
     <Compile Include="saved actions\ActionMove.cs" />

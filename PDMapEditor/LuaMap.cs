@@ -257,6 +257,16 @@ end");
                 sb.AppendLine("");
             }
 
+            if (Salvage.Salvages.Count > 0)
+            {
+                sb.AppendLine("\t-- Salvages");
+                foreach (Salvage salvage in Salvage.Salvages)
+                {
+                    sb.AppendLine("\taddSalvage(\"" + salvage.Type.Name + "\", "  + WriteFloatLuaTable(salvage.Position.X, salvage.Position.Y, salvage.Position.Z) + ", " + salvage.Multiplier.ToString(InvariantCulture) + ", " + salvage.Rotation.X.ToString(InvariantCulture) + ", " + salvage.Rotation.Y.ToString(InvariantCulture) + ", " + salvage.Rotation.Z.ToString(InvariantCulture) + ", 0" + ")");
+                }
+                sb.AppendLine("");
+            }
+
             if (Sphere.Spheres.Count > 0)
             {
                 sb.AppendLine("\t-- Spheres");
@@ -631,7 +641,22 @@ end");
 
         public static void AddSalvage(string type, LuaTable position, float resources, float rotX, float rotY, float rotZ, float unknown)
         {
-            //STUB
+            Vector3 pos = LuaTableToVector3(position);
+            Vector3 rot = Vector3.Zero;
+            rot.X = rotX;
+            rot.Y = rotY;
+            rot.Z = rotZ;
+
+            string newType = type.ToLower();
+            SalvageType salvageType = SalvageType.GetTypeFromName(newType);
+
+            if (salvageType == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Salvage type \"" + newType + "\" not found. Skipping salvage.");
+                return;
+            }
+
+            new Salvage(salvageType, pos, rot, resources);
         }
 
         public static void CreateSOBGroup(string name)

@@ -12,12 +12,15 @@ namespace PDMapEditor
         public override int VertexCount { get { return AssMesh.VertexCount; } }
         public override int IndiceCount { get { return Indices.Length; } }
 
-        public MeshIcosphere(Vector3 position, Vector3 color) : base(position, Vector3.Zero, Mesh.Icosphere)
+        public MeshIcosphere(Vector3 position, Vector3 color) : this(position, color, false)
         {
-            this.Color = color;
         }
 
-        public MeshIcosphere(Vector3 position, Vector3 color, bool detailed) : base(position, Vector3.Zero, Mesh.IcosphereHigh)
+        public MeshIcosphere(Vector3 position, Vector3 color, bool detailed) : this(position, Vector3.Zero, color, detailed)
+        {
+        }
+
+        public MeshIcosphere(Vector3 position, Vector3 rotation, Vector3 color, bool detailed) : base(position, Vector3.Zero, Mesh.IcosphereHigh)
         {
             this.Color = color;
         }
