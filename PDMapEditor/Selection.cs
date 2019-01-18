@@ -922,7 +922,7 @@ namespace PDMapEditor
 
         private static void DrawDrawable(Drawable drawable, int index, int id)
         {
-            // Convert "i", the integer mesh ID, into an RGB color
+            // Convert "id", the integer mesh ID, into an RGB color
             int r = (id & 0x000000FF) >> 0;
             int g = (id & 0x0000FF00) >> 8;
             int b = (id & 0x00FF0000) >> 16;

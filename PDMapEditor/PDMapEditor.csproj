@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="IElement.cs" />
     <Compile Include="map\Cloud.cs" />
+    <Compile Include="map\Camera.cs" />
     <Compile Include="map\Salvage.cs" />
     <Compile Include="property display\DustCloudTypeConverter - Kopieren.cs" />
     <Compile Include="property display\SalvageTypeConverter.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="saved actions\ActionDelete.cs" />
     <Compile Include="saved actions\SavedAction.cs" />
     <Compile Include="ActionKey.cs" />
-    <Compile Include="Camera.cs" />
+    <Compile Include="EditorCamera.cs" />
     <Compile Include="Creation.cs" />
     <Compile Include="property display\NebulaTypeConverter.cs" />
     <Compile Include="property display\ShipTypeConverter.cs" />
@@ -222,6 +223,9 @@
     <None Include="resources\asteroid.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="resources\camera.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="resources\cube.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -310,7 +314,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

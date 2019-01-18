@@ -277,6 +277,7 @@ namespace PDMapEditor
             Sphere.Spheres.Clear();
             Squadron.Squadrons.Clear();
             Salvage.Salvages.Clear();
+            Camera.Cameras.Clear();
 
             Problem.Problems.Clear();
             Program.main.UpdateProblems();

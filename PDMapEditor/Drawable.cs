@@ -10,7 +10,7 @@ namespace PDMapEditor
 
         private Vector3 position;
         [Browsable(false)]
-        public override Vector3 Position { get { return position; } set { position = value; if(Mesh != null) Mesh.Position = value; Selection.InvalidateAveragePosition(); Renderer.Invalidate(); Renderer.InvalidateView(); } }
+        public override Vector3 Position { get { return position; } set { position = value; if(Mesh != null) Mesh.Position = value; Target = Target; Selection.InvalidateAveragePosition(); Renderer.Invalidate(); Renderer.InvalidateView(); } }
 
         [DisplayName("X")]
         [Description("The X-coordinate of the position.")]
@@ -81,16 +81,33 @@ namespace PDMapEditor
 
         private Vector3 rotation;
         [Browsable(false)]
-        public override Vector3 Rotation { get { return rotation; } set { rotation = value; if (Mesh != null) Mesh.Rotation = value; Renderer.Invalidate(); Renderer.InvalidateView(); } }
+        public override Vector3 Rotation { get { return rotation; } set { rotation = value; if (Mesh != null) { Mesh.Rotation = value; } Renderer.Invalidate(); Renderer.InvalidateView(); } }
+
+        private bool rotationSetByTarget = false;
+        [Browsable(false)]
+        public bool RotationSetByTarget
+        {
+            get { return rotationSetByTarget; }
+            set { rotationSetByTarget = value; if (Mesh != null) { Mesh.RotationSetByTarget = value; } }
+        }
+
+        private Vector3 target;
+        [Browsable(false)]
+        public virtual Vector3 Target
+        {
+            set { target = value; if (Mesh != null) { Mesh.Target = value; } Renderer.Invalidate(); Renderer.InvalidateView(); }
+            get { return target; }
+        }
 
         public Vector3 lastPosition;
         public Vector3 lastRotation;
+        public Vector3 lastTarget;
 
         public Mesh Mesh;
 
         private bool visible = true;
         [Browsable(false)]
-        public bool Visible { get { return visible; } set { visible = value;  Renderer.Invalidate(); Renderer.InvalidateView(); } }
+        public virtual bool Visible { get { return visible; } set { visible = value;  Renderer.Invalidate(); Renderer.InvalidateView(); } }
 
         public Drawable(Vector3 position) : base(position)
         {

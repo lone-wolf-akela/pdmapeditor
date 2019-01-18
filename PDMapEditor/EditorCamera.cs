@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace PDMapEditor
 {
-    public class Camera
+    public class EditorCamera
     {
         public Vector3 Position = new Vector3(0, 0, 15);
         public Vector3 Orientation = new Vector3((float)Math.PI, 0f, 0f);

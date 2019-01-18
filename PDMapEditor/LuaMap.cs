@@ -287,6 +287,16 @@ end");
                 sb.AppendLine("");
             }
 
+            if (Camera.Cameras.Count > 0)
+            {
+                sb.AppendLine("\t-- Cameras");
+                foreach (Camera camera in Camera.Cameras)
+                {
+                    sb.AppendLine("\taddCamera(\"" + camera.Name + "\", " + WriteFloatLuaTable(camera.Position.X, camera.Position.Y, camera.Position.Z) + ", " + WriteFloatLuaTable(camera.Target.X, camera.Target.Y, camera.Target.Z) + ")");
+                }
+                sb.AppendLine("");
+            }
+
             sb.AppendLine("\t-- Settings");
             sb.AppendLine("\tsetWorldBoundsInner(" + WriteFloatLuaTable(0, 0, 0) + ", " + WriteFloatLuaTable(Map.MapDimensions.X, Map.MapDimensions.Y, Map.MapDimensions.Z) + ")");
             sb.AppendLine("end");
@@ -656,9 +666,12 @@ end");
             new Sphere(name, pos, radius);
         }
 
-        public static void AddCamera(string name, LuaTable target, LuaTable position)
+        public static void AddCamera(string name, LuaTable position, LuaTable target)
         {
-            //STUB
+            Vector3 pos = LuaTableToVector3(position);
+            Vector3 targetPos = LuaTableToVector3(target);
+
+            new Camera(name, pos, targetPos);
         }
 
         public static void AddSalvage(string type, LuaTable position, float resources, float rotX, float rotY, float rotZ, float unknown)

@@ -5,8 +5,11 @@ namespace PDMapEditor
 {
     public class MeshLine : Mesh
     {
-        public Vector3 Start;
-        public Vector3 End;
+        private Vector3 start;
+        public Vector3 Start { get { return start; } set { start = value; Renderer.InvalidateMeshData(); Renderer.Invalidate(); } }
+
+        private Vector3 end;
+        public Vector3 End { get { return end; } set { end = value; Renderer.InvalidateMeshData(); Renderer.Invalidate(); } }
 
         private Vector3 color;
         public Vector3 Color { get { return color; } set { color = value; Colors = GetColorData(); } }

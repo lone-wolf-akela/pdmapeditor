@@ -15,6 +15,7 @@ namespace PDMapEditor
         public static Assimp.Mesh Asteroid;
         public static Assimp.Mesh Point;
         public static Assimp.Mesh Cube;
+        public static Assimp.Mesh Camera;
 
         public static Assimp.Mesh SkyboxFront;
         public static Assimp.Mesh SkyboxBack;
@@ -42,6 +43,9 @@ namespace PDMapEditor
 
         public Vector3 Position = Vector3.Zero;
         public Vector3 Rotation = Vector3.Zero;
+        public Vector3 Target = Vector3.Zero;
+
+        public bool RotationSetByTarget = false;
 
         private Vector3 scale = Vector3.One;
         public Vector3 Scale { get { return scale; } set { scale = value; Renderer.Invalidate(); Renderer.InvalidateView(); } }
@@ -188,7 +192,19 @@ namespace PDMapEditor
         /// </summary>
         public virtual void CalculateModelMatrix()
         {
-            ModelMatrix = Matrix4.CreateScale(Scale) * Matrix4.CreateRotationX(MathHelper.DegreesToRadians(Rotation.X)) * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(Rotation.Y)) * Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(Rotation.Z)) * Matrix4.CreateTranslation(Position);
+            Matrix4 RotationMatrix = Matrix4.Identity;
+
+            if (!RotationSetByTarget)
+                RotationMatrix = Matrix4.CreateRotationX(MathHelper.DegreesToRadians(Rotation.X)) * Matrix4.CreateRotationY(MathHelper.DegreesToRadians(Rotation.Y)) * Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(Rotation.Z));
+            else
+            {
+                if (!Position.Equals(Target))
+                    RotationMatrix = Matrix4.LookAt(Position, Target, Vector3.UnitY).ClearTranslation().ClearScale().Inverted();
+                else
+                    RotationMatrix = Matrix4.Identity;
+            }
+
+            ModelMatrix = Matrix4.CreateScale(Scale) * RotationMatrix * Matrix4.CreateTranslation(Position);
         }
     }
 }

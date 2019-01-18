@@ -24,6 +24,7 @@ namespace PDMapEditor
             objectTypes.Add(typeof(Squadron));
             objectTypes.Add(typeof(Nebula));
             objectTypes.Add(typeof(Sphere));
+            objectTypes.Add(typeof(Camera));
 
             //Add possible object types to creation type combo
             foreach (Type type in objectTypes)

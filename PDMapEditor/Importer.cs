@@ -33,6 +33,9 @@ namespace PDMapEditor
             scene = importer.ImportFile(@"resources/cube.obj", PostProcessPreset.TargetRealTimeQuality);
             Mesh.Cube = scene.Meshes[0];
 
+            scene = importer.ImportFile(@"resources/camera.obj", PostProcessPreset.TargetRealTimeQuality);
+            Mesh.Camera = scene.Meshes[0];
+
             scene = importer.ImportFile(@"resources/skybox.obj", PostProcessPreset.TargetRealTimeQuality);
             Mesh.SkyboxFront = scene.Meshes[0];
             Mesh.SkyboxBack = scene.Meshes[1];

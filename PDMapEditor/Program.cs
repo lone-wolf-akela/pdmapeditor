@@ -12,7 +12,7 @@ namespace PDMapEditor
         public static Hotkeys hotkeys;
 
         public static GLControl GLControl;
-        public static Camera Camera = new Camera();
+        public static EditorCamera Camera = new EditorCamera();
         public static Settings Settings;
         public static ExecuteCode ExecuteCode;
 
