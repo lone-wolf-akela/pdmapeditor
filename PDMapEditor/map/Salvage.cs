@@ -36,6 +36,8 @@ namespace PDMapEditor
             else
                 Type = SalvageType.SalvageTypes[0];
 
+            Multiplier = lastMultiplier;
+
             CreateMesh();
 
             Salvages.Add(this);
@@ -56,7 +58,7 @@ namespace PDMapEditor
         private void CreateMesh()
         {
             Mesh = new MeshIcosphere(Position, Rotation, new Vector3(0, 0, 1), false);
-            Mesh.Scale = new Vector3(type.PixelSize * 11);
+            Mesh.Scale = new Vector3(type.PixelSize * 13);
         }
 
         public override void Destroy()

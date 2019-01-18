@@ -237,6 +237,16 @@ end");
                 sb.AppendLine("");
             }
 
+            if (Cloud.Clouds.Count > 0)
+            {
+                sb.AppendLine("\t-- Clouds");
+                foreach (Cloud cloud in Cloud.Clouds)
+                {
+                    sb.AppendLine("\taddCloud(\"" + cloud.Name + "\", \"" + cloud.Type.Name + "\", " + WriteFloatLuaTable(cloud.Position.X, cloud.Position.Y, cloud.Position.Z) + ", " + WriteFloatLuaTable(cloud.Color.X, cloud.Color.Y, cloud.Color.Z, cloud.Color.W) + ", " + cloud.Spin.ToString(InvariantCulture) + ", " + cloud.Radius.ToString(InvariantCulture) + ")");
+                }
+                sb.AppendLine("");
+            }
+
             if (Nebula.Nebulas.Count > 0)
             {
                 sb.AppendLine("\t-- Nebulas");
@@ -580,9 +590,21 @@ end");
             new Squadron(name, pos, rot, shipType, player, shipCount, inHS);
         }
 
-        public static void AddCloud(string name, string type, LuaTable position, LuaTable color, float unknown, float size)
+        public static void AddCloud(string name, string type, LuaTable position, LuaTable color, float spin, float radius)
         {
-            //STUB
+            Vector3 pos = LuaTableToVector3(position);
+            Vector4 col = LuaTableToVector4(color);
+
+            string newType = type.ToLower();
+            CloudType cloudType = CloudType.GetTypeFromName(newType);
+
+            if (cloudType == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Cloud type \"" + newType + "\" not found. Skipping cloud \"" + name + "\".");
+                return;
+            }
+
+            new Cloud(name, cloudType, pos, col, spin, radius);
         }
 
         public static void AddNebula(string name, string type, LuaTable position, LuaTable color, float spin, float radius)

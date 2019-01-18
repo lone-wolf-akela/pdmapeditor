@@ -273,6 +273,7 @@ namespace PDMapEditor
             Pebble.Pebbles.Clear();
             Point.Points.Clear();
             DustCloud.DustClouds.Clear();
+            Cloud.Clouds.Clear();
             Sphere.Spheres.Clear();
             Squadron.Squadrons.Clear();
             Salvage.Salvages.Clear();

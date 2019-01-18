@@ -19,6 +19,8 @@ namespace PDMapEditor
             objectTypes.Add(typeof(Pebble));
             objectTypes.Add(typeof(Point));
             objectTypes.Add(typeof(DustCloud));
+            objectTypes.Add(typeof(Cloud));
+            objectTypes.Add(typeof(Salvage));
             objectTypes.Add(typeof(Squadron));
             objectTypes.Add(typeof(Nebula));
             objectTypes.Add(typeof(Sphere));

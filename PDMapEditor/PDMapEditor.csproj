@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data\CloudType.cs" />
     <Compile Include="data\SalvageType.cs" />
     <Compile Include="ExecuteCode.cs">
       <SubType>Form</SubType>
@@ -84,7 +85,9 @@
       <DependentUpon>ExecuteCode.cs</DependentUpon>
     </Compile>
     <Compile Include="IElement.cs" />
+    <Compile Include="map\Cloud.cs" />
     <Compile Include="map\Salvage.cs" />
+    <Compile Include="property display\DustCloudTypeConverter - Kopieren.cs" />
     <Compile Include="property display\SalvageTypeConverter.cs" />
     <Compile Include="saved actions\ActionPropertyChange.cs" />
     <Compile Include="saved actions\ActionRotate.cs" />
@@ -98,7 +101,7 @@
     <Compile Include="property display\NebulaTypeConverter.cs" />
     <Compile Include="property display\ShipTypeConverter.cs" />
     <Compile Include="property display\PebbleTypeConverter.cs" />
-    <Compile Include="property display\DustCloudTypeConverter.cs" />
+    <Compile Include="property display\CloudTypeConverter.cs" />
     <Compile Include="property display\DegreesConverter.cs" />
     <Compile Include="property display\ResourcesConverter.cs" />
     <Compile Include="property display\PercentConverter.cs" />
@@ -307,7 +310,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
+      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

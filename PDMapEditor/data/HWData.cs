@@ -17,6 +17,7 @@ namespace PDMapEditor
         static LuaTable pebbleConfig;
         static LuaTable asteroidConfig;
         static LuaTable dustCloudConfig;
+        static LuaTable cloudConfig;
         static LuaTable salvageConfig;
         static LuaTable shipConfig;
 
@@ -90,6 +91,19 @@ namespace PDMapEditor
                     foreach (string file in files)
                     {
                         ParseDustCloudType(file);
+                    }
+                }
+
+                //Parse cloud types
+                string cloudTypesPath = Path.Combine(dataPath, "cloud/");
+
+                //Check if types folder exists
+                if (Directory.Exists(cloudTypesPath))
+                {
+                    string[] files = Directory.GetFiles(cloudTypesPath, "*.cloud", SearchOption.AllDirectories);
+                    foreach (string file in files)
+                    {
+                        ParseCloudType(file);
                     }
                 }
 
@@ -308,6 +322,50 @@ namespace PDMapEditor
             //Check if a type with that name already exists (because of multiple data paths)
             if (existingType == null)
                 new DustCloudType(name, pixelColor);
+            else
+            {
+                //Overwrite existing style
+                existingType.Name = name;
+                existingType.PixelColor = pixelColor;
+            }
+        }
+
+        private static void ParseCloudType(string path)
+        {
+            lua = new Lua();
+            lua.RegisterFunction("StartCloudConfig", null, typeof(HWData).GetMethod("StartCloudConfig"));
+            /*lua.RegisterFunction("setCollisionDamageToModifier", this, GetType().GetMethod("SetCollisionDamageToModifier"));
+            lua.RegisterFunction("setCollisionDamageFromModifier", this, GetType().GetMethod("SetCollisionDamageFromModifier"));
+            lua.RegisterFunction("SpawnAsteroidOnDeath", this, GetType().GetMethod("SpawnAsteroidOnDeath"));
+            lua.RegisterFunction("resourceAttackMode", this, GetType().GetMethod("ResourceAttackMode"));*/
+            lua.DoFile(path);
+
+            string name = Path.GetFileNameWithoutExtension(path).ToLower();
+
+            Vector4 pixelColor = Vector4.Zero;
+            foreach (KeyValuePair<object, object> de in cloudConfig)
+            {
+                switch (de.Key.ToString())
+                {
+                    case "pixelColour":
+                        pixelColor = LuaMap.LuaTableToVector4((LuaTable)de.Value);
+                        break;
+                }
+            }
+
+            CloudType existingType = null;
+            foreach (CloudType type in CloudType.CloudTypes)
+            {
+                if (type.Name == name)
+                {
+                    existingType = type;
+                    break;
+                }
+            }
+
+            //Check if a type with that name already exists (because of multiple data paths)
+            if (existingType == null)
+                new CloudType(name, pixelColor);
             else
             {
                 //Overwrite existing style
@@ -554,6 +612,11 @@ namespace PDMapEditor
         {
             dustCloudConfig = (LuaTable)lua.DoString("return {}")[0];
             return dustCloudConfig;
+        }
+        public static LuaTable StartCloudConfig()
+        {
+            cloudConfig = (LuaTable)lua.DoString("return {}")[0];
+            return cloudConfig;
         }
         public static LuaTable StartSalvageConfig()
         {
