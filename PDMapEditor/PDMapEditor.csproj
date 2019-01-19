@@ -88,6 +88,7 @@
     <Compile Include="map\Cloud.cs" />
     <Compile Include="map\Camera.cs" />
     <Compile Include="map\Salvage.cs" />
+    <Compile Include="property display\SOBGroupConverter.cs" />
     <Compile Include="property display\DustCloudTypeConverter - Kopieren.cs" />
     <Compile Include="property display\SalvageTypeConverter.cs" />
     <Compile Include="saved actions\ActionPropertyChange.cs" />
@@ -174,6 +175,7 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Shader.cs" />
+    <Compile Include="map\SOBGroup.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="property display\AsteroidTypeConverter.cs" />
     <Compile Include="Updater.cs" />
@@ -314,7 +316,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2000/1/1" BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" />
+      <UserProperties BuildVersion_AssemblyInfoFilename="Properties\AssemblyInfo.cs" BuildVersion_StartDate="2000/1/1" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

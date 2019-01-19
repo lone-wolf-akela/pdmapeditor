@@ -297,6 +297,21 @@ end");
                 sb.AppendLine("");
             }
 
+            if (SOBGroup.SOBGroups.Count > 0)
+            {
+                sb.AppendLine("\t-- SOB groups");
+                foreach (SOBGroup sobGroup in SOBGroup.SOBGroups)
+                {
+                    sb.AppendLine("\tcreateSOBGroup(\"" + sobGroup.Name + "\")");
+                    foreach(Squadron squad in sobGroup.Squadrons)
+                    {
+                        sb.AppendLine("\taddToSOBGroup(\"" + squad.Name + "\", \"" + sobGroup.Name + "\")");
+                    }
+                    sb.AppendLine("");
+                }
+                sb.AppendLine("");
+            }
+
             sb.AppendLine("\t-- Settings");
             sb.AppendLine("\tsetWorldBoundsInner(" + WriteFloatLuaTable(0, 0, 0) + ", " + WriteFloatLuaTable(Map.MapDimensions.X, Map.MapDimensions.Y, Map.MapDimensions.Z) + ")");
             sb.AppendLine("end");
@@ -696,12 +711,26 @@ end");
 
         public static void CreateSOBGroup(string name)
         {
-            //STUB
+            new SOBGroup(name);
         }
 
-        public static void AddToSOBGroup(string type, string sobGroup)
+        public static void AddToSOBGroup(string squadronName, string sobGroupName)
         {
-            //STUB
+            Squadron squadron = Squadron.GetByName(squadronName);
+            SOBGroup sobGroup = SOBGroup.GetByName(sobGroupName);
+
+            if(squadron == null)
+            {
+                new Problem(ProblemTypes.WARNING, "Squadron \"" + squadronName + "\" not found. Skipping adding to SOB group \"" + sobGroupName + "\".");
+                return;
+            }
+            if (sobGroup == null)
+            {
+                new Problem(ProblemTypes.WARNING, "SOB group \"" + sobGroupName + "\" not found. Skipping adding \"" + squadronName + "\" to group.");
+                return;
+            }
+
+            sobGroup.AddSquadron(squadron);
         }
 
         public static void AddPath(string name, params string[] points)

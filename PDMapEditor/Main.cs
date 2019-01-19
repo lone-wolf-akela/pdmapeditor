@@ -19,6 +19,7 @@ namespace PDMapEditor
         private bool problemsVisible;
 
         private bool ignoreMapDimensionChange;
+
         private bool ignoreFogAlphaChange;
         private bool ignoreFogDensityChange;
 
@@ -202,6 +203,15 @@ namespace PDMapEditor
         public void glControl_KeyUp(object sender, KeyEventArgs e)
         {
             ActionKey.KeyUp(e);
+        }
+
+        public void Clear()
+        {
+            listSquadrons.Items.Clear();
+            listSOBGroups.Items.Clear();
+            comboSquadrons.Items.Clear();
+
+            listSOBGroups_SelectedIndexChanged(this, EventArgs.Empty);
         }
 
         //---------------------- TOOL STRIP ------------------------//
@@ -648,6 +658,194 @@ namespace PDMapEditor
         }
         #endregion
 
+        //-------------------- SOB GROUPS -----------------------//
+        public void AddSOBGroup(SOBGroup group)
+        {
+            group.ItemIndex = listSOBGroups.Items.Add(group.Name);
+        }
+        public void RemoveSOBGroup(SOBGroup group)
+        {
+            ignoreListSOBGroups_SelectedIndexChanged = true;
+            listSOBGroups.Items.RemoveAt(group.ItemIndex);
+
+            foreach(SOBGroup sobGroup in SOBGroup.SOBGroups)
+            {
+                if(sobGroup.ItemIndex > group.ItemIndex)
+                    sobGroup.ItemIndex--;
+            }
+
+            listSOBGroups.ClearSelected();
+            ignoreListSOBGroups_SelectedIndexChanged = false;
+            SOBGroup.CurrentSelected = null;
+            listSOBGroups_SelectedIndexChanged(this, EventArgs.Empty);
+        }
+
+        private bool ignoreListSOBGroups_SelectedIndexChanged = false;
+        private void listSOBGroups_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ignoreListSOBGroups_SelectedIndexChanged)
+                return;
+
+            if(listSOBGroups.SelectedItem == null)
+            {
+                buttonRemoveSOBGroup.Enabled = false;
+                buttonAddSquadron.Enabled = false;
+                buttonRemoveSquadron.Enabled = false;
+                comboSquadrons.Enabled = false;
+                comboSquadrons.SelectedItem = null;
+                boxSOBGroupName.Text = string.Empty;
+                boxSOBGroupName.Enabled = false;
+                listSquadrons.Enabled = false;
+                listSquadrons.Items.Clear();
+
+                return;
+            }
+
+            SOBGroup.CurrentSelected = SOBGroup.GetByItemIndex(listSOBGroups.SelectedIndex);
+            boxSOBGroupName.Text = SOBGroup.CurrentSelected.Name;
+
+            listSquadrons.Items.Clear();
+            foreach(Squadron squadron in SOBGroup.CurrentSelected.Squadrons)
+            {
+                squadron.ItemIndex = listSquadrons.Items.Add(squadron.Name);
+            }
+
+            buttonRemoveSOBGroup.Enabled = true;
+            buttonAddSquadron.Enabled = true;
+            buttonRemoveSquadron.Enabled = false;
+            boxSOBGroupName.Enabled = true;
+            comboSquadrons.Enabled = true;
+            listSquadrons.Enabled = true;
+        }
+
+        private void boxSOBGroupName_TextChanged(object sender, EventArgs e)
+        {
+            if (SOBGroup.CurrentSelected == null)
+                return;
+
+            if (listSOBGroups.Items.Count == 0)
+                return;
+
+            SOBGroup.CurrentSelected.Name = boxSOBGroupName.Text;
+
+            ignoreListSOBGroups_SelectedIndexChanged = true;
+            listSOBGroups.Items[SOBGroup.CurrentSelected.ItemIndex] = SOBGroup.CurrentSelected.Name;
+            listSOBGroups.SelectedIndex = SOBGroup.CurrentSelected.ItemIndex;
+            ignoreListSOBGroups_SelectedIndexChanged = false;
+        }
+
+        private void buttonRemoveSOBGroup_Click(object sender, EventArgs e)
+        {
+            if (SOBGroup.CurrentSelected == null)
+                return;
+
+            SOBGroup.CurrentSelected.Destroy();
+        }
+        private void listSOBGroups_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                if (SOBGroup.CurrentSelected == null)
+                    return;
+
+                SOBGroup.CurrentSelected.Destroy();
+            }
+        }
+
+        private void buttonAddSOBGroup_Click(object sender, EventArgs e)
+        {
+            SOBGroup newGroup = new SOBGroup("SobGroup_" + (SOBGroup.SOBGroups.Count + 1));
+            listSOBGroups.SelectedIndex = newGroup.ItemIndex;
+        }
+
+        public void AddSquadron(Squadron squadron)
+        {
+            if (comboSquadrons.Items.Contains(squadron.Name)) //Ignore duplicate squadron names
+                return;
+
+            squadron.ItemIndex = comboSquadrons.Items.Add(squadron.Name);
+        }
+        public void RemoveSquadron(Squadron squadron)
+        {
+            comboSquadrons.Items.Remove(squadron.Name);
+            foreach (Squadron squad in Squadron.Squadrons)
+            {
+                if (squad.ItemIndex > squadron.ItemIndex)
+                    squad.ItemIndex--;
+            }
+            comboSquadrons.SelectedItem = null;
+            listSquadrons.Items.Remove(squadron.Name);
+            listSquadrons.ClearSelected();
+            listSquadrons.Refresh();
+        }
+
+        private void buttonAddSquadron_Click(object sender, EventArgs e)
+        {
+            if (SOBGroup.CurrentSelected == null)
+                return;
+
+            if (comboSquadrons.SelectedItem == null)
+                return;
+
+            Squadron selectedSquadron = Squadron.GetByName(comboSquadrons.SelectedItem.ToString());
+
+            if (selectedSquadron == null)
+                return;
+
+            if (SOBGroup.CurrentSelected.Squadrons.Contains(selectedSquadron))
+                return;
+
+            SOBGroup.CurrentSelected.AddSquadron(selectedSquadron);
+            listSOBGroups_SelectedIndexChanged(this, EventArgs.Empty);
+            listSquadrons.SelectedIndex = listSquadrons.Items.Count - 1;
+        }
+
+        private void buttonRemoveSquadron_Click(object sender, EventArgs e)
+        {
+            if (SOBGroup.CurrentSelected == null)
+                return;
+
+            Squadron selectedSquadron = Squadron.GetByName(listSquadrons.SelectedItem.ToString());
+
+            if (selectedSquadron == null)
+                return;
+
+            SOBGroup.CurrentSelected.RemoveSquadron(selectedSquadron);
+            listSquadrons.Items.Remove(selectedSquadron.Name);
+            listSquadrons.ClearSelected();
+            listSquadrons.Refresh();
+        }
+
+        private void listSquadrons_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SOBGroup.CurrentSelected == null)
+                return;
+
+            if(listSquadrons.SelectedItem == null)
+            {
+                buttonRemoveSquadron.Enabled = false;
+            }
+            else
+            {
+                buttonRemoveSquadron.Enabled = true;
+            }
+        }
+
+        private void listSquadrons_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (SOBGroup.CurrentSelected == null)
+                return;
+
+            Squadron selectedSquadron = Squadron.GetByName(listSquadrons.SelectedItem.ToString());
+
+            if (selectedSquadron == null)
+                return;
+
+            SOBGroup.CurrentSelected.RemoveSquadron(selectedSquadron);
+            listSquadrons.Items.Remove(selectedSquadron.Name);
+            listSquadrons.ClearSelected();
+            listSquadrons.Refresh();
+        }
 
         //-------------------- UPDATER -----------------------//
         private void buttonCheckForUpdates_Click(object sender, EventArgs e)

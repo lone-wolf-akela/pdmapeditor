@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.buttonNewMap = new System.Windows.Forms.ToolStripButton();
             this.buttonOpenMap = new System.Windows.Forms.ToolStripButton();
@@ -93,6 +93,12 @@
             this.numericMapDimensionsY = new System.Windows.Forms.NumericUpDown();
             this.labelMapDimensionsX = new System.Windows.Forms.Label();
             this.numericMapDimensionsX = new System.Windows.Forms.NumericUpDown();
+            this.tabSOBGroups = new System.Windows.Forms.TabPage();
+            this.labelSOBGroupName = new System.Windows.Forms.Label();
+            this.boxSOBGroupName = new System.Windows.Forms.TextBox();
+            this.listSOBGroups = new System.Windows.Forms.ListBox();
+            this.buttonRemoveSOBGroup = new System.Windows.Forms.Button();
+            this.buttonAddSOBGroup = new System.Windows.Forms.Button();
             this.tabSelection = new System.Windows.Forms.TabPage();
             this.propertySelection = new System.Windows.Forms.PropertyGrid();
             this.tabCreate = new System.Windows.Forms.TabPage();
@@ -111,6 +117,11 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.labelSelectedStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelActionStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupSquadrons = new System.Windows.Forms.GroupBox();
+            this.comboSquadrons = new System.Windows.Forms.ComboBox();
+            this.buttonRemoveSquadron = new System.Windows.Forms.Button();
+            this.buttonAddSquadron = new System.Windows.Forms.Button();
+            this.listSquadrons = new System.Windows.Forms.ListBox();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPropertiesAndViewportProblems)).BeginInit();
             this.splitPropertiesAndViewportProblems.Panel1.SuspendLayout();
@@ -134,6 +145,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).BeginInit();
+            this.tabSOBGroups.SuspendLayout();
             this.tabSelection.SuspendLayout();
             this.tabCreate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitViewportAndProblems)).BeginInit();
@@ -141,6 +153,7 @@
             this.splitViewportAndProblems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).BeginInit();
             this.statusStrip.SuspendLayout();
+            this.groupSquadrons.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip
@@ -263,6 +276,7 @@
             // tabControlLeft
             // 
             this.tabControlLeft.Controls.Add(this.tabMap);
+            this.tabControlLeft.Controls.Add(this.tabSOBGroups);
             this.tabControlLeft.Controls.Add(this.tabSelection);
             this.tabControlLeft.Controls.Add(this.tabCreate);
             this.tabControlLeft.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1004,6 +1018,77 @@
             0});
             this.numericMapDimensionsX.ValueChanged += new System.EventHandler(this.SetMapDimensions);
             // 
+            // tabSOBGroups
+            // 
+            this.tabSOBGroups.Controls.Add(this.groupSquadrons);
+            this.tabSOBGroups.Controls.Add(this.labelSOBGroupName);
+            this.tabSOBGroups.Controls.Add(this.boxSOBGroupName);
+            this.tabSOBGroups.Controls.Add(this.listSOBGroups);
+            this.tabSOBGroups.Controls.Add(this.buttonRemoveSOBGroup);
+            this.tabSOBGroups.Controls.Add(this.buttonAddSOBGroup);
+            this.tabSOBGroups.Location = new System.Drawing.Point(4, 22);
+            this.tabSOBGroups.Name = "tabSOBGroups";
+            this.tabSOBGroups.Size = new System.Drawing.Size(254, 693);
+            this.tabSOBGroups.TabIndex = 3;
+            this.tabSOBGroups.Text = "SOB Groups";
+            this.tabSOBGroups.UseVisualStyleBackColor = true;
+            // 
+            // labelSOBGroupName
+            // 
+            this.labelSOBGroupName.AutoSize = true;
+            this.labelSOBGroupName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSOBGroupName.Location = new System.Drawing.Point(3, 35);
+            this.labelSOBGroupName.Name = "labelSOBGroupName";
+            this.labelSOBGroupName.Size = new System.Drawing.Size(38, 13);
+            this.labelSOBGroupName.TabIndex = 24;
+            this.labelSOBGroupName.Text = "Name:";
+            // 
+            // boxSOBGroupName
+            // 
+            this.boxSOBGroupName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boxSOBGroupName.Enabled = false;
+            this.boxSOBGroupName.Location = new System.Drawing.Point(47, 32);
+            this.boxSOBGroupName.Name = "boxSOBGroupName";
+            this.boxSOBGroupName.Size = new System.Drawing.Size(204, 20);
+            this.boxSOBGroupName.TabIndex = 6;
+            this.boxSOBGroupName.TextChanged += new System.EventHandler(this.boxSOBGroupName_TextChanged);
+            // 
+            // listSOBGroups
+            // 
+            this.listSOBGroups.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listSOBGroups.FormattingEnabled = true;
+            this.listSOBGroups.HorizontalScrollbar = true;
+            this.listSOBGroups.Location = new System.Drawing.Point(4, 58);
+            this.listSOBGroups.Name = "listSOBGroups";
+            this.listSOBGroups.Size = new System.Drawing.Size(247, 238);
+            this.listSOBGroups.TabIndex = 2;
+            this.listSOBGroups.SelectedIndexChanged += new System.EventHandler(this.listSOBGroups_SelectedIndexChanged);
+            this.listSOBGroups.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listSOBGroups_KeyUp);
+            // 
+            // buttonRemoveSOBGroup
+            // 
+            this.buttonRemoveSOBGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemoveSOBGroup.Enabled = false;
+            this.buttonRemoveSOBGroup.Location = new System.Drawing.Point(130, 3);
+            this.buttonRemoveSOBGroup.Name = "buttonRemoveSOBGroup";
+            this.buttonRemoveSOBGroup.Size = new System.Drawing.Size(121, 23);
+            this.buttonRemoveSOBGroup.TabIndex = 1;
+            this.buttonRemoveSOBGroup.Text = "Remove Group";
+            this.buttonRemoveSOBGroup.UseVisualStyleBackColor = true;
+            this.buttonRemoveSOBGroup.Click += new System.EventHandler(this.buttonRemoveSOBGroup_Click);
+            // 
+            // buttonAddSOBGroup
+            // 
+            this.buttonAddSOBGroup.Location = new System.Drawing.Point(3, 3);
+            this.buttonAddSOBGroup.Name = "buttonAddSOBGroup";
+            this.buttonAddSOBGroup.Size = new System.Drawing.Size(121, 23);
+            this.buttonAddSOBGroup.TabIndex = 0;
+            this.buttonAddSOBGroup.Text = "Add Group";
+            this.buttonAddSOBGroup.UseVisualStyleBackColor = true;
+            this.buttonAddSOBGroup.Click += new System.EventHandler(this.buttonAddSOBGroup_Click);
+            // 
             // tabSelection
             // 
             this.tabSelection.Controls.Add(this.propertySelection);
@@ -1093,9 +1178,9 @@
             this.gridProblems.AllowUserToDeleteRows = false;
             this.gridProblems.AllowUserToResizeColumns = false;
             this.gridProblems.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.gridProblems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gridProblems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridProblems.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
@@ -1103,14 +1188,14 @@
             this.gridProblems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridProblems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnProblems});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.DefaultCellStyle = dataGridViewCellStyle19;
             this.gridProblems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridProblems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridProblems.Location = new System.Drawing.Point(0, 0);
@@ -1119,9 +1204,9 @@
             this.gridProblems.ReadOnly = true;
             this.gridProblems.RowHeadersVisible = false;
             this.gridProblems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gridProblems.RowsDefaultCellStyle = dataGridViewCellStyle20;
             this.gridProblems.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.gridProblems.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gridProblems.RowTemplate.Height = 500;
@@ -1134,9 +1219,9 @@
             // columnProblems
             // 
             this.columnProblems.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnProblems.DefaultCellStyle = dataGridViewCellStyle18;
             this.columnProblems.HeaderText = "Problems";
             this.columnProblems.Name = "columnProblems";
             this.columnProblems.ReadOnly = true;
@@ -1232,6 +1317,70 @@
             this.labelActionStatus.Size = new System.Drawing.Size(87, 19);
             this.labelActionStatus.Text = "No last action.";
             // 
+            // groupSquadrons
+            // 
+            this.groupSquadrons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupSquadrons.Controls.Add(this.listSquadrons);
+            this.groupSquadrons.Controls.Add(this.comboSquadrons);
+            this.groupSquadrons.Controls.Add(this.buttonRemoveSquadron);
+            this.groupSquadrons.Controls.Add(this.buttonAddSquadron);
+            this.groupSquadrons.Location = new System.Drawing.Point(4, 302);
+            this.groupSquadrons.Name = "groupSquadrons";
+            this.groupSquadrons.Size = new System.Drawing.Size(247, 386);
+            this.groupSquadrons.TabIndex = 25;
+            this.groupSquadrons.TabStop = false;
+            this.groupSquadrons.Text = "Squadrons";
+            // 
+            // comboSquadrons
+            // 
+            this.comboSquadrons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboSquadrons.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSquadrons.Enabled = false;
+            this.comboSquadrons.FormattingEnabled = true;
+            this.comboSquadrons.Location = new System.Drawing.Point(6, 48);
+            this.comboSquadrons.Name = "comboSquadrons";
+            this.comboSquadrons.Size = new System.Drawing.Size(235, 21);
+            this.comboSquadrons.TabIndex = 8;
+            // 
+            // buttonRemoveSquadron
+            // 
+            this.buttonRemoveSquadron.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemoveSquadron.Enabled = false;
+            this.buttonRemoveSquadron.Location = new System.Drawing.Point(126, 19);
+            this.buttonRemoveSquadron.Name = "buttonRemoveSquadron";
+            this.buttonRemoveSquadron.Size = new System.Drawing.Size(115, 23);
+            this.buttonRemoveSquadron.TabIndex = 7;
+            this.buttonRemoveSquadron.Text = "Remove Squadron";
+            this.buttonRemoveSquadron.UseVisualStyleBackColor = true;
+            this.buttonRemoveSquadron.Click += new System.EventHandler(this.buttonRemoveSquadron_Click);
+            // 
+            // buttonAddSquadron
+            // 
+            this.buttonAddSquadron.Enabled = false;
+            this.buttonAddSquadron.Location = new System.Drawing.Point(6, 19);
+            this.buttonAddSquadron.Name = "buttonAddSquadron";
+            this.buttonAddSquadron.Size = new System.Drawing.Size(114, 23);
+            this.buttonAddSquadron.TabIndex = 6;
+            this.buttonAddSquadron.Text = "Add Squadron";
+            this.buttonAddSquadron.UseVisualStyleBackColor = true;
+            this.buttonAddSquadron.Click += new System.EventHandler(this.buttonAddSquadron_Click);
+            // 
+            // listSquadrons
+            // 
+            this.listSquadrons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listSquadrons.Enabled = false;
+            this.listSquadrons.FormattingEnabled = true;
+            this.listSquadrons.HorizontalScrollbar = true;
+            this.listSquadrons.Location = new System.Drawing.Point(6, 75);
+            this.listSquadrons.Name = "listSquadrons";
+            this.listSquadrons.Size = new System.Drawing.Size(235, 303);
+            this.listSquadrons.TabIndex = 9;
+            this.listSquadrons.SelectedIndexChanged += new System.EventHandler(this.listSquadrons_SelectedIndexChanged);
+            this.listSquadrons.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listSquadrons_KeyUp);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1279,6 +1428,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapDimensionsX)).EndInit();
+            this.tabSOBGroups.ResumeLayout(false);
+            this.tabSOBGroups.PerformLayout();
             this.tabSelection.ResumeLayout(false);
             this.tabCreate.ResumeLayout(false);
             this.tabCreate.PerformLayout();
@@ -1288,6 +1439,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridProblems)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.groupSquadrons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1373,6 +1525,17 @@
         public System.Windows.Forms.ToolStripStatusLabel labelActionStatus;
         private System.Windows.Forms.ToolStripButton buttonExecuteCode;
         private System.Windows.Forms.ToolStripButton buttonCheckForUpdates;
+        public System.Windows.Forms.TabPage tabSOBGroups;
+        private System.Windows.Forms.ListBox listSOBGroups;
+        private System.Windows.Forms.Button buttonRemoveSOBGroup;
+        private System.Windows.Forms.Button buttonAddSOBGroup;
+        private System.Windows.Forms.Label labelSOBGroupName;
+        private System.Windows.Forms.TextBox boxSOBGroupName;
+        private System.Windows.Forms.GroupBox groupSquadrons;
+        private System.Windows.Forms.ListBox listSquadrons;
+        private System.Windows.Forms.ComboBox comboSquadrons;
+        private System.Windows.Forms.Button buttonRemoveSquadron;
+        private System.Windows.Forms.Button buttonAddSquadron;
     }
 }
 

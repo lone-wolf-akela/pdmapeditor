@@ -267,6 +267,8 @@ namespace PDMapEditor
 
         public static void Clear()
         {
+            Program.main.Clear();
+
             Drawable.Drawables.Clear();
             Mesh.Meshes.Clear();
             Asteroid.Asteroids.Clear();
@@ -278,6 +280,8 @@ namespace PDMapEditor
             Squadron.Squadrons.Clear();
             Salvage.Salvages.Clear();
             Camera.Cameras.Clear();
+
+            SOBGroup.SOBGroups.Clear();
 
             Problem.Problems.Clear();
             Program.main.UpdateProblems();

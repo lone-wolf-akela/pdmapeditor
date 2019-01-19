@@ -13,6 +13,38 @@ namespace PDMapEditor
         private static int lastSquadronSize = 1;
         private static bool lastInHyperspace = false;
 
+        public static Squadron GetByName(string name)
+        {
+            Squadron squadron = null;
+
+            foreach (Squadron squad in Squadrons)
+            {
+                if (squad.Name == name)
+                {
+                    squadron = squad;
+                    break;
+                }
+            }
+
+            return squadron;
+        }
+        public static Squadron GetByItemIndex(int itemIndex)
+        {
+            Squadron squadron = null;
+
+            foreach (Squadron squad in Squadrons)
+            {
+                if (squad.ItemIndex == itemIndex)
+                {
+                    squadron = squad;
+                    break;
+                }
+            }
+
+            return squadron;
+        }
+
+
         private string name;
         [CustomSortedCategory("Squadron", 2, 2)]
         [Description("The name of the squadron. It can be used to refer to this squadron with scripts.")]
@@ -40,6 +72,9 @@ namespace PDMapEditor
         [Description("If this is set to true, the squadron will spawn in hyperspace.")]
         public bool InHyperspace { get { return inHyperspace; } set { inHyperspace = value; lastInHyperspace = value; } }
 
+        public List<SOBGroup> SOBGroups = new List<SOBGroup>();
+        public int ItemIndex;
+
         [Browsable(false)]
         public string TypeName { get { return "Squadron"; } }
 
@@ -64,6 +99,8 @@ namespace PDMapEditor
             Mesh.Scale = new Vector3(100);
             Squadrons.Add(this);
 
+            Program.main.AddSquadron(this);
+
             AllowRotation = true;
         }
         public Squadron(string name, Vector3 position, Vector3 rotation, ShipType type, int player, int squadronSize, bool inHyperspace) : base (position, rotation)
@@ -79,6 +116,8 @@ namespace PDMapEditor
             Mesh.Scale = new Vector3(100);
             Squadrons.Add(this);
 
+            Program.main.AddSquadron(this);
+
             AllowRotation = true;
         }
 
@@ -87,6 +126,12 @@ namespace PDMapEditor
             base.Destroy();
 
             Squadrons.Remove(this);
+            foreach(SOBGroup sobGroup in SOBGroups)
+            {
+                sobGroup.Squadrons.Remove(this);
+            }
+            SOBGroups.Clear();
+            Program.main.RemoveSquadron(this);
         }
 
         public ISelectable Copy()
